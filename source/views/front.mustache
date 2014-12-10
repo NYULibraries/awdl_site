@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    {{> head }}
+  </head>
+  <body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" class="{{bodyClass}}">
+    {{> header }}
+    <main class="main container-fluid" role="main"> {{#content}}
+    {{#intro}}
+    <div class="intro {{class}}"> {{{html}}} </div>
+   <!--  <div class="searchHoldFlex"> {{> search_form }}</div> -->
+    {{/intro}}
+    {{/content}}
+    <div class="collectNavHolder"><h3>Browse the Collection:</h3>  <span class="active">collection name</span>  <span>collection name</span>  <span>collection name</span>  <span>See all ></span></div>
+    <div class="flex-container">
+      {{> featuredHome }}
+      {{> featuredHome }}
+      {{> featuredHome }}
+      {{> featuredHome }}
+
+      {{> featuredHome }}
+      {{> featuredHome }}
+      {{> featuredHome }}
+      {{> featuredHome }}
+
+      {{> featuredHome }}
+      {{> featuredHome }}
+      {{> featuredHome }}
+      {{> featuredHome }}
+    </div>
+    </main>
+    {{> footer }}
+    {{{ closure }}}
+  </body>
+</html>

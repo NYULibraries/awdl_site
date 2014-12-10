@@ -1,0 +1,55 @@
+{
+    "partners" : [
+      {
+        "id" : "isaw",
+        "name" : "INSTITUTE FOR THE STUDY OF THE ANCIENT WORLD",
+        "logo" : "images/logos/nyu_short_color.png",
+        "url" : "http://www.nyu.edu/"            
+      },
+      {
+        "id" : "dlts",
+        "name" : "DIGITAL LIBRARY TECHNOLOGY SERVICES",
+        "logo" : "images/logos/nyuad.png",
+        "url" : "http://www.nyu.edu/"      
+      }
+    ],
+    "subjects" : {
+      "en" : {
+        "title" : "Filter by subject",
+        "sourceType" : "json",
+        "source" : "source/json/datasources/subject.json"
+      }
+    },
+    "featuredSubjects" : {
+      "en" : {
+        "title" : "Featured Subjects",
+        "sourceType" : "local",
+        "data": [
+            {
+                "tid" : "hadith",
+                "term" : "Hadith-- Dictionaries"
+            },
+            {
+                "tid" : "arabic_language",
+                "term" : "Arabic language-- Dictionaries"
+            },
+            {
+                "tid" : "homer",
+                "term" : "Homer"
+            },
+            {
+                "tid" : "bustani",
+                "term" : "Bustānī"
+            }                          
+        ]
+      }
+    },
+
+    "recentlyAddedTitles" : {
+      "en" : {
+        "title" : "Recently Added Titles",
+        "sourceType" : "json",
+        "source" : "source/json/datasources/recentlyAddedTitlesEN.json"
+      }
+  }
+}

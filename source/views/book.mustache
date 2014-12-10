@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>{{> head }}</head>
+<body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" class="{{ bodyClass }}">
+  {{> header }}
+  <iframe 
+    class="widget book" 
+    id="book" 
+    name="book" 
+    data-name="book" 
+    data-bookTheme="{{ bookTheme }}" 
+    data-sourceUrl="{{ sourceUrl }}" 
+    data-script='{ "js" : [ "crossframe.min.js", "book.min.js" ] }' 
+    allowfullscreen mozallowfullscreen webkitallowfullscreen>
+  </iframe>
+  {{> loading }}
+  {{{ closure }}}
+</body>
+</html>
