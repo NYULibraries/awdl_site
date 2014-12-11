@@ -6,7 +6,7 @@
   <main class="main container-fluid" role="main">
     <header>
       {{#title}}
-        <h2  class="page-title">{{{html}}}</h2>
+        <h2  class="page-title">{{{html}}} for: <span class="s-query"></span></h2>
       {{/title}}
        <select id="browse-select">
         <option data-sort-dir="asc" value="ss_longlabel" selected>Title</option>
@@ -14,7 +14,7 @@
         <option data-sort-dir="asc" value="ss_ssubject">Subject</option>
         <option data-sort-dir="asc" value="ss_publocation">Place</option>
       </select>
-      <div class="resultsnum">Showing  <span class="start"></span> - <span class="docslength"></span> of <span class="numfound"></span> results for <span class="s-query"></span></div>
+      <div class="resultsnum">Showing  <span class="start"></span> - <span class="docslength"></span> of <span class="numfound"></span> results</div>
     </header>
     {{#content}}
       {{#items}}
