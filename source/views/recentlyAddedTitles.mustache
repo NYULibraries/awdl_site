@@ -1,17 +1,19 @@
-{{#recentlyAddedTitles}}
-<article>
- {{#data}}
-      {{#response}}
-        {{#docs}}
-          <div class="itemhome">
-             <div class="thumbs"><a href="{{appRoot}}/book/{{ss_identifer}}"><img class="img-responsive" src="{{ss_representative_image}}" alt="" title="{{title}}"/></a></div>
-             <div class="meta">
-             <div class="title"><a href="{{appUrl}}/book/{{ss_identifer}}">{{sm_field_title}}</a></div>
-             <div class="subjects">{{sm_vid_Terms}}</div></div>
-             <hr> 
-          </div> 
-        {{/docs}}
-      {{/response}}
-    {{/data}}
-</article>
-{{/recentlyAddedTitles}}
+<div class="item-list flex-container">
+  {{#recentlyAddedTitles}}
+  {{#data}}
+  {{#response}}
+  {{#docs}}
+  <article class="item">
+    <div class="thumbs"><a href="{{appRoot}}/book/{{ss_identifer}}"><img class="img-responsive" src="{{ss_thumbnail}}" alt="" title="{{title}}"/></a></div>
+    <h1 class="md_title"><a href="{{appUrl}}/book/{{ss_identifer}}">{{ss_title}}</a></h1>
+    <div class="md_author"><span>{{sm_author}}</span></div>
+    <div class="md_series"><span class="md_label">Series:</span><span>Placeholder Series</span></div>
+    <div class="md_publisher"><span class="md_label">Publisher:</span> <span>{{sm_publisher}}</span>, {{ss_publocation}}, {{ss_pubdate}}</div>
+    <div class="md_provider"><span class="md_label">Provider:</span> <span>{{sm_partner}}</span></div>
+    <div class="md_subjects"><span class="md_label">Subjects:</span> {{#sm_subject}}<a class="md_subject" href="{{appRoot}}/search?q={{.}}">{{.}}</a>{{/sm_subject}}</div>
+  </article>
+  {{/docs}}
+  {{/response}}
+  {{/data}}
+  {{/recentlyAddedTitles}}
+</div>

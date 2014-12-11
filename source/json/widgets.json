@@ -49,7 +49,7 @@
       "en" : {
         "title" : "Recently Added Titles",
         "sourceType" : "json",
-        "source" : "source/json/datasources/recentlyAddedTitlesEN.json"
+        "source" : "source/json/datasources/recentlyAddedTitles.json"
       }
   }
 }

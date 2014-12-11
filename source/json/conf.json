@@ -13,8 +13,9 @@
             }
         },
         "curl" : {
-            "recentlyAddedTitlesEN" : {
-                "src" : "http://discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=ss_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=!ss_language:ar&fl=ss_embedded,title,type,ss_collection_identifier,ss_identifer,ss_representative_image,teaser,sm_field_author,sm_field_title,ss_language,sm_field_publication_date_text,sm_field_publication_location,sm_field_publisher,sm_vid_Terms,tm_vid_1_names,sm_ar_title,sm_ar_author,sm_ar_publisher,sm_ar_publication_location,sm_ar_subjects,sm_ar_publication_date,sm_ar_partner,sm_field_partner&rows=5&&sort=ds_changed%20desc","dest" : "source/json/datasources/recentlyAddedTitlesEN.json"
+            "recentlyAddedTitles" : {
+                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=ss_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=!ss_language:ar&fl=ss_embedded,title,type,ss_collection_identifier,ss_identifer,ss_representative_image,teaser,sm_field_author,sm_field_title,ss_language,sm_field_publication_date_text,sm_field_publication_location,sm_field_publisher,sm_vid_Terms,tm_vid_1_names,sm_field_partner&rows=12&&sort=ds_changed%20desc",
+                "dest" : "source/json/datasources/recentlyAddedTitles.json"
             },
             "subject" : {
         	    "src" : "http://discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=ss_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&rows=0&facet=true&facet.field=im_field_subject",
@@ -28,7 +29,7 @@
     },
     "local" : {
         "appUrl" : "http://localhost/awdl_site2",
-        "appRoot" : "/awdl-site2",
+        "appRoot" : "/awdl_site2",
         "sass" : {
             "build" : "external"
           , "options" : {
@@ -38,9 +39,9 @@
             }
         },
         "curl" : {
-            "recentlyAddedTitlesEN" : {
-                "src" : "http://discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=ss_collection_identifier:7b71e702-e6b8-4f09-90c9-e5c2906f3050&fq=!ss_language:ar&fl=ss_embedded,title,type,ss_collection_identifier,ss_identifer,ss_representative_image,teaser,sm_field_author,sm_field_title,ss_language,sm_field_publication_date_text,sm_field_publication_location,sm_field_publisher,sm_vid_Terms,tm_vid_1_names,sm_ar_title,sm_ar_author,sm_ar_publisher,sm_ar_publication_location,sm_ar_subjects,sm_ar_publication_date,sm_ar_partner,sm_field_partner&rows=5&&sort=ds_changed%20desc",
-                "dest" : "source/json/datasources/recentlyAddedTitlesEN.json"
+            "recentlyAddedTitles" : {
+                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=ss_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=!ss_language:ar&fl=ss_embedded,title,type,ss_collection_identifier,ss_identifer,ss_thumbnail,sm_author,ss_title, ss_language,ss_pubdate,ss_publocation,sm_publisher,sm_subject,sm_partner&rows=12&&sort=ds_changed%20desc",
+                "dest" : "source/json/datasources/recentlyAddedTitles.json"
             },
            
             "subject" : {

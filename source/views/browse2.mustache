@@ -3,9 +3,18 @@
 <head>{{> head }}</head>
 <body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" class="{{ bodyClass }}">
   {{> header }}
-  <main class="main container-fluid" role="main">{{#content}}
+  <main class="main container-fluid" role="main">
+   
+    {{#content}}
      {{#intro}}
     <div class="intro {{class}}"> {{{html}}} </div>
+   <!--  <div class="searchHoldFlex"> {{> search_form }}</div> -->
+
+   
+
+    {{/intro}}
+
+    {{> featured }}
 
     <select id="browse-select">
         <option data-sort-dir="asc" value="ss_longlabel" selected>Title</option>
@@ -15,12 +24,6 @@
       </select>
       <div class="resultsnum">Showing results <span class="start"></span> - <span class="docslength"></span> of <span class="numfound"></span></div>
 
-
-    {{/intro}}
-
-    {{> featured }}
-
-  
       {{#items}}
         <div 
           class="widget" 
@@ -36,6 +39,16 @@
       {{/items}}
     {{/content}}
 
+    <hr>
+
+    <div class="flex-container">
+      {{> featuredHome }}
+      {{> featuredHome }}
+      {{> featuredHome }}
+      {{> featuredHome }}
+
+    
+    </div>
 
   </main>
   {{> footer }}
