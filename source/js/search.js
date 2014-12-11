@@ -507,6 +507,10 @@ YUI().use(
             
             Y.one('body').removeClass('io-loading');            
               
+            if ( q ) { 
+                    querytextNode.set('innerHTML', q);
+                }
+                
             if ( numfound > 0 ) {
               
                 // first transaction; enable paginator
@@ -529,9 +533,7 @@ YUI().use(
             
                 numfoundNode.set('innerHTML', numfound);
             
-                if ( q ) { 
-                    querytextNode.set('innerHTML', q);
-                }
+                
 
                 // render HTML and append to container
                 node.append(
