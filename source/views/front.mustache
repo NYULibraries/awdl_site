@@ -4,23 +4,23 @@
 <body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" class="{{ bodyClass }}">
   {{> header }}
   <main class="main container-fluid" role="main">{{#content}}
-     {{#intro}}
-    <div class="intro {{class}}"> {{{html}}} </div>
+    <div class="topHold flex-container">
+      {{#intro}}
+      <div class="intro {{class}} itemdouble item"> {{{html}}} </div>
+      {{/intro}}
+       <div class="item newsitem"> <h3>News item </h3><p>If we pull in a blog post via a feed, it will live here.</p> </div>
+      </div>
 
-    <select id="browse-select">
+    {{> featured }}
+
+   <select id="browse-select">
         <option data-sort-dir="asc" value="ss_longlabel" selected>Title</option>
         <option data-sort-dir="asc" value="ss_sauthor">Author</option>
         <option data-sort-dir="asc" value="ss_ssubject">Subject</option>
         <option data-sort-dir="asc" value="ss_publocation">Place</option>
       </select>
       <div class="resultsnum">Showing results <span class="start"></span> - <span class="docslength"></span> of <span class="numfound"></span></div>
-
-
-    {{/intro}}
-
-    {{> featured }}
-
-  
+<div class="featured">
       {{#items}}
         <div 
           class="widget" 
@@ -33,7 +33,7 @@
           {{/fq}}
           data-script='{ "js" : [ "front.min.js" ], "hbs" : [ { "template" : "itemsHome.hbs", "id" : "items" } ] }'
         ></div>       
-      {{/items}}
+      {{/items}}</div>
     {{/content}}
 
 

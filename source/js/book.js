@@ -62,7 +62,8 @@ YUI().use(
         bookTheme = widget.getAttribute('data-bookTheme'),
         identifier = request.params.identifier,
         page = (request.params.page) ? request.params.page : 1;
-
+//Y.log(" src " + src);
+//Y.log(" bookTheme " + bookTheme);
       widget.setAttribute('data-identifier', identifier);
 
       if (request.src === 'replace') {
@@ -72,8 +73,8 @@ YUI().use(
         if (bookTheme) {
           src = src + '?ctheme=' + bookTheme;
         }
-
-        widget.set('src', src);
+     // Y.log(" src " + src);
+       widget.set('src', src);
 
       }
 

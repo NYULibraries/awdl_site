@@ -13,16 +13,6 @@ h1.title, .titlebar {
     border-bottom: 1px solid darken($tertiaryColor, 7%);
 }
 
-.pane.pagemeta {
-    // background-color: #ddd;
-    // background-image: #ddd;
-}
-
-body .pane.display {
-    // background-color: #fff;
-    // background-image: #fff;
-}
-
 html body #pager {
     // background: #2d3e50;
     // border-top: 1px solid #2c4985;
@@ -44,19 +34,7 @@ html body .rtl .thumbnails-container li a:before {
     visibility: hidden;
 }
 
-.field-name-field-title {
-    font-weight: bold;
-    font-size: 1.3em;
-    margin: .5em 0;
-    line-height: 1.3;
-}
 
-.field-name-field-rights {
-    margin-top: .5em;
-    border-top: 1px solid #ccc;
-    padding-top: .5em;
-    font-size: .9em;
-}
 
 html body a.button {
     border: none;

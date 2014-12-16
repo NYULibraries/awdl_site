@@ -102,24 +102,75 @@ body {
         font-size: 1.3rem;
         line-height: 1.5;
         margin: 1rem auto 0rem auto;
+        margin: 1rem 0 0rem 0;
         max-width: 46em;
         // max-width: 730px;
         // float: left;
-        text-align: center;
+        // text-align: center;
+   
     }
-    .item {
+
+    .item-list {
+        border: none;
+    }
+     .featured  h3 {
+            padding: 40px 0 0 ;
+            margin-bottom: 30px;
+            border-bottom: 2px solid orange;
+        }
+    .flex-container {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        flex-flow: row wrap;
+        // width: 102%;
+        .item {
+            -webkit-flex: 1 0 320px;
+            flex: 1 0 320px;
+            -webkit-flex: 1 0 330px;
+            flex: 1 0 330px;
+            margin: 0 20px 20px 0;
+            border: none;
+        }
+        margin-top: 0px;
+        margin-left: 0px;
+       
+        .itemdouble {
+            // flex-grow: 3;
+            // -webkit-flex-grow: 3;
+            flex: 2 0 660px;
+            padding-right: 20px;
+        }
+    }
+    .resultsnum, #browse-select {
+        display: none;
+    }
+    .topHold {
+        // background-color: blue;
+        .newsitem {
+              background-color: #ECE2D6;
+              border:double 3px gold;
+              padding: 20px;
+              h3 {
+                margin: 0;
+                padding: 0;
+              }  
+        }
+    }
+    .featured .item {
         font-family: $font-family-serif;
         // max-width: 355px;
         background-color: $navbar-default-bg;
         padding: 8px;
         // border: 1px solid #ECDCC8;
         border-top: none;
-        @include box-shadow(rgba(#666, 0.3) 1px 0px 0px);
+        border: none;
+        @include box-shadow(rgba(#666, 0.3) 1px 1px 1px);
         // float: left;
         // clear: none;
         margin: 0 20px 20px 0px;
         &:hover {
-            cursor: pointer;
+           
             background-color: lighten($navbar-default-bg, 2%);
         }
         .md_label {
@@ -139,6 +190,10 @@ body {
             a, a:link {
                 font-weight: normal;
                 color: black;
+                display:block;
+            }
+            a:visited {
+                color: lighten(black, 40%);
             }
         }
         .md_author {
@@ -149,7 +204,6 @@ body {
         }
         .md_subjects {
             // clear: left;
-          
             // background-color: #ccc;
             .md_subject:link, .md_subject:visited {
                 display: inline-block;
@@ -168,15 +222,13 @@ body {
                 content: "";
             }
         }
-        .md_provider {
-           
-        }
+        .md_provider {}
         .thumbs {
             width: 26%;
             // max-width: 90px;
             margin-right: 4%;
-            margin-left:-8px;
-            margin-top:-8px;
+            margin-left: -8px;
+            margin-top: -8px;
             margin-bottom: 8px;
             @include box-shadow(rgba(#666, 0.5) 1px 1px 5px);
             img {
@@ -188,7 +240,6 @@ body {
 }
 
 .md_subjects {
-   
     // background-color: #ccc;
     .md_subject:link, .md_subject:visited {
         display: inline-block;
@@ -258,20 +309,6 @@ body {
     }
 }
 
-.front .flex-container {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-flow: row wrap;
-    flex-flow: row wrap;
-    .item {
-        -webkit-flex: 1 0 320px;
-        flex: 1 0 320px;
-    }
-    margin-top: 0px;
-    padding-top: 40px;
-    border-top: 1px solid orange;
-}
-
 //@import "compass";
 main {
     a:link, a:focus {
@@ -292,7 +329,6 @@ main {
             margin-top: 0;
         }
     }
-   
     h2.page-title {
         font-size: 2rem;
         font-weight: 300;
@@ -315,7 +351,6 @@ main {
         padding-left: 10px;
         display: inline-block;
     }
-    
     // Featured is on home page
     article.featured {
         float: left;
@@ -728,15 +763,15 @@ select#browse-select {
     color: #666;
     .s-query {
         font-weight: bold;
-         color: #222;
+        color: #222;
     }
 }
 
 .item-list {
-    clear: both;
+    // clear: both;
     margin-top: .5em;
     font-family: $font-family-serif;
-    width: 100%;
+    // width: 100%;
     border-collapse: separate;
     border-top: 1px solid #DECCBF;
     border-bottom: 1px solid #ffffff;
@@ -800,20 +835,11 @@ body.book {
     .navbar {
         margin-bottom: 0;
     }
-    .header-main {
-        padding-top: 20px;
-        padding-bottom: 20px;
-        background-color: #27205a;
-    }
+    
     .container-fluid {
         max-width: none;
     }
-    h1.title, .titlebar {
-        // background: #5e4625;
-        // background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, rgb(122,98,65)), color-stop(0.5, rgb(107,83,50)), color-stop(0.75, rgb(94,70,37)) );
-        // background-image: -moz-linear-gradient( center top, rgb(122,98,65) 0%, rgb(107,83,50) 50%, rgb(94,70,37) 75% );
-        background: #492602;
-    }
+ 
     #book {
         border: none;
     }

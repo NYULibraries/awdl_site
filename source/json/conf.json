@@ -3,7 +3,7 @@
     "environment" : "local",
     "development" : {
         "appUrl": "http://dev-dl-pa.home.nyu.edu/awdl_site",
-        "appRoot": "/aco",
+        "appRoot": "/awdl_site",
         "sass" : {
             "build" : "external"
           , "options" : {
@@ -14,7 +14,7 @@
         },
         "curl" : {
             "recentlyAddedTitles" : {
-                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=ss_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=!ss_language:ar&fl=ss_embedded,title,type,ss_collection_identifier,ss_identifer,ss_representative_image,teaser,sm_field_author,sm_field_title,ss_language,sm_field_publication_date_text,sm_field_publication_location,sm_field_publisher,sm_vid_Terms,tm_vid_1_names,sm_field_partner&rows=12&&sort=ds_changed%20desc",
+                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=ss_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fl=ss_embedded,title,type,ss_collection_identifier,ss_identifer,ss_thumbnail,sm_author,ss_title, ss_language,ss_pubdate,ss_publocation,sm_publisher,sm_subject,sm_partner&rows=12&&sort=ds_changed%20desc",
                 "dest" : "source/json/datasources/recentlyAddedTitles.json"
             },
             "subject" : {
@@ -28,8 +28,8 @@
         }
     },
     "local" : {
-        "appUrl" : "http://localhost/awdl_site2",
-        "appRoot" : "/awdl_site2",
+        "appUrl" : "http://localhost/awdl_site",
+        "appRoot" : "/awdl_site",
         "sass" : {
             "build" : "external"
           , "options" : {
@@ -55,7 +55,7 @@
         }      
     },
     "production" : {
-        "appUrl": "http://dlib.nyu.edu/aco",
+        "appUrl": "http://dlib.nyu.edu/awdl_site",
         "appRoot": "/awdl",
         "sass" : {
             "build" : "inline"

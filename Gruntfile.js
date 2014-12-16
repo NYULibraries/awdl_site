@@ -1,3 +1,4 @@
+/* jshint laxcomma: true */
 module.exports = function( grunt ) {
 
     var _ = require('underscore');
@@ -23,13 +24,13 @@ module.exports = function( grunt ) {
               , navbar = []
               , toJSON = ''
               , javascriptString = ''
-              , javascriptString = ''
               , handlebarsTemplate = ''
               , links = ''
               , closure = '';
             
+           
             if ( matchWidgets && matchWidgets[0] ) {
-                
+                 
                 toJSON = matchWidgets[0];
                 
                 toJSON = toJSON.replace(/'/g, '').replace(/data-script=/g, '');
@@ -41,7 +42,7 @@ module.exports = function( grunt ) {
                         javascriptString += javascriptTagOpen + grunt.file.read( 'build/js/' + js ) + javascriptTagClose;
                     }
                 });
-                
+               
                 _.each( toJSON.hbs, function ( hbs ) {
                 	
                     var handlebarsTagOpen = '<script id="'+ hbs.id +'" type="text/x-handlebars-template">'
@@ -53,6 +54,7 @@ module.exports = function( grunt ) {
 
                 });
 
+
             }
             
             closure += handlebarsTemplate + javascriptString;
@@ -61,6 +63,7 @@ module.exports = function( grunt ) {
             
             // build the menu object
             _.each( pages, function ( page, index ) {
+
                 if ( _.isArray( pages[index].menu ) ) {
                     _.each( pages[index].menu, function ( menu ) {
 
@@ -74,23 +77,28 @@ module.exports = function( grunt ) {
                     });
                 }
             });
-            
+        
             // this spaghetti maps the widgets to the taks and 
             // load data Object if type is not local
             if ( source.content ) {
+              
               _.each( source.content, function ( content, a ) {
+
                 _.each( source.content[a], function ( pane, b ) {
+                  
                   if ( _.isArray( source.content[a][b].widgets ) ) {
                     _.each( source.content[a][b].widgets, function ( widget, c ) {
 
                       var spaghetti = {};
-
+                   
                       spaghetti[widget] = widgets[source.content[a][b].widgets[c]][source.content[a][b].language_code];
-
-                      if ( spaghetti[widget].sourceType == 'json' ) {
+                      //grunt.log.write("\n" + '   ****************   spaghetti[widget]  ' + spaghetti[widget] );
+                      //grunt.log.write("\n" + '   ****************   spaghetti[widget].sourceType ' + spaghetti[widget].sourceType);
+                      if ( spaghetti[widget].sourceType) {
+                        if ( spaghetti[widget].sourceType == 'json' ) {
                         spaghetti[widget].data = grunt.file.readJSON( __dirname + '/' + spaghetti[widget].source );   
                       }
-
+                    }
                       source.content[a][b].widgets[c] = spaghetti;
 
                     });
@@ -98,7 +106,6 @@ module.exports = function( grunt ) {
                 });
               });
             }
-            
             source.menus = menus;
 
             source.appRoot = conf[environment].appRoot;  
@@ -131,17 +138,17 @@ module.exports = function( grunt ) {
                     , javascriptString = ''
                     , javascriptTagOpen = '<script>'
                     , javascriptTagClose = '</script>'     
-                    , closure = ''                  
+                    , closure = '';                
                   
                   if ( ! _.find(_.keys(pages), name) ) {
                   
                       if ( matchWidgets && matchWidgets[0] ) {
                 
-                          toJSON = matchWidgets[0]
+                          toJSON = matchWidgets[0];
                 
-                          toJSON = toJSON.replace(/'/g, '').replace(/data-script=/g, '')
+                          toJSON = toJSON.replace(/'/g, '').replace(/data-script=/g, '');
 
-                          toJSON = JSON.parse( toJSON )
+                          toJSON = JSON.parse( toJSON );
 
                           _.each( toJSON.js, function ( js ) {
            
@@ -177,7 +184,7 @@ module.exports = function( grunt ) {
             
             grunt.log.write('Transforming template into HTML. See ' + err.description + ' ').error();  
             
-            console.log( err );
+            console.log(err );
         }        
         
 

@@ -15,7 +15,6 @@ YUI().use(
       , router = new Y.Router()
       , transactions = [];
     
-     Y.log("Hello");
 
     function getRoute () {
         Y.log("getRoute");
@@ -125,7 +124,7 @@ YUI().use(
     }
     
     function update ( state ) {
-	 Y.log("update");
+	     Y.log("update");
     	this.setPage( state.page, true );
 		
 	    this.setRowsPerPage( state.rowsPerPage, true );
@@ -151,7 +150,7 @@ YUI().use(
     }    
 
     function onSuccess ( response, args ) {
- Y.log("onSuccess");
+      //Y.log("onSuccess");
         try {
             
             var node = args.container
