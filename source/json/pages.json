@@ -13,12 +13,12 @@
             "weight": 0
         }],
         "route": "/index.html",
-        "bodyClass": "front browse ",
+        "bodyClass": "front",
         "content": {
            "intro": [{
                 "title": "",
                 "class": "",
-                "html": "<p><b>The Ancient World Digital Library</b> (AWDL) is an initiative of the Institute for the Study of the Ancient World at New York University. AWDL will identify, collect, curate, and provide access to the broadest possible range of scholarly materials relevant to the study of the ancient world. <a href=\"/awdl/about\" class=\"readmore\">READ&nbsp;MORE…</a></p>"
+                "html": "<p><b>The Ancient World Digital Library</b> (AWDL) is an initiative of the Institute for the Study of the Ancient World at New York University. AWDL will identify, collect, curate, and provide access to the broadest possible range of scholarly materials relevant to the study of the ancient world. <a href=\"/awdl_site/about\" class=\"readmore\">READ&nbsp;MORE…</a></p>"
             }],
             "featured": [{
                 "title": "Recently Added Titles",
@@ -29,7 +29,7 @@
                 "source": "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select",
                 "rows": 12,
                 "fl": [
-                    "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_author", "sm_publisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation", "sm_partner"
+                    "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_author", "sm_publisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation", "sm_partner", "sm_field_publication_location"
                 ],
                 "fq": [{
                     "filter": "hash",
@@ -55,7 +55,7 @@
         "menu": [{
             "context": "navbar",
             "label": "Browse",
-            "weight": 3
+            "weight": 2
         }],
         "route": "/browse/index.html",
         "bodyClass": "browse io-loading",
@@ -64,7 +64,7 @@
                 "source": "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select",
                 "rows": 10,
                 "fl": [
-                    "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_publisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation"
+                    "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_publisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation", "sm_field_publication_location"
                 ],
                 "fq": [{
                     "filter": "hash",
@@ -76,8 +76,6 @@
             }
         }
     },
-
-   
     "subject": {
         "htmltitle": "Subject",
         "title": "Subject",
@@ -104,7 +102,6 @@
             }]
         }
     },
-
     "subjects": {
         "htmltitle": "Subjects",
         "title": "Subjects",
@@ -116,28 +113,6 @@
                 "language_code": "en",
                 "language_dir": "ltr",
                 "widgets": ["subjects"]
-            }]
-        }
-    },
-    "resources": {
-        "htmltitle": "Other Resources",
-        "title": [{
-           
-            "html": "Other Resources"
-        }],
-        "menu": [{
-            "context": "navbar",
-            "label": "Other Resources",
-            "weight": 2
-        }],
-        "route": "/resources/index.html",
-        "bodyClass": "page",
-        "content": {
-            "main": [{
-                "language_code": "en",
-                "class": "col-l",
-                "language_dir": "ltr",
-                "html": "<ul class=\"resources\">  <li> List of Resources  </li></ul>"
             }]
         }
     },
@@ -153,7 +128,7 @@
             "weight": 1
         }],
         "route": "/about/index.html",
-        "bodyClass": "page",
+        "bodyClass": "page about",
         "content": {
             "main": [{
                 "language_code": "en",

@@ -34,8 +34,6 @@ html body .rtl .thumbnails-container li a:before {
     visibility: hidden;
 }
 
-
-
 html body a.button {
     border: none;
     color: #fff;
@@ -58,7 +56,7 @@ html body a.button:active {
 }
 
 body .navbar-item {
-    a,  span,  .olControlDLTSZoomInItemInactive, .olControlDLTSZoomOutItemInactive {
+    a, span, .olControlDLTSZoomInItemInactive, .olControlDLTSZoomOutItemInactive {
         color: #fff;
         border: none;
         box-shadow: initial;
@@ -81,13 +79,18 @@ body .navbar-item {
     }
 }
 
+html body .thumbnails-container .pager li.pager-next a {
+    &:before, &:link, &:visited, &:hover {
+        color: white;
+    }
+}
+
 .pane.thumbnails {
     .thumbnails-container {
         #book-navbar {
             background-color: $tertiaryColor;
             border-top: 1px solid darken($tertiaryColor, 7%);
         }
-        
     }
     a:active, a:hover {
         color: #6fbef3;

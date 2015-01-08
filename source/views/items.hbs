@@ -1,18 +1,18 @@
-<div class="item-list">
+<!-- file: items.hbs -->
+<div class="item-list flex-container">
   {{#items}}
-  <div class="item">
-      <div class="thumbs">
-        <a href="{{../app.appRoot}}/book/{{ss_identifer}}"><img class="img-responsive" src="{{ss_thumbnail}}" alt="" title="{{ss_title}}"/></a>
-      </div>
-      <div lang="en">
-        <div class="md_title"><span class="md_label">Title:</span> <a href="{{../app.appRoot}}/book/{{ss_identifer}}">{{{ss_title}}}</a></div>                
-        <div class="md_author"><span class="md_label">Author:</span> {{#each sm_author}}<span>{{this}}</span>{{/each}}</div>                        
-        <div><span class="md_label">Publisher:</span> {{#each sm_publisher}}<span>{{this}}</span>{{/each}}</div>
-        <div><span class="md_label">Place of Publication:</span> {{ss_publocation}}</div>                        
-        <div><span class="md_label">Date of publication:</span> {{ss_pubdate}}</div>                        
-        <div class="md_subjects"><span class="md_label">Subject:</span> {{#each sm_subject}}<a class="md_subject" href="{{../../app.appRoot}}/search?q={{this}}">{{this}}</a>{{/each}}</div>
-        <div><span class="md_label">Provider:</span> {{#each sm_partner}}<span>{{this}}</span>{{/each}}</div>                   
-      </div>
-  </div>
+  <article class="item">
+    <div class="thumbs" >
+      <div class="clipper">
+      <a href="{{appRoot}}/book/{{ss_identifer}}"><img src="{{ss_thumbnail}}" alt="" title="{{title}}"/></a></div>
+    </div>
+    <h1 class="md_title"><a href="{{../app.appRoot}}/book/{{ss_identifer}}">{{{ss_title}}}</a></h1>
+    <div class="md_author">{{#each sm_author}}<span>{{this}}</span>{{/each}}</div>
+    <div class="md_series"><span class="md_label">Series:</span> <span>Placeholder Series</span></div>
+    <div  class="md_publisher"><span class="md_label">Publisher:</span> {{#each sm_publisher}}<span>{{this}}</span>{{/each}}, {{#each sm_field_publication_location}}<span>{{this}}</span>{{/each}}, {{ss_pubdate}}</div>
+      <div class="md_provider"><span class="md_label">Provider:</span> {{#each sm_partner}}<span>{{this}}</span>{{/each}}</div>
+     <div class="md_subjects"><span class="md_label">Subjects:</span> {{#each sm_subject}}<a class="md_subject" href="{{../../app.appRoot}}/search?q={{this}}">{{this}}</a>{{/each}}</div>
+  
+  </article>
   {{/items}}
 </div>

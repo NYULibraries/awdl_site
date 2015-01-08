@@ -69,6 +69,7 @@ module.exports = function( grunt ) {
 
                        menus[menu.weight] = {
                             label : menu.label
+                         ,  status : 'active'
                          ,  route : pages[index].route.replace('/index.html', '')
                          ,  page : index
                          ,  weight : menu.weight

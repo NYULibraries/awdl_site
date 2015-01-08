@@ -6,14 +6,21 @@
   <main class="main container-fluid" role="main">{{#content}}
     <div class="topHold flex-container">
       {{#intro}}
-      <div class="intro {{class}} itemdouble item"> {{{html}}} </div>
+      <div class="intro {{class}} itemdouble "> {{{html}}} </div>
       {{/intro}}
        <div class="item newsitem"> <h3>News item </h3><p>If we pull in a blog post via a feed, it will live here.</p> </div>
       </div>
 
-    {{> featured }}
-
-   <select id="browse-select">
+<div id="YUItabs">
+    <ul>
+        <li><h3><a href="#recentlyAdded">Recently Added Titles</a></h3></li>
+        <li><h3><a href="#featuredProvider">Featured Provider: Koninklijke Brill NV</a></h3></li>
+    
+    </ul>
+    <div>
+        <div id="recentlyAdded">{{> featured }}</div>
+        <div id="featuredProvider">
+             <select id="browse-select">
         <option data-sort-dir="asc" value="ss_longlabel" selected>Title</option>
         <option data-sort-dir="asc" value="ss_sauthor">Author</option>
         <option data-sort-dir="asc" value="ss_ssubject">Subject</option>
@@ -31,10 +38,27 @@
           {{#fq}}
           data-fq-{{ filter }}="{{ value }}"
           {{/fq}}
-          data-script='{ "js" : [ "front.min.js" ], "hbs" : [ { "template" : "itemsHome.hbs", "id" : "items" } ] }'
+          data-script='{ "js" : [ "front.min.js" ], "hbs" : [ { "template" : "items.hbs", "id" : "items" } ] }'
         ></div>       
       {{/items}}</div>
     {{/content}}
+
+
+</div>
+   
+    </div>
+</div>
+
+<script>
+YUI().use('tabview', function(Y) {
+    var tabview = new Y.TabView({
+        srcNode: '#YUItabs'
+    });
+
+    tabview.render();
+});
+</script>
+
 
 
   </main>
