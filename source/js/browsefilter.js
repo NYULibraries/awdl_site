@@ -29,7 +29,20 @@ YUI().use(
         return route;
 
     }
-      
+
+    function getRouteChangedParameters () {
+
+        // when filter or sort is changed, we should go back to the first page
+        var sortQueryString = getParameterByName('sort')
+          , route = router.getPath();
+
+        if ( sortQueryString ) {
+            route = route + '&sort=' + sortQueryString;
+        }
+    
+        return route;
+
+    }
     function getParameterByName(name) {
         
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -39,30 +52,6 @@ YUI().use(
 
         return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }      
-
-    /**
-     *
-     * Unused until subject page its available
-     * 
-
-     var subjectsList = Y.one('#subjecsList')
-       , subjects = JSON.parse(subjectsList.get('innerHTML'))
-    
-    function findById(tid) {
-        for ( var i = 0; i < subjects.length; i++) {
-            if (subjects[i].tid == tid) {
-                return subjects[i];
-            }
-        }
-    }
-
-    Y.Handlebars.registerHelper('subject', function (value) {
-        var subject = findById ( value );
-        if (subject) {
-            return '<a href="' + appRoot + '/subject?tid=' + subject.tid + '">' + subject.term + '</a>';
-        }
-    });
-    */
 
     router.route( router.getPath(), function ( req ) {
 
@@ -91,7 +80,7 @@ YUI().use(
     });
     
     function onSelectChange( ) {
-        router.replace( getRoute() );
+        router.replace( getRouteChangedParameters() );
     }
     
     function onFailure( response, args ) {
@@ -125,15 +114,15 @@ YUI().use(
     function update ( state ) {
 	
     	this.setPage( state.page, true );
-		
 	    this.setRowsPerPage( state.rowsPerPage, true );
-	    	
+	    this.setTotalRecords( state.totalRecords, true );
 	    router.save( router.getPath() + '?page=' + state.page );
 
     }
     
     function initPaginator( page, totalRecords, rowsPerPage ) {
         
+        Y.one('#paginator').empty();
         var paginatorConfiguration = {
                 totalRecords: totalRecords
               , rowsPerPage: rowsPerPage
@@ -144,12 +133,14 @@ YUI().use(
 
         paginator.on( 'changeRequest', update );
           
-        paginator.render('#paginator');
+        if (totalRecords > rowsPerPage) {
+          paginator.render('#paginator');
+        }
 
     }    
 
     function onSuccess ( response, args ) {
-
+        
         try {
             
             var node = args.container
@@ -162,15 +153,16 @@ YUI().use(
               , startNode = resultsnum.one('.start')
               , docslengthNode = resultsnum.one('.docslength')
               , docslength = parseInt(response.response.docs.length, 10)
-              , appRoot = Y.one('body').getAttribute('data-app');
+              , appRoot = Y.one('body').getAttribute('data-app')
+              , rows = args.rows
+              ;
               
-            // first transaction; enable paginator
-            if ( transactions.length < 1 ) {
-            	initPaginator( page , numfound, docslength );
-            }
-
-            // store called to avoid making the request multiple times
-            transactions.push ( this.url );
+            // Y.log ("numfound " + numfound);
+            // Y.log ("start " + start);
+            // Y.log ("rows " + rows);
+   
+            /* Re-init pagination each time, since number of results changes */
+            initPaginator( page , numfound, rows );
 
             node.setAttribute( 'data-numFound', numfound );
 
