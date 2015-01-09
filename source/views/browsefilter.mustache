@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>{{> head }}</head>
+<body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" class="{{ bodyClass }}">
+  {{> header }}
+  <main class="main container-fluid" role="main">
+    <header>
+      {{#title}}
+        <h2  class="page-title" >{{{html}}}</h2>
+      {{/title}}
+      <select id="browse-select">
+        <option data-sort-dir="asc" value="ss_longlabel" selected>Sorting by Title</option>
+        <option data-sort-dir="asc" value="ss_sauthor">Sort by Author</option>
+        <option data-sort-dir="asc" value="ss_ssubject">Sort by Subject</option>
+        <option data-sort-dir="asc" value="ss_publocation">Sort by Place</option>
+      </select>
+  <select id="filter-year">
+        <option data-fq-ss_pubdate="all" value="*" selected>all publication years</option>
+        <option data-fq-ss_pubdate="1991" value="1991">only 1991</option>
+        <option data-fq-ss_pubdate="1999" value="1999">only 1999</option>
+
+      </select>
+
+
+      <div class="resultsnum">Showing results <span class="start"></span> - <span class="docslength"></span> of <span class="numfound"></span></div>
+    </header>
+    {{#content}}
+      {{#items}}
+        <div 
+          class="widget" 
+          data-name="items" 
+          data-rows="{{ rows }}"
+          data-source="{{ source }}"
+          data-fl="{{ fl }}"
+          {{#fq}}
+          data-fq-{{ filter }}="{{ value }}"
+          {{/fq}}
+          data-script='{ "js" : [ "browsefilter.min.js" ], "hbs" : [ { "template" : "items.hbs", "id" : "items" } ] }'
+        ></div>
+        <div class="text-center">
+          <div id="paginator" class="pagination"></div>
+        </div>        
+      {{/items}}
+    {{/content}}
+  </main>
+  {{> footer }}
+  {{{ closure }}}
+</body>
+</html>
