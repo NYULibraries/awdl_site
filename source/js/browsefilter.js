@@ -80,7 +80,20 @@ YUI().use(
     });
     
     function onSelectChange( ) {
-        router.replace( getRouteChangedParameters() );
+      
+      
+      Y.all('#browse-select option').each(function(node) { 
+        /* reset all option text */ 
+        var t = node.get("text");
+        t = t.replace("Sorting by", "Sort by");
+        node.set("text", t);
+      });
+      var t2 = Y.one("#browse-select option:checked").get("text");
+      t2 = t2.replace("Sort by", "Sorting by");
+      Y.one("#browse-select option:checked").set("text", t2)
+      
+      router.replace( getRouteChangedParameters() );
+     
     }
     
     function onFailure( response, args ) {
@@ -208,6 +221,8 @@ YUI().use(
           , rows = ( data.rows ) ? data.rows : 10
           , yearChosenNode = Y.one('#filter-year :checked')
           , yearWhich = yearChosenNode.get('value')
+          , pubChosenNode = Y.one('#filter-publisher :checked')
+          , pubWhich = pubChosenNode.get('value')
           , fq = [];
 
         Y.one('body').addClass('io-loading');
@@ -220,8 +235,9 @@ YUI().use(
         	    }
             }
         }
-        Y.log("yearWhich is " + yearWhich);
+     
         fq.push('ss_pubdate:' + yearWhich );
+        fq.push('ss_spublisher:' + pubWhich );
         if ( options.page ) {
             page = parseInt( options.page, 10 );
         }
@@ -260,11 +276,10 @@ YUI().use(
     
     router.replace( getRoute () );
     
-    // Sort
+    // Sorts and filters
     Y.one('body').delegate('change', onSelectChange, '#browse-select');
     Y.one('body').delegate('change', onSelectChange, '#filter-year');
-    
-  
+    Y.one('body').delegate('change', onSelectChange, '#filter-publisher');
     
 
 });
