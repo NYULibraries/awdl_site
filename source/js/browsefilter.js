@@ -143,7 +143,7 @@ YUI().use(
           , paginator = new Y.Paginator( paginatorConfiguration );
 
         paginator.on( 'changeRequest', update );
-               
+          
         paginator.render('#paginator');
 
     }    

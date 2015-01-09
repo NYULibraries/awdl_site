@@ -157,8 +157,6 @@ body {
         margin: 1rem auto 0rem auto;
         margin: 1rem 0 0rem 0;
         max-width: 46em;
-       
-   
     }
     .featured h3 {
         padding: 40px 0 0;
@@ -188,19 +186,29 @@ body {
     -webkit-flex-flow: row wrap;
     flex-flow: row wrap;
     margin-top: 0px;
-    margin-left: -20px;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    
     .item {
-        -webkit-flex: 1 1 330px;
-        flex: 1 1 330px;
-        margin: 0 0px 20px 20px;
-        border: none;
+        -webkit-flex: 0 1 32%;
+        flex: 0 1 32%;
+        margin: 1% 0;
+        @media (max-width: 961px) {
+            -webkit-flex: 0 1 49%;
+            flex: 0 1 49%;
+            margin: 1% 0;
+        }
+        @media (max-width: $grid-float-breakpoint-max) {
+            -webkit-flex: 1 1 100%;
+            flex: 1 1 100%;
+            margin: 1% 0;
+        }
         font-family: $font-family-serif;
-        // max-width: 355px;
         background-color: $navbar-default-bg;
-        border: none;
         @include box-shadow(rgba(#666, 0.3) 1px 1px 1px);
         overflow: hidden;
         padding: 8px;
+        transition: .3s;
         &:hover {
             background-color: lighten($navbar-default-bg, 2%);
         }
@@ -255,7 +263,6 @@ body {
             }
         }
         .md_provider {}
-       
         .thumbs {
             width: 26%;
             // max-width: 90px;
@@ -263,7 +270,7 @@ body {
             margin-left: -8px;
             margin-top: -8px;
             margin-bottom: 8px;
-            float:left;
+            float: left;
             /* elaborate ruse for cropping the thumbnails */
             .clipper {
                 position: relative;
@@ -299,9 +306,11 @@ body {
         }
     }
 }
+
 .item-list {
     margin-top: 30px;
 }
+
 .header-nav {
     float: right;
     margin: 0;
@@ -731,7 +740,6 @@ select#browse-select {
         color: #222;
     }
 }
-
 
 body.book {
     overflow-y: hidden;
