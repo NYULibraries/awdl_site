@@ -45,6 +45,7 @@
             }
         }
     },
+    
     "browse": {
         "htmltitle": "Browse",
         "title": [{
@@ -58,37 +59,6 @@
             "weight": 2
         }],
         "route": "/browse/index.html",
-        "bodyClass": "browse io-loading",
-        "content": {
-            "items": {
-                "source": "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select",
-                "rows": 10,
-                "fl": [
-                    "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_publisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation", "sm_field_publication_location"
-                ],
-                "fq": [{
-                    "filter": "hash",
-                    "value": "iy26sh"
-                }, {
-                    "filter": "ss_collection_identifier",
-                    "value": "d72398c3-1cd7-4734-ab1c-3e3b29862cee"
-                }]
-            }
-        }
-    },
-    "browsefilter": {
-        "htmltitle": "Browse with Filters",
-        "title": [{
-            "language_code": "en",
-            "language_dir": "ltr",
-            "html": "Browse titles"
-        }],
-        "menu": [{
-            "context": "navbar",
-            "label": "Browse",
-            "weight": 2
-        }],
-        "route": "/browsefilter/index.html",
         "bodyClass": "browse io-loading",
         "content": {
             "items": {

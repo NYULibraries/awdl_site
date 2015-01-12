@@ -146,7 +146,6 @@ body {
             }
         }
     }
-   
     .intro {
         font-size: 1.3rem;
         line-height: 1.5;
@@ -175,10 +174,12 @@ body {
         }
     }
 }
+
 .filters {
     margin-top: -20px;
     margin-bottom: 10px;
 }
+
 .flex-container {
     display: -webkit-flex;
     display: flex;
@@ -187,7 +188,6 @@ body {
     margin-top: 0px;
     -webkit-justify-content: space-between;
     justify-content: space-between;
-    
     .item {
         -webkit-flex: 0 1 32%;
         flex: 0 1 32%;
@@ -203,11 +203,7 @@ body {
             margin: 1% 0;
         }
         font-family: $font-family-serif;
-        background-color: $navbar-default-bg;
-        @include box-shadow(rgba(#666, 0.3) 1px 1px 1px);
         overflow: hidden;
-        padding: 8px;
-        transition: .3s;
         &:hover {
             background-color: lighten($navbar-default-bg, 2%);
         }
@@ -295,7 +291,7 @@ body {
         -webkit-flex: 1 1 330px;
         flex: 1 1 330px;
         padding-right: 20px;
-        margin: 0 0px 20px 20px;
+        margin: 0 0px 20px 0px;
         @media (min-width: 1090px) {
             -webkit-flex: 2 1 680px;
             flex: 2 1 680px;
@@ -304,6 +300,13 @@ body {
             padding-right: 0px;
         }
     }
+}
+
+.card {
+    background-color: $navbar-default-bg;
+    @include box-shadow(rgba(#666, 0.3) 1px 1px 1px);
+    padding: 8px;
+    transition: .3s;
 }
 
 .item-list {
@@ -725,11 +728,6 @@ main {
 
 // end sticky footer
 
-select#browse-select {
-    float: right;
-    padding-bottom: 6px;
-    font-size: .75em;
-}
 
 .resultsnum {
     font-size: 1em;
@@ -788,7 +786,7 @@ body.book {
 /** Elements that are not meant to be seen until io its loading */
 .io-loading {
     .resultsnum,
-    #browse-select {
+    #browse-select, #YUItabs, .filters {
         position: absolute !important;
         height: 1px;
         width: 1px;
