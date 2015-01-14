@@ -7,7 +7,7 @@
         "sass" : {
             "build" : "external"
           , "options" : {
-                "style" : "compressed"
+                "style" : "expanded"
               , "debugInfo" : false
               , "lineNumbers" : false
             }
@@ -34,8 +34,8 @@
             "build" : "external"
           , "options" : {
                 "style" : "expanded"
-              , "debugInfo" : true
-              , "lineNumbers" : true
+              , "debugInfo" : false
+              , "lineNumbers" : false
             }
         },
         "curl" : {

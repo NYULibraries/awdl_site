@@ -7,7 +7,7 @@ YUI().use(
   , 'gallery-paginator'
   , 'anim'
   , function (Y) {
-	
+  
     'use strict';
 
     var itemsTemplateSource = Y.one('#items').getHTML()
@@ -29,7 +29,20 @@ YUI().use(
         return route;
 
     }
-      
+
+    function getRouteChangedParameters () {
+
+        // when filter or sort is changed, we should go back to the first page
+        var sortQueryString = getParameterByName('sort')
+          , route = router.getPath();
+
+        if ( sortQueryString ) {
+            route = route + '&sort=' + sortQueryString;
+        }
+    
+        return route;
+
+    }
     function getParameterByName(name) {
         
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -39,30 +52,6 @@ YUI().use(
 
         return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }      
-
-    /**
-     *
-     * Unused until subject page its available
-     * 
-
-     var subjectsList = Y.one('#subjecsList')
-       , subjects = JSON.parse(subjectsList.get('innerHTML'))
-    
-    function findById(tid) {
-        for ( var i = 0; i < subjects.length; i++) {
-            if (subjects[i].tid == tid) {
-                return subjects[i];
-            }
-        }
-    }
-
-    Y.Handlebars.registerHelper('subject', function (value) {
-        var subject = findById ( value );
-        if (subject) {
-            return '<a href="' + appRoot + '/subject?tid=' + subject.tid + '">' + subject.term + '</a>';
-        }
-    });
-    */
 
     router.route( router.getPath(), function ( req ) {
 
@@ -80,22 +69,35 @@ YUI().use(
             start = ( page * rows ) - rows;
         }
         
-    	initRequest ( {
-		    container : node
-	      , start : start
-	      , page : page
-    	  , rows : rows
-    	  , sort : sort
-		} );
+      initRequest ( {
+        container : node
+        , start : start
+        , page : page
+        , rows : rows
+        , sort : sort
+    } );
         
     });
     
     function onSelectChange( ) {
-        router.replace( getRoute() );
+      
+      
+      Y.all('#browse-select option').each(function(node) { 
+        /* reset all option text */ 
+        var t = node.get("text");
+        t = t.replace("Sorting by", "Sort by");
+        node.set("text", t);
+      });
+      var t2 = Y.one("#browse-select option:checked").get("text");
+      t2 = t2.replace("Sort by", "Sorting by");
+      Y.one("#browse-select option:checked").set("text", t2)
+      
+      router.replace( getRouteChangedParameters() );
+     
     }
     
     function onFailure( response, args ) {
-    	
+      
         // mover a onFailure
         var data = args.container.getData()
           , requestError = data.requesterror;
@@ -108,13 +110,13 @@ YUI().use(
             requestError = parseInt(requestError, 10) + 1;
             args.container.setAttribute( 'data-requesterror', requestError );                
         }
-    	
+      
         /** there try 3 more times before giving up */
         if ( requestError < 3 ) {
             router.replace( getRoute () );
         }
         else {
-        	Y.log('onFailure: there was a problem with this request');
+          Y.log('onFailure: there was a problem with this request');
         }
     }
 
@@ -123,17 +125,17 @@ YUI().use(
     }
     
     function update ( state ) {
-	
-    	this.setPage( state.page, true );
-		
-	    this.setRowsPerPage( state.rowsPerPage, true );
-	    	
-	    router.save( router.getPath() + '?page=' + state.page );
+  
+      this.setPage( state.page, true );
+      this.setRowsPerPage( state.rowsPerPage, true );
+      this.setTotalRecords( state.totalRecords, true );
+      router.save( router.getPath() + '?page=' + state.page );
 
     }
     
     function initPaginator( page, totalRecords, rowsPerPage ) {
         
+        Y.one('#paginator').empty();
         var paginatorConfiguration = {
                 totalRecords: totalRecords
               , rowsPerPage: rowsPerPage
@@ -143,13 +145,15 @@ YUI().use(
           , paginator = new Y.Paginator( paginatorConfiguration );
 
         paginator.on( 'changeRequest', update );
-               
-        paginator.render('#paginator');
+          
+        if (totalRecords > rowsPerPage) {
+          paginator.render('#paginator');
+        }
 
     }    
 
     function onSuccess ( response, args ) {
-
+        
         try {
             
             var node = args.container
@@ -162,15 +166,16 @@ YUI().use(
               , startNode = resultsnum.one('.start')
               , docslengthNode = resultsnum.one('.docslength')
               , docslength = parseInt(response.response.docs.length, 10)
-              , appRoot = Y.one('body').getAttribute('data-app');
+              , appRoot = Y.one('body').getAttribute('data-app')
+              , rows = args.rows
+              ;
               
-            // first transaction; enable paginator
-            if ( transactions.length < 1 ) {
-            	initPaginator( page , numfound, docslength );
-            }
-
-            // store called to avoid making the request multiple times
-            transactions.push ( this.url );
+            // Y.log ("numfound " + numfound);
+            // Y.log ("start " + start);
+            // Y.log ("rows " + rows);
+   
+            /* Re-init pagination each time, since number of results changes */
+            initPaginator( page , numfound, rows );
 
             node.setAttribute( 'data-numFound', numfound );
 
@@ -214,6 +219,10 @@ YUI().use(
           , source = ( data.source ) ? data.source : null
           , fl = ( data.fl ) ? data.fl : '*'
           , rows = ( data.rows ) ? data.rows : 10
+          , yearChosenNode = Y.one('#filter-year :checked')
+          , yearWhich = yearChosenNode.get('value')
+          , pubChosenNode = Y.one('#filter-publisher :checked')
+          , pubWhich = pubChosenNode.get('value')
           , fq = [];
 
         Y.one('body').addClass('io-loading');
@@ -221,12 +230,14 @@ YUI().use(
         /** find all data-fq and push the value into fq Array*/
         for ( var prop in data ) {
             if ( data.hasOwnProperty( prop ) ) {
-          	    if ( prop.match('fq-') ) {
-          	    	fq.push( prop.replace('fq-', '') + ':' + data[prop] );
-        	    }
+                if ( prop.match('fq-') ) {
+                  fq.push( prop.replace('fq-', '') + ':' + data[prop] );
+              }
             }
         }
-
+     
+        fq.push('ss_pubdate:' + yearWhich );
+        fq.push('ss_spublisher:' + pubWhich );
         if ( options.page ) {
             page = parseInt( options.page, 10 );
         }
@@ -265,10 +276,10 @@ YUI().use(
     
     router.replace( getRoute () );
     
-    // Sort
+    // Sorts and filters
     Y.one('body').delegate('change', onSelectChange, '#browse-select');
-    
-  
+    Y.one('body').delegate('change', onSelectChange, '#filter-year');
+    Y.one('body').delegate('change', onSelectChange, '#filter-publisher');
     
 
 });

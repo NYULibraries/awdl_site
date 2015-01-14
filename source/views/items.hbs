@@ -1,7 +1,8 @@
 <!-- file: items.hbs -->
 <div class="item-list flex-container">
   {{#items}}
-  <article class="item card">
+  <article class="item">
+  <div class="card">
     <div class="thumbs" >
       <div class="clipper">
       <a href="{{appRoot}}/book/{{ss_identifer}}"><img src="{{ss_thumbnail}}" alt="" title="{{title}}"/></a></div>
@@ -12,7 +13,9 @@
     <div  class="md_publisher"><span class="md_label">Publisher:</span> {{#each sm_publisher}}<span>{{this}}</span>{{/each}}, {{#each sm_field_publication_location}}<span>{{this}}</span>{{/each}}, {{ss_pubdate}}</div>
       <div class="md_provider"><span class="md_label">Provider:</span> {{#each sm_partner}}<span>{{this}}</span>{{/each}}</div>
      <div class="md_subjects"><span class="md_label">Subjects:</span> {{#each sm_subject}}<a class="md_subject" href="{{../../app.appRoot}}/search?q={{this}}">{{this}}</a>{{/each}}</div>
-  
+  </div>
   </article>
   {{/items}}
+   <article class="item"></article>
+  <article class="item"></article>
 </div>
