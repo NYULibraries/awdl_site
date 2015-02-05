@@ -773,7 +773,7 @@ body.book {
 /** Elements that are not meant to be seen until io its loading */
 .io-loading {
     .resultsnum,
-    #browse-select, #YUItabs, .filters {
+    #browse-select, #YUItabs, .filters, .pagination {
         position: absolute !important;
         height: 1px;
         width: 1px;
@@ -810,5 +810,5 @@ body.book {
 /* make it red instead (with with same width and style) */
 select:active, select:hover, select:focus {
     outline-color: gold !important;
-    box-shadow: 0 0 5px #FDAA29;
+    // box-shadow: 0 0 5px #FDAA29;
 }
