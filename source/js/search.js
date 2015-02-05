@@ -1,3 +1,5 @@
+/* jshint laxcomma: true */
+
 YUI().use(
     'node'
   , 'event'
@@ -394,7 +396,7 @@ YUI().use(
 
         }
         
-        return removeDiacritics( str )
+        return removeDiacritics( str );
     
     }    
 
@@ -407,7 +409,6 @@ YUI().use(
           , page = ( req.query.page ) ? parseInt( req.query.page, 10 ) : 0
           , query = ( req.query.q ) ? req.query.q : ''
           , start =  0;          
-          
         Y.one('.search_holder [name="q"]').set('value', query);
         
         if ( page <= 1 ) {
@@ -463,29 +464,33 @@ YUI().use(
     
     function update ( state ) {
     	
-    	this.setPage( state.page, true )
+    	this.setPage( state.page, true );
 		
-	    this.setRowsPerPage(state.rowsPerPage, true)
+	    this.setRowsPerPage(state.rowsPerPage, true);
 	    
 	    router.save( router.getPath() + '?q=' + getParameterByName('q') + '&page=' + state.page );
 
     }
-    
     function initPaginator( page, totalRecords, rowsPerPage ) {
         
+        Y.one('#paginator').empty();
         var paginatorConfiguration = {
                 totalRecords: totalRecords
               , rowsPerPage: rowsPerPage
               , initialPage : page
               , template: '{FirstPageLink} {PageLinks} {NextPageLink}'        
             }
-          , paginator = new Y.Paginator( paginatorConfiguration )
+          , paginator = new Y.Paginator( paginatorConfiguration );
 
-        paginator.on( 'changeRequest', update )
-               
-        paginator.render('#paginator')
+        paginator.on( 'changeRequest', update );
+          
+        if (totalRecords > rowsPerPage) {
+          paginator.render('#paginator');
+        }
 
-    }    
+    } 
+
+  
 
     function onSuccess ( response, args ) {
 
@@ -616,7 +621,7 @@ YUI().use(
         	source = source + '&q=' + options.q;
         }
                            
-        options.container.empty()
+        options.container.empty();
 
         Y.jsonp( source, {
             on: {
@@ -635,4 +640,4 @@ YUI().use(
     // Sort
     Y.one('body').delegate('change', onSelectChange, '#browse-select');    
 
-})
+});
