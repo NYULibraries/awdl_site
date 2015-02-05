@@ -1,11 +1,11 @@
 <!-- file: items.hbs -->
 <div class="item-list flex-container">
   {{#items}}
-  <article class="item">
+  <article class="item" {{#if score}}data-score="{{{score}}}{{/if}}">
   <div class="card">
     <div class="thumbs" >
       <div class="clipper">
-      <a href="{{appRoot}}/book/{{ss_identifer}}"><img src="{{ss_thumbnail}}" alt="" title="{{title}}"/></a></div>
+      <a href="{{../app.appRoot}}/book/{{ss_identifer}}"><img src="{{ss_thumbnail}}" alt="" title="{{title}}"/></a></div>
     </div>
     <h1 class="md_title"><a href="{{../app.appRoot}}/book/{{ss_identifer}}">{{{ss_title}}}</a></h1>
     <div class="md_author">{{#each sm_author}}<span>{{this}}</span>{{/each}}</div>
@@ -16,6 +16,6 @@
   </div>
   </article>
   {{/items}}
-   <article class="item"></article>
+  <article class="item"></article>
   <article class="item"></article>
 </div>
