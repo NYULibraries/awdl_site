@@ -1,6 +1,6 @@
 {
     "front": {
-        "htmltitle": "Welcome",
+        "htmltitle": "",
       
         "title": [{
             "language_code": "en",
@@ -151,7 +151,7 @@
                 "source": "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select",
                 "rows": 12,
                 "fl": [
-                    "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_publisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation","score", "ss_longlabel"
+                    "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_publisher", "ss_pubdate", "sm_partner", "sm_subject",  "ss_publocation", "sm_field_publication_location", "score", "ss_longlabel"
                 ],
                 "fq": [{
                     "filter": "hash",
