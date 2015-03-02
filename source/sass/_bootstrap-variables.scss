@@ -21,10 +21,12 @@ $gray-darker: lighten(black, 13.5%);
 // $gray-light:             lighten(#000, 46.7%) // #777
 // $gray-lighter:           lighten(#000, 93.5%) // #eee
 
+// Blood red
 $brand-primary: #8A0707;
 $brand-primary2: darken($brand-primary, 10%);
 $brand-primary-l2: lighten($brand-primary, 10%);
 ///
+// Creamy White
 $brand-secondary: #f9f1e7;
 $brand-secondary2: darken($brand-secondary, 5%);
 $brand-secondary3: darken($brand-secondary, 8%);

@@ -1,13 +1,13 @@
 {
     "appName": "Ancient World Digital Library",
-    "environment" : "local",
+    "environment" : "development",
     "development" : {
         "appUrl": "http://dev-dl-pa.home.nyu.edu/awdl_site",
         "appRoot": "/awdl_site",
         "sass" : {
-            "build" : "external"
+            "build" : "inline"
           , "options" : {
-                "style" : "expanded"
+                "style" : "compressed"
               , "debugInfo" : false
               , "lineNumbers" : false
             }
@@ -33,7 +33,7 @@
         "sass" : {
             "build" : "external"
           , "options" : {
-                "style" : "expanded"
+                "style" : "compressed"
               , "debugInfo" : false
               , "lineNumbers" : false
             }

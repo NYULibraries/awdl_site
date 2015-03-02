@@ -4,13 +4,13 @@
         "id" : "isaw",
         "name" : "INSTITUTE FOR THE STUDY OF THE ANCIENT WORLD",
         "logo" : "images/logos/nyu_short_color.png",
-        "url" : "http://www.nyu.edu/"            
+        "url" : "http://isaw.nyu.edu/"            
       },
       {
         "id" : "dlts",
         "name" : "DIGITAL LIBRARY TECHNOLOGY SERVICES",
         "logo" : "images/logos/nyuad.png",
-        "url" : "http://www.nyu.edu/"      
+        "url" : "http://dlib.nyu.edu/"      
       }
     ],
     "subjects" : {

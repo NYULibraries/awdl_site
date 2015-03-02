@@ -705,6 +705,9 @@ main {
     body {
         margin-bottom: 71px;
     }
+    body.book {
+        margin-bottom: 0px;
+    }
     .footer-wrapper {
         position: absolute;
         bottom: 0;
