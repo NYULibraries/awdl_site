@@ -212,7 +212,7 @@ YUI().use(
           , sortBy = sortData.get('value')
           , sortDir = sortData.getAttribute( "data-sort-dir" )
           , data = options.container.getData()
-          , source = ( data.source ) ? data.source : null
+          , source = Y.one('body').getAttribute('data-discoUrl')
           , fl = ( data.fl ) ? data.fl : '*'
           , rows = ( data.rows ) ? data.rows : 10
           , fq = [];
@@ -249,7 +249,7 @@ YUI().use(
                + "&rows=" + rows
                + "&start=" + start
                + "&sort=" + sortBy + "%20" + sortDir;
-      Y.log(source);
+        //Y.log(source);
         options.container.empty();
 
         Y.jsonp( source, {
