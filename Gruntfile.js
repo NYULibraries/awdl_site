@@ -4,7 +4,7 @@ module.exports = function( grunt ) {
     var _ = require('underscore');
 
     function transformHTML ( buildPath, task ) {
-
+       
         try {
 
             var hogan = require('hogan')
@@ -110,7 +110,7 @@ module.exports = function( grunt ) {
             source.menus = menus;
 
             source.appRoot = conf[environment].appRoot;  
-            
+            source.discoUrl = conf[environment].discoUrl; 
             source.discovery = conf.discovery;
 
             source.appName = conf.appName;
@@ -154,30 +154,30 @@ module.exports = function( grunt ) {
                           _.each( toJSON.js, function ( js ) {
            
                               if ( grunt.file.isFile ( 'build/js/' + js ) ) {
-                                  javascriptString += javascriptTagOpen + grunt.file.read( 'build/js/' + js ) + javascriptTagClose
+                                  javascriptString += javascriptTagOpen + grunt.file.read( 'build/js/' + js ) + javascriptTagClose;
                               }
-                          })
+                          });
                 
                        }                  
                   
-                      partials[name] = partial + javascriptString
+                      partials[name] = partial + javascriptString;
                   
                   }
                   
               }
 
-            })
+            });
         
             grunt.file.recurse( __dirname + '/source/views/' , function callback(abspath, rootdir, subdir, filename) {
               if ( filename.match(".hbs") ) {
-                  grunt.file.write( 'build/js/' + filename, grunt.file.read( abspath ) )
+                  grunt.file.write( 'build/js/' + filename, grunt.file.read( abspath ) );
               }
-            })
+            });
             
             // write file
-            grunt.file.write( buildPath, template.render( source, partials ) )
+            grunt.file.write( buildPath, template.render( source, partials ) );
             
-            grunt.log.write('Transforming ' + task + ' template into HTML ').ok()
+            grunt.log.write('Transforming ' + task + ' template into HTML ').ok();
             
         }
 
@@ -263,10 +263,10 @@ module.exports = function( grunt ) {
 		          
 		              name = filename.replace('.js', '');
 
-		              targets['build/js/' + name + '.min.js'] = abspath
+		              targets['build/js/' + name + '.min.js'] = abspath;
 		          }
 		          
-		    })
+		    });
 		  
 		    return targets;
 
@@ -322,27 +322,27 @@ module.exports = function( grunt ) {
     	  , subjects_source_map = []
     	  , gaga = []
           , jsonScriptTagOpen = '<script id="subjecsList" type="application/json">'
-          , jsonScriptTagClose = '</script>'     
+          , jsonScriptTagClose = '</script>';    
           
         _.each( drupal_subjects_source , function ( subject, index ) {
-        	subjects.push( { term : subject.value, tid : subject.raw_value })
-        })
+        	subjects.push( { term : subject.value, tid : subject.raw_value });
+        });
 
-        _.each( _.filter( terms, function ( term ) { return _.isString( term ) } ), function ( subject, index ) {
+        _.each( _.filter( terms, function ( term ) { return _.isString( term ); } ), function ( subject, index ) {
 
         	 var z = _.findWhere( subjects, { tid :  subject });
 
         	 if ( z ) {
-        	     subjects_source_map.push ( z )
+        	     subjects_source_map.push ( z );
         	 }
 
-        })
+        });
         
    	    //grunt.file.write( __dirname + '/source/views/subjectsList.mustache', jsonScriptTagOpen + JSON.stringify( subjects_source_map ) + jsonScriptTagClose  )
    	    
       //  grunt.file.write(__dirname + '/source/json/datasources/subject.json', JSON.stringify( subjects_source_map ) )   	    
 
-    })
+    });
     
     grunt.registerTask('writeHTML', 'writeHTML', function() {
     
