@@ -1,3 +1,4 @@
+/* jshint laxcomma: true */
 YUI().use(
     'node'
   , 'event'
@@ -50,7 +51,7 @@ YUI().use(
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)")
           , results = regex.exec(location.search);
 
-        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }      
 
     router.route( router.getPath(), function ( req ) {
@@ -90,7 +91,7 @@ YUI().use(
       });
       var t2 = Y.one("#browse-select option:checked").get("text");
       t2 = t2.replace("Sort by", "Sorting by");
-      Y.one("#browse-select option:checked").set("text", t2)
+      Y.one("#browse-select option:checked").set("text", t2);
       
       router.replace( getRouteChangedParameters() );
      
@@ -219,8 +220,9 @@ YUI().use(
           , source = Y.one('body').getAttribute('data-discoUrl')
           , fl = ( data.fl ) ? data.fl : '*'
           , rows = ( data.rows ) ? data.rows : 10
-          , yearChosenNode = Y.one('#filter-year :checked')
-          , yearWhich = yearChosenNode.get('value')
+          , yearSelectNode = Y.one('#filter-year')
+          , yearChosenOption = ( yearSelectNode ) ? Y.one('#filter-year :checked') : ''
+          , yearWhich = yearChosenOption.get('value')
           , pubChosenNode = Y.one('#filter-publisher :checked')
           , pubWhich = pubChosenNode.get('value')
           , fq = [];
