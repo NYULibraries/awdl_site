@@ -1,363 +1,379 @@
 /* jshint laxcomma: true */
-module.exports = function( grunt ) {
+module.exports = function(grunt) {
 
     var _ = require('underscore');
 
-    function transformHTML ( buildPath, task ) {
-       
+    function transformHTML(buildPath, task) {
+
         try {
 
-            var hogan = require('hogan')
-              , conf = grunt.file.readJSON( __dirname + '/source/json/conf.json')
-              , pages = grunt.file.readJSON( __dirname + '/source/json/pages.json')
-              , widgets = grunt.file.readJSON(__dirname + '/source/json/widgets.json')
-              , uncompileTemplate = grunt.file.read( __dirname + '/source/views/' + task + '.mustache' )
-              , source = pages[task]
-              , matchWidgetsRegEx = "data-script='(.*)'"
-              , matchWidgets = uncompileTemplate.match( matchWidgetsRegEx )
-              , javascriptTagOpen = '<script>'
-              , javascriptTagClose = '</script>'
-              , template = hogan.compile( uncompileTemplate )
-              , environment = conf.environment
-              , partials = {}
-              , menus = []
-              , navbar = []
-              , toJSON = ''
-              , javascriptString = ''
-              , handlebarsTemplate = ''
-              , links = ''
-              , closure = '';
-            
-           
-            if ( matchWidgets && matchWidgets[0] ) {
-                 
+            var hogan = require('hogan'),
+                conf = grunt.file.readJSON(__dirname + '/source/json/conf.json'),
+                pages = grunt.file.readJSON(__dirname + '/source/json/pages.json'),
+                widgets = grunt.file.readJSON(__dirname + '/source/json/widgets.json'),
+                uncompileTemplate = grunt.file.read(__dirname + '/source/views/' + task + '.mustache'),
+                source = pages[task],
+                matchWidgetsRegEx = "data-script='(.*)'",
+                matchWidgets = uncompileTemplate.match(matchWidgetsRegEx),
+                javascriptTagOpen = '<script>',
+                javascriptTagClose = '</script>',
+                template = hogan.compile(uncompileTemplate),
+                environment = conf.environment,
+                partials = {},
+                menus = [],
+                navbar = [],
+                toJSON = '',
+                javascriptString = '',
+                handlebarsTemplate = '',
+                links = '',
+                closure = '';
+
+
+            if (matchWidgets && matchWidgets[0]) {
+
                 toJSON = matchWidgets[0];
-                
+
                 toJSON = toJSON.replace(/'/g, '').replace(/data-script=/g, '');
 
-                toJSON = JSON.parse( toJSON );
+                toJSON = JSON.parse(toJSON);
 
-                _.each( toJSON.js, function ( js ) {
-                    if ( grunt.file.isFile ( 'build/js/' + js ) ) {
-                        javascriptString += javascriptTagOpen + grunt.file.read( 'build/js/' + js ) + javascriptTagClose;
+                _.each(toJSON.js, function(js) {
+                    if (grunt.file.isFile('build/js/' + js)) {
+                        javascriptString += javascriptTagOpen + grunt.file.read('build/js/' + js) + javascriptTagClose;
                     }
                 });
-               
-                _.each( toJSON.hbs, function ( hbs ) {
-                	
-                    var handlebarsTagOpen = '<script id="'+ hbs.id +'" type="text/x-handlebars-template">'
-                      , handlebarsTagClose = '</script>';
 
-                    if ( grunt.file.isFile ( 'source/views/' + hbs.template ) ) {
-                        handlebarsTemplate += handlebarsTagOpen + grunt.file.read( 'source/views/' + hbs.template ) + handlebarsTagClose;
+                _.each(toJSON.hbs, function(hbs) {
+
+                    var handlebarsTagOpen = '<script id="' + hbs.id + '" type="text/x-handlebars-template">',
+                        handlebarsTagClose = '</script>';
+
+                    if (grunt.file.isFile('source/views/' + hbs.template)) {
+                        handlebarsTemplate += handlebarsTagOpen + grunt.file.read('source/views/' + hbs.template) + handlebarsTagClose;
                     }
 
                 });
 
 
             }
-            
+
             closure += handlebarsTemplate + javascriptString;
-            
+
             source.closure = closure;
-            
+
             // build the menu object
-            _.each( pages, function ( page, index ) {
+            _.each(pages, function(page, index) {
 
-                if ( _.isArray( pages[index].menu ) ) {
-                    _.each( pages[index].menu, function ( menu ) {
+                if (_.isArray(pages[index].menu)) {
+                    _.each(pages[index].menu, function(menu) {
 
-                       menus[menu.weight] = {
-                            label : menu.label
-                         ,  status : 'active'
-                         ,  route : pages[index].route.replace('/index.html', '')
-                         ,  page : index
-                         ,  weight : menu.weight
+                        menus[menu.weight] = {
+                            label: menu.label,
+                            status: 'active',
+                            route: pages[index].route.replace('/index.html', ''),
+                            page: index,
+                            weight: menu.weight
                         };
-                       
+
                     });
                 }
             });
-        
+
+            // LMH 3/15/2015 -- mapping for multiple "featured items" sets
+            if (source.content) {
+                if (_.has(source.content, "featured")) {
+                    _.each(source.content.featured, function(element, index) {
+                        var widgetArray = widgets.featuredItemsGroupings.en;
+                        var foundObj = _.find(widgetArray, function(obj) {
+                            return obj.machineName == element.widget;
+                        });
+                        if (foundObj) {
+                            var fullsource = __dirname + '/' + foundObj.source;
+                            var dataRead = grunt.file.readJSON(fullsource);
+                            element.data = dataRead;
+                        } else {
+                            //grunt.log.error("Did not find the corresponding widget object");
+                        }
+
+                    }, this);
+                } else {
+                    // grunt.log.error("This page object has no widgets array");
+                }
+
+            }
+
+
             // this spaghetti maps the widgets to the taks and 
             // load data Object if type is not local
-            if ( source.content ) {
-              
-              _.each( source.content, function ( content, a ) {
+            if (source.content) {
 
-                _.each( source.content[a], function ( pane, b ) {
-                  
-                  if ( _.isArray( source.content[a][b].widgets ) ) {
-                    _.each( source.content[a][b].widgets, function ( widget, c ) {
+                _.each(source.content, function(content, a) {
 
-                      var spaghetti = {};
-                   
-                      spaghetti[widget] = widgets[source.content[a][b].widgets[c]][source.content[a][b].language_code];
-                      //grunt.log.write("\n" + '   ****************   spaghetti[widget]  ' + spaghetti[widget] );
-                      //grunt.log.write("\n" + '   ****************   spaghetti[widget].sourceType ' + spaghetti[widget].sourceType);
-                      if ( spaghetti[widget].sourceType) {
-                        if ( spaghetti[widget].sourceType == 'json' ) {
-                        spaghetti[widget].data = grunt.file.readJSON( __dirname + '/' + spaghetti[widget].source );   
-                      }
-                    }
-                      source.content[a][b].widgets[c] = spaghetti;
+                    _.each(source.content[a], function(pane, b) {
 
+                        if (_.isArray(source.content[a][b].widgets)) {
+                          
+                            _.each(source.content[a][b].widgets, function(widget, c) {
+
+                                var spaghetti = {};
+
+                                spaghetti[widget] = widgets[source.content[a][b].widgets[c]][source.content[a][b].language_code];
+                                //grunt.log.write("\n" + '   ****************   spaghetti[widget]  ' + spaghetti[widget]);
+                                //grunt.log.write("\n" + '   ****************   spaghetti[widget].sourceType ' + spaghetti[widget].sourceType);
+                                if (spaghetti[widget].sourceType) {
+                                    if (spaghetti[widget].sourceType == 'json') {
+                                        spaghetti[widget].data = grunt.file.readJSON(__dirname + '/' + spaghetti[widget].source);
+                                    }
+                                }
+                                source.content[a][b].widgets[c] = spaghetti;
+
+                            });
+                        }
                     });
-                  }
                 });
-              });
             }
             source.menus = menus;
 
-            source.appRoot = conf[environment].appRoot;  
-            source.discoUrl = conf[environment].discoUrl; 
+            source.appRoot = conf[environment].appRoot;
+            source.discoUrl = conf[environment].discoUrl;
             source.discovery = conf.discovery;
 
             source.appName = conf.appName;
-            
-            source.appUrl = conf[environment].appUrl;
-            
-            source.partners = widgets.partners;  
-            
-            if ( conf[environment].sass.build === 'external' ) {
-            	source.css = "<link href='"+ source.appUrl + "/css/style.css' rel='stylesheet' type='text/css'>";	
-            }
 
-            else {
+            source.appUrl = conf[environment].appUrl;
+
+            source.partners = widgets.partners;
+
+            if (conf[environment].sass.build === 'external') {
+                source.css = "<link href='" + source.appUrl + "/css/style.css' rel='stylesheet' type='text/css'>";
+            } else {
                 source.css = "<style>" + grunt.file.read(__dirname + '/build/css/style.css') + "</style>";
             }
 
-            grunt.file.recurse( __dirname + '/source/views/' , function callback(abspath, rootdir, subdir, filename) {
+            grunt.file.recurse(__dirname + '/source/views/', function callback(abspath, rootdir, subdir, filename) {
 
-              if ( filename.match(".mustache") && task + '.mustache' !== filename ) {
+                if (filename.match(".mustache") && task + '.mustache' !== filename) {
 
-                  var name = filename.replace(".mustache", "")
-                    , partial = grunt.file.read(abspath)
-                    , matchWidgetsRegEx = "data-script='(.*)'"
-                    , matchWidgets = partial.match( matchWidgetsRegEx )
-                    , toJSON = ''
-                    , javascriptString = ''
-                    , javascriptTagOpen = '<script>'
-                    , javascriptTagClose = '</script>'     
-                    , closure = '';                
-                  
-                  if ( ! _.find(_.keys(pages), name) ) {
-                  
-                      if ( matchWidgets && matchWidgets[0] ) {
-                
-                          toJSON = matchWidgets[0];
-                
-                          toJSON = toJSON.replace(/'/g, '').replace(/data-script=/g, '');
+                    var name = filename.replace(".mustache", ""),
+                        partial = grunt.file.read(abspath),
+                        matchWidgetsRegEx = "data-script='(.*)'",
+                        matchWidgets = partial.match(matchWidgetsRegEx),
+                        toJSON = '',
+                        javascriptString = '',
+                        javascriptTagOpen = '<script>',
+                        javascriptTagClose = '</script>',
+                        closure = '';
 
-                          toJSON = JSON.parse( toJSON );
+                    if (!_.find(_.keys(pages), name)) {
 
-                          _.each( toJSON.js, function ( js ) {
-           
-                              if ( grunt.file.isFile ( 'build/js/' + js ) ) {
-                                  javascriptString += javascriptTagOpen + grunt.file.read( 'build/js/' + js ) + javascriptTagClose;
-                              }
-                          });
-                
-                       }                  
-                  
-                      partials[name] = partial + javascriptString;
-                  
-                  }
-                  
-              }
+                        if (matchWidgets && matchWidgets[0]) {
+
+                            toJSON = matchWidgets[0];
+
+                            toJSON = toJSON.replace(/'/g, '').replace(/data-script=/g, '');
+
+                            toJSON = JSON.parse(toJSON);
+
+                            _.each(toJSON.js, function(js) {
+
+                                if (grunt.file.isFile('build/js/' + js)) {
+                                    javascriptString += javascriptTagOpen + grunt.file.read('build/js/' + js) + javascriptTagClose;
+                                }
+                            });
+
+                        }
+
+                        partials[name] = partial + javascriptString;
+
+                    }
+
+                }
 
             });
-        
-            grunt.file.recurse( __dirname + '/source/views/' , function callback(abspath, rootdir, subdir, filename) {
-              if ( filename.match(".hbs") ) {
-                  grunt.file.write( 'build/js/' + filename, grunt.file.read( abspath ) );
-              }
+
+            grunt.file.recurse(__dirname + '/source/views/', function callback(abspath, rootdir, subdir, filename) {
+                if (filename.match(".hbs")) {
+                    grunt.file.write('build/js/' + filename, grunt.file.read(abspath));
+                }
             });
-            
+
             // write file
-            grunt.file.write( buildPath, template.render( source, partials ) );
-            
+            grunt.file.write(buildPath, template.render(source, partials));
+
             grunt.log.write('Transforming ' + task + ' template into HTML ').ok();
-            
+
+        } catch (err) {
+
+            grunt.log.write('Transforming template into HTML. See ' + err.description + ' ').error();
+
+            console.log(err);
         }
 
-        catch (err) {  
-            
-            grunt.log.write('Transforming template into HTML. See ' + err.description + ' ').error();  
-            
-            console.log(err );
-        }        
-        
 
-  }
-  
-  function curlConfiguration () {
+    }
 
-      var conf = grunt.file.readJSON( __dirname + '/source/json/conf.json');
-      
-      return conf[conf.environment].curl;
-      
-  }
-  
-  function sassConfiguration () {
+    function curlConfiguration() {
 
-      var conf = grunt.file.readJSON( __dirname + '/source/json/conf.json');
-      
-      return {
-          dist : {
-              options : conf[conf.environment].sass.options
-            , files: {
-                 'build/css/style.css' : __dirname + '/source/sass/style.scss'
-              }
-          }
-      };
+        var conf = grunt.file.readJSON(__dirname + '/source/json/conf.json');
 
-  }
-  
-  function copyConfiguration () {
-	  return {
-	      main : {
-	        expand : true ,
-	        cwd : 'source/images',
-	        src : '**/*',
-	        dest : 'build/images',
-	      }
-      };
-  }
-  
-  function cleanConfiguration () {
-      return [ 
-	      , __dirname + '/build/images', 
-	      , __dirname + '/build/css'
-	  ];  
-  }
-  
-  function watchConfiguration () {
-	  return {
-	        files: [
-	            __dirname + '/source/js/*.js'
-	          , __dirname + '/source/json/*.json'            
-	          , __dirname + '/source/sass/*.scss'
-	          , __dirname + '/source/views/*.mustache'
-	        ],
-	        tasks: [
-	            'clean'
-	          , 'copy'
-	          , 'uglify'
-	          , 'sass'
-	          , 'writeHTML'
-	        ]
-	    };
-  }
-  
-  function uglifyConfiguration () {
-	  
-	  function targetsCallback() {
+        return conf[conf.environment].curl;
 
-		    var targets = {};
-		     
-		    grunt.file.recurse( __dirname + '/source/js/' , function callback(abspath, rootdir, subdir, filename) {
-		          var name;
-		          
-		          if ( filename.match('.js') ) {
-		          
-		              name = filename.replace('.js', '');
+    }
 
-		              targets['build/js/' + name + '.min.js'] = abspath;
-		          }
-		          
-		    });
-		  
-		    return targets;
+    function sassConfiguration() {
 
-      }
-	  
-	  return {
-	      options : {
-	        banner : '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-	        compress : true,
-	        preserveComments : false
-	      },
-	      my_target: {
-	          files : targetsCallback()
-	      }
-      };
-  }
+        var conf = grunt.file.readJSON(__dirname + '/source/json/conf.json');
 
-  // Project configuration.
+        return {
+            dist: {
+                options: conf[conf.environment].sass.options,
+                files: {
+                    'build/css/style.css': __dirname + '/source/sass/style.scss'
+                }
+            }
+        };
+
+    }
+
+    function copyConfiguration() {
+        return {
+            main: {
+                expand: true,
+                cwd: 'source/images',
+                src: '**/*',
+                dest: 'build/images',
+            }
+        };
+    }
+
+    function cleanConfiguration() {
+        return [, __dirname + '/build/images', , __dirname + '/build/css'];
+    }
+
+    function watchConfiguration() {
+        return {
+            files: [
+                __dirname + '/source/js/*.js', __dirname + '/source/json/*.json', __dirname + '/source/sass/*.scss', __dirname + '/source/views/*.mustache'
+            ],
+            tasks: [
+                'clean', 'copy', 'uglify', 'sass', 'writeHTML'
+            ]
+        };
+    }
+
+    function uglifyConfiguration() {
+
+        function targetsCallback() {
+
+            var targets = {};
+
+            grunt.file.recurse(__dirname + '/source/js/', function callback(abspath, rootdir, subdir, filename) {
+                var name;
+
+                if (filename.match('.js')) {
+
+                    name = filename.replace('.js', '');
+
+                    targets['build/js/' + name + '.min.js'] = abspath;
+                }
+
+            });
+
+            return targets;
+
+        }
+
+        return {
+            options: {
+                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+                compress: true,
+                preserveComments: false
+            },
+            my_target: {
+                files: targetsCallback()
+            }
+        };
+    }
+
+    // Project configuration.
     grunt.initConfig({
-        pkg : grunt.file.readJSON('package.json')
-      , curl : curlConfiguration()
-      , clean : cleanConfiguration()
-      , copy : copyConfiguration()
-      , uglify : uglifyConfiguration()
-      , sass : sassConfiguration()
-      , watch : watchConfiguration()
+        pkg: grunt.file.readJSON('package.json'),
+        curl: curlConfiguration(),
+        clean: cleanConfiguration(),
+        copy: copyConfiguration(),
+        uglify: uglifyConfiguration(),
+        sass: sassConfiguration(),
+        watch: watchConfiguration()
     });
-  
+
     grunt.loadNpmTasks('grunt-curl');
-  
+
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.loadNpmTasks('grunt-contrib-clean');
-    
+
     grunt.loadNpmTasks('grunt-contrib-copy');
-    
+
     grunt.loadNpmTasks('grunt-contrib-uglify');
-  
+
     grunt.loadNpmTasks('grunt-contrib-sass');
 
     grunt.loadNpmTasks('grunt-contrib-compass');
-    
+
     grunt.loadNpmTasks('grunt-contrib-watch');
-    
+
     // far from ideal
     grunt.registerTask('massageDataSource', 'massageDataSource', function() {
-    	
-    	var subjects_source = grunt.file.readJSON( __dirname + '/source/json/datasources/subject.json' )
-    	  , drupal_subjects_source = grunt.file.readJSON( __dirname + '/source/json/datasources/subjectsList.json' )
-    	  , terms = subjects_source.facet_counts.facet_fields.im_field_subject
-    	  , subjects = []
-    	  , z = []
-    	  , subjects_source_map = []
-    	  , gaga = []
-          , jsonScriptTagOpen = '<script id="subjecsList" type="application/json">'
-          , jsonScriptTagClose = '</script>';    
-          
-        _.each( drupal_subjects_source , function ( subject, index ) {
-        	subjects.push( { term : subject.value, tid : subject.raw_value });
+
+        var subjects_source = grunt.file.readJSON(__dirname + '/source/json/datasources/subject.json'),
+            drupal_subjects_source = grunt.file.readJSON(__dirname + '/source/json/datasources/subjectsList.json'),
+            terms = subjects_source.facet_counts.facet_fields.im_field_subject,
+            subjects = [],
+            z = [],
+            subjects_source_map = [],
+            gaga = [],
+            jsonScriptTagOpen = '<script id="subjecsList" type="application/json">',
+            jsonScriptTagClose = '</script>';
+
+        _.each(drupal_subjects_source, function(subject, index) {
+            subjects.push({
+                term: subject.value,
+                tid: subject.raw_value
+            });
         });
 
-        _.each( _.filter( terms, function ( term ) { return _.isString( term ); } ), function ( subject, index ) {
+        _.each(_.filter(terms, function(term) {
+            return _.isString(term);
+        }), function(subject, index) {
 
-        	 var z = _.findWhere( subjects, { tid :  subject });
+            var z = _.findWhere(subjects, {
+                tid: subject
+            });
 
-        	 if ( z ) {
-        	     subjects_source_map.push ( z );
-        	 }
+            if (z) {
+                subjects_source_map.push(z);
+            }
 
         });
-        
-   	    //grunt.file.write( __dirname + '/source/views/subjectsList.mustache', jsonScriptTagOpen + JSON.stringify( subjects_source_map ) + jsonScriptTagClose  )
-   	    
-      //  grunt.file.write(__dirname + '/source/json/datasources/subject.json', JSON.stringify( subjects_source_map ) )   	    
+
+        //grunt.file.write( __dirname + '/source/views/subjectsList.mustache', jsonScriptTagOpen + JSON.stringify( subjects_source_map ) + jsonScriptTagClose  )
+
+        //  grunt.file.write(__dirname + '/source/json/datasources/subject.json', JSON.stringify( subjects_source_map ) )         
 
     });
-    
-    grunt.registerTask('writeHTML', 'writeHTML', function() {
-    
-        var pages = grunt.file.readJSON(__dirname + '/source/json/pages.json'); 
-    
-        try {  
-        
-          _.each( pages, function ( element, index ) {
-              transformHTML( __dirname + '/build' + pages[index].route , index);
-          });
 
-        }
-        
-        catch (err) {  
-            grunt.log.write("Unknown error: " + err.description).error();  
+    grunt.registerTask('writeHTML', 'writeHTML', function() {
+
+        var pages = grunt.file.readJSON(__dirname + '/source/json/pages.json');
+
+        try {
+
+            _.each(pages, function(element, index) {
+                transformHTML(__dirname + '/build' + pages[index].route, index);
+            });
+
+        } catch (err) {
+            grunt.log.write("Unknown error: " + err.description).error();
         }
 
     });

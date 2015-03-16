@@ -1,7 +1,8 @@
-{{#featured}}
-    <div class="featured">
-      {{#widgets}}
-        {{> recentlyAddedTitles }}
-      {{/widgets}}
-    </div>
-{{/featured}}
+<div id="YUItabs" class="noFouc">
+<ul >{{#featured}} <li><h3><a href="#{{widget}}">{{title}}</a></h3></li>{{/featured}}</ul>
+<div>
+ {{#featured}}
+      <div id="{{widget}}">{{> featuredItemsGrouping }}</div>
+ {{/featured}}
+</div>
+</div>

@@ -3,7 +3,7 @@
 <head>{{> head }}
 <style type="text/css">
   .js .noFouc {
-    display: none;
+   display: none;
   }
 </style>
 <script type="text/javascript">
@@ -20,55 +20,20 @@
        <div class="item newsitem"> <h3>News item </h3><p>If we pull in a blog post via a feed, it will live here.</p> </div>
       </div>
 
-<div id="YUItabs" class="noFouc">
-    <ul>
-        <li><h3><a href="#recentlyAdded">Recently Added Titles</a></h3></li>
-        <li><h3><a href="#featuredProvider">Featured Provider: Koninklijke Brill NV</a></h3></li>
-    
-    </ul>
-    <div>
-        <div id="recentlyAdded">{{> featured }}</div>
-        <div id="featuredProvider">
-             <select id="browse-select">
-        <option data-sort-dir="asc" value="ss_longlabel" selected>Title</option>
-        <option data-sort-dir="asc" value="ss_sauthor">Author</option>
-        <option data-sort-dir="asc" value="ss_ssubject">Subject</option>
-        <option data-sort-dir="asc" value="ss_publocation">Place</option>
-      </select>
-      <div class="resultsnum">Showing results <span class="start"></span> - <span class="docslength"></span> of <span class="numfound"></span></div>
-
-      
-<div class="featured">
-      {{#items}}
-        <div 
-          class="widget" 
-          data-name="items" 
-          data-rows="{{ rows }}"
-          data-source="{{ source }}"
-          data-fl="{{ fl }}"
-          {{#fq}}
-          data-fq-{{ filter }}="{{ value }}"
-          {{/fq}}
-          data-script='{ "js" : [ "front.min.js" ], "hbs" : [ { "template" : "items.hbs", "id" : "items" } ] }'
-        ></div>       
-      {{/items}}</div>
-    {{/content}}
+  {{> featured }}
 
 
-</div>
-</div>
-</div>
+{{/content}}
 </main>
   {{> footer }}
   <script>
-YUI().use('tabview', function(Y) {
+  YUI().use('tabview', function(Y) {
     var tabview = new Y.TabView({
-        srcNode: '#YUItabs'
+     srcNode: '#YUItabs'
     });
-
     tabview.render();
     Y.one('.js .noFouc').setStyle('display', 'block');
-});
+  });
 </script>
   {{{ closure }}}
 </body>

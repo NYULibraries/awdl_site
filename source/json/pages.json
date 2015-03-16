@@ -1,7 +1,6 @@
 {
     "front": {
         "htmltitle": "",
-      
         "title": [{
             "language_code": "en",
             "language_dir": "ltr",
@@ -15,7 +14,7 @@
         "route": "/index.html",
         "bodyClass": "front",
         "content": {
-           "intro": [{
+            "intro": [{
                 "title": "",
                 "class": "",
                 "html": "<p><b>The Ancient World Digital Library</b> (AWDL) is an initiative of the Institute for the Study of the Ancient World at New York University. AWDL will identify, collect, curate, and provide access to the broadest possible range of scholarly materials relevant to the study of the ancient world. <a href=\"/awdl_site/about\" class=\"readmore\">READ&nbsp;MORE…</a></p>"
@@ -23,29 +22,21 @@
             "featured": [{
                 "title": "Recently Added Titles",
                 "language_code": "en",
-                "widgets": ["recentlyAddedTitles"]
-            }],
-            "items": {
-                "source": "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select",
-                "rows": 12,
-                "fl": [
-                    "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_author", "sm_publisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation", "sm_partner", "sm_field_publication_location"
-                ],
-                "fq": [{
-                    "filter": "hash",
-                    "value": "iy26sh"
-                }, {
-                    "filter": "ss_collection_identifier",
-                    "value": "d72398c3-1cd7-4734-ab1c-3e3b29862cee"
-                },
-                {
-                    "filter": "sm_partner",
-                    "value": "*Brill*"
-                }]
-            }
+                "language_dir": "ltr",
+                "widget": "recentlyAddedTitles"
+            }, {
+                "title": "Featured Newsletter: Circle of Inner Asian Art",
+                "language_code": "en",
+                "language_dir": "ltr",
+                "widget": "featuredCIAA"
+            }, {
+                "title": "Featured Provider: Brill",
+                "language_code": "en",
+                "language_dir": "ltr",
+                "widget": "featuredBrill"
+            }]
         }
     },
-    
     "browse": {
         "htmltitle": "Browse",
         "title": [{
@@ -62,7 +53,7 @@
         "bodyClass": "browse io-loading",
         "content": {
             "items": {
-               
+
                 "rows": 12,
                 "fl": [
                     "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_publisher", "ss_spublisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation", "sm_field_publication_location"
@@ -141,7 +132,7 @@
     "search": {
         "htmltitle": "Search",
         "title": [{
-           "html": "Search Results"
+            "html": "Search Results"
         }],
         "route": "/search/index.html",
         "bodyClass": "search io-loading",
@@ -149,13 +140,13 @@
             "items": {
                 "rows": 12,
                 "fl": [
-                    "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_publisher", "ss_pubdate", "sm_partner", "sm_subject",  "ss_publocation", "sm_field_publication_location", "score", "ss_longlabel"
+                    "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_publisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation", "sm_field_publication_location", "score", "ss_longlabel"
                 ],
                 "fq": [{
                     "filter": "hash",
                     "value": "iy26sh"
                 }, {
-                    "filter": "ss_collection_identifier",
+                    "filter": "sm_collection_identifier",
                     "value": "d72398c3-1cd7-4734-ab1c-3e3b29862cee"
                 }]
             }

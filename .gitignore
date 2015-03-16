@@ -2,3 +2,7 @@
 build
 node_modules
 source/yuiTabTest.html
+
+source/json/datasources/featuredBrill.json
+
+source/json/datasources/featuredCIAA.json
