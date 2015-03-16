@@ -6,3 +6,5 @@ source/yuiTabTest.html
 source/json/datasources/featuredBrill.json
 
 source/json/datasources/featuredCIAA.json
+
+source/json/datasources/recentlyAddedTitles.json
