@@ -150,11 +150,11 @@ body {
         }
     }
     .intro {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         line-height: 1.5;
         margin: 1rem auto 0rem auto;
         margin: 1rem 0 0rem 0;
-        max-width: 46em;
+        max-width: 51rem;
     }
     .featured h3 {
         padding: 40px 0 0;
@@ -170,6 +170,7 @@ body {
             background-color: #ECE2D6;
             border: double 3px gold;
             padding: 20px;
+            margin-top: 0;
             h3 {
                 margin: 0;
                 padding: 0;
@@ -237,9 +238,7 @@ body {
                 color: black;
                 display: block;
             }
-            a:visited {
-                color: lighten(black, 40%);
-            }
+           
         }
         .md_author {
             font-size: 1rem;
@@ -422,14 +421,14 @@ main {
             color: #fff;
             line-height: 1;
             display: block;
-            background: url("../images/awdl_logo.png") no-repeat left center;
+            background: url("/awdl_site/images/awdl_logo.png") no-repeat left center;
             background-size: 100% auto;
             @media (min-width: $grid-float-breakpoint) {
-                background: url("../images/awdl_logo.png") no-repeat left top;
+                background: url("/awdl_site/images/awdl_logo.png") no-repeat left top;
                 background-size: auto;
             }
             @media (max-width: 479px) {
-                background: url("../images/awdllogoVert.png") no-repeat left top;
+                background: url("/awdl_site/images/awdllogoVert.png") no-repeat left top;
                 background-size: auto 100%;
                 padding-top: 0;
                 height: 40px;
@@ -453,7 +452,7 @@ body.page .maintext {
 [role="search"] {
     input[type="submit"] {
         text-align: center;
-        background: #ecdcc8 url(../images/search-icon-2x.png) no-repeat center center;
+        background: #ecdcc8 url(/awdl_site/images/search-icon-2x.png) no-repeat center center;
         background-size: auto 80%;
         text-indent: -1000em;
         border: 1px solid $brand-secondary3;
@@ -780,7 +779,7 @@ body.book {
 /** Elements that are not meant to be seen until io its loading */
 .io-loading {
     .resultsnum,
-    #browse-select, #YUItabs, .filters, .pagination, .footer-wrapper {
+    #browse-select,  .filters, .pagination, .footer-wrapper {
         position: absolute !important;
         height: 1px;
         width: 1px;
