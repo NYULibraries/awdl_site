@@ -9,7 +9,6 @@
         <h2  class="page-title" >{{{html}}}</h2>
       {{/title}}
       <div class="filters">
-     
       <select id="filter-year">
         <option data-fq-ss_pubdate="all" value="*" selected>From all publication years</option>
         <option data-fq-ss_pubdate="1991" value="1991">Published in 1991</option>
@@ -22,11 +21,9 @@
         <option data-fq-ss_spublisher="styx" value="styx">From publisher: Styx</option>
         <option data-fq-ss_spublisher="brill" value="brill">From publisher: Brill</option>
       </select>
-       <select id="browse-select">
-         <option data-sort-dir="asc" value="ss_sauthor" selected>Sort by Author</option>
-
-        <option data-sort-dir="asc" value="ss_longlabel" >Sorting by Title</option>
-       
+      <select id="browse-select">
+        <option data-sort-dir="asc" value="ss_sauthor" selected>Sorting by Author</option>
+        <option data-sort-dir="asc" value="ss_longlabel" >Sort by Title</option>
       </select>
     </div>
       <div class="resultsnum">Showing results <span class="start"></span> - <span class="docslength"></span> of <span class="numfound"></span></div>
