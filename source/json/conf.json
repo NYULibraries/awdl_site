@@ -1,6 +1,6 @@
 {
     "appName": "Ancient World Digital Library",
-    "environment" : "local",
+    "environment" : "development",
     "development" : {
         "appUrl": "http://dev-dl-pa.home.nyu.edu/awdl_site",
         "appRoot": "/awdl_site",
@@ -23,7 +23,7 @@
                 "dest" : "source/json/datasources/featuredCIAA.json"
            },
             "featuredBrill" : {
-                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=sm_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=ss_spartner:(*brill*)&fl=ss_embedded,title,type,sm_collection_identifier,ss_identifer,ss_thumbnail,sm_author,ss_title, ss_language,ss_pubdate,ss_publocation,sm_publisher,sm_subject,sm_partner&rows=12&sort=ss_identifer%20asc",
+                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=sm_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=ss_spartner:(*brill*)&fl=ss_embedded,title,type,sm_collection_identifier,ss_identifer,ss_thumbnail,sm_author,ss_title, ss_language,ss_pubdate,ss_publocation,sm_publisher,sm_subject,sm_partner&rows=12&sort=iass_longlabel%20asc",
                 "dest" : "source/json/datasources/featuredBrill.json"
            }
         }

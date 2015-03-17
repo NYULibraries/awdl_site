@@ -161,9 +161,7 @@ body {
         margin-bottom: 30px;
         border-bottom: 2px solid orange;
     }
-    .resultsnum, #browse-select {
-        display: none;
-    }
+    
     .topHold {
         // background-color: blue;
         .newsitem {
@@ -177,11 +175,6 @@ body {
             }
         }
     }
-}
-
-.filters {
-    margin-top: -20px;
-    margin-bottom: 10px;
 }
 
 .flex-container {
@@ -720,14 +713,7 @@ main {
 
 // end sticky footer
 
-.resultsnum {
-    font-size: 1em;
-    color: #666;
-    .s-query {
-        font-weight: bold;
-        color: #222;
-    }
-}
+
 
 body.book {
     overflow-y: hidden;
@@ -775,6 +761,18 @@ body.book {
         }
     }
 }
+
+.resultsnum {
+    font-size: 1em;
+    color: #666;
+    margin-right: 20px;
+    float: left;
+    .s-query {
+        font-weight: bold;
+        color: #222;
+    }
+}
+
 
 /** Elements that are not meant to be seen until io its loading */
 .io-loading {
