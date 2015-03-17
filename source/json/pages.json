@@ -25,12 +25,12 @@
                 "language_dir": "ltr",
                 "widget": "recentlyAddedTitles"
             }, {
-                "title": "Featured Newsletter: Circle of Inner Asian Art",
+                "title": "Newsletter: Circle of Inner Asian Art",
                 "language_code": "en",
                 "language_dir": "ltr",
                 "widget": "featuredCIAA"
             }, {
-                "title": "Featured Provider: Brill",
+                "title": "Featured Provider: KONINKLIJKE BRILL NV",
                 "language_code": "en",
                 "language_dir": "ltr",
                 "widget": "featuredBrill"
@@ -62,7 +62,7 @@
                     "filter": "hash",
                     "value": "iy26sh"
                 }, {
-                    "filter": "ss_collection_identifier",
+                    "filter": "sm_collection_identifier",
                     "value": "d72398c3-1cd7-4734-ab1c-3e3b29862cee"
                 }]
             }
