@@ -1,0 +1,11 @@
+.noFouc {
+  opacity: 0;
+}
+
+.nojs {
+  .noFouc {
+    display: none;
+    visibility: hidden; 
+
+  }
+}

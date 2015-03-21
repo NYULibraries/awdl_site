@@ -1,7 +1,7 @@
 {
   "name": "awdl-site",
   "version": "1.0.0",
-  "description": "Ancient World Digital Library ========",
+  "description": "Ancient World Digital Library",
   "main": "Gruntfile.js",
   "devDependencies": {
     "diacritics": "^1.2.1",
@@ -17,13 +17,13 @@
     "grunt-curl": "^2.0.3",
     "hogan": "^1.0.2",
     "request": "^2.45.0",
-    "underscore": "^1.7.0"
+    "underscore": "^1.7.0",
+    "xml2js": "^0.4.6"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
- 
-  "author": "",
+  "author": "NYU Digital Library Technology Services",
   "license": "ISC",
   "homepage": "https://github.com/NYULibraries/awdl_site"
 }

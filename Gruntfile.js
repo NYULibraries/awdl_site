@@ -2,7 +2,9 @@
 module.exports = function(grunt) {
 
     var _ = require('underscore');
-
+    
+    var pkg = grunt.file.readJSON('package.json');
+    
     function transformHTML(buildPath, task) {
 
         try {
@@ -29,7 +31,7 @@ module.exports = function(grunt) {
                 closure = '';
 
 
-            if (matchWidgets && matchWidgets[0]) {
+            if ( matchWidgets && matchWidgets[0] ) {
 
                 toJSON = matchWidgets[0];
 
@@ -44,17 +46,13 @@ module.exports = function(grunt) {
                 });
 
                 _.each(toJSON.hbs, function(hbs) {
-
                     var handlebarsTagOpen = '<script id="' + hbs.id + '" type="text/x-handlebars-template">',
                         handlebarsTagClose = '</script>';
 
                     if (grunt.file.isFile('source/views/' + hbs.template)) {
                         handlebarsTemplate += handlebarsTagOpen + grunt.file.read('source/views/' + hbs.template) + handlebarsTagClose;
                     }
-
                 });
-
-
             }
 
             closure += handlebarsTemplate + javascriptString;
@@ -63,10 +61,8 @@ module.exports = function(grunt) {
 
             // build the menu object
             _.each(pages, function(page, index) {
-
                 if (_.isArray(pages[index].menu)) {
                     _.each(pages[index].menu, function(menu) {
-
                         menus[menu.weight] = {
                             label: menu.label,
                             status: 'active',
@@ -74,86 +70,62 @@ module.exports = function(grunt) {
                             page: index,
                             weight: menu.weight
                         };
-
                     });
                 }
             });
 
-            // LMH 3/15/2015 -- mapping for multiple "featured items" sets
-            if (source.content) {
-                if (_.has(source.content, "featured")) {
-                    _.each(source.content.featured, function(element, index) {
-                        var widgetArray = widgets.featuredItemsGroupings.en;
-                        var foundObj = _.find(widgetArray, function(obj) {
-                            return obj.machineName == element.widget;
-                        });
-                        if (foundObj) {
-                            var fullsource = __dirname + '/' + foundObj.source;
-                            var dataRead = grunt.file.readJSON(fullsource);
-                            element.data = dataRead;
-                        } else {
-                            //grunt.log.error("Did not find the corresponding widget object");
-                        }
-
-                    }, this);
-                } else {
-                    // grunt.log.error("This page object has no widgets array");
-                }
-
-            }
-
-
             // this spaghetti maps the widgets to the taks and 
             // load data Object if type is not local
-            if (source.content) {
-
-                _.each(source.content, function(content, a) {
-
-                    _.each(source.content[a], function(pane, b) {
-
-                        if (_.isArray(source.content[a][b].widgets)) {
-                          
-                            _.each(source.content[a][b].widgets, function(widget, c) {
-
-                                var spaghetti = {};
-
-                                spaghetti[widget] = widgets[source.content[a][b].widgets[c]][source.content[a][b].language_code];
-                                //grunt.log.write("\n" + '   ****************   spaghetti[widget]  ' + spaghetti[widget]);
-                                //grunt.log.write("\n" + '   ****************   spaghetti[widget].sourceType ' + spaghetti[widget].sourceType);
-                                if (spaghetti[widget].sourceType) {
-                                    if (spaghetti[widget].sourceType == 'json') {
-                                        spaghetti[widget].data = grunt.file.readJSON(__dirname + '/' + spaghetti[widget].source);
-                                    }
-                                }
-                                source.content[a][b].widgets[c] = spaghetti;
-
-                            });
-                        }
+            if ( source.content ) {
+              _.each( source.content, function ( content, a ) {
+                _.each( source.content[a], function ( pane, b ) {
+                  if ( _.isArray( source.content[a][b].widgets ) ) {
+                    source.content[a][b].raw = []
+                    _.each( source.content[a][b].widgets, function ( widget, c ) {
+                      var spaghetti = {};
+                      if ( widgets[source.content[a][b].widgets[c]].sourceType === 'json' ) {
+                        spaghetti =  { 
+                          label : widget, 
+                          widget : widgets[source.content[a][b].widgets[c]] , 
+                          data : grunt.file.readJSON( __dirname + '/' + widgets[source.content[a][b].widgets[c]].source ) 
+                        } ;   
+                      }
+                      // if you care about placement in specific scenario
+                      source.content[a][b][widget] = spaghetti;
+                      // as array to loop by weight
+                      source.content[a][b].raw.push( spaghetti );
+                      
+                      if ( task === 'front' ) console.log ( spaghetti )
+                      
                     });
+                  }
                 });
+              });
             }
+            
             source.menus = menus;
-
+            
             source.appRoot = conf[environment].appRoot;
+            
             source.discoUrl = conf[environment].discoUrl;
+            
             source.discovery = conf.discovery;
-
+            
             source.appName = conf.appName;
-
+            
             source.appUrl = conf[environment].appUrl;
-
+            
             source.partners = widgets.partners;
 
-            if (conf[environment].sass.build === 'external') {
+            if ( conf[environment].sass.build === 'external' ) {
                 source.css = "<link href='" + source.appUrl + "/css/style.css' rel='stylesheet' type='text/css'>";
-            } else {
+            }
+            else {
                 source.css = "<style>" + grunt.file.read(__dirname + '/build/css/style.css') + "</style>";
             }
 
             grunt.file.recurse(__dirname + '/source/views/', function callback(abspath, rootdir, subdir, filename) {
-
                 if (filename.match(".mustache") && task + '.mustache' !== filename) {
-
                     var name = filename.replace(".mustache", ""),
                         partial = grunt.file.read(abspath),
                         matchWidgetsRegEx = "data-script='(.*)'",
@@ -165,30 +137,19 @@ module.exports = function(grunt) {
                         closure = '';
 
                     if (!_.find(_.keys(pages), name)) {
-
                         if (matchWidgets && matchWidgets[0]) {
-
                             toJSON = matchWidgets[0];
-
                             toJSON = toJSON.replace(/'/g, '').replace(/data-script=/g, '');
-
                             toJSON = JSON.parse(toJSON);
-
                             _.each(toJSON.js, function(js) {
-
                                 if (grunt.file.isFile('build/js/' + js)) {
                                     javascriptString += javascriptTagOpen + grunt.file.read('build/js/' + js) + javascriptTagClose;
                                 }
                             });
-
                         }
-
                         partials[name] = partial + javascriptString;
-
                     }
-
                 }
-
             });
 
             grunt.file.recurse(__dirname + '/source/views/', function callback(abspath, rootdir, subdir, filename) {
@@ -213,17 +174,12 @@ module.exports = function(grunt) {
     }
 
     function curlConfiguration() {
-
         var conf = grunt.file.readJSON(__dirname + '/source/json/conf.json');
-
         return conf[conf.environment].curl;
-
     }
 
     function sassConfiguration() {
-
         var conf = grunt.file.readJSON(__dirname + '/source/json/conf.json');
-
         return {
             dist: {
                 options: conf[conf.environment].sass.options,
@@ -231,8 +187,7 @@ module.exports = function(grunt) {
                     'build/css/style.css': __dirname + '/source/sass/style.scss'
                 }
             }
-        };
-
+        }
     }
 
     function copyConfiguration() {
@@ -262,27 +217,17 @@ module.exports = function(grunt) {
     }
 
     function uglifyConfiguration() {
-
         function targetsCallback() {
-
             var targets = {};
-
             grunt.file.recurse(__dirname + '/source/js/', function callback(abspath, rootdir, subdir, filename) {
                 var name;
-
                 if (filename.match('.js')) {
-
                     name = filename.replace('.js', '');
-
                     targets['build/js/' + name + '.min.js'] = abspath;
                 }
-
             });
-
             return targets;
-
         }
-
         return {
             options: {
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
@@ -294,10 +239,10 @@ module.exports = function(grunt) {
             }
         };
     }
-
-    // Project configuration.
+    
+    /** project configuration */
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+        pkg: pkg,
         curl: curlConfiguration(),
         clean: cleanConfiguration(),
         copy: copyConfiguration(),
@@ -307,77 +252,52 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-curl');
-
     grunt.loadNpmTasks('grunt-contrib-jshint');
-
     grunt.loadNpmTasks('grunt-contrib-clean');
-
     grunt.loadNpmTasks('grunt-contrib-copy');
-
     grunt.loadNpmTasks('grunt-contrib-uglify');
-
     grunt.loadNpmTasks('grunt-contrib-sass');
-
     grunt.loadNpmTasks('grunt-contrib-compass');
-
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    // far from ideal
-    grunt.registerTask('massageDataSource', 'massageDataSource', function() {
-
-        var subjects_source = grunt.file.readJSON(__dirname + '/source/json/datasources/subject.json'),
-            drupal_subjects_source = grunt.file.readJSON(__dirname + '/source/json/datasources/subjectsList.json'),
-            terms = subjects_source.facet_counts.facet_fields.im_field_subject,
-            subjects = [],
-            z = [],
-            subjects_source_map = [],
-            gaga = [],
-            jsonScriptTagOpen = '<script id="subjecsList" type="application/json">',
-            jsonScriptTagClose = '</script>';
-
-        _.each(drupal_subjects_source, function(subject, index) {
-            subjects.push({
-                term: subject.value,
-                tid: subject.raw_value
-            });
-        });
-
-        _.each(_.filter(terms, function(term) {
-            return _.isString(term);
-        }), function(subject, index) {
-
-            var z = _.findWhere(subjects, {
-                tid: subject
-            });
-
-            if (z) {
-                subjects_source_map.push(z);
+    // ideally this will be a sub-module    
+    /** this task reads the RSS feed from ISAW Library Blog that was copy by */
+    grunt.registerTask('isawLibraryBlog', 'isawLibraryBlog', function() {
+        var done = this.async();
+        var request = require('request');
+        var fs = require('fs');        
+        var xml2js = require('xml2js');
+        var parser = new xml2js.Parser();        
+        var src = "http://isaw.nyu.edu/library/blog/collector/RSS";
+        var dest = __dirname + "/source/json/datasources/isawBlog.json";
+        request( src, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                parser.parseString( body, function ( err, result ) {
+                    var blogTitle = result['rdf:RDF']['channel'][0].title[0];
+                    var blogLink = result['rdf:RDF']['channel'][0].link[0];                    
+                    var blogDescription = result['rdf:RDF']['channel'][0].description[0];
+                    /** this widget only show the first item of the RSS feed */
+                    var items = result['rdf:RDF'].item.shift();
+                    var feed = { title : blogTitle , link : blogLink , description : blogDescription , items : [ items ] } ;
+                    grunt.file.write( dest , JSON.stringify( feed ) );
+                    done();
+                });
             }
-
-        });
-
-        //grunt.file.write( __dirname + '/source/views/subjectsList.mustache', jsonScriptTagOpen + JSON.stringify( subjects_source_map ) + jsonScriptTagClose  )
-
-        //  grunt.file.write(__dirname + '/source/json/datasources/subject.json', JSON.stringify( subjects_source_map ) )         
-
+        })
     });
 
     grunt.registerTask('writeHTML', 'writeHTML', function() {
-
         var pages = grunt.file.readJSON(__dirname + '/source/json/pages.json');
-
         try {
-
             _.each(pages, function(element, index) {
                 transformHTML(__dirname + '/build' + pages[index].route, index);
             });
-
-        } catch (err) {
+        }
+        catch (err) {
             grunt.log.write("Unknown error: " + err.description).error();
         }
-
     });
 
-    grunt.registerTask('default', ['clean', 'copy', 'curl', 'massageDataSource', 'uglify', 'sass', 'writeHTML']);
+    grunt.registerTask('default', ['clean', 'copy', 'curl', 'uglify', 'sass', 'isawLibraryBlog', 'writeHTML']);
 
 };

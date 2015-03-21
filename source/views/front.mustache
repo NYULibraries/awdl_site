@@ -1,40 +1,20 @@
 <!doctype html>
-<html>
-<head>{{> head }}
-<style type="text/css">
-  .js .noFouc {
-   display: none;
-  }
-</style>
-<script type="text/javascript">
-  document.documentElement.className = 'js';
-</script>
-</head>
-<body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" data-discoUrl="{{ discoUrl }}" class="{{ bodyClass }}">
+<html class="nojs">
+<head>{{> head }}</head>
+<body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" data-discoUrl="{{ discoUrl }}" class="{{ bodyClass }}" data-script='{ "js" : [ "front.min.js" ] }'>
   {{> header }}
-  <main class="main container-fluid" role="main">{{#content}}
-    <div class="topHold flex-container">
-      {{#intro}}
-      <div class="intro {{class}} itemdouble "> {{{html}}} </div>
-      {{/intro}}
-       <div class="item newsitem"> <h3>News item </h3><p>If we pull in a blog post via a feed, it will live here.</p> </div>
+  <main class="main container-fluid" role="main">
+    {{#content}}
+      <div class="topHold flex-container">
+        {{#intro}}
+          <div class="intro {{class}} itemdouble ">{{{html}}}</div>
+        {{/intro}}
+        {{> newsItem }} 
       </div>
-
-  {{> featured }}
-
-
-{{/content}}
-</main>
+      {{> featured }}
+    {{/content}}
+  </main>
   {{> footer }}
-  <script>
-  YUI().use('tabview', function(Y) {
-    var tabview = new Y.TabView({
-     srcNode: '#YUItabs'
-    });
-    tabview.render();
-    Y.one('.js .noFouc').setStyle('display', 'block');
-  });
-</script>
   {{{ closure }}}
 </body>
 </html>

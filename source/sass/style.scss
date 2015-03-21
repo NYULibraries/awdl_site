@@ -18,8 +18,6 @@
 @import "bootstrap/navs";
 @import "aconavbar";
 
-
-
 html {
     font-size: $font-size-base;
     line-height: $line-height-base;
@@ -767,3 +765,7 @@ select:active, select:hover, select:focus {
     outline-color: gold !important;
     // box-shadow: 0 0 5px #FDAA29;
 }
+
+/* no JS styles */
+
+@import "nojs";
