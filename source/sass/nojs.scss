@@ -5,7 +5,14 @@
 .nojs {
   .noFouc {
     display: none;
-    visibility: hidden; 
-
+    visibility: hidden;
+  }
+  main.main {
+    display: none;
+  }
+  body.io-loading .footer-wrapper {
+    clip: auto;
+    width: 100%;
+    height: auto;
   }
 }
