@@ -4,15 +4,13 @@
 <body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" class="{{ bodyClass }}">
   {{> header }}
   <main class="main container-fluid" role="main">
-     {{#title}}
+    {{#title}}
       <h2  class="page-title">{{{html}}}</h2>
-      {{/title}}
+    {{/title}}
     {{#content}}
-  
       {{#main}}
-      <div class="maintext {{class}}" >{{{html}}}</div>
+        <div class="maintext {{class}}" >{{{html}}}</div>
       {{/main}}
-  
     {{/content}}
   </main>
   {{> footer }}

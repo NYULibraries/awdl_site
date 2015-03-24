@@ -1,0 +1,14 @@
+<div class="item newsitem">
+{{#news}}
+  {{#newsItem}}
+    {{#data}}
+      <!-- h3>{{title}}</h3 --> <!-- also available; remove me if i wont be used -->
+      <p>{{description}}</p>
+      <ul>
+        {{#items}}<li><a href="{{link}}">{{title}}</a></li>{{/items}}
+      </ul>
+      <a href="{{link}}">read more</a>
+    {{/data}}    
+  {{/newsItem}}
+{{/news}}
+</div>
