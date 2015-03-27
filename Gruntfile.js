@@ -278,15 +278,12 @@ module.exports = function(grunt) {
                     var blogDescription = result['rdf:RDF']['channel'][0].description[0];
                     /** this widget only show the first item of the RSS feed */
                     var items = result['rdf:RDF'].item.shift(); // This returns an object
-                 
-                    // grunt.log.write("isArray: " + _.isArray(items)); // It's not an array
-                    // grunt.log.write("isObject: " + _.isObject(items));
-                    // The value of each is here considered an object -- we need to look for empty strings within in
-                    items = _.omit(items, function(value, key, object) { return (_.isEmpty(value[0]));});
-                    // Log cleaned up object
-                    for( var x in items)
-                                 grunt.log.write("\n 2  -- "+ x + " : " +  items[x]); 
-                 
+                    for( var k in items) {
+                       // grunt.log.write("\n "+ k + " : " +  items[k]); 
+                        if (_.isEmpty(items['description'][0])){
+                            items['description'][0] = "No excerpt was added for this blog post.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae augue in mi imperdiet porta.";
+                        }
+                    }
                     var feed = { title : blogTitle , link : blogLink , description : blogDescription , items : [ items ] } ;
                     grunt.file.write( dest , JSON.stringify( feed ) );
                     done();

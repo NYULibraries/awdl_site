@@ -1,24 +1,16 @@
 <div class="item newsitem">
-{{#news}}
-  {{#newsItem}}
-    {{#data}}
-    <h3><a href="{{link}}">From the ISAW blog</a></h3>     
-        {{#items}}<div class="newscontent">
+    {{#news}} {{#newsItem}} {{#data}}
+    <h3><a href="{{link}}">From the ISAW blog</a></h3> {{#items}}
+    <div class="newscontent">
         <div class="thumbs">
-           <div class="clipper"><a href="/awdl_site/book/isaw_ciaa000007"><img src="http://dev-dl-pa.home.nyu.edu/books/sites/default/files/isaw_ciaa000007/isaw_ciaa000007_thumb.jpg" alt="" title="[object Object]"></a></div></div>
+            <div class="clipper">
+                <a href="/awdl_site/book/isaw_ciaa000007"><img src="http://dev-dl-pa.home.nyu.edu/books/sites/default/files/isaw_ciaa000007/isaw_ciaa000007_thumb.jpg" alt="" title="[object Object]"></a>
+            </div>
+        </div>
         <h4><a href="{{link}}">{{title}}</a></h4>
         <time datetime="{{dc:date}}">{{dc:date}}</time>
         <div class="description">
-          {{#description}}{{description}}{{/description}}
-          {{^description}}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae augue in mi imperdiet porta. Nullam faucibus molestie finibus...
-          {{/description}}
-         
-          <hr>
-          </div></div>{{/items}}
-     
-      
-    {{/data}}    
-  {{/newsItem}}
-{{/news}}
+            {{#description}}{{description}}{{/description}}
+        </div>
+    </div>{{/items}} {{/data}} {{/newsItem}} {{/news}}
 </div>
