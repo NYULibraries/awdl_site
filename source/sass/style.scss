@@ -17,6 +17,7 @@
 
 @import "bootstrap/navs";
 @import "aconavbar";
+@import "partials/newsItem";
 
 html {
     font-size: $font-size-base;
@@ -110,20 +111,7 @@ body {
         margin-bottom: 30px;
         border-bottom: 2px solid orange;
     }
-    
-    .topHold {
-        // background-color: blue;
-        .newsitem {
-            background-color: #ECE2D6;
-            border: double 3px gold;
-            padding: 20px;
-            margin-top: 0;
-            h3 {
-                margin: 0;
-                padding: 0;
-            }
-        }
-    }
+ 
 }
 
 .flex-container {
@@ -163,7 +151,7 @@ body {
             /* font-weight: bold; */
             text-transform: uppercase;
             /* display: block; */
-            font-family: "Open Sans";
+            font-family: $font-family-sans-serif;
             font-size: .8em;
         }
         // .inner-meta {
@@ -244,7 +232,7 @@ body {
         padding-right: 20px;
         margin: 0 0px 20px 0px;
         @media (min-width: 1090px) {
-            -webkit-flex: 2 1 680px;
+            -webkit-flex: 2 1 6blogpx;
             flex: 2 1 680px;
         }
         @media (max-width: 780px) {
