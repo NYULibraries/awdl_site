@@ -16,6 +16,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-curl": "^2.0.3",
     "hogan": "^1.0.2",
+    "handlebars": "^3.0.1",
     "request": "^2.45.0",
     "underscore": "^1.7.0",
     "xml2js": "^0.4.6"
@@ -25,5 +26,8 @@
   },
   "author": "NYU Digital Library Technology Services",
   "license": "ISC",
-  "homepage": "https://github.com/NYULibraries/awdl_site"
+  "homepage": "https://github.com/NYULibraries/awdl_site",
+  "dependencies": {
+    "php-unserialize": "0.0.1"
+  }
 }
