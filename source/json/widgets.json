@@ -14,29 +14,30 @@
       "url": "http://dlib.nyu.edu/"
     }
   ],
-  
   "newsItem" : {
       "title": "News Item",
       "sourceType": "json",
       "source": "source/json/datasources/isawBlog.json"
   },
-  
   "recentlyAddedTitles" : {
       "title": "Recently Added Titles",
       "sourceType": "json",
       "source": "source/json/datasources/recentlyAddedTitles.json"
   },
-  
   "featuredCIAA" : {  
       "title": "Newsletter: Circle of Inner Asian Art",
       "sourceType": "json",
       "source": "source/json/datasources/featuredCIAA.json"
   },
-  
   "featuredBrill" : {  
     "title": "Featured Provider: KONINKLIJKE BRILL NV",
     "sourceType": "json",
     "source": "source/json/datasources/featuredBrill.json"
+  },
+  "series" : {
+    "title": "Series",
+    "sourceType": "json",
+    "source": "source/json/datasources/series.json"
   }
   
 }

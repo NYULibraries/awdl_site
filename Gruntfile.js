@@ -4,8 +4,6 @@ module.exports = function ( grunt ) {
 
   var pkg = grunt.file.readJSON('package.json');
 
-  //var transform = require('transform');
-
   var configuration = require('./Gruntconfigurations');  
 
   /** project configuration */
@@ -60,8 +58,6 @@ module.exports = function ( grunt ) {
     });
   });
 
-  // grunt.registerTask('default', ['clean', 'copy', 'curl', 'uglify', 'sass', 'isawLibraryBlog', 'writeHTML']);
+  grunt.registerTask('default', ['clean', 'copy', 'curl', 'uglify', 'sass', 'isawLibraryBlog', 'writeHTML']);
   
-  grunt.registerTask('default', ['clean', 'copy', 'curl', 'uglify', 'sass', 'writeHTML']);
-   
 };

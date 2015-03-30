@@ -25,8 +25,8 @@ YUI().use(
 
       if (body.hasClass('io-loading')) {
         var loadingAnimation = Y.one('.bubblingG'),
-          loaderHeight = loadingAnimation.get('offsetHeight');
-        availableHeight = availableHeight + loaderHeight;
+            loaderHeight = loadingAnimation.get('offsetHeight');
+            availableHeight = availableHeight + loaderHeight;
       }
 
       return availableHeight;
@@ -62,9 +62,7 @@ YUI().use(
         bookTheme = widget.getAttribute('data-bookTheme'),
         identifier = request.params.identifier,
         page = (request.params.page) ? request.params.page : 1;
-//Y.log(" src " + src);
-//Y.log(" bookTheme " + bookTheme);
-      widget.setAttribute('data-identifier', identifier);
+        widget.setAttribute('data-identifier', identifier);
 
       if (request.src === 'replace') {
 
@@ -73,8 +71,7 @@ YUI().use(
         if (bookTheme) {
           src = src + '?ctheme=' + bookTheme;
         }
-     // Y.log(" src " + src);
-       widget.set('src', src);
+        widget.set('src', src);
 
       }
 
@@ -129,8 +126,8 @@ YUI().use(
 
     resizeBookView();
 
-
     // initial request
     router.replace(router.getPath());
 
   });
+  

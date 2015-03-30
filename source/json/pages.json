@@ -23,15 +23,11 @@
     },
     "browse": {
         "htmltitle": "Browse",
-        "title": [{
-            "language_code": "en",
-            "language_dir": "ltr",
-            "html": "Browse titles"
-        }],
+        "title": [ { "html": "Browse titles" } ],
         "menu": [{
             "context": "navbar",
             "label": "Browse",
-            "weight": 2
+            "weight": 4
         }],
         "route": "/browse/index.html",
         "bodyClass": "browse io-loading",
@@ -39,15 +35,28 @@
             "items": {
                 "rows": 12,
                 "fl": [
-                    "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_publisher", "ss_spublisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation", "sm_field_publication_location"
+                    "ss_image_medium"
+                  , "ss_identifer"
+                  , "ss_title"
+                  , "sm_author"
+                  , "sm_publisher"
+                  , "ss_spublisher"
+                  , "ss_pubdate"
+                  , "sm_partner"
+                  , "sm_subject"
+                  , "ss_publocation"
+                  , "sm_field_publication_location"
+                  , "is_ispartof_series"
+                  , "ss_series_label"
+                  , "is_ispartof_multivol"
+                  , "ss_multivol_label"
                 ],
-                "fq": [{
-                    "filter": "hash",
-                    "value": "iy26sh"
-                }, {
+                "fq": [
+                  {
                     "filter": "sm_collection_identifier",
                     "value": "d72398c3-1cd7-4734-ab1c-3e3b29862cee"
-                }]
+                  }
+                ]
             }
         }
     },
@@ -102,23 +111,70 @@
             "items": {
                 "rows": 12,
                 "fl": [
-                    "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_publisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation", "sm_field_publication_location", "score", "ss_longlabel"
+                    "ss_image_medium"
+                  , "ss_identifer"
+                  , "ss_title"
+                  , "sm_author"
+                  , "sm_publisher"
+                  , "ss_pubdate"
+                  , "sm_partner"
+                  , "sm_subject"
+                  , "ss_publocation"
+                  , "sm_field_publication_location"
+                  , "score"
+                  , "ss_longlabel"
+                  , "is_ispartof_series"
+                  , "ss_series_label"
+                  , "is_ispartof_multivol"
+                  , "ss_multivol_label"                  
                 ],
-                "fq": [{
-                    "filter": "hash",
-                    "value": "iy26sh"
-                }, {
+                "fq": [
+                  {
                     "filter": "sm_collection_identifier",
                     "value": "d72398c3-1cd7-4734-ab1c-3e3b29862cee"
-                }]
+                  }
+                ]
             }
         }
     },
+
+    "series": {
+        "htmltitle": "Series",
+        "title": [{
+            "html": "Series"
+        }],
+        "route": "/series/index.html",
+        "bodyClass": "series io-loading",
+        "menu": [{
+          "context": "navbar",
+          "label": "Series",
+          "weight": 2
+        }],        
+        "content": {
+          "series" : [ { "title": "Collection series" , "widgets" : [ "series" ] } ]
+        }
+    },
+    
     "book": {
         "htmltitle": "Book",
         "title": "Book",
         "bodyClass": "book",
         "sourceUrl": "http://dev-dl-pa.home.nyu.edu/books",
         "route": "/book/index.html"
-    }
+    },
+    
+    "series/*": { "callback" : "series_pages" },
+    
+    "subjects": {
+      "callback" : "subjects",
+      "route": "/subjects/index.html",
+      "menu": [{
+        "context": "navbar",
+        "label": "Subjects",
+        "weight": 3
+      }]
+    },
+    
+    "subjects/*": {  "callback" : "subjects_pages" }    
+    
 }

@@ -13,4 +13,8 @@ source/json/datasources/*
 .buildpath
 .settings/*
 
+# project sub modules
 !node_modules/grunt-contrib-writeHTML
+!node_modules/series_pages 
+!node_modules/subjects 
+!node_modules/subjects_pages

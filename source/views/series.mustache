@@ -1,11 +1,35 @@
 <!doctype html>
 <html>
 <head>{{> head }}</head>
-<body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}">
+<body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" data-discoUrl="{{ discoUrl }}" class="{{ bodyClass }}">
   {{> header }}
-  <h2>{{ title }}</h2>
-  <span><a href="{{ appUrl }}" title="{{ appName }}">{{ appName }}</a> &gt; {{ title }}</span>
-  {{> partners }}
+  <main class="main container-fluid" role="main">
+    <header>
+      {{#title}}<h2  class="page-title">{{{html}}}</h2>{{/title}}
+    </header>
+    {{#content}}
+      {{#series}}
+        <div>
+          {{#raw}}
+            <div id="{{label}}">
+              <div class="item-list flex-container">
+                {{#data}}
+                  {{#response}}
+                    {{#docs}}
+                      <article class="item card">
+                        <h1 class="md_title"><a href="{{../../../../../../appUrl}}/series/{{ss_identifier}}">{{{ss_series_label}}}</a></h1>
+                      </article>  
+                    {{/docs}}
+                  {{/response}}
+                {{/data}}
+              </div>
+            </div>
+          {{/raw}}
+        </div>
+      {{/series}}
+    {{/content}}    
+  </main>
   {{> footer }}
+  {{{ closure }}}
 </body>
 </html>

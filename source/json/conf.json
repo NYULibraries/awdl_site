@@ -1,6 +1,6 @@
 {
     "appName": "Ancient World Digital Library",
-    "environment" : "local",
+    "environment" : "mercurio",
     "development" : {
         "appUrl": "http://dev-dl-pa.home.nyu.edu/awdl_site",
         "appRoot": "/awdl_site",
@@ -25,11 +25,15 @@
             "featuredBrill" : {
                 "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=sm_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=ss_spartner:(*brill*)&fl=ss_embedded,title,type,sm_collection_identifier,ss_identifer,ss_thumbnail,sm_author,ss_title, ss_language,ss_pubdate,ss_publocation,sm_publisher,sm_subject,sm_partner&rows=12&sort=iass_longlabel%20asc",
                 "dest" : "source/json/datasources/featuredBrill.json"
+           },
+           "series" : {
+               "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?fl=*&fq=sm_series_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee",
+               "dest" : "source/json/datasources/series.json"
            }
         }
     },
     "local" : {
-        "appUrl" : "http://localhost:8000/awdl_site",
+        "appUrl" : "http://localhost/awdl_site",
         "appRoot" : "/awdl_site",
         "discoUrl": "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select/",
         "sass" : {
@@ -52,9 +56,46 @@
             "featuredBrill" : {
                 "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=sm_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=ss_spartner:(*brill*)&fl=ss_embedded,title,type,sm_collection_identifier,ss_identifer,ss_thumbnail,sm_author,ss_title, ss_language,ss_pubdate,ss_publocation,sm_publisher,sm_subject,sm_partner&rows=12&sort=ss_identifer%20asc",
                 "dest" : "source/json/datasources/featuredBrill.json"
-            }
+           },
+           "series" : {
+               "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fl=*&fq=sm_series_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee",
+               "dest" : "source/json/datasources/series.json"
+           }
         }
     },
+
+    "mercurio" : {
+        "appUrl" : "http://192.168.1.117/awdl_site",
+        "appRoot" : "/awdl_site",
+        "discoUrl": "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select/",
+        "sass" : {
+            "build" : "external"
+          , "options" : {
+                "style" : "compressed"
+              , "debugInfo" : false
+              , "lineNumbers" : false
+            }
+        },
+        "curl" : {
+            "recentlyAddedTitles" : {
+                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=sm_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=!ss_language:ar&fl=*&rows=12&&sort=ds_changed%20desc",
+                "dest" : "source/json/datasources/recentlyAddedTitles.json"
+            },
+            "featuredCIAA" : {
+                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=sm_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=ss_spublisher:(*circle*)&fl=*&rows=100&sort=ss_identifer%20asc",
+                "dest" : "source/json/datasources/featuredCIAA.json"
+            },
+            "featuredBrill" : {
+                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=sm_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=ss_spartner:(*brill*)&fl=*&rows=12&sort=ss_identifer%20asc",
+                "dest" : "source/json/datasources/featuredBrill.json"
+           },
+           "series" : {
+               "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fl=*&fq=sm_series_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&rows=1000",
+               "dest" : "source/json/datasources/series.json"
+           }
+        }
+    },    
+    
     "production" : {
         "appUrl": "http://dlib.nyu.edu/awdl_site",
         "appRoot": "/awdl",
