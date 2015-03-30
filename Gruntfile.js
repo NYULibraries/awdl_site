@@ -28,6 +28,7 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-writeHTML');
     
   /** Reads the RSS feed from "ISAW Library Blog". @TODO: ideally this will be a sub-module */
   grunt.registerTask('isawLibraryBlog', 'isawLibraryBlog', function () {
@@ -59,45 +60,8 @@ module.exports = function ( grunt ) {
     });
   });
 
-  grunt.registerTask('writeHTML', 'writeHTML', function () {
-    /** force task into async mode and grab a handle to the "done" function. */
-    var done = this.async();
-    /** load configuration */
-    var conf = grunt.file.readJSON(__dirname + '/source/json/conf.json');
-    /** copy source JavaScript files to build */
-    grunt.file.recurse(__dirname + '/source/js/', function callback (abspath, rootdir, subdir, filename) {
-      if ( filename.match('.js') ) {
-        grunt.file.copy( abspath, 'build/js/' + filename );
-      }
-    });
-    /** load pages JSON Object*/ 
-    var pages = grunt.file.readJSON(__dirname + '/source/json/pages.json');        
-    try {
-      /** iterate pages and transform in HTML*/
-      _.each( pages , function ( element, index) {
-        /** if callback is set, we need to load the JS module and call it */
-        if ( ! _.isUndefined ( pages[index].callback )  ) {
-          /** load JS module */
-          var module = require( element.callback ) ;
-          /** 
-           * call module with parent configuration so that its possible 
-           * to overwrite defaults. Our modules accept a Function callback
-           * we pass "transform.html" as the default.
-           * 
-           */
-          module[element.callback]( transform.dynamic, { parent_conf : conf } ) ;
-        }
-        else {
-          /** all we need to construct this HTML page it's in the page Object */
-          transform.html(__dirname + '/build' + pages[index].route, index);
-        }
-      });
-    }
-    catch ( err ) {
-      grunt.log.write('Unknown error: ' + err.description).error();
-    }
-  });
+  // grunt.registerTask('default', ['clean', 'copy', 'curl', 'uglify', 'sass', 'isawLibraryBlog', 'writeHTML']);
   
-  grunt.registerTask('default', ['clean', 'copy', 'curl', 'uglify', 'sass', 'isawLibraryBlog', 'writeHTML']);
+  grunt.registerTask('default', ['clean', 'copy', 'curl', 'uglify', 'sass', 'writeHTML']);
    
 };

@@ -13,4 +13,4 @@ source/json/datasources/*
 .buildpath
 .settings/*
 
-!lib/node_modules/grunt-contrib-writeHTML
+!node_modules/grunt-contrib-writeHTML
