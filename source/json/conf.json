@@ -6,7 +6,7 @@
       "appRoot": "/awdl_site"
     },
 
-    "environment" : "moon",
+    "environment" : "local",
     
     "development" : {
         "appUrl": "http://dev-dl-pa.home.nyu.edu/awdl_site",
@@ -40,7 +40,7 @@
         }
     },
     "local" : {
-        "appUrl" : "http://localhost/awdl_site",
+        "appUrl" : "http://localhost:8000/awdl_site",
         "appRoot" : "/awdl_site",
         "discoUrl": "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select/",
         "sass" : {

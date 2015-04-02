@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head><title>Ancient World Digital Library: </title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--[if lte IE 9]>
+	<script>
+		window.location.replace("http://localhost:8000/awdl_site/upgrade.html");
+	</script>
+<![endif]-->
+
+
+<link href='http://fonts.googleapis.com/css?family=Lora:400,700|Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+<link rel="shortcut icon" href="http://localhost:8000/awdl_site/images/favicon.ico" />
+<link href='http://localhost:8000/awdl_site/css/style.css' rel='stylesheet' type='text/css'>
+<script src="http://yui.yahooapis.com/3.15.0/build/yui/yui-min.js"></script>
+</head>
+<body data-app="http://localhost:8000/awdl_site" data-appRoot="/awdl_site" class="page about">
+  <div class="header-wrapper ">
+  	<header class="header-main container-fluid" role="banner">
+  		<h1 class="sitename"><a href="http://localhost:8000/awdl_site/">Ancient World Digital Library</a></h1>
+  	</header>
+  </div>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid"> 
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed widget" data-toggle="collapse" data-name="navButton" data-script='{ "js" : [ "navButton.min.js" ] }'> 
+               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="40px" height="30px" viewBox="0 0 40 30" overflow="visible" xml:space="preserve">
+                 <defs> </defs>
+                 <rect y="0" fill="#FFFFFF" width="40" height="3"></rect>
+                 <rect y="7" fill="#FFFFFF" width="40" height="3"></rect>
+                 <rect y="14" fill="#FFFFFF" width="40" height="3"></rect>
+               </svg> 
+               <span class="sr-only">Toggle navigation</span> 
+       </button>
+       <script>/*! awdl-site 2015-04-02 */
+       YUI().use("node","event","anim",function(a){"use strict";function b(a){a.preventDefault(),c.fx.set("reverse",!c.fx.get("reverse")),c.fx.run()}var c=a.one(".navbar-collapse").plug(a.Plugin.NodeFX,{from:{height:function(a){return a.get("scrollHeight")}},to:{height:0},easing:a.Easing.easeBoth,on:{end:function(){var b=a.one(".navbar-toggle");b.toggleClass("collapsed")}},duration:.3});a.one("body").delegate("click",b,".navbar-toggle")});</script>    </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="navbar-collapse" >
+        <ul class="nav navbar-nav">
+            <li><a href="http://localhost:8000/awdl_site" class="front">Home</a></li>
+            <li><a href="http://localhost:8000/awdl_site/about" class="about">About</a></li>
+            <li><a href="http://localhost:8000/awdl_site/series" class="series">Series</a></li>
+            <li><a href="http://localhost:8000/awdl_site/subjects" class="subjects">Subjects</a></li>
+            <li><a href="http://localhost:8000/awdl_site/browse" class="browse">Browse</a></li>
+        </ul>
+        <div class="search_holder widget navbar-form navbar-right" data-name="search_form" data-script='{ "js" : [ "search_form.min.js" ] }'>
+  	<form method="get" action="http://localhost:8000/awdl_site/search" role="search">
+  		<input type="submit" class="submit-search">
+  		<input name="q" type="text" placeholder="search" title="Enter the terms you wish to search for.">
+  	</form>
+  </div><script>/*! awdl-site 2015-04-02 */
+  YUI().use("node","event",function(a){"use strict";function b(a){a.preventDefault();var b=a.currentTarget,c=b.one('[type="text"]'),d=c.get("value");d.length&&(location.href=b.get("action")+"?q="+d.trim().replace(/\s/g,"+"))}var c=a.one("body");c.delegate("submit",b,"form")});</script> </div>
+      <!-- /.navbar-collapse --> 
+    </div>
+    <!-- /.container-fluid --> 
+  </nav>  <main class="main container-fluid" role="main">
+      <h2  class="page-title">About</h2>
+        <div class="maintext " ><p><strong>The Ancient World Digital Library</strong> (AWDL) is an initiative of the <a href="http://www.nyu.edu/isaw/" title="Institute for the Study of the Ancient World at New York University" target="_blank">Institute for the Study of the Ancient World at New York University</a>. AWDL will identify, collect, curate, and provide access to the broadest possible range of scholarly materials relevant to the study of the ancient world. AWDL has two primary tracks:</p><ol>  <li>In partnership with the NYU Digital Libraries Program AWDL is developing mechanisms to host and preserve existing and newly contributed content without respect to digital condition, or state of enrichment of its contents: our overriding objective is to make available to researchers as large a part of the scholarly heritage of the relevant fields as possible. Towards this end we are soliciting the participation of publishers, scholarly societies, organizations, and individuals who hold the rights to scholarly content.</li>  <li>AWDL will identify, collect, curate and provide bibliographical access to the growing corpus of scholarly materials produced and served elsewhere. This will continue, within the context of the AWDL, the work Charles Jones has undertaken via <a href="http://www.etana.org/abzu/" title="Abzu" target="_blank">Abzu</a> and <a href="http://ancientworldonline.blogspot.com/" title="AWOL" target="_blank">AWOL</a> for more than a decade and a half.</li></ol><p>AWDL is collaborating with <a href="http://dlib.nyu.edu/dlts/" title="NYU Digital Library Technology Services" target="_blank">NYU Digital Library Technology Services (DLTS)</a> in the development of the book viewer.Within the Institute for the Study of the Ancient World, AWDL is a collaboration between the <a href="http://www.nyu.edu/isaw/library.htm" target="_blank">Library</a> and <a href="http://www.nyu.edu/isaw/about-projects.htm" title="Digital Programs" target="_blank">Digital Programs</a>. Additional information on AWDL and other Digital Initiatives of the Institute for the Study of the Ancient World is available on the <a href="http://www.nyu.edu/isaw/about-projects.htm" target="_blank">ISAW</a> website.</p></div>
+  </main>
+  <div class="footer-wrapper">
+  <footer class="footer-main container-fluid" role="contentinfo">
+  	<div class="logo"><a href="http://nyu.edu/" target="_blank"><img src="http://localhost:8000/awdl_site/images/nyu_short_white.svg" alt="NYU" width="120" height="41"></a></div>
+    <div class="partner-wrapper">
+        <div class="partner-isaw">
+        	<a href="http://isaw.nyu.edu/" title="INSTITUTE FOR THE STUDY OF THE ANCIENT WORLD" target="_blank">INSTITUTE FOR THE STUDY OF THE ANCIENT WORLD</a></div>
+        <div class="partner-dlts">
+        	<a href="http://dlib.nyu.edu/" title="DIGITAL LIBRARY TECHNOLOGY SERVICES" target="_blank">DIGITAL LIBRARY TECHNOLOGY SERVICES</a></div>
+    </div></footer>
+  </div>    
+</body>
+</html>
