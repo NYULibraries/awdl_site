@@ -32,6 +32,11 @@ $brand-secondary2: darken($brand-secondary, 5%);
 $brand-secondary3: darken($brand-secondary, 8%);
 $brand-secondary-bright: #FF9C00;
 
+// Glowing, From IO
+// $glowycolor: #85CCAA;
+// $glowycolor: #009B8C;
+// $input-border-focus: #007C64;
+
 
 
 $footer-color: #474C50;
@@ -63,7 +68,7 @@ $header-underline-color: darken($body-bg, 10%);
 //## Font, line-height, and color for body text, headings, and more.
 
 $font-family-sans-serif:  'Open Sans', Verdana, Helvetica, Arial, sans-serif;
-$font-family-serif: Lora, Georgia, "Times New Roman", Times, serif;
+$font-family-serif: Georgia, "Times New Roman", Times, serif;
 
 //* Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 // $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace
