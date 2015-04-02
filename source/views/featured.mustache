@@ -1,18 +1,19 @@
 {{#featured}}
-  <div id="{{id}}" class="noFouc">
+  <div id="{{id}}" class="noFouc tabHolder">
     <ul>
       {{#raw}}<li><h3><a href="#{{label}}">{{#widget}}{{title}}{{/widget}}</a></h3></li>{{/raw}}
     </ul>
-    <div>
+    <div class="tabContentHolder">
       {{#raw}}
         <div id="{{label}}">
+         <h3> {{#widget}}{{title}}{{/widget}}</h3>
           <div class="item-list flex-container">
             {{#data}}
               {{#response}}
                 {{#docs}}
                   <article class="item card">
                     <div class="thumbs">
-                      <div class="clipper"><a href="{{appRoot}}/book/{{ss_identifer}}"><img src="{{ss_thumbnail}}" alt="" title="{{title}}"/></a></div>
+                      <div class="clipper"><a href="{{appRoot}}/book/{{ss_identifer}}"><img src="{{zs_image_medium}}" alt="" title="{{title}}"/></a></div>
                     </div>
                     <h1 class="md_title"><a href="{{appUrl}}/book/{{ss_identifer}}">{{{ss_title}}}</a></h1>
                     <div class="md_author"><span>{{sm_author}}</span></div>
