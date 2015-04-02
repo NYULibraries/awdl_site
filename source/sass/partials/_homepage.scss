@@ -1,0 +1,107 @@
+.front {
+  main {
+    min-height: 1200px;
+  }
+  [role="tablist"] {
+    @include box-shadow(inset 0px -1px 0px 0px rgba(110, 102, 93, 0.3));
+    margin-bottom: 10px;
+    .yui3-tab {
+      margin-right: 40px;
+      h3 {
+        margin: 0;
+        a {
+          transition: all 0.5s;
+          display: block;
+          // border-bottom: 3px solid transparent;
+          padding: 10px 0px 4px;
+          font-weight: 400;
+          color: #555;
+          font-size: .8em;
+          letter-spacing: .3px;
+          text-transform: uppercase;
+          &:hover {
+            text-decoration: none;
+            @include box-shadow(inset 0px -4px 0px 0px #ff9c00);
+          }
+        }
+      }
+    }
+    .yui3-tab-label {
+      // overwrite YUI styles
+      padding: 0;
+      display: block;
+    }
+    .yui3-tab-selected {
+      // margin-bottom: -3px;
+      // @include box-shadow(rgba(#666, 0.3) 1px 1px 1px);
+      // @include box-shadow(rgba(#EAAE2C, 0.3) -1px 0px 1px);
+      h3 a {
+        // background-color: #f9f1e7;
+        // color: #555;
+        // border-top: 1px solid orange;
+        //  border-left: 1px solid orange;
+        //border-bottom: 3px solid orange;
+        box-shadow: inset 0px -4px 0px 0px #ff9c00;
+        // padding: 20px 20px 23px;
+        &:hover {
+          text-decoration: none;
+          // background-color: #ECE2D6;
+          //border-bottom: 3px solid orange;
+          box-shadow: inset 0px -4px 0px 0px orange;
+        }
+        &:hover, &:focus {
+          text-decoration: none;
+          background-color: #f9f1e7;
+        }
+      }
+    }
+  }
+  .intro {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 1rem auto 0rem auto;
+    margin: 1rem 0 0rem 0;
+    max-width: 51rem;
+  }
+  .featured h3 {
+    padding: 40px 0 0;
+    margin-bottom: 30px;
+    border-bottom: 2px solid orange;
+  }
+}
+
+// using these classes because we're not re-initing the JS
+.narrow-viewport .tabHolder ul {
+  // display: none;
+}
+
+.wide-viewport .tabContentHolder h3 {
+  // display: none;
+}
+
+@media (max-width: $grid-float-breakpoint) {
+  .front {
+    .yui3-tab-panel {
+      display: block;
+    }
+    .yui3-tab-panel h3 {
+      display: block;
+    }
+    .tabHolder ul {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: $grid-float-breakpoint) {
+  .yui3-tab-panel {
+    // display: block;
+ 
+  }
+  .yui3-tab-panel h3 {
+    display: none;
+  }
+  .tabHolder ul {
+    display: block;
+  }
+}
