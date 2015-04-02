@@ -10,7 +10,7 @@
             "weight": 0
         }],
         "route": "/index.html",
-        "bodyClass": "front",
+        "bodyClass": "front io-loading",
         "content": {
             "intro": [
               {
@@ -39,7 +39,7 @@
             "items": {
                 "rows": 12,
                 "fl": [
-                    "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_publisher", "ss_spublisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation", "sm_field_publication_location"
+                    "zs_image_medium",  "ss_identifer", "ss_title", "sm_author", "sm_publisher", "ss_spublisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation", "sm_field_publication_location"
                 ],
                 "fq": [{
                     "filter": "hash",
@@ -102,7 +102,7 @@
             "items": {
                 "rows": 12,
                 "fl": [
-                    "ss_thumbnail", "ss_identifer", "ss_title", "sm_author", "sm_publisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation", "sm_field_publication_location", "score", "ss_longlabel"
+                    "zs_image_medium", "ss_identifer", "ss_title", "sm_author", "sm_publisher", "ss_pubdate", "sm_partner", "sm_subject", "ss_publocation", "sm_field_publication_location", "score", "ss_longlabel"
                 ],
                 "fq": [{
                     "filter": "hash",
