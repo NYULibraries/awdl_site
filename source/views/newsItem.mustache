@@ -5,7 +5,12 @@
       <!-- h3>{{title}}</h3 --> <!-- also available; remove me if i wont be used -->
       <p>{{description}}</p>
       <ul>
-        {{#items}}<li><a href="{{link}}">{{title}}</a></li>{{/items}}
+        {{#items}}
+          <li>
+            <p><a href="{{link}}">{{title}}</a></p>
+            <span>{{date}}</span>
+          </li>
+        {{/items}}
       </ul>
       <a href="{{link}}">read more</a>
     {{/data}}    

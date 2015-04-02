@@ -95,8 +95,6 @@ module.exports = function(grunt) {
                       // as array to loop by weight
                       source.content[a][b].raw.push( spaghetti );
                       
-                      if ( task === 'front' ) console.log ( spaghetti )
-                      
                     });
                   }
                 });
@@ -268,6 +266,7 @@ module.exports = function(grunt) {
         var fs = require('fs');        
         var xml2js = require('xml2js');
         var parser = new xml2js.Parser();        
+        var dateFormat = require('dateformat');
         var src = "http://isaw.nyu.edu/library/blog/collector/RSS";
         var dest = __dirname + "/source/json/datasources/isawBlog.json";
         request( src, function (error, response, body) {
@@ -276,8 +275,18 @@ module.exports = function(grunt) {
                     var blogTitle = result['rdf:RDF']['channel'][0].title[0];
                     var blogLink = result['rdf:RDF']['channel'][0].link[0];                    
                     var blogDescription = result['rdf:RDF']['channel'][0].description[0];
+                    
                     /** this widget only show the first item of the RSS feed */
                     var items = result['rdf:RDF'].item.shift();
+                    
+                    /**
+                     * See: https://jira.nyu.edu/browse/AWDL-144?focusedCommentId=53481&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-53481
+                     *  FullMonthName DayOfMonth, FourDigitYear
+                     *  No zero filling for the Day of Month. 
+                     */
+                    items.date = dateFormat( items['dc:date'][0], "mmmm dS, yyyy") ;
+                    items.title = items.title[0] ;                    
+                    items.link = items.link[0] ;                                        
                     var feed = { title : blogTitle , link : blogLink , description : blogDescription , items : [ items ] } ;
                     grunt.file.write( dest , JSON.stringify( feed ) );
                     done();
