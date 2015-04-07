@@ -220,11 +220,6 @@ YUI().use(
           , source = Y.one('body').getAttribute('data-discoUrl')
           , fl = ( data.fl ) ? data.fl : '*'
           , rows = ( data.rows ) ? data.rows : 10
-          , yearSelectNode = Y.one('#filter-year')
-          , yearChosenOption = ( yearSelectNode ) ? Y.one('#filter-year :checked') : ''
-          , yearWhich = yearChosenOption.get('value')
-          , pubChosenNode = Y.one('#filter-publisher :checked')
-          , pubWhich = pubChosenNode.get('value')
           , fq = [];
 
         Y.one('body').addClass('io-loading');
@@ -238,8 +233,7 @@ YUI().use(
             }
         }
      
-        fq.push('ss_pubdate:' + yearWhich );
-        fq.push('ss_spublisher:' + pubWhich );
+       
         if ( options.page ) {
             page = parseInt( options.page, 10 );
         }
@@ -278,10 +272,7 @@ YUI().use(
     
     router.replace( getRoute () );
     
-    // Sorts and filters
+    // Sorting dropdown 
     Y.one('body').delegate('change', onSelectChange, '#browse-select');
-    Y.one('body').delegate('change', onSelectChange, '#filter-year');
-    Y.one('body').delegate('change', onSelectChange, '#filter-publisher');
-    
 
 });
