@@ -1,10 +1,22 @@
 .sass-cache
+.out
+.DS_Store
+
 build
-node_modules
+build/*
+node_modules/*
+
 source/yuiTabTest.html
+source/json/datasources/*
 
-source/json/datasources/featuredBrill.json
+# Ignore Eclipse conf files
+.project
+.buildpath
+.settings/*
 
-source/json/datasources/featuredCIAA.json
-
-source/json/datasources/recentlyAddedTitles.json
+# project sub modules
+!node_modules/grunt-contrib-writeHTML
+!node_modules/series
+!node_modules/series_pages
+!node_modules/subjects 
+!node_modules/subjects_pages
