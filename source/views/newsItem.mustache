@@ -1,7 +1,7 @@
-<div class="item newsitem">
+<aside class="item newsitem" role="complementary">
     {{#news}} {{#newsItem}} {{#data}}
     <h3><a href="{{link}}" target="_blank">From the ISAW blog</a></h3> {{#items}}
-    <div class="newscontent">
+    <div class="content">
         <div class="thumbs">
             <div class="clipper">
                 <a href="{{link}}">
@@ -14,4 +14,4 @@
             {{#description}}{{description}}{{/description}}
         </div>
     </div>{{/items}} {{/data}} {{/newsItem}} {{/news}}
-</div>
+</aside>

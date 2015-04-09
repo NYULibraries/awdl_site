@@ -3,7 +3,9 @@
 <head>{{> head }}</head>
 <body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" class="{{ bodyClass }}">
   {{> header }}
-  <main class="main container-fluid" role="main">
+  <div class="container-fluid">
+     <div class="flex-container">
+  <main class="main " role="main">
     {{#title}}
       <h2  class="page-title">{{{html}}}</h2>
     {{/title}}
@@ -13,6 +15,10 @@
       {{/main}}
     {{/content}}
   </main>
+  <aside role="complementary">
+    <h3>About the ISAW library</h3>
+    <div class="content"><p>The ISAW Library is a full-service, non-circulating library of approximately 40,000 volumes related to the history, language, literature, and material culture of the ancient world from the Mediterranean to China.</p><p>The strengths of ISAW’s collection mirror the research and teaching interests of its faculty and students: we have extensive holdings in Greek and Roman material culture and history, Egyptology, Mesopotamian archaeology and Assyriology, Central Asian and Iranian studies, and Chinese archaeology and art history.</p>
+    <p>Open Monday-Friday from 9am to 5pm, the library is available to the New York University community and all scholars and students of the ancient world who need to consult its collection. Our collections are searchable via Bobcat, the catalog of print and electronic resources of NYU Libraries. </p></div></aside></div></div>
   {{> footer }}
   {{{ closure }}}  
 </body>

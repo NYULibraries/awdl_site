@@ -17,6 +17,7 @@
 
 @import "bootstrap/navs";
 @import "partials/aconavbar";
+@import "partials/flexboxLayout";
 @import "partials/newsItem";
 @import "partials/header";
 @import "partials/homepage";
@@ -163,15 +164,13 @@ body {
   .itemdouble {
     -webkit-flex: 1 1 330px;
     flex: 1 1 330px;
-    padding-right: 20px;
+   
     margin: 0 0px 20px 0px;
     @media (min-width: 1090px) {
-      -webkit-flex: 2 1 6blogpx;
+      -webkit-flex: 2 1 680px;
       flex: 2 1 680px;
     }
-    @media (max-width: 780px) {
-      padding-right: 0px;
-    }
+   
   }
   .item:empty {
     height: 0;
@@ -225,13 +224,7 @@ main {
   header {
     @include clearfix;
   }
-  .readmore {
-    font-size: .9rem;
-    padding-left: 10px;
-    line-height: 1.2;
-    font-family: $font-family-sans-serif;
-    display: inline-block;
-  }
+  
 }
 
 body.page .maintext {
