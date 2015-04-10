@@ -15,7 +15,6 @@
 // Components
 @import "bootstrap/component-animations";
 
-@import "bootstrap/navs";
 @import "partials/aconavbar";
 @import "partials/flexboxLayout";
 @import "partials/newsItem";
@@ -231,81 +230,7 @@ body.page .maintext {
   max-width: 60em;
 }
 
-nav.navbar.navbar-default {
-  border: 0;
-  // overridding bootstrap
-  //   border-bottom: 1px solid $brand-primary;
-  border-bottom: 1px solid #DECCBF;
-  li > a {
-    font-size: .9em;
-    line-height: 1.5;
-    font-family: $font-family-sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    transition: all .4s;
-  }
-  .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-    background-color: transparent;
-    color: #FF9C00;
-    @include box-shadow(inset 0px -4px 0px 0px #ff9c00);
-  }
-  @media (min-width: $grid-float-breakpoint) {
-    // full size
-    margin-top: 0;
-    @include box-shadow(0px 0px 16px 0px rgba(110, 102, 93, 0.3));
-    .nav > li:first-child > a {
-      padding-left: 0;
-    }
-    body.browse & a.browse, body.about & a.about {
-      // @include box-shadow(inset 0px -4px 0px 0px #D7CFC6);
-      @include box-shadow(none);
-      cursor: default;
-      color: #555;
-      &:hover {
-        color: #777;
-      }
-    }
-  }
-  @media (max-width: $grid-float-breakpoint-max) {
-    // mobile-friendly dropdown
-    border-bottom: none;
-    min-height: 0;
-    .container-fluid {
-      overflow: visible;
-      // we want the hover state to extend to edges of screen
-      padding: 0;
-    }
-    .navbar-toggle {
-      border: none;
-      padding: 20px 20px 0px 20px;
-      margin-top: -60px;
-      margin-bottom: 0px;
-      background-color: transparent;
-      rect {
-        fill: #aaaaaa;
-      }
-      &.collapsed {
-        rect {
-          fill: white;
-        }
-      }
-      &:hover {
-        rect {
-          fill: orange;
-        }
-      }
-    }
-    .navbar-collapse {
-      border: none;
-      clear: right;
-      .nav > li > a {
-        padding: 15px 20px;
-        text-align: right;
-        border-bottom: 1px solid $navbar-default-link-hover-bg;
-      }
-    }
-  }
-}
+
 
 body.book {
   overflow-y: hidden;
