@@ -1,38 +1,24 @@
 <!doctype html>
-<html>
+<html class="nojs">
 <head>{{> head }}</head>
-<body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" data-discoUrl="{{ discoUrl }}" class="{{ bodyClass }}">
+<body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" data-discoUrl="{{ discoUrl }}" class="{{ bodyClass }}" data-script='{ "js" : [ "commons.js", "speakingurl.js", "browse.js" ], "hbs" : [ { "template" : "items.hbs", "id" : "items" } ] }'>
   {{> header }}
   <main class="main container-fluid" role="main">
     <header>
-      {{#title}}
-        <h2  class="page-title" >{{{html}}}</h2>
-      {{/title}}
-       <div class="resultsnum">Showing results <span class="start"></span> - <span class="docslength"></span> of <span class="numfound"></span></div>
+      {{#title}}<h2  class="page-title" >{{{html}}}</h2>{{/title}}
+      <div class="resultsnum">Showing results <span class="start"></span> - <span class="docslength"></span> of <span class="numfound"></span></div>
       <div class="filters">
-
-     
-      <select id="browse-select">
-        <option data-sort-dir="asc" value="ss_sauthor" selected>Sorting by Author</option>
-        <option data-sort-dir="asc" value="iass_longlabel">Sort by Title</option>
-        <option data-sort-dir="asc" value="ss_pubdate">Sort by ss_pubdate (Ascending)</option>
-        <option data-sort-dir="desc" value="ss_pubdate">Sort by ss_pubdate (Descending)</option>
-      </select>
-    </div>
-      </header>
+        <select id="browse-select">
+          <option data-sort-dir="asc" value="ss_sauthor" selected>Sorting by Author</option>
+          <option data-sort-dir="asc" value="iass_longlabel">Sort by Title</option>
+          <option data-sort-dir="asc" value="ss_pubdate">Sort by ss_pubdate (Ascending)</option>
+          <option data-sort-dir="desc" value="ss_pubdate">Sort by ss_pubdate (Descending)</option>
+        </select>
+      </div>
+    </header>
     {{#content}}
       {{#items}}
-        <div 
-          class="widget" 
-          data-name="items" 
-          data-rows="{{ rows }}"
-          data-source="{{ source }}"
-          data-fl="{{ fl }}"
-          {{#fq}}
-          data-fq-{{ filter }}="{{ value }}"
-          {{/fq}}
-          data-script='{ "js" : [ "browse.min.js" ], "hbs" : [ { "template" : "items.hbs", "id" : "items" } ] }'
-        ></div>
+        <div class="widget" data-name="items" data-rows="{{rows}}" data-source="{{source}}" data-fl="{{fl}}" {{#fq}}data-fq-{{filter}}="{{value}}" {{/fq}}></div>
         <div class="text-center">
           <div id="paginator" class="pagination"></div>
         </div>        
