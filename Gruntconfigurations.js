@@ -47,13 +47,14 @@ function sass () {
 	// default SASS configuration
     sass_conf = {
       sass : {
-	    build : "external", // options: inline,  external
+        build : "external", // options: inline,  external
+	    // build : "external", // options: inline,  external
 	    // for options; see: https://github.com/gruntjs/grunt-contrib-sass
 	    options : {
           style : "expanded", // options: nested, compact, compressed, expanded
-          debugInfo : true,
+          debugInfo : false,
           lineNumbers : true,
-          trace: true
+          trace: false
         }
       }
     };  
@@ -62,11 +63,9 @@ function sass () {
   return {
     dist: {
       options: sass_conf.sass.options,
-      files: {
-        'build/css/style.css': __dirname + '/source/sass/style.scss'
-      }
-    },
-    build: sass_conf.sass.build
+      files: { 'build/css/style.css': __dirname + '/source/sass/style.scss' },
+      build : sass_conf.sass.build
+    }
   } ;
 
 }
