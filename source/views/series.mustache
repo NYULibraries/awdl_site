@@ -1,11 +1,21 @@
 <!doctype html>
 <html>
 <head>{{> head }}</head>
-<body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}">
+<body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" class="{{ bodyClass }}">
   {{> header }}
-  <h2>{{ title }}</h2>
-  <span><a href="{{ appUrl }}" title="{{ appName }}">{{ appName }}</a> &gt; {{ title }}</span>
-  {{> partners }}
+  <div class="container-fluid"><div class="flex-container">
+    <main class="main " role="main">
+    {{#title}}
+      <h2  class="page-title">{{{html}}}</h2>
+    {{/title}}
+    {{#content}}
+      {{#main}}
+        <div class="maintext {{class}}" >{{{html}}}</div>
+      {{/main}}
+    {{/content}}
+    </main>
+ </div></div>
   {{> footer }}
+  {{{ closure }}}  
 </body>
 </html>

@@ -28,7 +28,7 @@
   },
   
   "featuredCIAA" : {  
-      "title": "Newsletter: Circle of Inner Asian Art",
+      "title": "AWDL Atlas",
       "sourceType": "json",
       "source": "source/json/datasources/featuredCIAA.json"
   },
