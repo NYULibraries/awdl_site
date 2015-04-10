@@ -31,7 +31,7 @@
         "menu": [{
             "context": "navbar",
             "label": "Browse",
-            "weight": 2
+            "weight": 3
         }],
         "route": "/browse/index.html",
         "bodyClass": "browse io-loading",
@@ -88,6 +88,27 @@
                 "class": "",
                 "language_dir": "ltr",
                 "html": "<p><span class=\"firstline\">The Ancient World Digital Library</span> (AWDL) is an initiative of the <a href=\"http://isaw.nyu.edu\" target=\"_blank\" class=\"ext\">Institute for the Study of the Ancient World</a> (ISAW) at New York University. AWDL will identify, collect, curate, and provide access to a broad range of scholarly materials relevant to the study of the ancient world. </p><p>With NYU’s <a href=\"http://dlib.nyu.edu/dlts\" target=\"_blank\" class=\"ext\">Digital Library Technology Services</a> (DLTS), AWDL is developing mechanisms to digitize, preserve, and host digitized print and born-digital scholarly content. We are actively soliciting partnerships with publishers, scholarly societies, organizations, and individuals who hold the rights to scholarly content as we expand our collection.</p><p>For additional information related to AWDL, DLTS, or other ISAW digital initiatives, please subscribe to the ISAW Library Blog and/or contact <a href=\"mailto:david.ratzan@nyu.edu\">David M. Ratzan</a>, Head Librarian, ISAW.</p><h3>Project Team</h3><p>Melitte Buchman (DLTS)<br>Jill Golden (ISAW)<br>Laura Henze (DLTS)<br>Carol Kassel (DLTS)<br>Gabriel McKee (ISAW)<br>Alberto Ortiz Flores (DLTS)<br>Ekaterina Pechekhonova (DLTS)<br>Rasan Rasch (DLTS)<br>David M. Ratzan (ISAW)</p><p>The ISAW team would like to thank Charles E. Jones and Dawn Gross for their leadership and contribution during the formative stages of AWDL’s development.</p>"
+            }]
+        }
+    },
+    "partners": {
+        "htmltitle": "partners",
+        "title": [{
+            "html": "Partners"
+        }],
+        "menu": [{
+            "context": "navbar",
+            "label": "Partners",
+            "weight": 2
+        }],
+        "route": "/partners/index.html",
+        "bodyClass": "page partners",
+        "content": {
+            "main": [{
+                "language_code": "en",
+                "class": "",
+                "language_dir": "ltr",
+                "html": "<p>Much of the content in the Ancient World Digital Library is provided by our partners, who are committed to making quality scholarship about the ancient world broadly available to the public. The Institute for the Study of the Ancient World would like to thank the following organizations in particular for their generous support:</p><ul><li>American Society of Papyrologists</li><li>Brill</li><li>Journal of Inner Asian Art and Archaeology (formerly the Circle of Inner Asian Art)</li><li>Stephen Chan Library at The Institute for Fine Arts, New York University</li></ul><p>If you or your organization is interested in partnering with or contributing to the Ancient World Digital Library, please email David&nbsp;M.&nbsp;Ratzan (<a href=\"mailto:david.ratzan@nyu.edu\">david.ratzan@nyu.edu</a>), Head Librarian, The Institute for the Study of the Ancient World.</p>"
             }]
         }
     },
