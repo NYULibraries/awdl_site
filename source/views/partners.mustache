@@ -1,6 +1,21 @@
-<div class="partner-wrapper">
-  {{#partners}}
-    <div class="partner-{{id}}">
-    	<a href="{{url}}" title="{{#ltitle}}{{ltitle}}{{/ltitle}}{{^ltitle}}{{name}}{{/ltitle}}" target="_blank">{{name}}</a></div>
-  {{/partners}}
-</div>
+<!doctype html>
+<html>
+<head>{{> head }}</head>
+<body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" class="{{ bodyClass }}">
+  {{> header }}
+  <div class="container-fluid"><div class="flex-container">
+    <main class="main " role="main">
+    {{#title}}
+      <h2  class="page-title">{{{html}}}</h2>
+    {{/title}}
+    {{#content}}
+      {{#main}}
+        <div class="maintext {{class}}" >{{{html}}}</div>
+      {{/main}}
+    {{/content}}
+    </main>
+ </div></div>
+  {{> footer }}
+  {{{ closure }}}  
+</body>
+</html>
