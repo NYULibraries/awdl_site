@@ -16,7 +16,7 @@ module.exports = function ( grunt ) {
 
   if ( grunt.file.isFile( __dirname + '/source/json/curl.json' ) ) {
 	taskConfiguration.curl = configuration.curl () ;
-  }    
+  }
 
   /** project configuration */
   grunt.initConfig ( taskConfiguration );
