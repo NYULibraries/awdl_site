@@ -1,0 +1,43 @@
+{
+  "browse": {
+        "htmltitle": "Browse",
+        "title": [ { "html": "Browse titles" } ],
+        "menu": [{
+            "context": "navbar",
+            "label": "Browse",
+            "weight": 3
+        }],
+        "route": "/browse/index.html",
+        "bodyClass": "browse io-loading",
+        "content": {
+            "items": {
+                "rows": 12,
+                "fl": [
+                    "zs_image_220wide"
+                  , "zm_series_data"
+                  , "zm_subject"
+                  , "ss_identifer"
+                  , "ss_title"
+                  , "sm_author"
+                  , "sm_publisher"
+                  , "ss_spublisher"
+                  , "ss_pubdate"
+                  , "sm_partner"
+                  , "sm_subject"
+                  , "ss_publocation"
+                  , "sm_field_publication_location"
+                  , "is_ispartof_series"
+                  , "ss_series_label"
+                  , "is_ispartof_multivol"
+                  , "ss_multivol_label"
+                ],
+                "fq": [
+                  {
+                    "filter": "sm_collection_code",
+                    "value": "awdl"
+                  }
+                ]
+            }
+        }
+    }
+}

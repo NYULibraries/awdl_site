@@ -1,0 +1,24 @@
+{
+  "front": {
+    "htmltitle": "",
+      "title": [ {
+        "html": "Browse Home"
+      } ],
+      "menu": [ {
+        "context": "navbar",
+        "label": "Home",
+        "weight": 0
+    } ],
+    "route": "/index.html",
+    "bodyClass": "front",
+    "content": {
+      "intro": [
+        {
+          "html": "<p><b>The Ancient World Digital Library</b> (AWDL) is an initiative of the Institute for the Study of the Ancient World at New York University. AWDL will identify, collect, curate, and provide access to the broadest possible range of scholarly materials relevant to the study of the ancient world. <a href=\"/awdl_site/about\" class=\"readmore\">READ&nbsp;MORE…</a></p>"
+        }
+      ],
+      "news" : [ { "title": "News items" , "widgets" : [ "newsItem" ] } ],
+      "featured": [ { "id" : "YUItabs" , "widgets" : [ "recentlyAddedTitles", "featuredCIAA", "featuredBrill" ] } ]
+    }
+  }
+}
