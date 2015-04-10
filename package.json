@@ -16,9 +16,12 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-curl": "^2.0.3",
     "hogan": "^1.0.2",
+    "handlebars": "^3.0.1",
     "request": "^2.45.0",
     "underscore": "^1.7.0",
-    "xml2js": "^0.4.6"
+    "xml2js": "^0.4.6",
+    "dateformat": "^1.0.11",
+    "speakingurl": "^1.1.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,6 +30,5 @@
   "license": "ISC",
   "homepage": "https://github.com/NYULibraries/awdl_site",
   "dependencies": {
-    "dateformat": "^1.0.11"
   }
 }
