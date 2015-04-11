@@ -8,7 +8,7 @@
             "weight": 3
         }],
         "route": "/browse/index.html",
-        "bodyClass": "browse io-loading",
+        "bodyClass": "browse",
         "content": {
             "items": {
                 "rows": 12,

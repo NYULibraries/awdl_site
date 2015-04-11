@@ -10,12 +10,31 @@ YUI().use(
   , function (Y) {
   
     'use strict';
-
+    
     var itemsTemplateSource = Y.one('#items').getHTML()
       , itemsTemplate = Y.Handlebars.compile(itemsTemplateSource)
       , router = new Y.Router()
       , transactions = [];
     
+    function HandlebarsHelpers ( ) {
+
+      function json ( context, options ) {
+    	return options.fn ( JSON.parse ( context ) );
+      }
+
+      function speakingurl ( context, options ) {
+    	return window.getSlug ( this.label ) ;
+      }  
+
+     return { 
+       json : json,
+    	speakingurl : speakingurl
+     } ;
+
+    }
+    
+    Y.Object.each ( HandlebarsHelpers() , function ( helper , key ) { Y.Handlebars.registerHelper ( key , helper ) } ) ;
+
     function getRoute () {
 
         var pageQueryString = getParameterByName('page')
@@ -154,7 +173,7 @@ YUI().use(
     }    
 
     function onSuccess ( response, args ) {
-        
+    	
         try {
             
             var node = args.container
@@ -203,8 +222,9 @@ YUI().use(
 
         }
 
-        catch (e) {
-
+        catch ( e ) {
+        	Y.log( 'onSuccess error' )
+        	Y.log( e )
         }
 
     }
@@ -257,7 +277,7 @@ YUI().use(
                + "&sort=" + sortBy + "%20" + sortDir;
 
         options.container.empty();
-
+        
         Y.jsonp( source, {
             on: {
                 success: onSuccess,

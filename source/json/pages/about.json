@@ -11,13 +11,18 @@
         }],
         "route": "/about/index.html",
         "bodyClass": "page about",
-        "content": {
-            "main": [{
-                "language_code": "en",
-                "class": "",
-                "language_dir": "ltr",
+        "content": {            
+            "main": [ 
+              {
+                "title" : "About",
                 "html": "<p><strong>The Ancient World Digital Library</strong> (AWDL) is an initiative of the <a href=\"http://www.nyu.edu/isaw/\" title=\"Institute for the Study of the Ancient World at New York University\" target=\"_blank\">Institute for the Study of the Ancient World at New York University</a>. AWDL will identify, collect, curate, and provide access to the broadest possible range of scholarly materials relevant to the study of the ancient world. AWDL has two primary tracks:</p><ol>  <li>In partnership with the NYU Digital Libraries Program AWDL is developing mechanisms to host and preserve existing and newly contributed content without respect to digital condition, or state of enrichment of its contents: our overriding objective is to make available to researchers as large a part of the scholarly heritage of the relevant fields as possible. Towards this end we are soliciting the participation of publishers, scholarly societies, organizations, and individuals who hold the rights to scholarly content.</li>  <li>AWDL will identify, collect, curate and provide bibliographical access to the growing corpus of scholarly materials produced and served elsewhere. This will continue, within the context of the AWDL, the work Charles Jones has undertaken via <a href=\"http://www.etana.org/abzu/\" title=\"Abzu\" target=\"_blank\">Abzu</a> and <a href=\"http://ancientworldonline.blogspot.com/\" title=\"AWOL\" target=\"_blank\">AWOL</a> for more than a decade and a half.</li></ol><p>AWDL is collaborating with <a href=\"http://dlib.nyu.edu/dlts/\" title=\"NYU Digital Library Technology Services\" target=\"_blank\">NYU Digital Library Technology Services (DLTS)</a> in the development of the book viewer.Within the Institute for the Study of the Ancient World, AWDL is a collaboration between the <a href=\"http://www.nyu.edu/isaw/library.htm\" target=\"_blank\">Library</a> and <a href=\"http://www.nyu.edu/isaw/about-projects.htm\" title=\"Digital Programs\" target=\"_blank\">Digital Programs</a>. Additional information on AWDL and other Digital Initiatives of the Institute for the Study of the Ancient World is available on the <a href=\"http://www.nyu.edu/isaw/about-projects.htm\" target=\"_blank\">ISAW</a> website.</p>"
-            }]
+              }
+            ],
+            "aside": [ {
+              "title" : "About the ISAW library",
+              "html": "<p>The ISAW Library is a full-service, non-circulating library of approximately 40,000 volumes related to the history, language, literature, and material culture of the ancient world from the Mediterranean to China.</p><p>The strengths of ISAW’s collection mirror the research and teaching interests of its faculty and students: we have extensive holdings in Greek and Roman material culture and history, Egyptology, Mesopotamian archaeology and Assyriology, Central Asian and Iranian studies, and Chinese archaeology and art history.</p><p>Open Monday-Friday from 9am to 5pm, the library is available to the New York University community and all scholars and students of the ancient world who need to consult its collection. Our collections are searchable via Bobcat, the catalog of print and electronic resources of NYU Libraries.</p>"
+            }
+          ]            
         }
     }
 }

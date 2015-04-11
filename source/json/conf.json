@@ -1,7 +1,7 @@
 {
   "appName": "Ancient World Digital Library",
   "collectionCode": "awdl",
-  "appUrl": "http://ortiz.bobst.nyu.edu:8000/awdl",
+  "appUrl": "http://localhost:8000/awdl",
   "appRoot": "/awdl",
   "discovery": "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select/",
   "discoUrl": "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select/"

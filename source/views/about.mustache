@@ -2,29 +2,30 @@
 <html class="nojs">
 <head>{{> head }}</head>
 <body data-app="{{appUrl}}" data-appRoot="{{appRoot}}" class="{{bodyClass}}" data-script='{ "js" : [ "commons.js" ] }'>
-  {{> header }}
+  {{> header }}  
   <div class="container-fluid">
     <div class="flex-container">
-      <main class="main " role="main">
-        {{#title}}<h2  class="page-title">{{{html}}}</h2>{{/title}}
-        {{#content}}
-          {{#main}}
-            <div class="maintext {{class}}" >{{{html}}}</div>
-          {{/main}}
-        {{/content}}
-      </main>
-      <aside role="complementary">
-        <h3>About the ISAW library</h3>
-        <div class="content">
-          <div class="thumbs">
-            <div class="clipper">
-              <a href="http://isaw.nyu.edu/library/blog/ACRL2015"><img src="{{ appUrl }}/images/ISAWLibrarythumb.png"></a>
+      {{#content}}
+        <main class="main" role="main">
+        {{#main}}
+          <h2  class="page-title">{{title}}</h2>
+          <div class="maintext {{class}}" >{{{html}}}</div>
+        {{/main}}
+        </main>
+        <aside role="complementary">
+        {{#aside}}
+          <h3>{{title}}</h3>
+          <div class="content">
+            <div class="thumbs">
+              <div class="clipper">
+                <a href="http://isaw.nyu.edu/library/blog/ACRL2015"><img src="{{appUrl}}/images/ISAWLibrarythumb.png"></a>
+              </div>
             </div>
+            {{{html}}}
           </div>
-          <p>The ISAW Library is a full-service, non-circulating library of approximately 40,000 volumes related to the history, language, literature, and material culture of the ancient world from the Mediterranean to China.</p><p>The strengths of ISAW’s collection mirror the research and teaching interests of its faculty and students: we have extensive holdings in Greek and Roman material culture and history, Egyptology, Mesopotamian archaeology and Assyriology, Central Asian and Iranian studies, and Chinese archaeology and art history.</p>
-          <p>Open Monday-Friday from 9am to 5pm, the library is available to the New York University community and all scholars and students of the ancient world who need to consult its collection. Our collections are searchable via Bobcat, the catalog of print and electronic resources of NYU Libraries.</p>
-        </div>
-      </aside>
+        {{/aside}}
+        </aside>
+      {{/content}}
     </div>
   </div>
   {{> footer }}
