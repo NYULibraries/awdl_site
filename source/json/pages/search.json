@@ -19,6 +19,7 @@
           , "ss_pubdate"
           , "sm_partner"
           , "sm_subject"
+          , "zm_subject"
           , "ss_publocation"
           , "sm_field_publication_location"
           , "score"
