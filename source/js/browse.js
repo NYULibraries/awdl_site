@@ -24,7 +24,7 @@ YUI().use(
 
       function speakingurl ( context, options ) {
     	return window.getSlug ( this.label ) ;
-      }  
+      }
 
      return { 
        json : json,
