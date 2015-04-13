@@ -16,7 +16,27 @@ YUI().use(
       , nrSource = Y.one('#noresults').getHTML()
       , noresultsTemplate = Y.Handlebars.compile(nrSource)
       , router = new Y.Router()
-      , transactions = [];      
+      , transactions = [];    
+    
+    function HandlebarsHelpers ( ) {
+
+        function json ( context, options ) {
+      	return options.fn ( JSON.parse ( context ) );
+        }
+
+        function speakingurl ( context, options ) {
+      	return window.getSlug ( this.label ) ;
+        }
+
+       return { 
+         json : json,
+      	speakingurl : speakingurl
+       } ;
+
+      }
+      
+  Y.Object.each ( HandlebarsHelpers() , function ( helper , key ) { Y.Handlebars.registerHelper ( key , helper ) } ) ;
+    
 
     function getRoute () {
 

@@ -4,11 +4,11 @@
         "title": [{
             "html": "Partners"
         }],
-        "menu": [{
+        "menu": [ {
             "context": "navbar",
             "label": "Partners",
-            "weight": 2
-        }],
+            "weight": 7
+        } ],
         "route": "/partners/index.html",
         "bodyClass": "page partners",
         "content": {
