@@ -11,6 +11,7 @@
         "rows": 12,
         "fl": [
             "zs_image_medium"
+          , "zs_image_220wide"
           , "ss_identifer"
           , "ss_title"
           , "sm_author"
@@ -23,6 +24,7 @@
           , "score"
           , "ss_longlabel"
           , "is_ispartof_series"
+          , "zm_series_data"
           , "ss_series_label"
           , "is_ispartof_multivol"
           , "ss_multivol_label"                  
