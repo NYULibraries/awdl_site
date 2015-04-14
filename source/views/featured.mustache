@@ -20,12 +20,13 @@
                       <h1 class="md_title"><a href="{{../../../../../../appRoot}}/books/{{ss_identifer}}">{{{ss_title}}}</a></h1>
                       <div class="md_author">{{#each sm_author}}<span>{{this}}</span>{{/each}}</div>         
                       {{#if zm_series_data}}
+                      <div class="md_series">
                       <span class="md_label">Series:</span>
                       {{#each zm_series_data}}
                         {{#json this}}
-                          <div class="md_series"> <span><a href="{{../../../../../../../../../appRoot}}/series/{{#speakingurl}}{{label}}{{/speakingurl}}">{{label}}</a></span></div>
+                          <a class="md_series_each" href="{{../../../../../../../../../appRoot}}/series/{{#speakingurl}}{{label}}{{/speakingurl}}">{{label}}</a>
                         {{/json}}
-                      {{/each}}
+                      {{/each}}</div>
                       {{/if}}                   
                       <div class="md_publisher"><span class="md_label">Publisher:</span> {{#each sm_publisher}}<span>{{this}}</span>{{/each}}, {{#each sm_field_publication_location}}<span>{{this}}</span>{{/each}}, {{ss_pubdate}}</div>
                       <div class="md_provider"><span class="md_label">Provider:</span> {{#each sm_partner}}<span>{{this}}</span>{{/each}}</div>

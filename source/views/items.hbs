@@ -8,7 +8,7 @@
       <div class="md_series"><span class="md_label">Series :</span>
       {{#each zm_series_data}}      
         {{#json this}}
-          <span><a href="{{../../../app.appRoot}}/series/{{#speakingurl}}{{label}}{{/speakingurl}}">{{label}}</a></span>
+          <a class="md_series_each" href="{{../../../app.appRoot}}/series/{{#speakingurl}}{{label}}{{/speakingurl}}">{{label}}</a>
         {{/json}}
       {{/each}}
       </div>
