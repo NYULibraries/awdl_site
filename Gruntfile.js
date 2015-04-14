@@ -1,7 +1,8 @@
 module.exports = function ( grunt ) {
 
   /** task to run */
-  var tasks = ['clean', 'copy', 'uglify', 'sass', 'curl', 'isawLibraryBlog', 'writeHTML'] ;
+  // var tasks = ['clean', 'copy', 'uglify', 'sass', 'curl', 'isawLibraryBlog', 'writeHTML'] ;
+  var tasks = ['clean', 'copy', 'uglify', 'compass', 'curl', 'isawLibraryBlog', 'writeHTML'] ;
 
   var configuration = require('./Gruntconfigurations');
   
@@ -10,8 +11,9 @@ module.exports = function ( grunt ) {
 	clean: configuration.clean(),
 	copy: configuration.copy(),
 	uglify: configuration.uglify(),
-	sass: configuration.sass(),
-	watch: configuration.watch()
+	// sass: configuration.sass(),
+	watch: configuration.watch(),
+	compass : configuration.compass()
   };
 
   if ( grunt.file.isFile( __dirname + '/source/json/curl.json' ) ) {
@@ -27,8 +29,8 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-sass'); // remove later on
+  grunt.loadNpmTasks('grunt-contrib-compass');  
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-writeHTML');
       

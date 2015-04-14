@@ -18,7 +18,6 @@
       }
     ]
   },
-  
   "newsItem" : {
     "title": "News Item",
     "sourceType": "json",

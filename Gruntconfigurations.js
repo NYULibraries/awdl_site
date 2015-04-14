@@ -35,6 +35,7 @@ function js () {
 
 }
 
+/** merge with compass */
 function sass () {
   
   var sass_conf;
@@ -70,6 +71,18 @@ function sass () {
 
 }
 
+function compass () {
+  return {
+	dist: {
+	  options: {
+        config: '/Users/ortiz/tools/projects/awdl_site/source/config.rb',
+        basePath: '/Users/ortiz/tools/projects/awdl_site/source',
+        bundleExec: true
+      }
+    }
+  }
+}
+
 function copy () {
   return {
     main: {
@@ -102,7 +115,7 @@ function watch () {
       'clean',
       'copy',
       'uglify',
-      'sass',
+      'compass',
       'writeHTML'
     ]
   };
@@ -139,3 +152,4 @@ exports.clean = clean;
 exports.watch = watch;
 exports.uglify = uglify;
 exports.js = js;
+exports.compass = compass;
