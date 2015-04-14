@@ -6,7 +6,7 @@
       <h1 class="md_title"><a href="{{../app.appRoot}}/book/{{ss_identifer}}">{{{ss_title}}}</a></h1>
       <div class="md_author">{{#each sm_author}}<span>{{this}}</span>{{/each}}</div>
       {{#if zm_series_data}}
-      <div class="md_series"><span class="md_label">Series :</span>
+      <div class="md_series"><span class="md_label">Series:</span>
       {{#each zm_series_data}}      
         {{#json this}}
           <a class="md_series_each" href="{{../../../app.appRoot}}/series/{{#speakingurl}}{{label}}{{/speakingurl}}">{{label}}</a>
