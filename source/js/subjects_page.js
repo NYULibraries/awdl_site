@@ -129,6 +129,7 @@ YUI().use(
       else {
         Y.log('onFailure: there was a problem with this request');
       }
+      Y.one('body').removeClass('io-loading');
   }
 
   function onTimeout() {
