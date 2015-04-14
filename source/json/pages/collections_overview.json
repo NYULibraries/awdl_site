@@ -1,0 +1,28 @@
+{
+  "collectionsoverview": {
+        "htmltitle": "Collections Overview",
+        "title": [{
+            "html": "Collections Overview"
+        }],
+        "menu": [{
+            "context": "navbar",
+            "label": "Collections Overview",
+            "weight": 5
+        }],
+        "route": "/collectionsoverview/index.html",
+        "bodyClass": "page collectionsoverview",
+        "content": {            
+            "main": [ 
+              {
+                "title" : "Collections Overview",
+              "html": "<p>AWDL's purpose is to present the broadest possible range of scholarly materials relevant to the study of the ancient world. Our holdings are currently focused on the Ancient Near East and Central Asia. The map at right can be used to browse titles related to particular regions, cities, and sites.</p><p>Particular strengths of the AWDL collection include:</p><div class=\"flex-container\"><p class=\"item\"><a href=\"/awdl/search/?q=%22ancient%20judaism%22\">Ancient Judaism</a></p><p class=\"item\"><a href=\"/awdl/search/?q=assyriology\">Assyriology</a></p><p class=\"item\"><a href=\"/awdl/search/?q=%22central%20asia%22\">Central Asia</a></p><p class=\"item\"><a href=\"/awdl/search/?q=%22Early%20Christianity%22\">Early Christianity</a></p><p class=\"item\"><a href=\"/awdl/search/?q=egyptology\">Egyptology</a></p><p class=\"item\"><a href=\"/awdl/search/?q=hittitology\">Hittitology</a></p><p class=\"item\"><a href=\"/awdl/search/?q=%22iranian%20studies%22\">Iranian  studies</a></p><p  class=\"item\"> <a href=\"/awdl/search/?q=Papyrology\">Papyrology</a></p><p class=\"item\"></p></div>"
+              }
+            ],
+            "aside": [ {
+              "title" : "AWDL Atlas",
+              "html": "<div class=\"content\"><p>Browse titles related to particular regions, cities, and sites.</p><iframe width=\"100%\" height=\"500\" scrolling=\"no\" frameborder=\"no\" src=\"https://www.google.com/fusiontables/embedviz?q=select+col2+from+1Iz5JvJrlL-LPod87b1VTOaMdRbgyj7ptB8c2SaA&amp;viz=MAP&amp;h=false&amp;lat=40.714029638436955&amp;lng=-72.76368443134766&amp;t=1&amp;z=8&amp;l=col2&amp;y=1&amp;tmplt=3&amp;hml=GEOCODABLE\"></iframe></div>"
+            }
+          ]            
+        }
+    }
+}
