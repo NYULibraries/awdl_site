@@ -1,4 +1,117 @@
 //
+// Navs
+// --------------------------------------------------
+
+// Base class
+// --------------------------------------------------
+
+.nav {
+  margin-bottom: 0;
+  padding-left: 0;
+  // Override default ul/ol
+  list-style: none;
+  @include clearfix;
+  > li {
+    position: relative;
+    display: block;
+    > a {
+      position: relative;
+      display: block;
+      padding: $nav-link-padding;
+      &:hover,
+      &:focus {
+        text-decoration: none;
+        background-color: $nav-link-hover-bg;
+      }
+    }
+    // Disabled state sets text to gray and nukes hover/tab effects
+    &.disabled > a {
+      color: $nav-disabled-link-color;
+      &:hover,
+      &:focus {
+        color: $nav-disabled-link-hover-color;
+        text-decoration: none;
+        background-color: transparent;
+        cursor: not-allowed;
+      }
+    }
+  }
+  // Open dropdowns
+  .open > a {
+    &,
+    &:hover,
+    &:focus {
+      background-color: $nav-link-hover-bg;
+      border-color: $link-color;
+    }
+  }
+  // Nav dividers (deprecated with v3.0.1)
+  //
+  // This should have been removed in v3 with the dropping of `.nav-list`, but
+  // we missed it. We don't currently support this anywhere, but in the interest
+  // of maintaining backward compatibility in case you use it, it's deprecated.
+  .nav-divider {
+    @include nav-divider;
+  }
+  // Prevent IE8 from misplacing imgs
+  //
+  // See https://github.com/h5bp/html5-boilerplate/issues/984#issuecomment-3985989
+  > li > a > img {
+    max-width: none;
+  }
+}
+
+// Tabs
+// -------------------------
+
+// Give the tabs something to sit on
+.nav-tabs {
+  border-bottom: 1px solid $nav-tabs-border-color;
+  > li {
+    float: left;
+    // Make the list-items overlay the bottom border
+    margin-bottom: -1px;
+    // Actual tabs (as links)
+    > a {
+      margin-right: 2px;
+      line-height: $line-height-base;
+      border: 1px solid transparent;
+      border-radius: $border-radius-base $border-radius-base 0 0;
+      &:hover {
+        border-color: $nav-tabs-link-hover-border-color $nav-tabs-link-hover-border-color $nav-tabs-border-color;
+      }
+    }
+    // Active state, and its :hover to override normal :hover
+    &.active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: $nav-tabs-active-link-hover-color;
+        background-color: $nav-tabs-active-link-hover-bg;
+        border: 1px solid $nav-tabs-active-link-hover-border-color;
+        border-bottom-color: transparent;
+        cursor: default;
+      }
+    }
+  }
+}
+
+// Tabbable tabs
+// -------------------------
+
+// Hide tabbable panes to start, show them when `.active`
+.tab-content {
+  > .tab-pane {
+    display: none;
+  }
+  > .active {
+    display: block;
+  }
+}
+
+/// end bootstrap nav partial
+
+//
 // Navbars
 // --------------------------------------------------
 
@@ -193,7 +306,7 @@
   @include box-shadow($shadow);
   // Mixin behavior for optimum display
   // modified LMH 10/16/2014
-  @extend .form-inline !optional;
+  @extend .form-inline !optional; 
   // Vertically center in expanded, horizontal navbar
   @include navbar-vertical-align($input-height-base);
   // Undo 100% width for pull classes
@@ -266,6 +379,82 @@
       &:focus {
         background-color: $navbar-default-link-active-bg;
         color: $navbar-default-link-active-color;
+      }
+    }
+  }
+}
+
+nav.navbar.navbar-default {
+  border: 0;
+  // overridding bootstrap
+  //   border-bottom: 1px solid $brand-primary;
+  border-bottom: 1px solid #DECCBF;
+  li > a {
+    font-size: .9em;
+    line-height: 1.5;
+    font-family: $font-family-sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    transition: all .4s;
+  }
+  .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: transparent;
+    color: #FF9C00;
+    @include box-shadow(inset 0px -4px 0px 0px #ff9c00);
+  }
+  @media (min-width: $grid-float-breakpoint) {
+    // full size
+    margin-top: 0;
+    @include box-shadow(0px 0px 16px 0px rgba(110, 102, 93, 0.3));
+    .nav > li:first-child > a {
+      padding-left: 0;
+    }
+    body.browse & a.browse, body.about & a.about {
+      // @include box-shadow(inset 0px -4px 0px 0px #D7CFC6);
+      @include box-shadow(none);
+      cursor: default;
+      color: #555;
+      &:hover {
+        color: #777;
+      }
+    }
+  }
+  @media (max-width: $grid-float-breakpoint-max) {
+    // mobile-friendly dropdown
+    border-bottom: none;
+    min-height: 0;
+    .container-fluid {
+      overflow: visible;
+      // we want the hover state to extend to edges of screen
+      padding: 0;
+    }
+    .navbar-toggle {
+      border: none;
+      padding: 20px 20px 0px 20px;
+      margin-top: -60px;
+      margin-bottom: 0px;
+      background-color: transparent;
+      rect {
+        fill: #aaaaaa;
+      }
+      &.collapsed {
+        rect {
+          fill: white;
+        }
+      }
+      &:hover {
+        rect {
+          fill: orange;
+        }
+      }
+    }
+    .navbar-collapse {
+      border: none;
+      clear: right;
+      .nav > li > a {
+        padding: 15px 20px;
+        text-align: right;
+        border-bottom: 1px solid $navbar-default-link-hover-bg;
       }
     }
   }
