@@ -75,8 +75,8 @@ function compass () {
   return {
 	dist: {
 	  options: {
-        config: '/Users/ortiz/tools/projects/awdl_site/source/config.rb',
-        basePath: '/Users/ortiz/tools/projects/awdl_site/source',
+        config: __dirname + '/source/config.rb',
+        basePath: __dirname + '/source',
         bundleExec: true
       }
     }
