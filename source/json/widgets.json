@@ -31,6 +31,7 @@
   },
   "awdlAtlas" : {
       "title": "AWDL Atlas",
+      "id": "awdlAtlas",
       "sourceType": "iframe",
       "source": "https://www.google.com/fusiontables/embedviz?q=select+col2+from+1Iz5JvJrlL-LPod87b1VTOaMdRbgyj7ptB8c2SaA&amp;viz=MAP&amp;h=false&amp;lat=40.714029638436955&amp;lng=-72.76368443134766&amp;t=1&amp;z=8&amp;l=col2&amp;y=1&amp;tmplt=3&amp;hml=GEOCODABLE"
   },

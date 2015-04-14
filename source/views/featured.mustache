@@ -3,6 +3,13 @@
     <div id="{{id}}" class="noFouc tabHolder">
       <ul>
         {{#raw}}<li><h3><a href="#{{label}}">{{#widget}}{{title}}{{/widget}}</a></h3></li>{{/raw}}
+        {{#../..}}
+          {{#widgets}}
+            {{#awdlAtlas}}
+              <li><h3><a href="#x">{{title}}</a></h3></li>
+            {{/awdlAtlas}}
+          {{/widgets}}
+        {{/../..}}
       </ul>
       <div class="tabContentHolder">
         {{#raw}}
@@ -47,6 +54,16 @@
           </div>
         </div>
         {{/raw}}
+        {{#../..}}
+          {{#widgets}}
+            {{#awdlAtlas}}
+              <div id="{{id}}">
+                <iframe width="100%" height="500" scrolling="no" frameborder="no" src="{{source}}" allowfullscreen mozallowfullscreen webkitallowfullscreen></iframe>
+              </div>
+            {{/awdlAtlas}}
+          {{/widgets}}
+        {{/../..}}        
+        
       </div>
     </div>
   {{/featured}}
