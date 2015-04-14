@@ -16,7 +16,7 @@
         }
       ],
       "news" : [ { "title": "News items" , "widgets" : [ "newsItem" ] } ],
-      "featured": [ { "id" : "YUItabs" , "widgets" : [ "recentlyAddedTitles", "awdlAtlas" ] } ]
+      "featured": [ { "id" : "YUItabs" , "widgets" : [ "recentlyAddedTitles" ] } ]
     }
   }
 }

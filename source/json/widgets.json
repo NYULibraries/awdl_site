@@ -1,5 +1,4 @@
 {
-
   "partners" : {
     "title": "Partners",
     "sourceType": "local",
@@ -23,7 +22,6 @@
     "sourceType": "json",
     "source": "source/json/datasources/isawBlog.json"
   },
-  
   "recentlyAddedTitles" : {
       "title": "Recently Added Titles",
       "sourceType": "json",
@@ -40,7 +38,6 @@
       "sourceType": "json",
       "source": "source/json/datasources/featuredCIAA.json"
   },
-  
   "featuredBrill" : {  
     "title": "Featured Provider: KONINKLIJKE BRILL NV",
     "sourceType": "json",
