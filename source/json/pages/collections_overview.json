@@ -20,7 +20,7 @@
             ],
             "aside": [ {
               "title" : "AWDL Atlas",
-              "html": "<div class=\"content\"><p>Browse titles related to particular regions, cities, and sites.</p><iframe width=\"100%\" height=\"500\" scrolling=\"no\" frameborder=\"no\" src=\"https://www.google.com/fusiontables/embedviz?q=select+col4+from+1F9kzSPgjNomW9bCvsp76cdpzewdYImwfkbCXbZDl&amp;viz=MAP&amp;h=false&amp;lat=40.30445619237193&amp;lng=43.085443378906234&amp;t=3&amp;z=3&amp;l=col4&amp;y=2&amp;tmplt=2&amp;hml=TWO_COL_LAT_LNG\"></iframe></div>"
+              "html": "<p>Browse titles related to particular regions, cities, and sites.</p><iframe width=\"100%\" height=\"500\" scrolling=\"no\" frameborder=\"no\" src=\"https://www.google.com/fusiontables/embedviz?q=select+col4+from+1F9kzSPgjNomW9bCvsp76cdpzewdYImwfkbCXbZDl&amp;viz=MAP&amp;h=false&amp;lat=40.30445619237193&amp;lng=43.085443378906234&amp;t=3&amp;z=3&amp;l=col4&amp;y=2&amp;tmplt=2&amp;hml=TWO_COL_LAT_LNG\"></iframe>"
             }
           ]            
         }
