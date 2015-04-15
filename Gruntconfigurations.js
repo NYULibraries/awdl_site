@@ -72,15 +72,31 @@ function sass () {
 }
 
 function compass () {
+
+  // outputStyle: nested, expanded, compact, compressed
+  // noLineComments: true, false
+  // httpPath: String , default to "/"
+
+  var compass_conf;
+	  
+  if ( grunt.file.isFile( __dirname + '/source/json/compass.json' ) ) {
+    compass_conf = grunt.file.readJSON( __dirname + '/source/json/compass.json' ) ;  
+  }
+	
   return {
 	dist: {
 	  options: {
-        config: __dirname + '/source/config.rb',
-        basePath: __dirname + '/source',
-        bundleExec: true
+        basePath: __dirname,
+        sassDir: __dirname + '/source/sass',
+        outputStyle: 'expanded',
+        imagesDir: 'images',
+        javascriptsDir: 'js',
+        cssDir: 'build/css',
+        httpPath: '/awdl'
       }
     }
   }
+
 }
 
 function copy () {
@@ -102,7 +118,6 @@ function clean () {
 }
 
 function watch () {
-
   return {
     files: [
       __dirname + '/source/js/*.js',
@@ -119,7 +134,6 @@ function watch () {
       'writeHTML'
     ]
   };
-
 }
 
 function uglify () {
