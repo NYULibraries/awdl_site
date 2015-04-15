@@ -1,7 +1,6 @@
 module.exports = function ( grunt ) {
 
   /** task to run */
-  // var tasks = ['clean', 'copy', 'uglify', 'sass', 'curl', 'isawLibraryBlog', 'writeHTML'] ;
   var tasks = ['clean', 'copy', 'uglify', 'compass', 'curl', 'isawLibraryBlog', 'writeHTML'] ;
 
   var configuration = require('./Gruntconfigurations');
@@ -11,7 +10,6 @@ module.exports = function ( grunt ) {
 	clean: configuration.clean(),
 	copy: configuration.copy(),
 	uglify: configuration.uglify(),
-	// sass: configuration.sass(),
 	watch: configuration.watch(),
 	compass : configuration.compass()
   };

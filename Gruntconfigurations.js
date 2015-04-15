@@ -1,6 +1,20 @@
 
 var grunt = require('grunt') ;
 
+function project () {
+
+  var projectConfiguration ;
+  
+  var projectConfigurationFile = __dirname + '/source/json/conf.json' ;
+  
+  if ( grunt.file.isFile ( projectConfigurationFile ) ) {
+    projectConfiguration = grunt.file.readJSON ( projectConfigurationFile ) ;
+  }
+  
+  return projectConfiguration ;
+
+}
+
 function curl () {
 	
   if ( grunt.file.isFile( __dirname + '/source/json/curl.json' ) ) {
@@ -72,7 +86,9 @@ function sass () {
 }
 
 function compass () {
-
+	
+  var projectConfiguration = project () ;
+  
   // outputStyle: nested, expanded, compact, compressed
   // noLineComments: true, false
   // httpPath: String , default to "/"
@@ -92,7 +108,7 @@ function compass () {
         imagesDir: 'images',
         javascriptsDir: 'js',
         cssDir: 'build/css',
-        httpPath: '/awdl'
+        httpPath: projectConfiguration.appRoot
       }
     }
   }
@@ -167,3 +183,4 @@ exports.watch = watch;
 exports.uglify = uglify;
 exports.js = js;
 exports.compass = compass;
+exports.project = project ;
