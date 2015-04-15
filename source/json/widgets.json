@@ -34,7 +34,7 @@
       "source": "https://www.google.com/fusiontables/embedviz?q=select+col4+from+1F9kzSPgjNomW9bCvsp76cdpzewdYImwfkbCXbZDl&amp;viz=MAP&amp;h=false&amp;lat=40.30445619237193&amp;lng=43.085443378906234&amp;t=3&amp;z=3&amp;l=col4&amp;y=2&amp;tmplt=2&amp;hml=TWO_COL_LAT_LNG"
   },
   "featuredCIAA" : {  
-      "title": "Newsletter: Circle of Inner Asian Art",
+      "title": "AWDL Atlas",
       "sourceType": "json",
       "source": "source/json/datasources/featuredCIAA.json"
   },
