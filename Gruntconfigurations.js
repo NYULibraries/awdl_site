@@ -86,10 +86,13 @@ function compass () {
   return {
 	dist: {
 	  options: {
-        bundleExec: true,
-		config: __dirname + '/config.rb',
+        basePath: __dirname,
         sassDir: __dirname + '/source/sass',
-        outputStyle: 'expanded'
+        outputStyle: 'expanded',
+        imagesDir: 'images',
+        javascriptsDir: 'js',
+        cssDir: 'build/css',
+        httpPath: '/awdl'
       }
     }
   }
