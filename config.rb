@@ -4,10 +4,14 @@
 # Set this to the root of your project when deployed:
 http_path = "/awdl"
 
-css_dir = "../build/css"
-sass_dir = "sass"
+css_dir = "build/css"
+
+javascripts_dir = "build/js"
+
+sass_dir = "source/sass"
+
 images_dir = "images"
-javascripts_dir = "../build/js"
+
 
 # You can select your preferred output style here (can be overridden via the command line):
  #output_style = :expanded or :nested or :compact or :compressed
