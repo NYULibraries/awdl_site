@@ -1,6 +1,9 @@
 <div class="partner-wrapper">
-  {{#partners}}
-    <div class="partner-{{id}}">
-    	<a href="{{url}}" title="{{#ltitle}}{{ltitle}}{{/ltitle}}{{^ltitle}}{{name}}{{/ltitle}}" target="_blank">{{name}}</a></div>
-  {{/partners}}
+  {{#widgets}}
+    {{#partners}}
+      {{#data}}  
+        <div class="partner-{{id}}"><a href="{{url}}">{{name}}</a></div>
+      {{/data}}
+    {{/partners}}
+  {{/widgets}}
 </div>

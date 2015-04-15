@@ -1,0 +1,3 @@
+{
+  "series/*": { "callback" : "series_pages" }
+}

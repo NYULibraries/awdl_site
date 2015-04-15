@@ -1,4 +1,3 @@
-
 .header-wrapper {
     background-color: $brand-primary;
     color: #fff;
@@ -29,14 +28,14 @@
             color: #fff;
             line-height: 1;
             display: block;
-            background: url("/awdl_site/images/awdl_logo.png") no-repeat left center;
+            background: image-url("awdl_logo.png") no-repeat left center;
             background-size: 100% auto;
             @media (min-width: $grid-float-breakpoint) {
-                background: url("/awdl_site/images/awdl_logo.png") no-repeat left top;
+                background: image-url("awdl_logo.png") no-repeat left top;
                 background-size: auto;
             }
             @media (max-width: 479px) {
-                background: url("/awdl_site/images/awdllogoVert.png") no-repeat left top;
+                background: image-url("awdllogoVert.png") no-repeat left top;
                 background-size: auto 100%;
                 padding-top: 0;
                 height: 40px;

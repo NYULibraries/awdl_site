@@ -1,76 +1,8 @@
 {
-    "appName": "Ancient World Digital Library",
-    "environment" : "development",
-    "development" : {
-        "appUrl": "http://dev-dl-pa.home.nyu.edu/awdl_site",
-        "appRoot": "/awdl_site",
-        "discoUrl": "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select/",
-        "sass" : {
-            "build" : "inline"
-          , "options" : {
-                "style" : "compressed"
-              , "debugInfo" : false
-              , "lineNumbers" : false
-            }
-        },
-        "curl" : {
-            "recentlyAddedTitles" : {
-                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=sm_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fl=ss_embedded,title,type,sm_collection_identifier,ss_identifer,zs_image_medium,sm_author,ss_title, ss_language,ss_pubdate,ss_publocation,sm_publisher,sm_subject,sm_partner&rows=12&&sort=ds_changed%20desc",
-                "dest" : "source/json/datasources/recentlyAddedTitles.json"
-            },
-              "featuredCIAA" : {
-                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=sm_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=ss_spublisher:(*circle*)&fl=ss_embedded,title,type,sm_collection_identifier,ss_identifer,zs_image_medium,sm_author,ss_title, ss_language,ss_pubdate,ss_publocation,sm_publisher,sm_subject,sm_partner&rows=100&sort=ss_identifer%20asc",
-                "dest" : "source/json/datasources/featuredCIAA.json"
-           },
-            "featuredBrill" : {
-                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=sm_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=ss_spartner:(*brill*)&fl=ss_embedded,title,type,sm_collection_identifier,ss_identifer,zs_image_medium,sm_author,ss_title, ss_language,ss_pubdate,ss_publocation,sm_publisher,sm_subject,sm_partner&rows=12&sort=iass_longlabel%20asc",
-                "dest" : "source/json/datasources/featuredBrill.json"
-           }
-        }
-    },
-    "local" : {
-        "appUrl" : "http://localhost:8000/awdl_site",
-        "appRoot" : "/awdl_site",
-        "discoUrl": "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select/",
-        "sass" : {
-            "build" : "external"
-          , "options" : {
-                "style" : "compressed"
-              , "debugInfo" : false
-              , "lineNumbers" : false
-            }
-        },
-        "curl" : {
-            "recentlyAddedTitles" : {
-                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=sm_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=!ss_language:ar&fl=ss_embedded,title,type,sm_collection_identifier,ss_identifer,zs_image_medium,sm_author,ss_title, ss_language,ss_pubdate,ss_publocation,sm_publisher,sm_subject,sm_partner&rows=12&&sort=ds_changed%20desc",
-                "dest" : "source/json/datasources/recentlyAddedTitles.json"
-            },
-            "featuredCIAA" : {
-                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=sm_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=ss_spublisher:(*circle*)&fl=ss_embedded,title,type,sm_collection_identifier,ss_identifer,zs_image_medium,sm_author,ss_title, ss_language,ss_pubdate,ss_publocation,sm_publisher,sm_subject,sm_partner&rows=100&sort=ss_identifer%20asc",
-                "dest" : "source/json/datasources/featuredCIAA.json"
-            },
-            "featuredBrill" : {
-                "src" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=sm_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=ss_spartner:(*brill*)&fl=ss_embedded,title,type,sm_collection_identifier,ss_identifer,zs_image_medium,sm_author,ss_title, ss_language,ss_pubdate,ss_publocation,sm_publisher,sm_subject,sm_partner&rows=12&sort=ss_identifer%20asc",
-                "dest" : "source/json/datasources/featuredBrill.json"
-            }
-        }
-    },
-    "production" : {
-        "appUrl": "http://dlib.nyu.edu/awdl_site",
-        "appRoot": "/awdl",
-        "discoUrl": "http://discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select/",
-        "sass" : {
-            "build" : "inline"
-          , "options" : {
-                "style" : "compressed"
-            }
-        },        
-        "curl" : {
-            "recentlyAddedTitlesEN" : {
-                "src" : "http://discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select?wt=json&fq=hash:iy26sh&fq=sm_collection_identifier:d72398c3-1cd7-4734-ab1c-3e3b29862cee&fq=!ss_language:ar&fl=ss_embedded,title,type,sm_collection_identifier,ss_identifer,zs_image_medium,teaser,sm_field_author,sm_field_title,ss_language,sm_field_publication_date_text,sm_field_publication_location,sm_field_publisher,sm_vid_Terms,tm_vid_1_names,sm_ar_title,sm_ar_author,sm_ar_publisher,sm_ar_publication_location,sm_ar_subjects,sm_ar_publication_date,sm_ar_partner,sm_field_partner&rows=5&&sort=ds_changed%20desc",
-                "dest" : "source/json/datasources/recentlyAddedTitlesEN.json"
-            }
-            
-        }      
-    }        
+  "appName": "Ancient World Digital Library",
+  "collectionCode": "awdl",
+  "appUrl": "http://localhost:8000/awdl",
+  "appRoot": "/awdl",
+  "discovery": "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select/",
+  "discoUrl": "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/core0/select/"
 }

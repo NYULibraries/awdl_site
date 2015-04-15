@@ -1,0 +1,17 @@
+{
+
+  "series": {
+    "htmltitle": "Series",
+      "title": [ { "html": "Series" }
+     ],
+    "route": "/series/index.html",
+    "bodyClass": "series",
+    "menu": [{
+          "context": "navbar",
+          "label": "Series",
+          "weight": 2
+    }],
+    "callback" : "series"      
+  }
+  
+}

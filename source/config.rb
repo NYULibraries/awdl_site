@@ -2,7 +2,8 @@
 
 
 # Set this to the root of your project when deployed:
-http_path = "/"
+http_path = "/awdl"
+
 css_dir = "../build/css"
 sass_dir = "sass"
 images_dir = "images"

@@ -1,0 +1,10 @@
+<!doctype html>
+<html class="nojs">
+<head>{{> head }}</head>
+<body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" class="{{ bodyClass }}" data-script='{ "js" : [ "commons.js" ] }'>
+  {{> header }}
+  <iframe class="widget book" id="book" name="book" data-name="book" data-bookTheme="{{bookTheme}}" data-sourceUrl="{{sourceUrl}}" data-script='{ "js" : [ "crossframe.js", "book.js" ] }' allowfullscreen mozallowfullscreen webkitallowfullscreen>
+  {{> loading }}
+  {{{ closure }}}
+</body>
+</html>

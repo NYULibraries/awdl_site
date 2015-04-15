@@ -1,38 +1,43 @@
 {
-
-  "partners": [
-    {
-      "id": "isaw",
-      "name": "INSTITUTE FOR THE STUDY OF THE ANCIENT WORLD",
-      "logo": "images/logos/nyu_short_color.png",
-      "url": "http://isaw.nyu.edu/"
-    },
-    {
-      "id": "dlts",
-      "name": "DIGITAL LIBRARY TECHNOLOGY SERVICES",
-      "logo": "images/logos/nyuad.png",
-      "url": "http://dlib.nyu.edu/"
-    }
-  ],
-  
-  "newsItem" : {
-      "title": "News Item",
-      "sourceType": "json",
-      "source": "source/json/datasources/isawBlog.json"
+  "partners" : {
+    "title": "Partners",
+    "sourceType": "local",
+    "data" : [
+      {
+        "id": "isaw",
+        "name": "INSTITUTE FOR THE STUDY OF THE ANCIENT WORLD",
+        "logo": "images/logos/nyu_short_color.png",
+        "url": "http://isaw.nyu.edu/"
+      },
+      {
+        "id": "dlts",
+        "name": "DIGITAL LIBRARY TECHNOLOGY SERVICES",
+        "logo": "images/logos/nyuad.png",
+        "url": "http://dlib.nyu.edu/"
+      }
+    ]
   },
-  
+  "newsItem" : {
+    "title": "News Item",
+    "sourceType": "json",
+    "source": "source/json/datasources/isawBlog.json"
+  },
   "recentlyAddedTitles" : {
       "title": "Recently Added Titles",
       "sourceType": "json",
       "source": "source/json/datasources/recentlyAddedTitles.json"
   },
-  
+  "awdlAtlas" : {
+      "title": "AWDL Atlas",
+      "id": "awdlAtlas",
+      "sourceType": "iframe",
+      "source": "https://www.google.com/fusiontables/embedviz?q=select+col4+from+1F9kzSPgjNomW9bCvsp76cdpzewdYImwfkbCXbZDl&amp;viz=MAP&amp;h=false&amp;lat=40.30445619237193&amp;lng=43.085443378906234&amp;t=3&amp;z=3&amp;l=col4&amp;y=2&amp;tmplt=2&amp;hml=TWO_COL_LAT_LNG"
+  },
   "featuredCIAA" : {  
       "title": "AWDL Atlas",
       "sourceType": "json",
       "source": "source/json/datasources/featuredCIAA.json"
   },
-  
   "featuredBrill" : {  
     "title": "Featured Provider: KONINKLIJKE BRILL NV",
     "sourceType": "json",
