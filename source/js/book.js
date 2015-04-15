@@ -12,7 +12,7 @@ YUI().use(
     
     var widget = Y.one('.widget.book') ;
     
-    var appRoot = body.getAttribute(''data-appRoot') ;
+    var appRoot = body.getAttribute('data-appRoot') ;
 
     body.addClass('io-loading');
 
