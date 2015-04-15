@@ -1,0 +1,15 @@
+{
+  "upgrade": {
+    "title": "Please Upgrade Your Browser",
+    "route": "/upgrade/index.html",
+    "content": {            
+      "main": [ 
+        {
+          "title" : "Please upgrade your browser",
+          "html": "<p>We've detected that you're using the Internet Explorer browser, version 9 or earlier.<br>  This site is designed only to be viewed on newer browsers.  </p><p>Please upgrade your browser to one of the following:</p><ul><li><a href=\"https://support.google.com/chrome/answer/95346\" target=\"_blank\">Google Chrome</a></li><li><a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a></li><li><a href=\"http://windows.microsoft.com/en-us/internet-explorer/download-ie\" target=\"_blank\">Latest Internet Explorer</a></li></ul>"
+        }
+      ]
+    }
+  }
+}
+
