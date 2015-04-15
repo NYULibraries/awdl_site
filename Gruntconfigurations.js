@@ -95,8 +95,8 @@ function compass () {
 
   var compass_conf;
 	  
-  if ( grunt.file.isFile( __dirname + '/source/json/compass.json' ) ) {
-    compass_conf = grunt.file.readJSON( __dirname + '/source/json/compass.json' ) ;  
+  if ( grunt.file.isFile ( __dirname + '/source/json/compass.json' ) ) {
+    compass_conf = grunt.file.readJSON ( __dirname + '/source/json/compass.json' ) ;  
   }
 	
   return {

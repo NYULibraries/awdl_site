@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="nojs">
 <head>{{> head }}</head>
-<body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" class="{{ bodyClass }}" data-script='{ "js" : [ "commons.js" ] }'>
+<body data-app="{{appUrl}}" data-appRoot="{{appRoot}}" class="{{bodyClass}}">
   {{> header }}
-  <iframe class="widget book" id="book" name="book" data-name="book" data-bookTheme="{{bookTheme}}" data-sourceUrl="{{sourceUrl}}" data-script='{ "js" : [ "crossframe.js", "book.js" ] }' allowfullscreen mozallowfullscreen webkitallowfullscreen>
+  <iframe class="widget book" id="book" name="book" data-name="book" data-sourceUrl="{{sourceUrl}}" data-script='{ "js" : [ "commons.js", "crossframe.js", "book.js" ] }' allowfullscreen mozallowfullscreen webkitallowfullscreen>
   {{> loading }}
-  {{{ closure }}}
+  {{{closure}}}
 </body>
 </html>
