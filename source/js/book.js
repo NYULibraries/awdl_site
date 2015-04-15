@@ -25,7 +25,7 @@ YUI().use(
       // space created by the curved corners of the browser?
       // Not elegant but to consider. 
      // availableHeight += 5;
-      siblings.each( function(node) {
+      siblings.each ( function ( node ) {
         availableHeight = availableHeight - node.get('offsetHeight');
       });
 
@@ -83,10 +83,10 @@ YUI().use(
     var router = new Y.Router({
       root: appRoot,
       routes: [{
-        path: '/book/:identifier/:page',
+        path: '/books/:identifier/:page',
         callbacks: requestReplaceLoadBook
       }, {
-        path: '/book/:identifier',
+        path: '/books/:identifier',
         callbacks: requestReplaceLoadBook
       }]
     });
@@ -97,8 +97,8 @@ YUI().use(
 
     Y.on('button:button-fullscreen:off', showSiblings);
 
-    Y.on('openlayers:change', function(data) {
-      router.save('/book/' + widget.getAttribute('data-identifier') + '/' + data.sequence);
+    Y.on('openlayers:change', function ( data ) {
+      router.save('/books/' + widget.getAttribute('data-identifier') + '/' + data.sequence);
     });
 
     Y.Global.on("crossframe:message", function(o, data) {
