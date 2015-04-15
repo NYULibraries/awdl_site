@@ -1,12 +1,18 @@
 YUI().use(
-  'node', 'anim', 'crossframe', 'router', 'event-resize',
-  function(Y) {
+    'node'
+  , 'anim'
+  , 'crossframe'
+  , 'router'
+  , 'event-resize'
+  , function (Y) {
 
     'use strict';
 
-    var body = Y.one('body'),
-      widget = Y.one('.widget.book'),
-      appRoot = body.getAttribute("data-appRoot");
+    var body = Y.one('body') ;
+    
+    var widget = Y.one('.widget.book') ;
+    
+    var appRoot = body.getAttribute(''data-appRoot') ;
 
     body.addClass('io-loading');
 
@@ -19,23 +25,21 @@ YUI().use(
       // space created by the curved corners of the browser?
       // Not elegant but to consider. 
      // availableHeight += 5;
-      siblings.each(function(node) {
+      siblings.each( function(node) {
         availableHeight = availableHeight - node.get('offsetHeight');
       });
 
       if (body.hasClass('io-loading')) {
         var loadingAnimation = Y.one('.bubblingG'),
-          loaderHeight = loadingAnimation.get('offsetHeight');
-        availableHeight = availableHeight + loaderHeight;
+            loaderHeight = loadingAnimation.get('offsetHeight');
+            availableHeight = availableHeight + loaderHeight;
       }
 
       return availableHeight;
     }
 
     function resizeBookView() {
-      widget.setStyles({
-        height: calculateAvailableHeight()
-      });
+      widget.setStyles( { height: calculateAvailableHeight() } ) ;
     }
 
     function hideSiblings() {
@@ -56,25 +60,21 @@ YUI().use(
       resizeBookView();
     }
 
-    function requestReplaceLoadBook(request) {
+    function requestReplaceLoadBook( request ) {
 
-      var src = widget.getAttribute('data-sourceUrl'),
-        bookTheme = widget.getAttribute('data-bookTheme'),
-        identifier = request.params.identifier,
-        page = (request.params.page) ? request.params.page : 1;
-//Y.log(" src " + src);
-//Y.log(" bookTheme " + bookTheme);
+      var src = widget.getAttribute('data-sourceUrl') ;
+      
+      var identifier = request.params.identifier ;
+      
+      var page = (request.params.page) ? request.params.page : 1;
+
       widget.setAttribute('data-identifier', identifier);
 
-      if (request.src === 'replace') {
+      if ( request.src === 'replace' ) {
 
         src = src + '/books/' + request.params.identifier + '/' + page;
 
-        if (bookTheme) {
-          src = src + '?ctheme=' + bookTheme;
-        }
-     // Y.log(" src " + src);
-       widget.set('src', src);
+        widget.set('src', src);
 
       }
 
@@ -129,8 +129,7 @@ YUI().use(
 
     resizeBookView();
 
-
     // initial request
-    router.replace(router.getPath());
+    router.replace ( router.getPath() ) ;
 
   });
