@@ -9,7 +9,7 @@
       <div class="md_series"><span class="md_label">Series:</span>
       {{#each zm_series_data}}      
         {{#json this}}
-          <a class="md_series_each" href="{{../../../app.appRoot}}/series/{{#speakingurl}}{{label}}{{/speakingurl}}">{{label}}</a>
+          <a class="md_series_each" href="{{../../../app.appRoot}}/series/{{#speakingurl}}{{label}}{{/speakingurl}}">{{label}}{{#if volume}} v. {{volume}}{{/if}}</a>
         {{/json}}
       {{/each}}
       </div>
