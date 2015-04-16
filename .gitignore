@@ -6,6 +6,12 @@ build
 build/*
 node_modules/*
 
+source/json/conf.json
+source/json/sass.json
+source/json/htmlminify.json
+source/json/js.json
+source/json/compass.json
+
 source/yuiTabTest.html
 source/json/datasources/*
 
@@ -21,4 +27,4 @@ source/json/datasources/*
 !node_modules/subjects
 !node_modules/subjects_pages
 
-source/json/sass.json
+

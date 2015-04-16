@@ -29,5 +29,7 @@
   "author": "NYU Digital Library Technology Services",
   "license": "ISC",
   "homepage": "https://github.com/NYULibraries/awdl_site",
-  "dependencies": {}
+  "dependencies": {
+    "html-minifier": "^0.7.2"
+  }
 }
