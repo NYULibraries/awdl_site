@@ -15,6 +15,24 @@ function project () {
 
 }
 
+function htmlminify () {
+
+  var htmlminifyConfiguration = {} ;
+	  
+  var htmlminifyConfigurationFile = __dirname + '/source/json/htmlminify.json' ;
+	  
+  if ( grunt.file.isFile ( htmlminifyConfigurationFile ) ) {
+
+    projectConfiguration = grunt.file.readJSON ( htmlminifyConfigurationFile ) ;
+    
+    projectConfiguration = projectConfiguration.htmlminify
+    
+  }
+	  
+  return projectConfiguration ;
+
+}
+
 function curl () {
 	
   if ( grunt.file.isFile( __dirname + '/source/json/curl.json' ) ) {
@@ -184,3 +202,4 @@ exports.uglify = uglify;
 exports.js = js;
 exports.compass = compass;
 exports.project = project ;
+exports.htmlminify = htmlminify ;
