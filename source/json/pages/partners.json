@@ -7,7 +7,7 @@
         "menu": [ {
             "context": "navbar",
             "label": "Partners",
-            "weight": 7
+            "weight": 4
         } ],
         "route": "/partners/index.html",
         "bodyClass": "page partners",

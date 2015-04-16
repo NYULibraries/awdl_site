@@ -7,7 +7,7 @@
         "menu": [{
             "context": "navbar",
             "label": "About",
-            "weight": 1
+            "weight": 3
         }],
         "route": "/about/index.html",
         "bodyClass": "page about",
