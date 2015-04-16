@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>{{> head }}</head>
+<body data-app="{{ appUrl }}" data-appRoot="{{ appRoot }}" class="{{ bodyClass }}">
+  {{> header }}
+  <div class="container-fluid"><div class="flex-container">
+    <main class="main hasSidebar" role="main">
+    {{#title}}
+      <h2  class="page-title">{{{html}}}</h2>
+    {{/title}}
+    {{#content}}
+      {{#main}}
+        <div class="maintext {{class}}" >{{{html}}}</div>
+      {{/main}}
+    {{/content}}
+    </main>
+    <aside role="complementary">
+         <h3>{{title}}</h3>
+         <div class="content">{{{html}}}</div>
+    </aside>
+
+ </div>
+
+</div>
+  {{> footer }}
+  {{{ closure }}}  
+</body>
+</html>
