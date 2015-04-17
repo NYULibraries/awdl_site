@@ -5,30 +5,28 @@
       "html": "Search Results"
     } ],
     "route": "/search/index.html",
-    "bodyClass": "search io-loading",
+    "bodyClass": "search",
     "content": {
       "items": {
         "rows": 12,
         "fl": [
-            "zs_image_medium"
-          , "zs_image_220wide"
-          , "ss_identifer"
-          , "ss_title"
-          , "sm_author"
-          , "sm_publisher"
-          , "ss_pubdate"
-          , "sm_partner"
-          , "sm_subject"
-          , "zm_subject"
-          , "ss_publocation"
-          , "sm_field_publication_location"
-          , "score"
-          , "ss_longlabel"
-          , "is_ispartof_series"
-          , "zm_series_data"
-          , "ss_series_label"
-          , "is_ispartof_multivol"
-          , "ss_multivol_label"                  
+           "zs_image_220wide"
+         , "zm_series_data"
+         , "zm_subject"
+         , "ss_identifer"
+         , "ss_title"
+         , "sm_author"
+         , "sm_publisher"
+         , "ss_spublisher"
+         , "ss_pubdate"
+         , "sm_partner"
+         , "sm_subject"
+         , "ss_publocation"
+         , "sm_field_publication_location"
+         , "is_ispartof_series"
+         , "ss_series_label"
+         , "is_ispartof_multivol"
+         , "ss_multivol_label"        
         ],
         "fq": [
           {
