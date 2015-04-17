@@ -1,6 +1,5 @@
 {
   "front": {
-    "htmltitle": "",
     "title": [ { "html": "Browse Home" } ],
     "menu": [ {
       "context": "navbar",
