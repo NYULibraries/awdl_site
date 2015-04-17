@@ -5,7 +5,7 @@
         "menu": [{
             "context": "navbar",
             "label": "Browse",
-            "weight": 3
+            "weight": 5
         }],
         "route": "/browse/index.html",
         "bodyClass": "browse",
