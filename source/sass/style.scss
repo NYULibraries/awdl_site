@@ -64,16 +64,17 @@ body {
     -ms-flex: 0 1 32%;
     -webkit-flex: 0 1 32%;
     flex: 0 1 32%;
-    margin: 1% 0;
+    // Firefox won't allow percentage margins here
+    margin: 10px 0;
     @media (max-width: 961px) {
       -webkit-flex: 0 1 49%;
       flex: 0 1 49%;
-      margin: 1% 0;
+      margin: 10px 0;
     }
     @media (max-width: $grid-float-breakpoint-max) {
       -webkit-flex: 1 1 100%;
       flex: 1 1 100%;
-      margin: 1% 0;
+      margin: 10px 0;
     }
   }
   .itemdouble {
@@ -93,7 +94,6 @@ body {
     margin: 0;
   }
 }
-
 
 .item-list {
   margin-top: 30px;
