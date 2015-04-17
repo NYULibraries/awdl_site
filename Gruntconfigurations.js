@@ -23,13 +23,13 @@ function htmlminify () {
 	  
   if ( grunt.file.isFile ( htmlminifyConfigurationFile ) ) {
 
-    projectConfiguration = grunt.file.readJSON ( htmlminifyConfigurationFile ) ;
+    htmlminifyConfiguration = grunt.file.readJSON ( htmlminifyConfigurationFile ) ;
     
-    projectConfiguration = projectConfiguration.htmlminify
+    htmlminifyConfiguration = htmlminifyConfiguration.htmlminify
     
   }
 	  
-  return projectConfiguration ;
+  return htmlminifyConfiguration ;
 
 }
 
