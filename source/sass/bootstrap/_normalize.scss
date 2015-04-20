@@ -80,11 +80,6 @@ a:hover {
 // Text-level semantics
 // ==========================================================================
 
-//
-
-//
-// Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
-//
 
 
 // Embedded content
@@ -105,18 +100,6 @@ img {
 svg:not(:root) {
   overflow: hidden;
 }
-
-// Grouping content
-// ==========================================================================
-
-//
-// Address margin not present in IE 8/9 and Safari.
-//
-
-figure {
-  margin: 1em 40px;
-}
-
 
 
 
@@ -218,11 +201,11 @@ input {
 // 2. Remove excess padding in IE 8/9/10.
 //
 
-input[type="checkbox"],
-input[type="radio"] {
-  box-sizing: border-box; // 1
-  padding: 0; // 2
-}
+// input[type="checkbox"],
+// input[type="radio"] {
+//   box-sizing: border-box; // 1
+//   padding: 0; // 2
+// }
 
 //
 // Fix the cursor style for Chrome's increment/decrement buttons. For certain
@@ -286,12 +269,12 @@ fieldset {
 // Remove most spacing between table cells.
 //
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
+// table {
+//   border-collapse: collapse;
+//   border-spacing: 0;
+// }
 
-td,
-th {
-  padding: 0;
-}
+// td,
+// th {
+//   padding: 0;
+// }
