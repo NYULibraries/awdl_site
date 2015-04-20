@@ -11,20 +11,20 @@ YUI().use(
   
     'use strict';
     
+    var router = new Y.Router();
+    
     var itemsTemplateSource = Y.one('#items').getHTML();
     
     var itemsTemplate = Y.Handlebars.compile(itemsTemplateSource);
     
     Y.Handlebars.registerHelper( 'json', function ( context, options ) {
-        return options.fn ( JSON.parse ( context ) )  ;
+      return options.fn ( JSON.parse ( context ) )  ;
     } ) ;
 
     Y.Handlebars.registerHelper( 'speakingurl', function ( context, options ) {
       return window.getSlug( this.label ) ;
     });    
     
-    var router = new Y.Router();
-  
     function getRoute () {
 
       var pageQueryString = getParameterByName('page')
@@ -72,9 +72,9 @@ YUI().use(
         , sort = ( req.query.sort ) ? req.query.sort : ( ( data.sort ) ? data.sort : Y.one('#browse-select').get('value') )           
         , page = ( req.query.page ) ? parseInt( req.query.page, 10 ) : 0
         , start =  0;
-
+        
         if ( page <= 1 ) {
-          start = 0;
+          start = 0 ;
         }
         else {
           start = ( page * rows ) - rows;
@@ -91,8 +91,7 @@ YUI().use(
     });
   
   function onSelectChange( ) {
-    
-    
+
     Y.all('#browse-select option').each(function(node) { 
       /* reset all option text */ 
       var t = node.get("text");
@@ -107,7 +106,7 @@ YUI().use(
    
   }
   
-  function onFailure( response, args ) {
+  function onFailure ( response, args ) {
     
       // mover a onFailure
       var data = args.container.getData()
@@ -132,7 +131,7 @@ YUI().use(
       Y.one('body').removeClass('io-loading');
   }
 
-  function onTimeout() {
+  function onTimeout () {
       onFailure();
   }
   
@@ -145,7 +144,7 @@ YUI().use(
 
   }
   
-  function initPaginator( page, totalRecords, rowsPerPage ) {
+  function initPaginator ( page, totalRecords, rowsPerPage ) {
       
       Y.one('#paginator').empty();
       var paginatorConfiguration = {
@@ -154,9 +153,9 @@ YUI().use(
             , initialPage : page
             , template: '{FirstPageLink} {PageLinks} {NextPageLink}'        
           }
-        , paginator = new Y.Paginator( paginatorConfiguration );
+        , paginator = new Y.Paginator ( paginatorConfiguration );
 
-      paginator.on( 'changeRequest', update );
+      paginator.on ( 'changeRequest', update );
         
       if (totalRecords > rowsPerPage) {
         paginator.render('#paginator');
@@ -228,8 +227,6 @@ YUI().use(
         , rows = ( data.rows ) ? data.rows : 10
         , fq = [];
       
-      Y.log ( subject_term_id ) ;
-
       Y.one('body').addClass('io-loading');
       
       /** find all data-fq and push the value into fq Array*/
