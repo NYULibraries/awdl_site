@@ -30,6 +30,7 @@
   "license": "ISC",
   "homepage": "https://github.com/NYULibraries/awdl_site",
   "dependencies": {
+    "html-entities": "^1.1.2",
     "html-minifier": "^0.7.2"
   }
 }
