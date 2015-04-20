@@ -4,7 +4,15 @@
 <!--[if lte IE 9]>
   <script>window.location.replace("{{appUrl}}/upgrade/");</script>
 <![endif]-->
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
 <link rel="shortcut icon" href="{{appUrl}}/images/favicon.ico" />
 {{{css}}}
 <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.10/webfont.js"></script>
+<script>
+WebFont.load({
+    google: {
+      families: ['Open Sans:300,400,600']
+    },
+    timeout: 3000
+});
+</script>
