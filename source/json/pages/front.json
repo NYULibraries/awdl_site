@@ -7,7 +7,7 @@
       "weight": 0
     } ],
     "route": "/index.html",
-    "bodyClass": "front io-loading",
+    "bodyClass": "front",
     "content": {
       "intro": [
         {
