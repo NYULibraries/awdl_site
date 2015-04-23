@@ -213,12 +213,7 @@ $headings-font-family:    inherit;
  $input-border-focus:          #FF9C00;
  $input-border-focus:          #FDAA29;
  
-:focus {
-outline: #FDAA29 auto 5px;
-outline-color: #FDAA29;
-outline-style: auto;
-outline-width: 5px;
-}
+
 //* Placeholder text color
 // $input-color-placeholder:        $gray-light
 

@@ -50,6 +50,7 @@ input[type="text"] {
     margin: 0;
   }
 }
+
 .navbar-form {
   margin-left: -$navbar-padding-horizontal;
   margin-right: -$navbar-padding-horizontal;
@@ -60,7 +61,7 @@ input[type="text"] {
   @include box-shadow($shadow);
   // Mixin behavior for optimum display
   // modified LMH 10/16/2014
-  @extend .form-inline !optional; 
+  @extend .form-inline !optional;
   // Vertically center in expanded, horizontal navbar
   @include navbar-vertical-align($input-height-base);
   // Undo 100% width for pull classes
@@ -81,6 +82,13 @@ input[type="text"] {
 
 .filters {
   float: right;
+}
+
+input:focus {
+  outline: #FDAA29 auto 5px;
+  outline-color: #FDAA29;
+  outline-style: auto;
+  outline-width: 5px;
 }
 
 .resultsnum {

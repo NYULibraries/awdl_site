@@ -21,6 +21,7 @@
 @import "partials/header";
 @import "partials/front";
 @import "partials/search";
+@import "partials/formElements";
 @import "partials/footer";
 @import "partials/pagination";
 @import "partials/series_page";
@@ -205,9 +206,6 @@ body.book {
   visibility: hidden;
 }
 
-select:active, select:hover, select:focus {
-  outline-color: gold !important;
-}
 
 /* no JS styles */
 @import "partials/nojs";
