@@ -2,9 +2,6 @@
 // Navs
 // --------------------------------------------------
 
-// Base class
-// --------------------------------------------------
-
 .nav {
   margin-bottom: 0;
   padding-left: 0;
@@ -52,22 +49,38 @@
   > li > a > img {
     max-width: none;
   }
+  ////
+  /////
+  ////
+  ///
+  //
+  //
+  //
+
+   margin: $navbar-padding-vertical / 2 (-$navbar-padding-horizontal);
+  > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: $line-height-computed;
+  }
+  // Uncollapse the nav
+  @media (min-width: $grid-float-breakpoint) {
+    float: left;
+    margin: 0;
+    > li {
+      float: left;
+      > a {
+        padding-top: $navbar-padding-vertical;
+        padding-bottom: $navbar-padding-vertical;
+      }
+    }
+    &.navbar-right:last-child {
+      margin-right: -$navbar-padding-horizontal;
+    }
+  }
+
 }
 
-// Tabbable tabs
-// -------------------------
-
-// Hide tabbable panes to start, show them when `.active`
-.tab-content {
-  > .tab-pane {
-    display: none;
-  }
-  > .active {
-    display: block;
-  }
-}
-
-/// end bootstrap nav partial
 
 //
 // Navbars
@@ -146,11 +159,6 @@
   }
 }
 
-//
-// Navbar alignment options
-//
-// Display the navbar across the entirety of the page or fixed it to the top or
-// bottom of the page.
 
 // Navbar toggle
 //
@@ -188,34 +196,7 @@
   }
 }
 
-// Navbar nav links
-//
-// Builds on top of the `.nav` components with its own modifier class to make
-// the nav the full height of the horizontal nav (above 768px).
 
-.navbar-nav {
-  margin: $navbar-padding-vertical / 2 (-$navbar-padding-horizontal);
-  > li > a {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    line-height: $line-height-computed;
-  }
-  // Uncollapse the nav
-  @media (min-width: $grid-float-breakpoint) {
-    float: left;
-    margin: 0;
-    > li {
-      float: left;
-      > a {
-        padding-top: $navbar-padding-vertical;
-        padding-bottom: $navbar-padding-vertical;
-      }
-    }
-    &.navbar-right:last-child {
-      margin-right: -$navbar-padding-horizontal;
-    }
-  }
-}
 
 // Component alignment
 //
