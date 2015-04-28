@@ -102,6 +102,10 @@ body {
 }
 
 main {
+  padding: .5em 0 2em;
+  @media (min-width: $grid-float-breakpoint) {
+    padding: 2em 0 4em;
+  }
   a:link, a:focus {
     font-weight: bold;
   }
@@ -121,10 +125,13 @@ main {
     }
   }
   h2.page-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 300;
     text-shadow: 0px 0px 1px white;
     margin-top: 0;
+    @media (min-width: $grid-float-breakpoint) {
+      font-size: 2rem;
+    }
   }
   h3 {
     font-size: 1.3rem;
@@ -205,7 +212,6 @@ body.book {
   display: none;
   visibility: hidden;
 }
-
 
 /* no JS styles */
 @import "partials/nojs";
