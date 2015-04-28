@@ -88,7 +88,7 @@ body {
       flex: 2 1 680px;
     }
   }
-  .item:empty {
+  .item:empty, .card:empty {
     height: 0;
     border: none;
     padding: 0;
