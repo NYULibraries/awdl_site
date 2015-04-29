@@ -69,21 +69,25 @@ body {
     // Firefox won't allow percentage margins here
     margin: 10px 0;
     @media (max-width: 961px) {
+       -ms-flex: 0 1 49%;
       -webkit-flex: 0 1 49%;
       flex: 0 1 49%;
       margin: 10px 0;
     }
     @media (max-width: $grid-float-breakpoint-max) {
+      -ms-flex: 1 1 100%;
       -webkit-flex: 1 1 100%;
       flex: 1 1 100%;
       margin: 10px 0;
     }
   }
   .itemdouble {
+    -ms-flex: 1 1 330px;
     -webkit-flex: 1 1 330px;
     flex: 1 1 330px;
     margin: 0 0px 20px 0px;
     @media (min-width: 1090px) {
+      -ms-flex: 2 1 680px;
       -webkit-flex: 2 1 680px;
       flex: 2 1 680px;
     }
