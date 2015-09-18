@@ -12,6 +12,9 @@ EPOCH=`stat -c '%Y' ${BUILD_DIR}`
 
 mv ${BUILD_DIR} ${BACKUPS_DIR}/${EPOCH}
 
-grunt --base ${PROJECT_DIR}
+grunt --no-color --base ${PROJECT_DIR} > ${PROJECT_DIR}/logs/${TODAY}.out
+
+chmod 2775 -R ${BUILD_DIR}
 
 exit 0
+
