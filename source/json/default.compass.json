@@ -1,0 +1,10 @@
+{
+  "compass" : {
+    "build" : "inline",
+    "options" : {
+      "outputStyle" : "compressed", 
+      "debugInfo" : false,
+      "lineNumbers" : false
+    }
+  }
+}
