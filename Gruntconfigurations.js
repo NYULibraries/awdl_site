@@ -80,13 +80,13 @@ function sass () {
 	// default SASS configuration
     sass_conf = {
       sass : {
-        build : "external", // options: inline,  external
+        build : "inline", // options: inline,  external
 	    // build : "external", // options: inline,  external
 	    // for options; see: https://github.com/gruntjs/grunt-contrib-sass
 	    options : {
-          style : "expanded", // options: nested, compact, compressed, expanded
+          style : "compressed", // options: nested, compact, compressed, expanded
           debugInfo : false,
-          lineNumbers : true,
+          lineNumbers : false,
           trace: false
         }
       }
@@ -115,14 +115,28 @@ function compass () {
 	  
   if ( grunt.file.isFile ( __dirname + '/source/json/compass.json' ) ) {
     compass_conf = grunt.file.readJSON ( __dirname + '/source/json/compass.json' ) ;  
+  } else {
+  // default Compass configuration
+    compass_conf = {
+      compass : {
+        build : "inline", // options: inline,  external
+        // for options; see: https://github.com/gruntjs/grunt-contrib-sass
+        options : {
+          outputStyle : "compressed", // options: nested, compact, compressed, expanded
+          debugInfo : false,
+          lineNumbers : false,
+          trace: false
+        }
+      }
+    };  
   }
 	
   return {
 	dist: {
 	  options: {
+        outputStyle: compass_conf.compass.options.outputStyle,
         basePath: __dirname,
         sassDir: __dirname + '/source/sass',
-        outputStyle: 'expanded',
         imagesDir: 'images',
         javascriptsDir: 'js',
         cssDir: 'build/css',
