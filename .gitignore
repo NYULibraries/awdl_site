@@ -13,6 +13,8 @@ source/json/htmlminify.json
 source/json/js.json
 source/json/compass.json
 
+source/views/htaccess.mustache
+
 source/yuiTabTest.html
 source/json/datasources/*
 
