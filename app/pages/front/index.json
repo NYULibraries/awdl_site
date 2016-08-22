@@ -1,0 +1,19 @@
+{
+  "id" : "home",
+  "title": "Home",
+  "route": "/index.html",
+  "menu": [
+    {
+      "context": "navbar",
+      "label": "Home",
+      "weight": 1
+    }
+  ],
+  "content": {},
+  "assets" : {
+    "js" : [
+      "commons.js",
+      "crossframe.js"
+    ]
+  }  
+}

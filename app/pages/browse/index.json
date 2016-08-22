@@ -1,0 +1,77 @@
+{
+  "id" : "browse",
+  "title": "Browse titles",
+  "route": "/browse/index.html",
+  "menu": [
+    {
+      "context": "navbar",
+      "label": "Browse",
+      "weight": 6
+    }
+  ],
+  "content": {
+    "top" : {
+       "title" : "Browse titles"
+    },
+    "items": {
+      "datasource": "discovery",
+      "rows": 12,
+      "fl": [
+        "ss_representative_image",
+        "ss_title_long",
+        "ss_book_identifier",
+        "sm_author",
+        "ss_uri",
+        "sm_publisher",
+        "ss_pubdate",
+        "sm_collection_partner_label",
+        "zm_subject",
+        "zm_partner",
+        "ss_publocation",
+        "ss_longlabel",
+        "ss_sauthor",
+        "ds_created",
+        "score"
+      ],
+      "fq": [
+        {
+          "filter": "bundle",
+          "value": "dlts_book"
+        },
+        {
+          "filter": "sm_collection_code",
+          "value": "awdl"
+        }
+      ],
+      "features" : {
+        "filters" : [
+          {
+            "direction" : "asc",
+            "field" : "iass_longlabel",
+            "label" : "Sorting by Title",
+            "selected" : true
+          },
+          {
+            "direction" : "asc",
+            "field" : "ss_sauthor",
+            "label" : "Sort by Author",
+            "selected" : false
+          }
+        ]
+      }
+    }
+  },
+  "assets" : {
+    "js" : [
+        "commons.js"
+      , "speakingurl.js"
+      , "browse.js"
+    ],
+    "hbs" : [
+      {
+        "template" : "items.hbs",
+        "id" : "items"
+      }
+    ]
+  }
+}

@@ -1,9 +1,0 @@
-{
-  "books": {
-    "htmltitle": "Book",
-    "title": "Book",
-    "bodyClass": "book",
-    "sourceUrl": "http://dev-dl-pa.home.nyu.edu/books",
-    "route": "/books/index.html"
-  }
-}

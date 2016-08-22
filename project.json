@@ -1,0 +1,16 @@
+{
+  "appName": "awdl",
+  "collectionCode": "awdl",
+  "appRoot": "/awdl",
+  "relic": "generic",
+  "version": "0.0.1",
+  "appUrl": "http://localhost:8000/awdl",
+  "datasource" : {
+    "discovery": {
+      "url" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/stage/select"
+    },
+    "viewer": {
+      "url" : "http://alpha-user:dlts2010@stage-dl-pa.home.nyu.edu/viewer"
+    }
+  }
+}

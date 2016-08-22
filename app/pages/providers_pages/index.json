@@ -1,0 +1,69 @@
+{
+  "title": "Providers",
+  "route": "/providers/*",
+  "content": {
+    "top" : {
+       "title" : ""
+    },
+    "items": {
+      "datasource": "viewer",
+      "rows": 12,
+      "fl": [
+        "ss_representative_image",
+        "ss_title_long",
+        "ss_book_identifier",
+        "sm_author",
+        "ss_uri",
+        "sm_publisher",
+        "ss_pubdate",
+        "sm_collection_partner_label",
+        "zm_subject",
+        "zm_partner",
+        "ss_publocation",
+        "ss_longlabel",
+        "ss_sauthor",
+        "ds_created",
+        "score"
+      ],
+      "fq": [
+        {
+          "filter": "bundle",
+          "value": "dlts_book"
+        }
+      ],
+      "features" : {
+        "filters" : [
+          {
+            "direction" : "asc",
+            "field" : "iass_longlabel",
+            "label" : "Sorting by Title",
+            "selected" : true
+          },
+          {
+            "direction" : "asc",
+            "field" : "ss_sauthor",
+            "label" : "Sort by Author",
+            "selected" : false
+          }
+        ]
+      }
+    }
+  },
+  "assets" : {
+    "js" : [
+        "commons.js"
+      , "speakingurl.js"
+      , "browse.js"
+    ],
+    "hbs" : [
+      {
+        "template" : "items.hbs",
+        "id" : "items"
+      }
+    ]
+  },
+  "datasource" : {
+    "discovery" : "discovery"
+  }  
+}
+

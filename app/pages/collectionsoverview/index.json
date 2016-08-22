@@ -1,0 +1,28 @@
+{
+  "id" : "collections-overview",
+  "title" : "Collections Overview",
+  "route" : "/collectionsoverview/index.html",
+  "menu": [
+    {
+      "context": "navbar",
+      "label": "Collections Overview",
+      "weight": 2
+    }
+  ],
+  "content" : {
+    "main": {
+      "title" : "Collections Overview",
+      "html": "<p>AWDL's purpose is to present the broadest possible range of scholarly materials relevant to the study of the ancient world.</p><p>Titles from an earlier version of AWDL will soon appear on this site. Until then, they are available <a href=\"http://dlib.nyu.edu/awdl/\" target=\"_blank\">here</a>.</p><p>Particular strengths of the AWDL collection include:</p><div class=\"flex-container\"><div class=\"item\"><div class=\"card\"><a href=\"/ancientworld/search/?q=%22ancient%20judaism%22\">Ancient Judaism</a></div></div><div class=\"item\"><div class=\"card\"><a href=\"/ancientworld/search/?q=assyriology\">Assyriology</a></div>  </div><div class=\"item\"><div class=\"card\"><a href=\"/ancientworld/search/?q=%22central%20asia%22\">Central Asia</a></div></div><div class=\"item\"><div class=\"card\"><a href=\"/ancientworld/search/?q=%22Early%20Christianity%22\">Early Christianity</a></div></div><div class=\"item\">  <div class=\"card\"><a href=\"/ancientworld/search/?q=egyptology\">Egyptology</a></div></div><div class=\"item\"><div class=\"card\"><a href=\"/ancientworld/search/?q=hittitology\">Hittitology</a></div></div><div class=\"item\"><div class=\"card\"><a href=\"/ancientworld/search/?q=%22iranian%20studies%22\">Iranian  studies</a></div></div><div class=\"item\"><div class=\"card\"><a href=\"/ancientworld/search/?q=Papyrology\">Papyrology</a></div></div><div class=\"item\"></div></div>"
+    },
+    "aside": {
+      "title" : "AWDL Atlas",
+      "html": "<p>Explore titles by place.</p><iframe width=\"100%\" height=\"500\" scrolling=\"no\" frameborder=\"no\" src=\"https://www.google.com/fusiontables/embedviz?q=select+col4+from+1F9kzSPgjNomW9bCvsp76cdpzewdYImwfkbCXbZDl&amp;viz=MAP&amp;h=false&amp;lat=40.30445619237193&amp;lng=43.085443378906234&amp;t=3&amp;z=3&amp;l=col4&amp;y=2&amp;tmplt=2&amp;hml=TWO_COL_LAT_LNG\"></iframe>"
+    }
+  },
+  "assets" : {
+    "js" : [
+      "commons.js",
+      "crossframe.js"
+    ]
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "id" : "subjects-pages",
+  "title": "Subjects",
+  "route": "/subjects/*",
+  "content": {
+    "top" : {
+       "title" : "Subjects"
+    },
+    "items": {
+      "datasource": "discovery",
+      "rows": 12,
+      "fl": [
+          "sm_field_identifier",
+          "ss_representative_image",
+          "zs_image_220wide",
+          "ss_title_long",
+          "ss_book_identifier",
+          "sm_author",
+          "ss_uri",
+          "sm_publisher",
+          "ss_pubdate",
+          "sm_collection_partner_label",
+          "zm_subject",
+          "zm_partner",
+          "ss_publocation",
+          "ss_longlabel",
+          "ss_sauthor",
+          "ds_created",
+          "score"
+      ],
+      "fq": [
+          {
+            "filter": "bundle",
+            "value": "dlts_book"
+          },
+          {
+            "filter": "sm_collection_code",
+            "value": "awdl"
+          },
+          {
+            "filter": "hash",
+            "value": "705lna"
+          }
+        ],
+      "features" : {
+        "filters" : [
+          {
+            "direction" : "asc",
+            "field" : "iass_longlabel",
+            "label" : "Sorting by Title",
+            "selected" : true
+          },
+          {
+            "direction" : "asc",
+            "field" : "ss_sauthor",
+            "label" : "Sort by Author",
+            "selected" : false
+          }
+        ]
+      }
+    }
+  },
+  "assets" : {
+    "js" : [
+        "commons.js"
+      , "speakingurl.js"
+      , "subjects_pages.js"
+    ],
+    "hbs" : [
+      {
+        "template" : "items.hbs",
+        "id" : "items"
+      }
+    ]
+  },
+  "request" : {
+    "drupal_subjects" : {
+      "src" : "http://alpha-user:dlts2010@stage-dl-pa.home.nyu.edu/viewer/sources/field/field_subject"
+    }
+  }
+}
