@@ -6,6 +6,7 @@
   "viewer": {
     "url" : "http://sites.dlib.nyu.edu/viewer"
   },
+  "content" : {},
   "assets" : {
     "js" : [
       "commons.js",

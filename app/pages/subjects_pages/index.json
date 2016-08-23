@@ -9,25 +9,7 @@
     "items": {
       "datasource": "discovery",
       "rows": 12,
-      "fl": [
-          "sm_field_identifier",
-          "ss_representative_image",
-          "zs_image_220wide",
-          "ss_title_long",
-          "ss_book_identifier",
-          "sm_author",
-          "ss_uri",
-          "sm_publisher",
-          "ss_pubdate",
-          "sm_collection_partner_label",
-          "zm_subject",
-          "zm_partner",
-          "ss_publocation",
-          "ss_longlabel",
-          "ss_sauthor",
-          "ds_created",
-          "score"
-      ],
+      "fl": [ "*" ],
       "fq": [
           {
             "filter": "bundle",

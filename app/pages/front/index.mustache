@@ -1,0 +1,91 @@
+<!doctype html>
+<html class="nojs">
+<head>{{>head}}</head>
+<body id="{{id}}" data-app="{{appUrl}}" data-appRoot="{{appRoot}}">
+  {{>header}}
+  <main class="main container-fluid" role="main">
+    {{#content}}
+      <div class="topHold flex-container">
+        {{#intro}}
+          <div class="intro {{class}} itemdouble">{{{html}}}</div>
+        {{/intro}}
+        <aside class="item newsitem" role="complementary">
+          {{#news}}
+            <h3><a href="{{link}}" target="_blank">{{title}}</a></h3>
+            <div class="content">
+              <div class="thumbs">
+                <div class="clipper">
+                  <a href="{{link}}"><img src="images/blog_thumb.jpg"></a>
+                </div>
+              </div>
+              {{#post}}
+                <h4><a href="{{link}}">{{title}}</a></h4>
+                <time datetime="{{dc_date}}">{{date}}</time>
+                <div class="description">{{description}}</div>
+              {{/post}}
+            </div>
+          {{/news}}
+        </aside>
+      </div>
+      {{#featured}}
+        <div id="{{id}}" data-label="{{label}}" class="noFouc tabHolder">
+          <ul>
+          {{#tabs}}
+            <li><h3><a href="#{{id}}">{{label}}</a></h3></li>
+          {{/tabs}}
+          </ul>
+          <div class="tabContentHolder">
+            {{#widgets}}
+              {{#items}}
+                <div id="{{label}}">
+                  <h3>{{label}}</h3>
+                  <div class="item-list flex-container">
+                    {{#docs}}
+                      <article class="item" {{#if score}}data-score="{{{score}}}"{{/if}}>
+                          <div class="card">
+                            <div class="thumbs">
+                              <div class="clipper"><a href="{{../../../../appRoot}}/books/{{ss_identifer}}"><img src="{{zs_image_medium}}" alt="" title="{{title}}"/></a></div>
+                            </div>
+                            <h1 class="md_title"><a href="{{../../../../../../appRoot}}/books/{{ss_identifer}}">{{{ss_title}}}</a></h1>
+                            <div class="md_author">{{#each sm_author}}<span>{{this}}</span>{{/each}}</div>
+                            {{#if zm_series_data}}
+                              <div class="md_series">
+                              <span class="md_label">Series:</span>
+                              {{#each zm_series_data}}
+                                {{#json this}}
+                                  <a class="md_series_each" href="{{../../../../../../../../../appRoot}}/series/{{#speakingurl}}{{label}}{{/speakingurl}}">{{label}}{{#if volume}} v. {{volume}}{{/if}}</a>
+                                {{/json}}
+                              {{/each}}</div>
+                            {{/if}}
+                            <div class="md_publisher"><span class="md_label">Publisher:</span> {{#each sm_publisher}}<span>{{this}}</span>{{/each}}, {{#each sm_field_publication_location}}<span>{{this}}</span>{{/each}}, {{ss_pubdate}}</div>
+                            <div class="md_provider"><span class="md_label">Provider:</span> {{#each sm_partner}}<span>{{this}}</span>{{/each}}</div>
+                            <div class="md_subjects"><span class="md_label">Subjects:</span>
+                            {{#each zm_subject}}
+                              {{#json this}}
+                                <a class="md_subject" href="{{../../../../../../../../appRoot}}/subjects/{{tid}}">{{name}}</a>
+                              {{/json}}
+                            {{/each}}
+                          </div>
+                        </div>
+                      </article>
+                    {{/docs}}
+                    <article class="item"></article>
+                    <article class="item"></article>
+                  </div>
+                </div>
+            {{/items}}
+            {{#atlas}}
+              <div id="{{id}}">
+                <h3>{{label}}</h3>
+                <iframe height="500" width="500" style="width: 100%; height: 500px;" scrolling="no" frameborder="no" src="{{src}}" allowfullscreen mozallowfullscreen webkitallowfullscreen></iframe>
+              </div>
+            {{/atlas}}
+          {{/widgets}}
+        </div>
+      </div>
+    {{/featured}}
+    {{/content}}
+  </main>
+  {{>footer}}
+  {{{closure}}}
+</body>
