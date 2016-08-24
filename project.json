@@ -1,9 +1,9 @@
 {
-  "appName": "awdl",
+  "appName": "Ancient World Digital Library",
   "collectionCode": "awdl",
-  "appRoot": "/awdl",
   "relic": "generic",
   "version": "0.0.1",
+  "appRoot": "/awdl",
   "appUrl": "http://localhost:8000/awdl",
   "datasource" : {
     "discovery": {

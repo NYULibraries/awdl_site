@@ -1,34 +1,24 @@
 {
-  "title": "Providers",
+  "title": "Provider",
   "route": "/providers/*",
   "content": {
     "top" : {
-       "title" : ""
+       "title" : "Provider"
     },
     "items": {
       "datasource": "viewer",
       "rows": 12,
       "fl": [
-        "ss_representative_image",
-        "ss_title_long",
-        "ss_book_identifier",
-        "sm_author",
-        "ss_uri",
-        "sm_publisher",
-        "ss_pubdate",
-        "sm_collection_partner_label",
-        "zm_subject",
-        "zm_partner",
-        "ss_publocation",
-        "ss_longlabel",
-        "ss_sauthor",
-        "ds_created",
-        "score"
+        "*"
       ],
       "fq": [
         {
           "filter": "bundle",
           "value": "dlts_book"
+        },
+        {
+          "filter": "sm_collection_code",
+          "value": "awdl"
         }
       ],
       "features" : {
@@ -53,7 +43,7 @@
     "js" : [
         "commons.js"
       , "speakingurl.js"
-      , "browse.js"
+      , "providers_pages.js"
     ],
     "hbs" : [
       {
@@ -61,9 +51,5 @@
         "id" : "items"
       }
     ]
-  },
-  "datasource" : {
-    "discovery" : "discovery"
-  }  
+  }
 }
-

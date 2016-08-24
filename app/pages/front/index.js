@@ -4,13 +4,13 @@ function front (data) {
 
   // Agartha should be in in the process Object by now.
   // if not, we are not running inside Agartha CLI; kill
-  if (process.agartha === undefined) return;
+  if (process.agartha === undefined) process.exit();
 
   const agartha = process.agartha;
 
   /**
    * we need to run two synchronous tasks
-   * - Get the latest blog post from  ISAW Library Blog
+   * - Get the latest blog post from ISAW Library Blog
    * - Get the list of the recently added titles + render AWDL Atlas
    * we use generators (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*)
    * and wait (yield 2 times) for this operations to call generator.next()
@@ -22,13 +22,17 @@ function front (data) {
     agartha.emit('task.done', data);
   }
 
-  const generator = steps();
+  function Content () {}
 
-  function Callbacks () {}
-
-  Callbacks.prototype.get_latest_blog_post = (object, generator) => {
+  // Request the latest content from ISAW Library Blog
+  // and adds data.content.news so that we can render
+  // the "ISAW LIBRARY BLOG" block in the page
+  Content.prototype.get_latest_blog_post = (generator) => {
     const dateFormat = agartha.dateformat;
     const src = "http://isaw.nyu.edu/library/blog/collector/RSS";
+    data.content.news = {};
+    data.content.news.id = "new-items";
+    data.content.news.label = "News items";
     data.content.news.title = 'ISAW Library Blog';
     data.content.news.link = 'http://isaw.nyu.edu/library/blog/collector';
     agartha.request(src, (error, response, body) => {
@@ -48,12 +52,15 @@ function front (data) {
     });
   }
 
-  Callbacks.prototype.render_featured = (object, generator) => {
+  Content.prototype.render_featured = (generator) => {
     const recently_added_titles_url = agartha.get('datasource').discovery.url + '?wt=json&fq=sm_collection_code:awdl&fl=*&rows=12&sort=ds_changed%20desc';
     agartha.request(recently_added_titles_url, (error, response, body) => {
       if (error) return;
       const atlas_url = 'https://www.google.com/fusiontables/embedviz?q=select+col4+from+1F9kzSPgjNomW9bCvsp76cdpzewdYImwfkbCXbZDl&amp;viz=MAP&amp;h=false&amp;lat=46&amp;lng=-12&amp;t=3&amp;z=4&amp;l=col4&amp;y=2&amp;tmplt=2&amp;hml=TWO_COL_LAT_LNG';
       const source = JSON.parse(body);
+      data.content.featured = {};
+      data.content.featured.id = "tabs";
+      data.content.featured.label = "Tabs";
       data.content.featured.tabs = [];
       data.content.featured.widgets = {};
       data.content.featured.widgets.items = {
@@ -73,14 +80,18 @@ function front (data) {
   }
 
   function start (generator) {
-    const callbacks = new Callbacks();
+    // init Callbacks
+    const content = new Content();
     // start the generator
     generator.next();
-    // find out if we need to call a function
-    agartha._.each (data.content, (object) => {
-      if (agartha._.has(object, 'callback')) callbacks[object.callback](object, generator);
-    });
+    // populate content with the latest blog post from ISAW Library Blog
+    content.get_latest_blog_post(generator);
+    // populate content with the AWDL Atlas and recent items
+    content.render_featured(generator);
   }
+
+  // init "steps" generator
+  const generator = steps();
 
   // run the steps
   start(generator);

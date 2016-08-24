@@ -1,12 +1,8 @@
 {
   "title" : "Browse by subjects",
-  "id": "subjects",
-  "route ": "/subjects/index.html",
+  "id" : "subjects",
+  "route" : "/subjects/index.html",
   "content": {},
-  "datasource" : {
-    "drupal_subjects" : "viewer",
-    "subjects" : "discovery"
-  },
   "assets" : {
     "js" : [
       "commons.js",

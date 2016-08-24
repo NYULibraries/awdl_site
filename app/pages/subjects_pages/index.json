@@ -11,19 +11,15 @@
       "rows": 12,
       "fl": [ "*" ],
       "fq": [
-          {
-            "filter": "bundle",
-            "value": "dlts_book"
-          },
-          {
-            "filter": "sm_collection_code",
-            "value": "awdl"
-          },
-          {
-            "filter": "hash",
-            "value": "705lna"
-          }
-        ],
+        {
+          "filter": "bundle",
+          "value": "dlts_book"
+        },
+        {
+          "filter": "sm_collection_code",
+          "value": "awdl"
+        }
+      ],
       "features" : {
         "filters" : [
           {
@@ -54,10 +50,5 @@
         "id" : "items"
       }
     ]
-  },
-  "request" : {
-    "drupal_subjects" : {
-      "src" : "http://alpha-user:dlts2010@stage-dl-pa.home.nyu.edu/viewer/sources/field/field_subject"
-    }
   }
 }
