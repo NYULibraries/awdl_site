@@ -37,16 +37,20 @@ function front (data) {
     data.content.news.link = 'http://isaw.nyu.edu/library/blog/collector';
     agartha.request(src, (error, response, body) => {
       if (error) return;
-      const xml2js = require('xml2js');
-      const parser = new xml2js.Parser();
-      parser.parseString(body, (err, result) => {
+      agartha.read.xml(body, (err, result) => {
         const title = result['rdf:RDF']['channel'][0].title[0];
         const link = result['rdf:RDF']['channel'][0].link[0];
         const description = result['rdf:RDF']['channel'][0].description[0];
         const items = result['rdf:RDF'].item.shift(); /** this widget only show the first item of the RSS feed */
         const date = dateFormat(items['dc:date'][0], "mmmm dS, yyyy");
         const dc_date = items['dc:date'][0];
-        data.content.news.post = { title : title, link : link, description : description, dc_date : dc_date, date : date };
+        data.content.news.post = {
+          title : title,
+          link : link,
+          description : description,
+          dc_date : dc_date,
+          date : date
+        };
         generator.next();
       });
     });
