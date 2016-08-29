@@ -59,7 +59,7 @@ function front (data) {
       const atlas_url = 'https://www.google.com/fusiontables/embedviz?q=select+col4+from+1F9kzSPgjNomW9bCvsp76cdpzewdYImwfkbCXbZDl&amp;viz=MAP&amp;h=false&amp;lat=46&amp;lng=-12&amp;t=3&amp;z=4&amp;l=col4&amp;y=2&amp;tmplt=2&amp;hml=TWO_COL_LAT_LNG';
       const source = JSON.parse(body);
       data.content.featured = {};
-      data.content.featured.id = "tabs";
+      data.content.featured.id = "YUItabs";
       data.content.featured.label = "Tabs";
       data.content.featured.tabs = [];
       data.content.featured.widgets = {};
