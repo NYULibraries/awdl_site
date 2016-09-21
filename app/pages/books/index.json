@@ -2,10 +2,6 @@
   "id": "book",
   "title": "Book",
   "route": "/books/index.html",
-  "htaccess" : true,
-  "viewer": {
-    "url" : "http://sites.dlib.nyu.edu/viewer"
-  },
   "content" : {},
   "assets" : {
     "js" : [

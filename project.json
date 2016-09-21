@@ -4,7 +4,7 @@
   "relic": "generic",
   "version": "0.0.1",
   "appRoot": "/ancientworld",
-  "appUrl": "http://stage-dl-pa.home.nyu.edu/ancientworld",
+  "appUrl": "/ancientworld",
   "datasource" : {
     "discovery": {
       "url" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/stage/select"

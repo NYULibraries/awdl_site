@@ -839,7 +839,7 @@ $pagination-disabled-bg: #FCF7F0;
 /// should not include trailing slash
 /// @access public
 /// @type String
-$asset-base-path: 'http://localhost:8000/awdl/images' !default;
+$asset-base-path: '/ancientworld/images' !default;
 
 /// Asset URL builder
 /// @access private
