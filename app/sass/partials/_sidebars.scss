@@ -41,8 +41,12 @@
     font-family: $font-family-sans-serif;
     h4 {
       margin: 0;
-      font-weight: normal;
       margin-top: -10px;
+      a:link,
+      a:visited {
+        color: #d30b0b;
+        font-weight: bold;
+      }
     }
     time {
       color: #555;
@@ -50,7 +54,8 @@
     }
     .thumbs {
       margin-left: -8px;
-      .clipper, a {
+      .clipper,
+      a {
         top: 0;
       }
       img {
