@@ -45,17 +45,17 @@
                       <div class="card">
                         <div class="thumbs">
                           <div class="clipper">
-                            <a href="{{../app.appRoot}}/books/{{ss_book_identifier}}/1">
-                              <img src="{{ss_representative_image}}" alt="" title="{{ss_title_long}}"/>
+                            <a href="{{../../../../../appRoot}}/books/{{ss_book_identifier}}/1">
+                              <img src="{{ss_representative_image}}" title="{{ss_title_long}}" alt=""/>
                             </a>
                           </div>
                         </div>
-                        <h1 class="md_title"><a href="{{../app.appRoot}}/books/{{ss_book_identifier}}/1">{{ss_title_long}}</a></h1>
+                        <h1 class="md_title"><a href="{{../../../../../appRoot}}/books/{{ss_book_identifier}}/1">{{ss_title_long}}</a></h1>
                         <div class="md_authors"><span class="md_label">Author:</span> {{#each sm_author}}<span  class="md_author">{{this}}</span>{{/each}}</div>
                         <div class="md_series"><span class="md_label">Series:</span>
                         {{#each zm_series_data}}
                           {{#json this}}
-                            <a class="md_series_each" href="{{../../../app.appRoot}}/series/{{#speakingurl}}{{label}}{{/speakingurl}}">{{label}}{{#if volume}} v. {{volume}}{{/if}}</a>
+                            <a class="md_series_each" href="{{../../../../../appRoot}}/series/{{#speakingurl}}{{label}}{{/speakingurl}}">{{label}}{{#if volume}} v. {{volume}}{{/if}}</a>
                           {{/json}}
                         {{/each}}
                         </div>
@@ -66,7 +66,7 @@
                           <span class="md_label">Subject:</span>
                           {{#each zm_subject}}
                             {{#json this}}
-                              <a class="md_subject" href="{{../../../app.appRoot}}/subjects/{{tid}}">{{name}}</a>
+                              <a class="md_subject" href="{{../../../../../../../appRoot}}/subjects/{{tid}}">{{name}}</a>
                             {{/json}}
                           {{/each}}
                         </div>
@@ -74,7 +74,7 @@
                           <span class="md_label">Provider:</span>
                           {{#each zm_partner}}
                             {{#json this}}
-                              <a class="md_provider" data-code="{{code}}" data-id="{{nid}}" href="{{../../../app.appRoot}}/providers/{{nid}}">{{name}}</a>
+                              <a class="md_provider" data-code="{{code}}" data-id="{{nid}}" href="{{../../../../../../../appRoot}}/providers/{{nid}}">{{name}}</a>
                             {{/json}}
                           {{/each}}
                         </div>
