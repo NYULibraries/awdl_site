@@ -12,7 +12,7 @@
   "content" : {
     "main": {
       "title" : "Partners",
-      "html": "<p>Much of the content in the Ancient World Digital Library is provided by our partners, who are committed to making quality scholarship about the ancient world broadly available to the public. The Institute for the Study of the Ancient World would like to thank the following organizations in particular for their generous support:</p><ul><li><a href=\"http://www.papyrology.org/\" target=\"_blank\">American Society of Papyrologists</a></li><li><a href=\"http://www.brill.com\" target=\"_blank\">Brill</a></li><li><a href=\"http://isaw.nyu.edu/publications/jiaaa\" target=\"_blank\">Journal of Inner Asian Art and Archaeology</a> (formerly the Circle of Inner Asian Art)</li><li><a href=\"https://www.nyu.edu/gsas/dept/fineart/research/libraries.htm\" target=\"_blank\">Stephen Chan Library</a> at The <a href=\"http://www.nyu.edu/gsas/dept/fineart/index.htm\" target=\"_blank\">Institute for Fine Arts</a>, New York University</li></ul><p>If you or your organization is interested in partnering with or contributing to the Ancient World Digital Library, please email David&nbsp;M.&nbsp;Ratzan (<a href=\"mailto:david.ratzan@nyu.edu\">david.ratzan@nyu.edu</a>), Head Librarian, The Institute for the Study of the Ancient World.</p>"
+      "localsource": "main.content.html"
     },
     "aside": {}
   },
