@@ -13,7 +13,7 @@
     "intro" : {
       "id" : "intro",
       "title": "The Ancient World Digital Library",
-      "html": "<p><span class='bold'>The Ancient World Digital Library</span> (AWDL) is an initiative of the <a href='http://isaw.nyu.edu' target='_blank' class='ext nobreak'>Institute for the Study of the Ancient World</a> at <a href='http://www.nyu.edu' target='_blank' class='ext nobreak'>New York University</a>. </p><p class='line2'><span class='nobreak'>AWDL will identify,</span> collect, curate, and provide access to the broadest possible range of scholarly materials relevant to the study of the ancient world.&nbsp;<a href='/ancientworld/about' class='readmore'>READ&nbsp;MORE&hellip;</a></p>"
+      "localsource": "intro.content.html"
     }
   },
   "assets" : {
