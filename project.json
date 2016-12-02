@@ -12,5 +12,18 @@
     "viewer": {
       "url" : "http://alpha-user:dlts2010@stage-dl-pa.home.nyu.edu/viewer"
     }
+  },  
+  "env" : "local",
+  "envs" : {
+    "local" : {
+      "datasource" : {
+        "discovery": {
+          "url" : "http://dev-discovery.dlib.nyu.edu:8080/solr3_discovery/stage/select"
+        },
+        "viewer": {
+          "url" : "http://alpha-user:dlts2010@stage-dl-pa.home.nyu.edu/viewer"
+        }
+      }
+    }
   }
 }
