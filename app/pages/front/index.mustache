@@ -9,22 +9,23 @@
         {{#intro}}
           <div class="intro {{class}} itemdouble">{{{html}}}</div>
         {{/intro}}
+      
         <aside class="item newsitem" role="complementary">
-          {{#news}}
-            <h3><a href="{{link}}" target="_blank">{{title}}</a></h3>
+
+        
+            <h3>ISAW Library Blog</h3>
             <div class="content">
               <div class="thumbs">
                 <div class="clipper">
-                  <a href="{{link}}"><img src="images/blog_thumb.jpg"></a>
+                  <img src="images/blog_thumb.jpg">
                 </div>
               </div>
-              {{#post}}
-                <h4><a href="{{link}}">{{title}}</a></h4>
-                <time datetime="{{dc_date}}">{{date}}</time>
-                <div class="description">{{description}}</div>
-              {{/post}}
+            
+                <h4><a href="http://isaw.nyu.edu/library/blog/collector" target="_blank">ISAW Library Blog</a></h4>
+                <div class="description">News, information, and features from the Library of the Institute for the Study of the Ancient World at New York University.</div>
+            
             </div>
-          {{/news}}
+   
         </aside>
       </div>
       {{#featured}}
