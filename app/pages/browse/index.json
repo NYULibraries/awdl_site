@@ -32,13 +32,15 @@
           {
             "direction" : "asc",
             "field" : "iass_longlabel",
-            "label" : "Sorting by Title",
+            "labelActive" : "Sorting by Title",
+            "labelInactive" : "Sort by Title",
             "selected" : true
           },
           {
             "direction" : "asc",
             "field" : "ss_sauthor",
-            "label" : "Sort by Author",
+            "labelActive" : "Sorting by Author",
+            "labelInactive" : "Sort by Author",
             "selected" : false
           }
         ]
