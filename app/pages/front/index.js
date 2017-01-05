@@ -60,7 +60,7 @@ function front (data) {
     const recently_added_titles_url = agartha.get('datasource').discovery.url + '?wt=json&fq=sm_collection_code:awdl&fl=*&rows=12&sort=ds_changed%20desc';
     agartha.request(recently_added_titles_url, (error, response, body) => {
       if (error) return;
-      const atlas_url = 'https://www.google.com/fusiontables/embedviz?q=select+col4+from+1F9kzSPgjNomW9bCvsp76cdpzewdYImwfkbCXbZDl&amp;viz=MAP&amp;h=false&amp;lat=46&amp;lng=-12&amp;t=3&amp;z=4&amp;l=col4&amp;y=2&amp;tmplt=2&amp;hml=TWO_COL_LAT_LNG';
+      const atlas_url = 'https://fusiontables.googleusercontent.com/embedviz?q=select+col4+from+1F9kzSPgjNomW9bCvsp76cdpzewdYImwfkbCXbZDl&viz=MAP&h=false&lat=46&lng=-12&t=3&z=4&l=col4&y=2&tmplt=2&hml=TWO_COL_LAT_LNG';
       const source = JSON.parse(body);
       data.content.featured = {};
       data.content.featured.id = "YUItabs";
