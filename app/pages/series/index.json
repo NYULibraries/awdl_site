@@ -9,9 +9,6 @@
       "weight": 3
     }
   ],
-  "content": {
-    "nodes" : []
-  },
   "datasource" : {
     "drupal_subjects" : "viewer",
     "subjects" : "discovery"

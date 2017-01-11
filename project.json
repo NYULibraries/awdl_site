@@ -1,6 +1,6 @@
 {
   "appName": "Ancient World Digital Library",
-  "collectionCode": "awdl",
+  "collectionCode": "(awdl OR egypt)",
   "relic": "generic",
   "version": "0.0.1",
   "appRoot": "/ancientworld",
