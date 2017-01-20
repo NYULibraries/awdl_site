@@ -1,0 +1,98 @@
+<!doctype html>
+<html class="nojs">
+<head>{{>head}}</head>
+<body id="{{id}}" class="{{id}}" data-app="{{appUrl}}" data-appRoot="{{appRoot}}">
+  {{>header}}
+  <main class="main container-fluid" role="main">
+    {{#content}}
+      <div class="topHold flex-container">
+        {{#intro}}
+          <div class="intro {{class}} itemdouble">{{{html}}}</div>
+        {{/intro}}
+        <aside class="item newsitem" role="complementary">
+            <h3>ISAW Library Blog</h3>
+            <div class="content">
+              <div class="thumbs">
+                <div class="clipper">
+                  <a href="http://isaw.nyu.edu/library/blog/collector" target="_blank"><img src="images/blog_thumb.jpg"></a>
+                </div>
+              </div>
+                <h4><a href="http://isaw.nyu.edu/library/blog/collector" target="_blank">ISAW Library Blog</a></h4>
+                <div class="description">News, information, and features from the Library of the Institute for the Study of the Ancient World at New York University.</div>
+            </div>
+        </aside>
+      </div>
+      {{#featured}}
+        <div id="{{id}}" data-label="{{label}}" class="noFouc tabHolder">
+          <ul>
+          {{#tabs}}
+            <li><h3><a href="#{{id}}">{{label}}</a></h3></li>
+          {{/tabs}}
+          </ul>
+          <div class="tabContentHolder">
+            {{#widgets}}
+              {{#items}}
+                <div id="{{label}}">
+                  <h3>{{label}}</h3>
+                  <div class="item-list flex-container">
+                    {{#docs}}
+                    <article class="item" {{#if score}}data-score="{{{score}}}"{{/if}}>
+                      <div class="card">
+                        <div class="thumbs">
+                          <div class="clipper">
+                            <a href="{{../../../../../appRoot}}/books/{{ss_book_identifier}}/1">
+                              <img src="{{ss_representative_image}}" title="{{ss_title_long}}" alt=""/>
+                            </a>
+                          </div>
+                        </div>
+                        <h1 class="md_title"><a href="{{../../../../../appRoot}}/books/{{ss_book_identifier}}/1">{{ss_title_long}}</a></h1>
+                        <div class="md_authors"><span class="md_label">Author:</span> {{#each sm_author}}<span  class="md_author">{{this}}</span>{{/each}}</div>
+                        <div class="md_series"><span class="md_label">Series:</span>
+                        {{#each zm_series_data}}
+                          {{#json this}}
+                            <a class="md_series_each" href="{{../../../../../../../appRoot}}/series/{{#speakingurl}}{{label}}{{/speakingurl}}">{{label}}{{#if volume}} v. {{volume}}{{/if}}</a>
+                          {{/json}}
+                        {{/each}}
+                        </div>
+                        <div><span class="md_label">Publisher:</span> {{#each sm_publisher}}<span>{{this}}</span>{{/each}}</div>
+                        <div><span class="md_label">Place of Publication:</span> {{ss_publocation}}</div>
+                        <div><span class="md_label">Date of Publication:</span> {{ss_pubdate}}</div>
+                        <div class="md_subjects">
+                          <span class="md_label">Subject:</span>
+                          {{#each zm_subject}}
+                            {{#json this}}
+                              <a class="md_subject" href="{{../../../../../../../appRoot}}/subjects/{{tid}}">{{name}}</a>
+                            {{/json}}
+                          {{/each}}
+                        </div>
+                        <div class="md_partner">
+                          <span class="md_label">Provider:</span>
+                          {{#each zm_partner}}
+                            {{#json this}}
+                              <a class="md_provider" data-code="{{code}}" data-id="{{nid}}" href="{{../../../../../../../appRoot}}/providers/{{nid}}">{{name}}</a>
+                            {{/json}}
+                          {{/each}}
+                        </div>
+                      </div>
+                    </article>
+                    {{/docs}}
+                    <article class="item"></article>
+                    <article class="item"></article>
+                  </div>
+                </div>
+            {{/items}}
+            {{#atlas}}
+              <div id="{{id}}">
+                <h3>{{label}}</h3>
+                <iframe height="500" width="500" style="width: 100%; height: 500px;" scrolling="no" frameborder="no" src="{{src}}" allowfullscreen mozallowfullscreen webkitallowfullscreen></iframe>
+              </div>
+            {{/atlas}}
+          {{/widgets}}
+        </div>
+      </div>
+    {{/featured}}
+    {{/content}}
+  </main>
+  {{>footer}}
+  {{{closure}}}
+</body>

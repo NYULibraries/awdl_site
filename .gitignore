@@ -1,31 +1,22 @@
-.sass-cache
-.out
 .DS_Store
 
+# Logs
+logs
+*.log
+*.out
+
+# Runtime data
+*.pid
+*.seed
+
+.sass-cache
+lib/.sass-cache
+
 build
-build/*
-node_modules/*
-backups/*
+backups
+node_modules
 
-source/json/conf.json
-source/json/sass.json
-source/json/htmlminify.json
-source/json/js.json
-source/json/compass.json
-
-source/views/htaccess.mustache
-
-source/yuiTabTest.html
-source/json/datasources/*
-
-# Ignore Eclipse conf files
+# Ignore Eclipse files
 .project
 .buildpath
 .settings/*
-
-# project sub modules
-!node_modules/grunt-contrib-writeHTML
-!node_modules/series
-!node_modules/series_pages
-!node_modules/subjects
-!node_modules/subjects_pages

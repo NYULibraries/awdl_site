@@ -1,0 +1,25 @@
+{
+  "id" : "partners",
+  "title" : "Partners",
+  "route" : "/partners/index.html",
+  "menu": [
+    {
+      "context": "navbar",
+      "label": "Partners",
+      "weight": 5
+    }
+  ],
+  "content" : {
+    "main": {
+      "title" : "Partners",
+      "localsource": "main.content.html"
+    },
+    "aside": {}
+  },
+  "assets" : {
+    "js" : [
+      "commons.js",
+      "crossframe.js"
+    ]
+  }
+}

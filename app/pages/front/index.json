@@ -1,0 +1,26 @@
+{
+  "id" : "home",
+  "title": "Browse Home",
+  "route": "/index.html",
+  "menu": [
+    {
+      "context": "navbar",
+      "label": "Home",
+      "weight": 1
+    }
+  ],
+  "content": {
+    "intro" : {
+      "id" : "intro",
+      "title": "The Ancient World Digital Library",
+      "localsource": "intro.content.html"
+    }
+  },
+  "assets" : {
+    "js" : [
+      "front.js",
+      "commons.js",
+      "crossframe.js"
+    ]
+  }
+}

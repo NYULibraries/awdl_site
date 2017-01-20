@@ -1,0 +1,19 @@
+{
+  "header" : {
+    "url" : "http://isaw.nyu.edu/",
+    "label" : "NYU | ISAW",
+    "class" : ["isawlogo"]
+  },
+  "partners" : [
+    {
+      "id" : "partners-awdl",
+      "url" : "http://isaw.nyu.edu/",
+      "label" : "INSTITUTE FOR THE STUDY OF THE ANCIENT WORLD"
+    },
+    {
+      "id" : "partners-dlts",
+      "url" : "http://dlib.nyu.edu/",
+      "label" : "NYU DIGITAL LIBRARY TECHNOLOGY SERVICES"
+    }
+  ]
+}

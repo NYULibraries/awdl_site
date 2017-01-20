@@ -1,0 +1,20 @@
+{
+  "appName": "Ancient World Digital Library",
+  "collectionCode": "(awdl OR egypt)",
+  "relic": "generic",
+  "version": "0.0.1",
+  "appRoot": "/ancientworld",
+  "appUrl": "/ancientworld",
+  "ga": {
+    "active" : true,
+    "code" : "UA-37717358-3"
+  },
+  "datasource" : {
+    "discovery": {
+      "url" : "http://discovery.dlib.nyu.edu:8080/solr3_discovery/viewer/select"
+    },
+    "viewer": {
+      "url" : "http://sites.dlib.nyu.edu/viewer"
+    }
+  }
+}
