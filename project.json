@@ -8,13 +8,5 @@
   "ga": {
     "active" : true,
     "code" : "UA-37717358-3"
-  },
-  "datasource" : {
-    "discovery": {
-      "url" : "http://discovery.dlib.nyu.edu:8080/solr3_discovery/viewer/select"
-    },
-    "viewer": {
-      "url" : "http://sites.dlib.nyu.edu/viewer"
-    }
   }
 }
