@@ -1,0 +1,18 @@
+{
+  "id" : "takedown",
+  "title" : "Takedown Policy",
+  "route" : "/takedown/index.html",
+  "content" : {
+    "main": {
+      "title" : "Takedown Policy",
+      "localsource": "main.content.html"
+    },
+    "aside": {}
+  },
+  "assets" : {
+    "js" : [
+      "commons.js",
+      "crossframe.js"
+    ]
+  }
+}
