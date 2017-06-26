@@ -2,6 +2,7 @@
   "id" : "partners",
   "title" : "Partners",
   "route" : "/partners/index.html",
+   "class" : "page",
   "menu": [
     {
       "context": "navbar",

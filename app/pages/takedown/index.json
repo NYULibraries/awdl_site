@@ -2,6 +2,7 @@
   "id" : "takedown",
   "title" : "Takedown Policy",
   "route" : "/takedown/index.html",
+  "class" : "page",
   "content" : {
     "main": {
       "title" : "Takedown Policy",
