@@ -11,9 +11,6 @@
   overflow: hidden;
   .partner-wrapper {
     text-align: center;
-    @media (min-width: $grid-float-breakpoint) {
-      text-align: right;
-    }
     a {
       display: block;
       color: white;
