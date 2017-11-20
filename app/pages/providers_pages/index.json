@@ -8,9 +8,7 @@
     "items": {
       "datasource": "viewer",
       "rows": 12,
-      "fl": [
-        "*"
-      ],
+      "fl": [ "*" ],
       "fq": [
         {
           "filter": "bundle",
@@ -18,7 +16,7 @@
         },
         {
           "filter": "sm_collection_code",
-          "value": "awdl"
+          "value": "(awdl OR egypt)"
         }
       ],
       "features" : {
