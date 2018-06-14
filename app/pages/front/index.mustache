@@ -3,7 +3,7 @@
 <head>{{>head}}</head>
 <body id="{{id}}" class="{{id}}" data-app="{{appUrl}}" data-appRoot="{{appRoot}}">
   {{>header}}
-  <main class="main container-fluid" role="main">
+  <main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
     {{#content}}
       <div class="topHold flex-container">
         {{#intro}}
@@ -32,7 +32,7 @@
           <div class="tabContentHolder">
             {{#widgets}}
               {{#items}}
-                <div id="{{label}}">
+                <div id="{{id}}">
                   <h3>{{label}}</h3>
                   <div class="item-list flex-container">
                     {{#docs}}
