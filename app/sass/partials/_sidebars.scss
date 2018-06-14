@@ -18,15 +18,17 @@
       -webkit-flex: 0 1 32%;
       flex: 0 1 32%;
     }
-    h3 {
+    .sidebar-title {
       margin: 0;
       padding: 5px;
       background-color: #cec5bc;
       text-transform: uppercase;
-      color: #383737;
-      font-size: .9em;
+      color: #1e1d1d;
+      font-size: .9rem;
+      font-weight: 400;
+      text-shadow: 0px 0px 1px white;
       a {
-        color: #383737;
+        color: #1e1d1d;
       }
     }
     .content {
@@ -39,12 +41,12 @@
     padding: 0px;
     margin-top: 0;
     font-family: $font-family-sans-serif;
-    h4 {
+    .blogmeta-title {
       margin: 0;
       margin-top: -10px;
+      font-size: 1rem;
       a:link,
       a:visited {
-        color: #d30b0b;
         font-weight: bold;
       }
     }
