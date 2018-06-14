@@ -57,6 +57,8 @@ function series_pages(data) {
 
         data.content.top.title = doc.ss_series_label;
 
+        data.title = doc.label;
+
         node.data = JSON.parse(doc.zs_data);
 
         node.label = doc.label;
