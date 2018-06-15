@@ -19,7 +19,6 @@
 //     background-color: darken(#ecdcc8, 8%);
 //   }
 // }
-
 // input[type="text"] {
 //   padding: 0 10px;
 //   border: 1px solid $brand-secondary3;
@@ -36,7 +35,6 @@
 //     z-index: 1000;
 //   }
 // }
-
 // [role="search"] {
 //   margin: 0 15px;
 //   display: -ms-flexbox;
@@ -50,7 +48,6 @@
 //     margin: 0;
 //   }
 // }
-
 .filters {
   float: right;
 }
@@ -89,16 +86,16 @@ input:focus {
 
 // Navbar form
 .navbar-form {
-  margin-left: -$navbar-padding-horizontal;
-  margin-right: -$navbar-padding-horizontal;
+  margin-left: $navbar-padding-horizontal;
+  margin-right: $navbar-padding-horizontal;
+  margin-left: 15px;
+  margin-right: 15px;
   padding: 10px $navbar-padding-horizontal;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
   $shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
-  @include box-shadow($shadow);
-  // Vertically center in expanded, horizontal navbar
-  @include navbar-vertical-align($input-height-base);
-  // Undo 100% width for pull classes
+  @include box-shadow($shadow); // Vertically center in expanded, horizontal navbar
+  @include navbar-vertical-align($input-height-base); // Undo 100% width for pull classes
   @media (min-width: $grid-float-breakpoint) {
     width: 32%;
     border: 0;
@@ -106,8 +103,7 @@ input:focus {
     margin-right: 0;
     padding-top: 0;
     padding-bottom: 0;
-    @include box-shadow(none);
-    // Outdent the form if last child to line up with content down the page
+    @include box-shadow(none); // Outdent the form if last child to line up with content down the page
     &.navbar-right:last-child {
       margin-right: -$navbar-padding-horizontal;
     }
