@@ -14,7 +14,7 @@
           <div class="resultsnum">Showing  <span class="start"></span> - <span class="docslength"></span> of <span class="numfound"></span> results for <span class="s-query"></span></div>
           <div class="filters">
               {{#features}}
-                <select id="browse-select">
+                <select id="browse-select" aria-label="Sort Books">
                 {{#each filters}}
                   <option data-label-active="{{labelActive}}" data-label-inactive="{{labelInactive}}" data-sort-dir="{{direction}}" value="{{field}}" {{#if selected}}selected{{/if}}>{{#if selected}}{{labelActive}}{{else}}{{labelInactive}}{{/if}}</option>
                 {{/each}}
