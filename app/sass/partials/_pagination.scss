@@ -3,6 +3,9 @@
   padding-left: 0;
   margin: 1em auto;
   width: auto;
+  .yui3-paginator-pages {
+    display: inline-block;
+  }
   .yui3-paginator-first, .yui3-paginator-next, .yui3-paginator-page {
     display: inline-block;
     padding: 5px;
