@@ -52,25 +52,25 @@
   float: right;
 }
 
-input:focus {
-  outline: #FDAA29 auto 5px;
-  outline-color: #FDAA29;
-  outline-style: auto;
-  outline-width: 5px;
-}
+// input:focus {
+//   outline: #FDAA29 auto 5px;
+//   outline-color: #FDAA29;
+//   outline-style: auto;
+//   outline-width: 5px;
+// }
 
-.resultsnum {
-  font-size: 1em;
-  color: #666;
-  float: left;
-  margin-right: 20px;
-  .s-query,
-  .start,
-  .docslength,
-  .numfound {
-    font-weight: bold;
-  }
-}
+// .resultsnum {
+//   font-size: 1em;
+//   color: #666;
+//   float: left;
+//   margin-right: 20px;
+//   .s-query,
+//   .start,
+//   .docslength,
+//   .numfound {
+//     font-weight: bold;
+//   }
+// }
 
 .items-no-results {
   .resultsnum,
