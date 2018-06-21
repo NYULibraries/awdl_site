@@ -1,5 +1,5 @@
 function subjects_pages (data) {
-  console.log("*************   ");
+  
   'use strict';
 
   const agartha = require('agartha').agartha;
@@ -26,8 +26,6 @@ function subjects_pages (data) {
         // set page title
         data.content.top.label = documents[index].value;
         data.title = documents[index].value;
-        console.log("LMH logging: " + documents[index].value);
-        console.log("LMH logging: " + documents[index].raw_value);
         /** Add to the filters the subjects field */
         destination = [ { "filter": "im_field_subject", "value": documents[index].raw_value } ];
         data.content.items.fq = destination.concat(filters);
