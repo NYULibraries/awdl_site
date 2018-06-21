@@ -1,6 +1,6 @@
 {
   "id" : "home",
-  "title": "Browse Home",
+  "title": "",
   "route": "/index.html",
   "menu": [
     {
