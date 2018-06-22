@@ -10,7 +10,7 @@ rm build/js/*;  agartha forge
 
 Then to created compressed CSS file, 
 
-compass compile -s compressed  --force
+cd app; rm ../build/css/*; compass compile -s compressed  --force
 
 To pass in the enviromental variable for production, use
 
