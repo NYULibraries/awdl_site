@@ -40,12 +40,12 @@
                       <div class="card">
                         <div class="thumbs">
                           <div class="clipper">
-                            <a href="{{../../../../../appRoot}}/books/{{ss_book_identifier}}/1">
-                              <img src="{{ss_representative_image}}" title="{{ss_title_long}}" alt=""/>
+                            <a href="{{../../../../../appRoot}}/books/{{ss_book_identifier}}/1" role="presentation" aria-hidden="true" tabindex="-1">
+                              <img src="{{ss_representative_image}}"  alt="{{ss_title_long}}" role="presentation" >
                             </a>
                           </div>
                         </div>
-                        <h1 class="md_title"><a href="{{../../../../../appRoot}}/books/{{ss_book_identifier}}/1">{{ss_title_long}}</a></h1>
+                        <h4 class="md_title"><a href="{{../../../../../appRoot}}/books/{{ss_book_identifier}}/1">{{ss_title_long}}</a></h4>
                         <div class="md_authors"><span class="md_label">Author:</span> {{#each sm_author}}<span  class="md_author">{{this}}</span>{{/each}}</div>
                         <div class="md_series"><span class="md_label">Series:</span>
                         {{#each zm_series_data}}
