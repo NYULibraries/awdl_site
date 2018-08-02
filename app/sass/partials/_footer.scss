@@ -1,12 +1,23 @@
 .footer-wrapper {
   background-color: $footer-color;
+  .navf {
+    background-color: #2f3133;
+    a:link,
+    a:visited {
+      font-size: .8rem;
+      padding: 4px 20px 4px 0;
+      text-decoration: underline;
+      color: white;
+      text-align: center;
+      display: block;
+    }
+  }
 }
 
 .footer-main {
   margin: 0px auto;
   padding-top: 15px;
-  padding-bottom: 15px;
-  // clear internal floats
+  padding-bottom: 15px; // clear internal floats
   width: 100%;
   overflow: hidden;
   .partner-wrapper {
@@ -27,6 +38,7 @@
       }
     }
   }
+
   .logo {
     margin-bottom: 10px;
     @media (min-width: $grid-float-breakpoint) {
@@ -46,10 +58,8 @@
 }
 
 // sticky footer for full-width, for search and browse pages
-
 main {
   min-height: 400px;
- 
 }
 
 @media (min-width: $grid-float-breakpoint) {
@@ -58,7 +68,7 @@ main {
     min-height: 100%;
   }
   body {
-    margin-bottom: 71px;
+    margin-bottom: 100px;
   }
   body.book {
     margin-bottom: 0px;
@@ -66,13 +76,12 @@ main {
   .footer-wrapper {
     position: absolute;
     bottom: 0;
-    height: 71px;
+    height: 100px;
     width: 100%;
   }
 }
 
 // end sticky footer
-
 .io-loading .footer-wrapper {
-  display:none;
+  display: none;
 }
