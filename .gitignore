@@ -4,7 +4,7 @@
 logs
 *.log
 *.out
-
+.vscode
 # Runtime data
 *.pid
 *.seed
