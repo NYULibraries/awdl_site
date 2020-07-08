@@ -1,85 +1,115 @@
-function series_pages(data) {
+const { get, Page } = require('hephaestus');
 
-  var agartha = require('agartha').agartha;
+// https://github.com/mdevils/node-html-entities
+const Entities = require('html-entities').AllHtmlEntities;
 
-  // https://github.com/pid/speakingurl
-  var getSlug = require('speakingurl');
+// https://github.com/pid/speakingurl
+const getSlug = require('speakingurl');
 
-  // https://github.com/mdevils/node-html-entities
-  var Entities = require('html-entities').AllHtmlEntities;
+const _ = require('lodash');
 
-  var entities = new Entities();
+const axios = require('axios');
 
-  var discovery = agartha.get('datasource').discovery.url;
+module.exports = class SeriesPages extends Page {
 
-  var collectionCode = agartha.get('collectionCode');
+  async init() {
 
-  data.content.items.datasource = discovery;
+    const entities = new Entities();
 
-  data.nodes = {};
+    const discovery = get('DISCOVERY');
 
-  /** Source URL template */
-  // We request all nodes that are type (bundle: https://www.drupal.org/node/1261744) dlts_series
-  // and match the collection code of this project. By default we sort by ss_series_label
-  var compiled = agartha._.template("<%=discovery%>?wt=json&fl=*&fq=bundle:dlts_series&fq=sm_series_code:<%=collectionCode%>&rows=1000&hl=off");
+    let collectionCode = get('COLLECTION_CODE');
 
-  // Use http://underscorejs.org/#template to render the URL that we will use to request data
-  var src = compiled({ collectionCode : collectionCode, discovery : discovery });
+    const shared = require('../../../content.js');
 
-  if (collectionCode.match('OR')) {
-    collectionCode = collectionCode.replace(/[\(\)]/g, '').split(' OR ');
-  }
+    /** Source URL template */
+    // We request all nodes that are type (bundle: https://www.drupal.org/node/1261744) dlts_series
+    // and match the collection code of this project. By default we sort by ss_series_label
+    // Use http://underscorejs.org/#template to render the URL that we will use to request data
+    const response = await axios.get( `${discovery}?wt=json&fl=*&fq=bundle:dlts_series&fq=sm_series_code:${collectionCode}&rows=1000&hl=off`);
 
-  agartha.request(src, (error, response, body) => {
+    this.addJS([ 'commons.js', 'speakingurl.js', 'series_pages.js' ]);
 
-    if (error) return;
+    _.each(response.data.response.docs, (doc) => {
 
-    var datasource = JSON.parse(body);
+      const node = {};
 
-    var documents = datasource.response.docs;
+      const identifier = doc.ss_identifier;
 
-    var filters = data.content.items.fq;
-
-    agartha._.each(documents , function(doc) {
-
-      var node = {};
-
-      var identifier = doc.ss_identifier;
-
-      if (agartha._.has(data, identifier)) return;
+      let filters = [
+        {
+          filter: 'bundle',
+          value: 'dlts_book'
+        },
+        {
+          filter: 'sm_collection_code',
+          value: collectionCode
+        },
+        {
+          filter: 'sm_series_identifier',
+          value: identifier
+        },
+        {
+          filter: 'is_ispartofseries',
+          value: 1
+        }        
+      ];
 
       if (!doc.bs_status) return;
 
-      // old test: agartha._.contains(doc.sm_series_code, collectionCode)
-      if (agartha._.intersection(doc.sm_series_code, collectionCode)) {
+      if (!doc.zs_data) return;
 
-        if (!doc.zs_data) return;
+      node.data = JSON.parse(doc.zs_data);
 
-        data.content.top.title = doc.ss_series_label;
+      node.label = doc.label;
 
-        data.title = doc.ss_series_label;
+      node.hash = doc.hash;
 
-        node.data = JSON.parse(doc.zs_data);
+      node.identifier = identifier;
 
-        node.label = doc.label;
+      node.series_code = doc.sm_series_code;
 
-        node.hash = doc.hash;
+      const slug = getSlug(
+        entities.decode(doc.label.trim())
+      );
 
-        node.identifier = doc.ss_identifier;
-
-        node.series_code = doc.sm_series_code;
-
-        data.content.items.fq = agartha._.union(filters, [ { 'filter' : 'sm_series_identifier', 'value' : doc.ss_identifier }, { 'filter' : 'is_ispartofseries', 'value' : 1 } ]);
-
-        data.content.node = node;
-
-        data.route = '/series/' + getSlug(entities.decode(node.label)) + '/index.html';
-
-        agartha.emit('task.done', data);
-
-      }
+      this.render({
+        id: `seriespage-${doc.ss_identifier}`,
+        title: doc.ss_series_label,
+        route: `/series/${slug}/index.html`,
+        htaccess: false,
+        menu: shared.menu,
+        content: {
+          header: shared.content.header,
+          partners: shared.content.partners,            
+          node: node,
+          top: {
+            title: doc.ss_series_label
+          },
+          items: {
+            datasource: discovery,
+            rows: 12,
+            fl: [ '*' ],
+            fq: filters,
+            features: {
+              filters: [
+                {
+                  direction: 'asc',
+                  field: 'iass_longlabel',
+                  label: 'Sorting by Title',
+                  selected: true
+                },
+                {
+                  direction: 'asc',
+                  field: 'ss_sauthor',
+                  label: 'Sort by Author',
+                  selected: false
+                }
+              ]
+            }
+          }
+        }
+      });
     });
-  });
+  }
 }
-
-exports.series_pages = series_pages;

@@ -3,14 +3,18 @@
   <head>{{>head}}</head>
   <body data-app="{{appUrl}}" data-appRoot="{{appRoot}}" class="{{bodyClass}}">
     {{> header }}
-	<main class="main container-fluid" role="main" data-tid="{{tid}}"  id="mainContent" tabindex="-1">
+	  <main class="main container-fluid" role="main" data-tid="{{tid}}"  id="mainContent" tabindex="-1">
 	  <header>
 	    <h1 class="page-title">{{title}}</h1>
 	  </header>
 	  <div>
-	  <ul>
-        {{#terms}}<li><a href="{{ ../appUrl }}/subjects/{{tid}}">{{label}}</a></li>{{/terms}}
+      {{#content}}
+	    <ul>
+        {{#terms}}
+          <li><a href="{{ ../../appUrl }}/subjects/{{tid}}">{{label}}</a></li>
+        {{/terms}}
       </ul>
+      {{/content}}
 	  </div>
     </main>
     {{> footer }}

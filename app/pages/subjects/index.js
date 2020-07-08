@@ -11,7 +11,7 @@ const {
   Page 
 } = require('hephaestus');
 
-module.exports = class SubjectsPages extends Page {
+module.exports = class Subjects extends Page {
   
   async init() {
 
@@ -29,7 +29,7 @@ module.exports = class SubjectsPages extends Page {
 
     let discoverySubjects = '';
 
-    this.addJS([ 'commons.js', 'speakingurl.js', 'subjects_pages.js' ]);
+    this.addJS([ 'commons.js', 'crossframe.js' ]);
 
     /** we need the list of Drupal 7 subjects */
     /** we use Viewer's API endpoint to collect this information */
@@ -68,64 +68,23 @@ module.exports = class SubjectsPages extends Page {
             tid: term.raw_value,
             label: term.value
           };
-        }
+        }         
       }
     }).filter(term => {
       if (term) return term;
     });
 
-    for (let index = 0; index < terms.length; index++) {
-      const filters = [
-        {
-          filter: 'bundle',
-          value: 'dlts_book'
-        },
-        {
-          filter: 'sm_collection_code',
-          value: get('COLLECTION_CODE')
-        },
-        { 
-          filter: 'im_field_subject', 
-          value: terms[index].tid
-        }
-      ];
-      
-      this.render({
-        id: `subjects-pages-${terms[index].tid}`,
-        title: terms[index].label,
-        route: `/subjects/${terms[index].tid}/index.html`,
-        menu: shared.menu,
-        content: {
-          header: shared.content.header,
-          partners: shared.content.partners,
-          top: {
-            label: terms[index].label,
-            title: 'Subjects'
-          },
-          items: {
-            datasource: get('DISCOVERY'),
-            rows: 12,
-            fl: [ '*' ],
-            fq: filters,
-            features: {
-              filters: [
-                {
-                  direction: 'asc',
-                  field: 'iass_longlabel',
-                  label: 'Sorting by Title',
-                  selected: true
-                },
-                {
-                  direction: 'asc',
-                  field: 'ss_sauthor',
-                  label: 'Sort by Author',
-                  selected: false
-                }
-              ]
-            }
-          }
-        }
-      });
-    }
+    this.render({
+      id: 'subjects',
+      title: 'Subjects',
+      menu: shared.menu,
+      route: '/subjects/index.html',
+      content: {
+        header: shared.content.header,
+        partners: shared.content.partners,
+        terms: terms
+      },
+    });
+
   }
 }

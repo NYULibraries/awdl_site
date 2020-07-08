@@ -1,0 +1,28 @@
+{
+  "name": "awdl_site",
+  "version": "1.0.0",
+  "description": "Ancient World Digital Library site",
+  "main": "hephaestus.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "core-js": "^2.6.11",
+    "hephaestus-cli": "^2.0.6",
+    "html-entities": "^1.3.1",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "GTAG=1 GA_COD=UA-37717358-3 COLLECTION_CODE='(awdl OR egypt)' VIEWER=http://sites.dlib.nyu.edu/viewer DISCOVERY=http://discovery1.dlib.nyu.edu/solr/viewer/select ./node_modules/hephaestus-cli/bin/hephaestus-cli forge",
+    "docker": "./docker.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NYULibraries/awdl_site.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NYULibraries/awdl_site/issues"
+  },
+  "homepage": "https://github.com/NYULibraries/awdl_site#readme"
+}

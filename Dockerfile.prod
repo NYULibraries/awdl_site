@@ -1,0 +1,18 @@
+# Usage example
+# 1) Build container image
+# $ docker build -t nyudlts/ancientworld-prod:latest . -f ./Dockerfile.prod
+# 2) Run container
+# $ docker run -d --name=ancientworld-prod -p 8001:80 nyudlts/ancientworld-prod:latest
+
+FROM httpd:2.4-alpine
+
+RUN sed -i '/LoadModule rewrite_module/s/^#//g' /usr/local/apache2/conf/httpd.conf
+
+RUN { \
+  echo 'IncludeOptional conf.d/*.conf'; \
+} >> /usr/local/apache2/conf/httpd.conf \
+  && mkdir /usr/local/apache2/conf.d
+
+ADD ./build /usr/local/apache2/htdocs/ancientworld/
+
+COPY ./httpd.conf /usr/local/apache2/conf.d/ancientworld.conf

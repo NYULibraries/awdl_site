@@ -10,7 +10,9 @@
     {{#content}}
 	    <div>
 	      <ul>
-          {{#terms}}<li><a href="{{ ../../appUrl}}/providers/{{nid}}">{{label}}</a></li>{{/terms}}
+          {{#providers}}
+            <li><a href="{{ ../../appUrl}}/providers/{{nid}}">{{label}}</a></li>
+          {{/providers}}
         </ul>
 	    </div>
     {{/content}}

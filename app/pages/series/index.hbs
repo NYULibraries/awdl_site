@@ -9,13 +9,13 @@
 	    </header>
       {{#content}}
         <div class="flex-container">
-        {{#nodes}}
+        {{#each nodes}}
           <article class="item" {{#if score}}data-score="{{score}}"{{/if}}>
             <div class="card">
-              <a href="{{../../appUrl}}/series/{{route}}">{{label}}</a>
+              <a href="{{../../appUrl}}/series/{{this.route}}">{{this.label}}</a>
             </div>
           </article>
-        {{/nodes}}
+        {{/each}}
         </div>
       {{/content}}
     </main>
