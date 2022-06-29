@@ -12,9 +12,12 @@
   },
   "devDependencies": {},
   "scripts": {
-    "build-prod": "GA=1 GA_CODE=UA-37717358-3 COLLECTION_CODE=(awdl OR egypt) VIEWER=https://sites.dlib.nyu.edu/viewer APP_URL=https://dlib.nyu.edu/ancientworld APP_ROOT=/ancientworld DISCOVERY=https://discovery1.dlib.nyu.edu/solr/viewer/select ./node_modules/hephaestus-cli/bin/hephaestus-cli forge",
-    "build-stage": "GA=0 GA_CODE=UA-37717358-3 COLLECTION_CODE=(awdl OR egypt) VIEWER=https://stage-sites.dlib.nyu.edu/viewer APP_URL=https://stageweb1.dlib.nyu.edu/ancientworld APP_ROOT=/ancientworld DISCOVERY=https://stagediscovery.dlib.nyu.edu/solr/viewer/select ./node_modules/hephaestus-cli/bin/hephaestus-cli forge",
-    "build-local": "GA=0 GA_CODE=UA-37717358-3 COLLECTION_CODE=(awdl OR egypt) VIEWER=https://stage-sites.dlib.nyu.edu/viewer APP_URL=http://localhost/ancientworld APP_ROOT=/ancientworld DISCOVERY=https://stagediscovery.dlib.nyu.edu/solr/viewer/select ./node_modules/hephaestus-cli/bin/hephaestus-cli forge"
+    "build-prod": "GA=1 GA_CODE=UA-37717358-3 COLLECTION_CODE='(awdl OR egypt)' VIEWER=https://sites.dlib.nyu.edu/viewer APP_URL=https://dlib.nyu.edu/ancientworld APP_ROOT=/ancientworld DISCOVERY=https://discovery1.dlib.nyu.edu/solr/viewer/select ./node_modules/hephaestus-cli/bin/hephaestus-cli forge",
+    "build-stage": "GA=0 GA_CODE=UA-37717358-3 COLLECTION_CODE='(awdl OR egypt)' VIEWER=https://stage-sites.dlib.nyu.edu/viewer APP_URL=https://stageweb1.dlib.nyu.edu/ancientworld APP_ROOT=/ancientworld DISCOVERY=https://stagediscovery.dlib.nyu.edu/solr/viewer/select ./node_modules/hephaestus-cli/bin/hephaestus-cli forge",
+    "build-local": "GA=0 GA_CODE=UA-37717358-3 COLLECTION_CODE='(awdl OR egypt)' VIEWER=https://stage-sites.dlib.nyu.edu/viewer APP_URL=http://localhost/ancientworld APP_ROOT=/ancientworld DISCOVERY=https://stagediscovery.dlib.nyu.edu/solr/viewer/select ./node_modules/hephaestus-cli/bin/hephaestus-cli forge",
+    "dev-deploy": "rsync -avzhe ssh ./build/ devweb1:/home/ortiz/ancientworld/",
+    "deploy-stage": "rsync -avzhe ssh ./build/ stageweb1:/home/ortiz/ancientworld/",
+    "deploy-prod": "rsync -avzhe ssh ./build/ web1:/home/ortiz/ancientworld/"
   },
   "repository": {
     "type": "git",
