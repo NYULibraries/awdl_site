@@ -4,6 +4,7 @@ const {
 
 const gtag = parseInt(get('GTAG'), 10);
 const gcode = get('GA_CODE');
+const collectionCode = get('COLLECTION_CODE');
 
 module.exports = exports = {
   appName: 'Ancient World Digital Library',

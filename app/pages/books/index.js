@@ -1,4 +1,9 @@
 const shared = require('../../../content.js');
+const {
+  get
+} = require('hephaestus');
+
+const viewer = get('VIEWER');
 
 module.exports = {
   id: 'book',
@@ -8,12 +13,11 @@ module.exports = {
   content: {
     header: shared.content.header,
     partners: shared.content.partners,      
-    viewer: 'http://sites.dlib.nyu.edu/viewer'
+    viewer: viewer
   },
   assets: {
     js: [
       'commons.js', 
-      'crossframe.js', 
       'books.js'
     ]
   }
