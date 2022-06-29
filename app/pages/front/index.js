@@ -20,7 +20,7 @@ class Front extends Page {
 
   async init() {
     const shared = require('../../../content.js');
-    
+    const viewer = get('VIEWER');
     let data = {
       id: 'home',
       route: '/index.html',
@@ -53,6 +53,7 @@ class Front extends Page {
             items: {
               label: 'Recently Added Titles',
               id: 'recently-added-titles',
+              viewer: viewer,
               docs: []
             }
           }

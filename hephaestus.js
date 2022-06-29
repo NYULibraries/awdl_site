@@ -8,7 +8,7 @@ const collectionCode = get('COLLECTION_CODE');
 
 module.exports = exports = {
   appName: 'Ancient World Digital Library',
-  collectionCode: '(awdl OR egypt)',
+  collectionCode: collectionCode, // '(awdl OR egypt)',
   shortName: 'beard',
   appUrl: '/ancientworld',
   appRoot: '/ancientworld',
