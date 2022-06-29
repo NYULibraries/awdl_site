@@ -2,9 +2,8 @@ Ancient World Digital Library site
 ========
 
 ```bash
-$ git clone https://github.com/dismorfo/aco-site.git
-$ cd aco-site
+$ git clone https://github.com/NYULibraries/awdl_site.git ancientworld
+$ cd ancientworld
 $ npm install
-$ npm run-script build
-$ npm run-script docker # only if you want to test in your local environment
+$ npm run build-prod
 ```
