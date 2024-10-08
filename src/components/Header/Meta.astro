@@ -5,7 +5,7 @@ const { title, description } = Astro.props;
 // const url = env.PUBLIC_APPURL;
 // const type = metatags.type;
 // const author = metatags.defaultAuthor;
-const string = 'test';
+const baseURL: string = import.meta.env.BASE_URL;
 ---
 
 <head>
@@ -20,6 +20,7 @@ const string = 'test';
   />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="/ancientworld" />
+  <link rel="icon" type="image/x-icon" href=`${baseURL}/favicon.ico` />
 </head>
 
 <!-- Google tag manager script -->
