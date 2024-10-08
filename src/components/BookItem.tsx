@@ -1,10 +1,10 @@
 import React from 'react'
 
-interface SearchResultProps {
+interface BookItemProps {
   // Add any props if needed
 }
 
-const SearchResult: React.FC<SearchResultProps> = () => {
+const BookItem: React.FC<BookItemProps> = () => {
   return (
     <article className="item">
       <div className="card">
@@ -41,4 +41,4 @@ const SearchResult: React.FC<SearchResultProps> = () => {
   )
 }
 
-export default SearchResult;
+export default BookItem;
