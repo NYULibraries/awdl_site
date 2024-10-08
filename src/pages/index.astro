@@ -1,0 +1,63 @@
+---
+import DefaultLayout from '../layouts/DefaultLayout.astro';
+import { Image } from 'astro:assets';
+import blogThumb from '../assets/images/blog_thumb.jpg';
+
+const baseURL : string = import.meta.env.BASE_URL
+---
+
+<DefaultLayout bodyID="home" bodyClass="home">
+  <main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
+  <div class="topHold flex-container">
+    <div class="intro itemdouble">
+      <p>
+        <span class="bold">The Ancient World Digital Library</span> (AWDL) is an
+        initiative of the <a
+          href="http://isaw.nyu.edu"
+          target="_blank"
+          class="ext nobreak">Institute for the Study of the Ancient World</a
+        > at
+        <a href="http://www.nyu.edu" target="_blank" class="ext nobreak"
+          >New York University</a
+        >.
+      </p>
+      <p class="line2">
+        <span class="nobreak">AWDL will identify,</span> collect, curate, and provide
+        access to the broadest possible range of scholarly materials relevant to
+        the study of the ancient world. <a
+          href=`${baseURL}about`
+          class="readmore"
+          aria-label="Read more about The Ancient World Digital Library"
+          >READ MORE…</a
+        >
+      </p>
+    </div>
+    <aside class="item newsitem" role="complementary">
+      <h2 class="sidebar-title">
+        <a href="http://isaw.nyu.edu/library/blog/collector" target="_blank"
+          >ISAW Library Blog</a
+        >
+      </h2>
+      <div class="content">
+        <div class="thumbs">
+          <div class="clipper">
+            <a
+              href="http://isaw.nyu.edu/library/blog/collector"
+              target="_blank"
+            >
+              <Image
+                src={blogThumb}
+                alt="the Library of the Institute for the Study of the Ancient World"
+              />
+            </a>
+          </div>
+        </div>
+        <div class="description">
+          News, information, and features from the Library of the Institute for
+          the Study of the Ancient World at New York University.
+        </div>
+      </div>
+    </aside>
+  </div>
+  </main>
+</DefaultLayout>

@@ -1,0 +1,10 @@
+---
+import DefaultLayout from '../../layouts/DefaultLayout.astro';
+const { bookID } = Astro.params;
+
+export const prerender = false;
+---
+
+<DefaultLayout>
+  <h1>Book: {bookID}</h1>
+</DefaultLayout>

@@ -1,0 +1,5 @@
+The [ISAW Library](http://www.nyu.edu/isaw/library.htm) is a full-service, non-circulating library of approximately 50,000 volumes related to the history, language, literature, and material culture of the ancient world from the Mediterranean to China.
+
+The strengths of ISAW's collection mirror the research and teaching interests of its faculty and students: we have extensive holdings in Greek and Roman material culture and history, Egyptology, Mesopotamian archaeology and Assyriology, Central Asian and Iranian studies, and Chinese archaeology and art history.
+
+Open Monday-Friday from 9am to 5pm, the library is available to the New York University community and all scholars and students of the ancient world who need to consult its collection. Our collections are searchable via Bobcat, the catalog of print and electronic resources of NYU Libraries.
