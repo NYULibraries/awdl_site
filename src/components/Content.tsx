@@ -13,15 +13,30 @@ const Content: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const fields = [
+    'sm_field_identifier',
+    'ss_title_long',
+    'sm_author',
+    'sm_series',
+    'sm_publisher',
+    'sm_field_publication_location',
+    'ss_publication_date_text',
+    'zm_subject',
+    'zm_provider',
+  ];
+
+  const createFieldString = (fieldsArray: string[]): string => {
+    return fieldsArray.join(',');
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const fieldString = createFieldString(fields);
         const response = await fetch(
-          'https://discovery1.dlib.nyu.edu/solr/viewer/select?wt=json&q=*:*&fl=*&fq=sm_collection_code:awdl&rows=12&start=1&sort=ss_longlabel%20asc',
+          `https://discovery1.dlib.nyu.edu/solr/viewer/select?wt=json&q=*:*&fl=${fieldString}&fq=sm_collection_code:awdl&rows=12&start=1&sort=ss_longlabel%20asc`,
         );
         if (!response.ok) {
-          throw new Error('Network response was not ok');
-          console.log('as');
         }
         const result: ApiResponse = await response.json();
         setData(result);
@@ -36,7 +51,7 @@ const Content: React.FC = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...h</div>;
+    return <div>Loading...</div>;
   }
 
   if (error) {
@@ -46,51 +61,13 @@ const Content: React.FC = () => {
   return (
     <>
       <p>Number of documents found: {data?.response.numFound}</p>
-      <div
-        id="yui_3_18_1_1_1729599236628_89"
-        className="yui3-widget yui3-tabview"
-      >
-        <div
-          id="YUItabs"
-          data-label="Tabs"
-        //   className="noFouc tabHolder yui3-tabview-content"
-        //   style="opacity: 1;"
-        >
-          <ul className="yui3-tabview-list" role="tablist">
-            <li
-              className="yui3-tab yui3-widget yui3-tab-selected"
-              id="yui_3_18_1_1_1729599236628_100"
-              role="presentation"
-            >
-              <h3>Recently Added Titles</h3>
-              <a
-                id="yui_3_18_1_1_1729599236628_108"
-                className="yui3-tab-content yui3-tab-label"
-                role="tab"
-                // tabindex="0"
-              ></a>
-            </li>
-          </ul>
-          <div className="tabContentHolder yui3-tabview-panel">
-            <div id="awdlAtlas" className="yui3-tab-panel"></div>
 
-            <div
-              id="recently-added-titles"
-              className="yui3-tab-panel yui3-tab-panel-selected"
-              role="tabpanel"
-              aria-labelledby="yui_3_18_1_1_1729599236628_108"
-            >
-              <h3>Recently Added Titles</h3>
-              <div className="item-list flex-container">
-                {data?.response.docs.map((doc, index) => (
-                  <BookItem document={doc} />
-                ))}
-                <article className="item"></article>
-                <article className="item"></article>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="item-list flex-container">
+        {data?.response.docs.map((doc, index) => (
+          <BookItem key={index} document={doc} />
+        ))}
+        <article className="item"></article>
+        <article className="item"></article>
       </div>
     </>
   );
