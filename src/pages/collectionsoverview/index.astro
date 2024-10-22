@@ -5,6 +5,20 @@ import ISAWLibrary from '../../../src/assets/images/ISAWLibrary420.jpg';
 import CollectionItem from '../../components/Collections/CollectionItem';
 
 const baseURL: string = import.meta.env.BASE_URL;
+const collectionItems = [
+  { label: 'Ancient Judaism' },
+  { label: 'Ancient Science' },
+  { label: 'Assyriology' },
+  { label: 'Central Asia' },
+  // This url is originally title cased 
+  { label: 'Classical Antiquity' },
+  // This url is originally title cased
+  { label: 'Early Christianity' },
+  { label: 'Egyptology' },
+  { label: 'Hittitology' },
+  { label: 'Iranian studies' },
+  { label: 'Papyrology' },
+];
 ---
 
 <DefaultLayout bodyID="collections-overview">
@@ -19,69 +33,11 @@ const baseURL: string = import.meta.env.BASE_URL;
           </p>
           <p>Particular strengths of the AWDL collection include:</p>
           <div class="flex-container">
-            <CollectionItem/>
-            <div class="item">
-              <div class="card">
-                <a href={`${baseURL}search/?q=%22ancient%20judaism%22`}
-                  >Ancient Judaism</a
-                >
-              </div>
-            </div>
-            <div class="item">
-              <div class="card">
-                <a href={`${baseURL}search/?q=%22ancient%20science%22`}
-                  >Ancient Science</a
-                >
-              </div>
-            </div>
-            <div class="item">
-              <div class="card">
-                <a href={`${baseURL}search/?q=assyriology`}>Assyriology</a>
-              </div>
-            </div>
-            <div class="item">
-              <div class="card">
-                <a href={`${baseURL}search/?q=%22central%20asia%22`}
-                  >Central Asia</a
-                >
-              </div>
-            </div>
-            <div class="item">
-              <div class="card">
-                <a href={`${baseURL}search/?q=%22Classical%20Antiquity%22`}
-                  >Classical Antiquity</a
-                >
-              </div>
-            </div>
-            <div class="item">
-              <div class="card">
-                <a href={`${baseURL}search/?q=%22Early%20Christianity%22`}
-                  >Early Christianity</a
-                >
-              </div>
-            </div>
-            <div class="item">
-              <div class="card">
-                <a href={`${baseURL}search/?q=egyptology`}>Egyptology</a>
-              </div>
-            </div>
-            <div class="item">
-              <div class="card">
-                <a href={`${baseURL}search/?q=hittitology`}>Hittitology</a>
-              </div>
-            </div>
-            <div class="item">
-              <div class="card">
-                <a href={`${baseURL}search/?q=%22iranian%20studies%22`}
-                  >Iranian studies</a
-                >
-              </div>
-            </div>
-            <div class="item">
-              <div class="card">
-                <a href={`${baseURL}search/?q=papyrology`}>Papyrology</a>
-              </div>
-            </div>
+            {
+              collectionItems.map((item) => {
+                return <CollectionItem label={item.label} />;
+              })
+            }
           </div>
         </div>
       </main>

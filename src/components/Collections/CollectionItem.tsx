@@ -1,16 +1,24 @@
 import React from 'react';
 
 interface CollectionItemProps {
+  label: string;
 }
 
-const CollectionItem: React.FC<CollectionItemProps> = () => {
+const CollectionItem: React.FC<CollectionItemProps> = ({ label }) => {
   const baseURL: string = import.meta.env.BASE_URL;
+
+//   Single words have no encoding for double quotations
+  const encodeLabel = (label: string): string => {
+    return label.includes(' ') ? `"${encodeURIComponent(label.toLowerCase())}"` : encodeURIComponent(label.toLowerCase());
+  };
+
+  const encodedLabel = encodeLabel(label);
 
   return (
     <div className="item">
       <div className="card">
-        <a href={`${baseURL}search/?q=%22ancient%20judaism%22`}>
-          Ancient Judaism
+        <a href={`${baseURL}search/?q=${encodedLabel}`}>
+          {label}
         </a>
       </div>
     </div>
