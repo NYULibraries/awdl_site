@@ -4,7 +4,7 @@
     background-color: #2f3133;
     a:link,
     a:visited {
-      font-size: .8rem;
+      font-size: 0.8rem;
       padding: 4px 20px 4px 0;
       text-decoration: underline;
       color: white;
@@ -41,10 +41,6 @@
 
   .logo {
     margin-bottom: 10px;
-    @media (min-width: $grid-float-breakpoint) {
-      float: left;
-      margin-bottom: 0px;
-    }
     text-align: center;
     line-height: 1;
     width: auto;
@@ -53,6 +49,10 @@
       display: block;
       width: auto;
       height: 100%;
+    }
+    @media (min-width: $grid-float-breakpoint) {
+      float: left;
+      margin-bottom: 0px;
     }
   }
 }

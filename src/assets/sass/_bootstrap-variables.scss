@@ -13,7 +13,10 @@
 //
 //## Gray and brand colors for use across Bootstrap.
 
-$gray-darker: lighten(black, 13.5%);
+@use "sass:color";
+
+// $gray-darker:              lighten(#000, 13.5%) // #222
+$gray-darker: color.scale(#000, $lightness: 13.5%);
 
 // #222
 // $gray-dark:              lighten(#000, 20%)   // #333
@@ -23,14 +26,14 @@ $gray-darker: lighten(black, 13.5%);
 
 // Blood red
 $brand-primary: #8A0707;
-$brand-primary2: darken($brand-primary, 10%);
-$brand-primary-l2: lighten($brand-primary, 10%);
+$brand-primary2: color.scale($brand-primary, $lightness: -10%);
+$brand-primary-l2: color.scale($brand-primary, $lightness: 10%);
 
 ///
 // Creamy White
 $brand-secondary: #f9f1e7;
-$brand-secondary2: darken($brand-secondary, 5%);
-$brand-secondary3: darken($brand-secondary, 8%);
+$brand-secondary2: color.scale($brand-secondary, $lightness: -5%);
+$brand-secondary3: color.scale($brand-secondary, $lightness: -8%);
 $brand-secondary-bright: #FF9C00;
 
 $footer-color: #474C50;
@@ -56,7 +59,7 @@ $text-color-brown: #6e665d;
 $link-color: #af0202;
 //* Link hover color set via `darken()` function.
 $link-hover-color: $link-color;
-$header-underline-color: darken($body-bg, 10%);
+$header-underline-color: color.scale($body-bg, $lightness: -10%);
 
 //== Typography
 //
@@ -380,17 +383,17 @@ $navbar-default-bg: #FCF7F0;
 $navbar-default-link-color: #555;
 
 // $navbar-default-link-hover-color:          #333
-$navbar-default-link-hover-bg: darken($navbar-default-bg, 6.5%);
+$navbar-default-link-hover-bg: color.scale($navbar-default-bg, $lightness: -6.5%);
 
 $navbar-link-hover-underline-color: #FF9C00;
 $navbar-link-hover-text-color: #FF9C00;
 
 ///////
 // Text color for hover nav link
-//$navbar-link-active-color:  darken($navbar-link-hover-underline-color, 5%);
+//$navbar-link-active-color:  color.scale($navbar-link-hover-underline-color, $lightness: -5%);
 $navbar-link-active-color: #000000;
 
-// $navbar-default-link-active-bg:            darken($navbar-default-bg, 6.5%)
+// $navbar-default-link-active-bg:            color.scale($navbar-default-bg, $lightness: -6.5%)
 $navbar-default-link-active-bg: $navbar-default-bg;
 
 //== Navs
@@ -861,3 +864,4 @@ $asset-base-path: '/ancientworld/images' !default;
 @function font($file) {
   @return asset('fonts', $file);
 }
+

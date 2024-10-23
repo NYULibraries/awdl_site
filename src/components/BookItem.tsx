@@ -34,11 +34,13 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
     setIsLoaded(true);
   };
 
+  // use ss_identifier instead of field identifier
   const identifier = sm_field_identifier[0];
   const title = ss_title_long;
   const authors = sm_author;
   // Series are all named different
   const series = sm_series;
+  // assume can be more than one sm
   const publisher = sm_publisher[0];
   const publicationPlace = sm_field_publication_location[0];
   const publicationDate = ss_publication_date_text;

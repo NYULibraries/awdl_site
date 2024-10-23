@@ -14,12 +14,12 @@ body {
   max-width: 1400px;
   padding-left: 5%;
   padding-right: 5%;
+  margin: 0px auto;
+  overflow: hidden;
   @media (min-width: $grid-float-breakpoint) {
     padding-left: 20px;
     padding-right: 20px;
   }
-  margin: 0px auto;
-  overflow: hidden;
 }
 
 .flex-container {
@@ -28,6 +28,7 @@ body {
   display: flex;
   -webkit-flex-flow: row wrap;
   flex-flow: row wrap;
+  flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   margin-top: 0px;
   -webkit-justify-content: space-between;
@@ -76,17 +77,18 @@ body {
   margin-top: 30px;
 }
 
-input:focus, button:focus, a:focus {
-  outline: #FDAA29 auto 5px;
-  outline-color: #FDAA29;
+input:focus,
+button:focus,
+a:focus {
+  outline: #fdaa29 auto 5px;
+  outline-color: #fdaa29;
   outline-style: auto;
   outline-width: 5px;
-  z-index:1000;
+  z-index: 1000;
 }
 
 main {
-
-  padding: .5em 0 2em;
+  padding: 0.5em 0 2em;
   @media (min-width: $grid-float-breakpoint) {
     padding: 2em 0 4em;
   }
@@ -100,8 +102,8 @@ main {
     list-style-position: inside;
   }
   li {
-    padding-left: .1rem;
-    padding-right: .1rem;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
   }
   p {
     margin: 1rem 0;
@@ -121,7 +123,7 @@ main {
   h3 {
     font-size: 1.3rem;
     font-weight: 400;
-    margin: 2.5rem 0 .5rem;
+    margin: 2.5rem 0 0.5rem;
     text-shadow: 0px 0px 1px white;
   }
   header,
@@ -151,7 +153,6 @@ body#book {
   text-align: center;
 }
 
-
 .resultsnum {
   font-size: 1em;
   color: #666;
@@ -162,11 +163,9 @@ body#book {
   .docslength,
   .numfound {
     font-weight: bold;
-     color: #222;
+    color: #222;
   }
 }
-
-
 
 /** Elements that are not meant to be seen until io its loading */
 
@@ -183,7 +182,6 @@ body#book {
     clip: rect(1px 1px 1px 1px);
   }
 }
-
 
 .widget {
   &.book {
@@ -206,14 +204,14 @@ $submit-button-bg: #ffffff;
   width: 100%;
   border: 1px solid #ccc;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16);
-  >* {
-    height: $height; // transparent border overrides browser defaults 
+  > * {
+    height: $height; // transparent border overrides browser defaults
     border: 1px solid transparent;
     font-size: 1rem;
     &:focus {
-      // higher z-index specified so that 
+      // higher z-index specified so that
       // outline/border for focus will be fully visible --
-      // not "under" another element 
+      // not "under" another element
       z-index: 2;
     }
   }
@@ -222,7 +220,7 @@ $submit-button-bg: #ffffff;
     padding: 0px 1rem;
     min-width: 30px;
   }
-  [type="submit"] {
+  [type='submit'] {
     background-color: $submit-button-bg;
     flex: 0 1 70px;
     &:hover {
@@ -246,7 +244,7 @@ $submit-button-bg: #ffffff;
   height: 1px;
   margin: -1px;
   overflow: hidden;
-  padding: 0 ;
+  padding: 0;
   width: 1px;
   white-space: nowrap;
 }
