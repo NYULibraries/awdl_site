@@ -17,7 +17,7 @@ const useFetchData = () => {
     queryKey: ['responseData'],
     queryFn: async () => {
       const response = await fetch(
-        'https://discovery1.dlib.nyu.edu/solr/viewer/select?wt=json&q=*:*&fl=*&fq=sm_collection_code:(awdl OR egypt)&rows=12&start=1&sort=ss_longlabel%20asc',
+        'https://discovery1.dlib.nyu.edu/solr/viewer/select?wt=json&q=*:*&fl=*&fq=sm_collection_code:awdl&rows=12&start=1&sort=ss_longlabel%20asc',
       );
       if (!response.ok) {
         throw new Error('Failed to fetch data');

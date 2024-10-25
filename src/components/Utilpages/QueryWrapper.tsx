@@ -8,9 +8,9 @@ export const FetchedDataContext = createContext<ReturnType<typeof useFetchData> 
 
 export const useFetchedData = () => {
   const context = useContext(FetchedDataContext);
-  // if (context === undefined) {
-  //   throw new Error('useFetchedData must be used within a QueryWrapper');
-  // }
+  if (context === undefined) {
+    throw new Error('useFetchedData must be used within a QueryWrapper');
+  }
   return context;
 };
 
