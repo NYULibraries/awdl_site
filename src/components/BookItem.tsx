@@ -3,7 +3,8 @@ import BookItemPlaceholder from './BookItemPlaceholder';
 
 interface BookItemProps {
   document: {
-    sm_field_identifier: string[];
+    ss_book_identifier: string;
+    ss_uri: string;
     ss_title_long: string;
     sm_author: string[];
     sm_series: any;
@@ -12,12 +13,14 @@ interface BookItemProps {
     ss_publication_date_text: string;
     zm_subject: string[];
     zm_provider: string[];
+    bs_status: boolean;
   };
 }
 
 const BookItem: React.FC<BookItemProps> = ({ document }) => {
   const {
-    sm_field_identifier,
+    ss_book_identifier,
+    ss_uri,
     ss_title_long,
     sm_author,
     sm_series,
@@ -26,6 +29,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
     ss_publication_date_text,
     zm_subject,
     zm_provider,
+    bs_status,
   } = document;
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -35,7 +39,8 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
   };
 
   // use ss_identifier instead of field identifier
-  const identifier = sm_field_identifier[0];
+  const identifier = ss_book_identifier;
+  const uri = ss_uri;
   const title = ss_title_long;
   const authors = sm_author || [];
   // Series are all named different
@@ -47,7 +52,8 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
   const subjects = zm_subject;
   const provider = zm_provider[0];
 
-  return (
+  console.log(uri)
+  return bs_status ? (
     <article className="item">
       <div className="card">
         {/* Thumbnail */}
@@ -58,7 +64,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
               isLoaded ? 'clipper' : 'clipperNoshadow imagePlaceholder'
             }
           >
-            <a href={`/books/${identifier}/1`}>
+            <a href={`${uri}`}>
               <img
                 src={`https://sites.dlib.nyu.edu/viewer/api/image/books/${identifier}/1/full/150,/0/default.jpg`}
                 alt=""
@@ -152,7 +158,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
         </div>
       </div>
     </article>
-  );
+  ) : null;
 };
 
 export default BookItem;

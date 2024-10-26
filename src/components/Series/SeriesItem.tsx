@@ -12,14 +12,25 @@ export interface SeriesItemProps {
     zm_subject: string[];
     zm_provider: string[];
     bundle: 'dlts_series';
+    // Series name
     ss_series_label: string;
+    // Series id
+    ss_series_identifier: string;
+    // Should it be published
+    bs_status: boolean;
+    is_ispartofseries: boolean;
   };
 }
 
 const SeriesItem: React.FC<SeriesItemProps> = ({ document }) => {
-  const { ss_series_label, sm_series_identiier, is_ispartofseries, bs_status } = document;
+  const {
+    ss_series_label,
+    ss_series_identifier,
+    is_ispartofseries,
+    bs_status,
+  } = document;
 
-  return (
+  return bs_status ? (
     <article className="item">
       <div className="card">
         <a href="/ancientworld/series/through-the-eye-series">
@@ -27,7 +38,7 @@ const SeriesItem: React.FC<SeriesItemProps> = ({ document }) => {
         </a>
       </div>
     </article>
-  );
+  ) : null;
 };
 
 export default SeriesItem;

@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Test.tsx file
+src/components/Test.tsx
+
+# atest.astro file
+src/pages/atest.astro

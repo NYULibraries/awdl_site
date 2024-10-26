@@ -5,7 +5,7 @@ import QueryWrapper, {
   useFetchedData,
 } from '../Util/QueryWrapper';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { seriesUrl } from '../Util/Urls';
+import { seriesSolrUrl } from '../Util/Urls';
 
 const SeriesContent: React.FC = () => {
   const queryResult = useFetchedData();
@@ -32,7 +32,7 @@ const SeriesContent: React.FC = () => {
 const SeriesContentWrapped: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <QueryWrapper query={seriesUrl}>
+      <QueryWrapper query={seriesSolrUrl}>
         <SeriesContent />
       </QueryWrapper>
     </QueryClientProvider>
