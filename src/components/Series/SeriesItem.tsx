@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface SeriesItemProps {
+export interface SeriesItemProps {
   document: {
     sm_field_identifier: string[];
     ss_title_long: string;
@@ -17,13 +17,13 @@ interface SeriesItemProps {
 }
 
 const SeriesItem: React.FC<SeriesItemProps> = ({ document }) => {
-  const { ss_series_label } = document;
+  const { ss_series_label, sm_series_identiier, is_ispartofseries, bs_status } = document;
 
   return (
     <article className="item">
       <div className="card">
         <a href="/ancientworld/series/through-the-eye-series">
-          "Through the eye" series
+          {ss_series_label}
         </a>
       </div>
     </article>

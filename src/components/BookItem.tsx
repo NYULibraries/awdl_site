@@ -37,7 +37,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
   // use ss_identifier instead of field identifier
   const identifier = sm_field_identifier[0];
   const title = ss_title_long;
-  const authors = sm_author;
+  const authors = sm_author || [];
   // Series are all named different
   const series = sm_series;
   // assume can be more than one sm
@@ -75,13 +75,15 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
         {/* Authors */}
         <div className="md_authors">
           <span className="md_label">Author:</span>{' '}
-          {authors.map((author, index) => {
-            return (
+          {authors.length > 0 ? (
+            authors.map((author, index) => (
               <span key={index} className="md_author">
                 {author}
               </span>
-            );
-          })}
+            ))
+          ) : (
+            <span className="md_author">No author available</span>
+          )}
         </div>
         {/* Series */}
         <div className="md_series">

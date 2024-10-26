@@ -1,10 +1,10 @@
 import React, { createContext, useContext } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
 import useFetchData from './useFetchData';
 
-const queryClient = new QueryClient();
-
 export const FetchedDataContext = createContext<ReturnType<typeof useFetchData> | undefined>(undefined);
+
+export const queryClient = new QueryClient();
 
 export const useFetchedData = () => {
   const context = useContext(FetchedDataContext);
@@ -16,17 +16,16 @@ export const useFetchedData = () => {
 
 interface QueryWrapperProps {
   children: React.ReactNode;
+  query: string
 }
 
-const QueryWrapper: React.FC<QueryWrapperProps> = ({ children }) => {
-  const queryResult = useFetchData();
+const QueryWrapper: React.FC<QueryWrapperProps> = ({ children, query }) => {
+  const queryResult = useFetchData(query);
 
   return (
-    <QueryClientProvider client={new QueryClient()}>
       <FetchedDataContext.Provider value={queryResult}>
         {children}
       </FetchedDataContext.Provider>
-    </QueryClientProvider>
   );
 };
 

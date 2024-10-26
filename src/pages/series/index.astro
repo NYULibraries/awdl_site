@@ -1,6 +1,6 @@
 ---
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
-import SeriesContent from '../../components/Series/SeriesContent';
+import SeriesContentWrapped from '../../components/Series/SeriesContent';
 
 const baseURL: string = import.meta.env.BASE_URL;
 ---
@@ -10,6 +10,6 @@ const baseURL: string = import.meta.env.BASE_URL;
     <header>
       <h1 class="page-title">Series</h1>
     </header>
-    <SeriesContent client:load />
+    <SeriesContentWrapped client:load />
   </main>
 </DefaultLayout>

@@ -1,24 +1,32 @@
 import { useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
-const ResponseTypeSchema = z.object({
-  responseHeader: z.record(z.unknown()),
-  response: z.object({
+const ResponseTypeSchema = z.union([
+  z.object({
+    // api response structure
     numFound: z.number(),
     start: z.number(),
     docs: z.array(z.record(z.unknown())),
   }),
-});
+  z.object({
+    // Solr response structure
+    responseHeader: z.record(z.unknown()),
+    response: z.object({
+      numFound: z.number(),
+      start: z.number(),
+      docs: z.array(z.record(z.unknown())),
+    }),
+  })
+]);
 
 type ResponseType = z.infer<typeof ResponseTypeSchema>;
 
-const useFetchData = () => {
+const useFetchData = (query: string) => {
+
   return useQuery<ResponseType>({
-    queryKey: ['responseData'],
+    queryKey: ['responseData', query],
     queryFn: async () => {
-      const response = await fetch(
-        'https://discovery1.dlib.nyu.edu/solr/viewer/select?wt=json&q=*:*&fl=*&fq=sm_collection_code:awdl&rows=12&start=1&sort=ss_longlabel%20asc',
-      );
+      const response = await fetch(query);
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
