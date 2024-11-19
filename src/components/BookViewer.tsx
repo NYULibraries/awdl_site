@@ -26,11 +26,6 @@ const Book: React.FC<BookProps> = (props) => {
     setIsLoaded(true);
   };
 
-  useEffect(() => {
-    console.log('Current iframe height:', iFrameHeight);
-    console.log('Loading URL:', `${viewer}/books/${pid}`);
-  }, [iFrameHeight, pid]);
-
   return (
     <>
       {!isLoaded && (

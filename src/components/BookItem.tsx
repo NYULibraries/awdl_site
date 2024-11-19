@@ -4,7 +4,6 @@ import BookItemPlaceholder from './BookItemPlaceholder';
 interface BookItemProps {
   document: {
     ss_book_identifier: string;
-    ss_uri: string;
     ss_title_long: string;
     sm_author: string[];
     sm_series: any;
@@ -20,7 +19,6 @@ interface BookItemProps {
 const BookItem: React.FC<BookItemProps> = ({ document }) => {
   const {
     ss_book_identifier,
-    ss_uri,
     ss_title_long,
     sm_author,
     sm_series,
@@ -40,11 +38,9 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 
   // use ss_identifier instead of field identifier - done
   const identifier = ss_book_identifier;
-  // uri = viewer link
-  const uri = ss_uri;
   const title = ss_title_long;
   const authors = sm_author || [];
-  // Series are all named different
+  // Series are all named different - still needs to be done
   const series = sm_series;
   // assume can be more than one sm
   const publisher = sm_publisher[0];
@@ -53,7 +49,6 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
   const subjects = zm_subject;
   const provider = zm_provider[0];
 
-  console.log(uri)
   return bs_status ? (
     <article className="item">
       <div className="card">
@@ -65,7 +60,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
               isLoaded ? 'clipper' : 'clipperNoshadow imagePlaceholder'
             }
           >
-            <a href={`/ancientworld/${uri}`}>
+            <a href={`/ancientworld/books/${identifier}/1`}>
               <img
                 src={`https://sites.dlib.nyu.edu/viewer/api/image/books/${identifier}/1/full/150,/0/default.jpg`}
                 alt=""
