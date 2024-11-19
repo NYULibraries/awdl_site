@@ -18,7 +18,7 @@ export interface SeriesItemProps {
     ss_series_identifier: string;
     // Should it be published
     bs_status: boolean;
-    is_ispartofseries: boolean;
+    is_ispartofseries: number;
   };
 }
 

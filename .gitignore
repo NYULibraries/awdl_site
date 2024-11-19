@@ -28,3 +28,5 @@ src/components/Test.tsx
 
 # atest.astro file
 src/pages/atest.astro
+src/pages/api
+src/pages/api/viewer.json.tsx

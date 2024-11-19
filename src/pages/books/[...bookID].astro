@@ -1,10 +1,15 @@
 ---
-import DefaultLayout from '../../layouts/DefaultLayout.astro';
+import BookLayout from '../../layouts/BookLayout.astro';
+import Book from '../../components/BookViewer';
+
 const { bookID } = Astro.params;
+if (!bookID) throw new Error('Book ID unfound');
 
 export const prerender = false;
+
+const viewer = 'https://sites.dlib.nyu.edu/viewer';
 ---
 
-<DefaultLayout>
-  <h1>Book: {bookID}</h1>
-</DefaultLayout>
+<BookLayout>
+  <Book client:only="react" pid={bookID} viewer={viewer} />
+</BookLayout>

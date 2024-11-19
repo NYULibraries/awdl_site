@@ -38,8 +38,9 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
     setIsLoaded(true);
   };
 
-  // use ss_identifier instead of field identifier
+  // use ss_identifier instead of field identifier - done
   const identifier = ss_book_identifier;
+  // uri = viewer link
   const uri = ss_uri;
   const title = ss_title_long;
   const authors = sm_author || [];
@@ -64,7 +65,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
               isLoaded ? 'clipper' : 'clipperNoshadow imagePlaceholder'
             }
           >
-            <a href={`${uri}`}>
+            <a href={`/ancientworld/${uri}`}>
               <img
                 src={`https://sites.dlib.nyu.edu/viewer/api/image/books/${identifier}/1/full/150,/0/default.jpg`}
                 alt=""
@@ -76,7 +77,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
         </div>
         {/* Title */}
         <h1 className="md_title">
-          <a href={`/books/${identifier}/1`}>{title && title}</a>
+          <a href={`/ancientworld/books/${identifier}/1`}>{title && title}</a>
         </h1>
         {/* Authors */}
         <div className="md_authors">
@@ -91,7 +92,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
             <span className="md_author">No author available</span>
           )}
         </div>
-        {/* Series */}
+        {/* Series - not fixed */}
         <div className="md_series">
           <span className="md_label">Series:</span>
           <a

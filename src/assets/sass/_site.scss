@@ -187,7 +187,18 @@ body#book {
   &.book {
     width: 100%;
     opacity: 0;
+    transition: opacity 0.3s ease;
   }
+  &.viewerLoaded {
+    opacity: 1;
+  }
+}
+
+.bookViewerPlaceholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fcf7f0;
 }
 
 .hiddenSiblings {
