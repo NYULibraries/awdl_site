@@ -3,11 +3,8 @@ frontend:
   phases:
     preBuild:
       commands:
-        - export NODE_ENV=production
         - git checkout ancientworld-astro
-        - rm -rf node_modules package-lock.json
-        - npm install -g npm@9.8.1
-        - npm install --omit=dev
+        - npm install
     build:
       commands:
         - npm run build
