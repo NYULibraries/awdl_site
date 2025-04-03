@@ -4,6 +4,7 @@ frontend:
     preBuild:
       commands:
         - git checkout ancientworld-astro
+        - npm install --platform=linux --arch=x64 @rollup/rollup-linux-x64-gnu
         - npm install
     build:
       commands:
