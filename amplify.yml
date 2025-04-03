@@ -7,8 +7,7 @@ frontend:
         - git checkout ancientworld-astro
         - rm -rf node_modules package-lock.json
         - npm install -g npm@9.8.1
-        - npm install rollup@latest --include=optional
-        - npm ci --omit=dev --include=optional
+        - npm install --omit=dev
     build:
       commands:
         - npm run build
@@ -17,7 +16,11 @@ frontend:
     baseDirectory: .amplify-hosting
     files:
       - '**/*'
+  customHeaders:
+    - pattern: '**/*'
+      headers:
+        - key: 'Cache-Control'
+          value: 'max-age=0, no-cache, no-store, must-revalidate'
   cache:
     paths:
-      - '.npm/**/*'
-      - 'node_modules/**/*'
+      - node_modules/**/*
