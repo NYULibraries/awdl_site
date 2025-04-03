@@ -16,13 +16,12 @@ const ResponseTypeSchema = z.union([
       start: z.number(),
       docs: z.array(z.record(z.unknown())),
     }),
-  })
+  }),
 ]);
 
-type ResponseType = z.infer<typeof ResponseTypeSchema>;
+export type ResponseType = z.infer<typeof ResponseTypeSchema>;
 
 const useFetchData = (query: string) => {
-
   return useQuery<ResponseType>({
     queryKey: ['responseData', query],
     queryFn: async () => {

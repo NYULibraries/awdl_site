@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import SeriesItem from './SeriesItem';
 import QueryWrapper, {
   queryClient,
@@ -12,16 +12,18 @@ const SeriesContent: React.FC = () => {
 
   if (queryResult.isLoading) return <div>Loading...</div>;
   if (queryResult.isError) return <div>Error: {queryResult.error.message}</div>;
+  if (!queryResult.data) return <div>No data available</div>;
 
-  console.log(queryResult.data?.response.docs);
-  const docs = queryResult.data?.response.docs;
-  const numFound = queryResult.data?.response.numFound;
+  const data = queryResult.data;
+  const docs = 'response' in data ? data.response.docs : data.docs;
+  const numFound = 'response' in data ? data.response.numFound : data.numFound;
 
   return (
     <>
       <div className="flex-container">
-        {docs &&
-          docs.map((doc, index) => <SeriesItem key={index} document={doc} />)}
+        {docs.map((doc: any, index: number) => (
+          <SeriesItem key={index} document={doc} />
+        ))}
         <article className="item"></article>
         <article className="item"></article>
       </div>
