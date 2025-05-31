@@ -1,20 +1,20 @@
 const fields = [
-  'ss_book_identifier',
-  'ss_uri',
-  'ss_title_long',
-  'sm_author',
-  'sm_series',
-  'sm_publisher',
-  'sm_field_publication_location',
-  'ss_publication_date_text',
-  'zm_subject',
-  'zm_provider',
-  'ss_series_label',
-  'bs_status',
+	'ss_book_identifier',
+	'ss_uri',
+	'ss_title_long',
+	'sm_author',
+	'sm_series',
+	'sm_publisher',
+	'sm_field_publication_location',
+	'ss_publication_date_text',
+	'zm_subject',
+	'zm_provider',
+	'ss_series_label',
+	'bs_status'
 ];
 
 const createFieldString = (fieldsArray: string[]): string => {
-  return fieldsArray.join(',');
+	return fieldsArray.join(',');
 };
 
 const collectionCode = '(awdl%20OR%20egypt)';

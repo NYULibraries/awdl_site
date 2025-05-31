@@ -1,0 +1,4 @@
+/dist/
+/cypress/
+src/env.d.ts
+src/components/Test.tsx

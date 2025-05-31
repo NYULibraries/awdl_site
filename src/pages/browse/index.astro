@@ -6,53 +6,54 @@ const baseURL: string = import.meta.env.BASE_URL;
 ---
 
 <DefaultLayout bodyID="browse">
-  <main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
-    <h1 class="page-title">Browse titles</h1>
-    <div class="items-widget">
-      <div class="top">
-        <div class="resultsnum" id="yui_3_18_1_2_1728355287814_82">
-          Showing <span class="start">1</span> - <span class="docslength"
-            >12</span
-          > of <span class="numfound">280</span> results<span
-            data-label-active="for"
-            class="s-query"></span>
-        </div>
-        <div class="filters">
-          <select id="browse-select" aria-label="Sort Books">
-            <option
-              data-label-active="Sorting by Title"
-              data-label-inactive="Sort by Title"
-              data-sort-dir="asc"
-              value="iass_longlabel"
-              selected="">Sorting by Title</option
-            >
-            <option
-              data-label-active="Sorting by Author"
-              data-label-inactive="Sort by Author"
-              data-sort-dir="asc"
-              value="ss_sauthor">Sort by Author</option
-            >
-          </select>
-        </div>
-      </div>
-      <div
-        id="items"
-        class="widget items"
-        data-name="items"
-        data-rows="12"
-        data-source="https://discovery1.dlib.nyu.edu/solr/viewer/select"
-        data-fl="*"
-        data-fq-bundle="dlts_book"
-        data-fq-sm_collection_code="awdl"
-        data-numfound="280"
-        data-start="0"
-        data-docslength="12"
-        data-requesterror="0"
-      >
-      <Content client:load/>
-      </div>
-      <div class="bottom text-center">
-        <!-- <div id="paginator" class="pagination">
+	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
+		<h1 class="page-title">Browse titles</h1>
+		<div class="items-widget">
+			<div class="top">
+				<div class="resultsnum" id="yui_3_18_1_2_1728355287814_82">
+					Showing <span class="start">1</span> - <span class="docslength">12</span> of <span class="numfound">280</span>
+					results<span data-label-active="for" class="s-query"></span>
+				</div>
+				<div class="filters">
+					<select id="browse-select" aria-label="Sort Books">
+						<option
+							data-label-active="Sorting by Title"
+							data-label-inactive="Sort by Title"
+							data-sort-dir="asc"
+							value="iass_longlabel"
+							selected=""
+						>
+							Sorting by Title
+						</option>
+						<option
+							data-label-active="Sorting by Author"
+							data-label-inactive="Sort by Author"
+							data-sort-dir="asc"
+							value="ss_sauthor"
+						>
+							Sort by Author
+						</option>
+					</select>
+				</div>
+			</div>
+			<div
+				id="items"
+				class="widget items"
+				data-name="items"
+				data-rows="12"
+				data-source="https://discovery1.dlib.nyu.edu/solr/viewer/select"
+				data-fl="*"
+				data-fq-bundle="dlts_book"
+				data-fq-sm_collection_code="awdl"
+				data-numfound="280"
+				data-start="0"
+				data-docslength="12"
+				data-requesterror="0"
+			>
+				<Content client:load />
+			</div>
+			<div class="bottom text-center">
+				<!-- <div id="paginator" class="pagination">
           <div
             id="yui_3_18_1_2_1728355287814_56"
             class="yui3-widget yui3-paginator"
@@ -96,7 +97,7 @@ const baseURL: string = import.meta.env.BASE_URL;
             </div>
           </div>
         </div> -->
-      </div>
-    </div>
-  </main>
+			</div>
+		</div>
+	</main>
 </DefaultLayout>

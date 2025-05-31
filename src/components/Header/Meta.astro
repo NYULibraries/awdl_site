@@ -1,26 +1,25 @@
 ---
 const { title, description } = Astro.props;
 
+/* eslint-disable capitalized-comments */
 // const siteName = metatags.siteName;
 // const url = env.PUBLIC_APPURL;
 // const type = metatags.type;
 // const author = metatags.defaultAuthor;
+/* eslint-enable capitalized-comments */
 const baseURL: string = import.meta.env.BASE_URL;
 ---
 
 <head>
-  <title>Partners: Ancient World Digital Library</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta property="og:site_name" content="Ancient World Digital Library" />
-  <meta property="og:title" content="Ancient World Digital Library" />
-  <meta
-    property="og:description"
-    content="Powered by NYU Digital Library Technology Services"
-  />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="/ancientworld" />
-  <link rel="icon" type="image/x-icon" href=`${baseURL}/favicon.ico` />
+	<title>Partners: Ancient World Digital Library</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<meta property="og:site_name" content="Ancient World Digital Library" />
+	<meta property="og:title" content="Ancient World Digital Library" />
+	<meta property="og:description" content="Powered by NYU Digital Library Technology Services" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="/ancientworld" />
+	<link rel="icon" type="image/x-icon" href=`${baseURL}/favicon.ico` />
 </head>
 
 <!-- Google tag manager script -->

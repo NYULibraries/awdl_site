@@ -57,6 +57,8 @@ For more information, please contact us at: ISAW-Library@nyu.edu with "AWDL" in 
 - Rasan Rasch (DLTS)
 - David M. Ratzan (ISAW)
 - Michael Stasiak (DLTS)
+- Derrick Xu (DLTS)
+- Damon Chu (DLTS)
 
 ### Special thanks to past project members
 

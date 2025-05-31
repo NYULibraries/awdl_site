@@ -8,93 +8,71 @@ const baseURL: string = import.meta.env.BASE_URL;
 ---
 
 <DefaultLayout bodyID="home" bodyClass="home">
-  <main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
-    <div class="topHold flex-container">
-      <div class="intro itemdouble">
-        <p>
-          <span class="bold">The Ancient World Digital Library</span> (AWDL) is an
-          initiative of the <a
-            href="http://isaw.nyu.edu"
-            target="_blank"
-            class="ext nobreak">Institute for the Study of the Ancient World</a
-          > at
-          <a href="http://www.nyu.edu" target="_blank" class="ext nobreak"
-            >New York University</a
-          >.
-        </p>
-        <p class="line2">
-          <span class="nobreak">AWDL will identify,</span> collect, curate, and provide
-          access to the broadest possible range of scholarly materials relevant to
-          the study of the ancient world. <a
-            href=`${baseURL}about`
-            class="readmore"
-            aria-label="Read more about The Ancient World Digital Library"
-            >READ MORE…</a
-          >
-        </p>
-      </div>
-      <aside class="item newsitem" role="complementary">
-        <h2 class="sidebar-title">
-          <a href="http://isaw.nyu.edu/library/blog/collector" target="_blank"
-            >ISAW Library Blog</a
-          >
-        </h2>
-        <div class="content">
-          <div class="thumbs">
-            <div class="clipper">
-              <a
-                href="http://isaw.nyu.edu/library/blog/collector"
-                target="_blank"
-              >
-                <Image
-                  src={blogThumb}
-                  alt="the Library of the Institute for the Study of the Ancient World"
-                />
-              </a>
-            </div>
-          </div>
-          <div class="description">
-            News, information, and features from the Library of the Institute
-            for the Study of the Ancient World at New York University.
-          </div>
-        </div>
-      </aside>
-    </div>
-    <div id="yui_3_18_1_1_1729599236628_89" class="yui3-widget yui3-tabview">
-      <div
-        id="YUItabs"
-        data-label="Tabs"
-        class="noFouc tabHolder yui3-tabview-content"
-        style="opacity: 1;"
-      >
-        <ul class="yui3-tabview-list" role="tablist">
-          <li
-            class="yui3-tab yui3-widget yui3-tab-selected"
-            id="yui_3_18_1_1_1729599236628_100"
-            role="presentation"
-          >
-            <h3>Recently Added Titles</h3>
-            <a
-              id="yui_3_18_1_1_1729599236628_108"
-              class="yui3-tab-content yui3-tab-label"
-              role="tab"
-              tabindex="0"></a>
-          </li>
-        </ul>
-        <div class="tabContentHolder yui3-tabview-panel">
-          <div id="awdlAtlas" class="yui3-tab-panel"></div>
+	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
+		<div class="topHold flex-container">
+			<div class="intro itemdouble">
+				<p>
+					<span class="bold">The Ancient World Digital Library</span> (AWDL) is an initiative of the <a
+						href="http://isaw.nyu.edu"
+						target="_blank"
+						class="ext nobreak"
+					>
+						Institute for the Study of the Ancient World
+					</a> at
+					<a href="http://www.nyu.edu" target="_blank" class="ext nobreak">New York University</a>.
+				</p>
+				<p class="line2">
+					<span class="nobreak">AWDL will identify,</span> collect, curate, and provide access to the broadest possible range
+					of scholarly materials relevant to the study of the ancient world. <a
+						href=`${baseURL}about`
+						class="readmore"
+						aria-label="Read more about The Ancient World Digital Library"
+					>
+						READ MORE…
+					</a>
+				</p>
+			</div>
+			<aside class="item newsitem" role="complementary">
+				<h2 class="sidebar-title">
+					<a href="http://isaw.nyu.edu/library/blog/collector" target="_blank">ISAW Library Blog</a>
+				</h2>
+				<div class="content">
+					<div class="thumbs">
+						<div class="clipper">
+							<a href="http://isaw.nyu.edu/library/blog/collector" target="_blank">
+								<Image src={blogThumb} alt="the Library of the Institute for the Study of the Ancient World" />
+							</a>
+						</div>
+					</div>
+					<div class="description">
+						News, information, and features from the Library of the Institute for the Study of the Ancient World at New
+						York University.
+					</div>
+				</div>
+			</aside>
+		</div>
+		<div id="yui_3_18_1_1_1729599236628_89" class="yui3-widget yui3-tabview">
+			<div id="YUItabs" data-label="Tabs" class="noFouc tabHolder yui3-tabview-content" style="opacity: 1;">
+				<ul class="yui3-tabview-list" role="tablist">
+					<li class="yui3-tab yui3-widget yui3-tab-selected" id="yui_3_18_1_1_1729599236628_100" role="presentation">
+						<h3>Recently Added Titles</h3>
+						<a id="yui_3_18_1_1_1729599236628_108" class="yui3-tab-content yui3-tab-label" role="tab" tabindex="0"></a>
+					</li>
+				</ul>
+				<div class="tabContentHolder yui3-tabview-panel">
+					<div id="awdlAtlas" class="yui3-tab-panel"></div>
 
-          <div
-            id="recently-added-titles"
-            class="yui3-tab-panel yui3-tab-panel-selected"
-            role="tabpanel"
-            aria-labelledby="yui_3_18_1_1_1729599236628_108"
-          >
-            <h3>Recently Added Titles</h3>
-            <Content client:load />
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
+					<div
+						id="recently-added-titles"
+						class="yui3-tab-panel yui3-tab-panel-selected"
+						role="tabpanel"
+						aria-labelledby="yui_3_18_1_1_1729599236628_108"
+					>
+						<h3>Recently Added Titles</h3>
+						<Content client:load />
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
 </DefaultLayout>

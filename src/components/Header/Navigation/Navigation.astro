@@ -1,122 +1,107 @@
 ---
 const baseURL: string = import.meta.env.BASE_URL;
 const NavigationItems = [
-  {
-    href: `${baseURL}`,
-    class: 'home',
-    label: 'Home',
-  },
-  {
-    href: `${baseURL}collectionsoverview`,
-    class: 'collectionsoverview',
-    label: 'Collections Overview',
-  },
-  {
-    href: `${baseURL}series`,
-    class: 'series',
-    label: 'Series',
-  },
-  {
-    href: `${baseURL}about`,
-    class: 'about',
-    label: 'About',
-  },
-  {
-    href: `${baseURL}partners`,
-    class: 'partners',
-    label: 'Partners',
-  },
-  {
-    href: `${baseURL}browse`,
-    class: 'browse',
-    label: 'Browse',
-  },
+	{
+		href: `${baseURL}`,
+		class: 'home',
+		label: 'Home'
+	},
+	{
+		href: `${baseURL}collectionsoverview`,
+		class: 'collectionsoverview',
+		label: 'Collections Overview'
+	},
+	{
+		href: `${baseURL}series`,
+		class: 'series',
+		label: 'Series'
+	},
+	{
+		href: `${baseURL}about`,
+		class: 'about',
+		label: 'About'
+	},
+	{
+		href: `${baseURL}partners`,
+		class: 'partners',
+		label: 'Partners'
+	},
+	{
+		href: `${baseURL}browse`,
+		class: 'browse',
+		label: 'Browse'
+	}
 ];
 ---
 
 <nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button
-        type="button"
-        class="navbar-toggle collapsed widget"
-        data-toggle="collapse"
-        data-name="navButton"
-        data-script='{ "js" : [ "navButton.js" ] }'
-      >
-        <svg
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px"
-          y="0px"
-          width="40px"
-          height="30px"
-          viewBox="0 0 40 30"
-          overflow="visible"
-          xml:space="preserve"
-        >
-          <defs> </defs>
-          <rect y="0" fill="#FFFFFF" width="40" height="3"></rect>
-          <rect y="7" fill="#FFFFFF" width="40" height="3"></rect>
-          <rect y="14" fill="#FFFFFF" width="40" height="3"></rect>
-        </svg>
-        <span class="sr-only">Toggle navigation</span>
-      </button>
-    </div>
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button
+				type="button"
+				class="navbar-toggle collapsed widget"
+				data-toggle="collapse"
+				data-name="navButton"
+				data-script='{ "js" : [ "navButton.js" ] }'
+			>
+				<svg
+					version="1.1"
+					xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink"
+					x="0px"
+					y="0px"
+					width="40px"
+					height="30px"
+					viewBox="0 0 40 30"
+					overflow="visible"
+					xml:space="preserve"
+				>
+					<defs></defs>
+					<rect y="0" fill="#FFFFFF" width="40" height="3"></rect>
+					<rect y="7" fill="#FFFFFF" width="40" height="3"></rect>
+					<rect y="14" fill="#FFFFFF" width="40" height="3"></rect>
+				</svg>
+				<span class="sr-only">Toggle navigation</span>
+			</button>
+		</div>
 
-    <div class="navbar-collapse">
-      <ul class="nav navbar-nav">
-        {
-          NavigationItems.map((item) => {
-            return (
-              <li>
-                <a href={item.href} class={item.class}>
-                  {item.label}
-                </a>
-              </li>
-            );
-          })
-        }
-      </ul>
-      <div
-        class="search_holder widget navbar-form navbar-right"
-        data-name="search_form"
-        data-script='{ "js" : [ "search_form.js" ] }'
-      >
-        <form
-          method="get"
-          action="/ancientworld/search"
-          class="dl-search"
-          role="search"
-        >
-          <input
-            class="searchfield"
-            name="q"
-            type="text"
-            aria-label="search"
-            placeholder="Search titles, subjects, authors..."
-          />
-          <button
-            type="submit"
-            aria-label="submit"
-            value="submit"
-            class="submit-search"
-          >
-            <svg
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
-              ></path>
-            </svg>
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
+		<div class="navbar-collapse">
+			<ul class="nav navbar-nav">
+				{
+					NavigationItems.map((item) => {
+						return (
+							<li>
+								<a href={item.href} class={item.class}>
+									{item.label}
+								</a>
+							</li>
+						);
+					})
+				}
+			</ul>
+			<div
+				class="search_holder widget navbar-form navbar-right"
+				data-name="search_form"
+				data-script='{ "js" : [ "search_form.js" ] }'
+			>
+				<form method="get" action="/ancientworld/search" class="dl-search" role="search">
+					<input
+						class="searchfield"
+						name="q"
+						type="text"
+						aria-label="search"
+						placeholder="Search titles, subjects, authors..."
+					/>
+					<button type="submit" aria-label="submit" value="submit" class="submit-search">
+						<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+							<path
+								d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+							>
+							</path>
+						</svg>
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
 </nav>

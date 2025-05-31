@@ -1,24 +1,24 @@
 ---
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
 import { Content as AboutContent } from '../../components/About/about.md';
-import { Content as SidebarContent } from "../../components/About/aboutSidebar.md";
+import { Content as SidebarContent } from '../../components/About/aboutSidebar.md';
 ---
 
 <DefaultLayout bodyID="about">
-  <div class="container-fluid">
-    <div class="flex-container">
-      <main class="main hasSidebar" role="main" id="mainContent" tabindex="-1">
-        <h2 class="page-title">About</h2>
-        <div class="maintext">
-          <AboutContent />
-        </div>
-      </main>
-      <aside role="complementary">
-        <h3 class="sidebar-title">About the ISAW library</h3>
-        <div class="content">
-          <SidebarContent/>
-        </div>
-      </aside>
-    </div>
-  </div>
+	<div class="container-fluid">
+		<div class="flex-container">
+			<main class="main hasSidebar" role="main" id="mainContent" tabindex="-1">
+				<h2 class="page-title">About</h2>
+				<div class="maintext">
+					<AboutContent />
+				</div>
+			</main>
+			<aside role="complementary">
+				<h3 class="sidebar-title">About the ISAW library</h3>
+				<div class="content">
+					<SidebarContent />
+				</div>
+			</aside>
+		</div>
+	</div>
 </DefaultLayout>

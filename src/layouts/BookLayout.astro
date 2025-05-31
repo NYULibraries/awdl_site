@@ -2,22 +2,22 @@
 import '../assets/sass/style.scss';
 import Header from '../components/Header/Header.astro';
 import Meta from '../components/Header/Meta.astro';
-// import { metatags } from "../utils/Constants/metatags";
+// Import { metatags } from "../utils/Constants/metatags";
 
-const title: string = 'title';
-const description: string = 'desc';
+const title = 'title';
+const description = 'desc';
 ---
 
 <html lang="en">
-  <head>
-    <Meta title={title} description={description} />
-  </head>
-  <body id="book">
-    <div id="skipnav"><a href="#mainContent">Skip navigation</a></div>
-    <Header />
-      <slot />
-    <!-- <script>
+	<head>
+		<Meta title={title} description={description} />
+	</head>
+	<body id="book">
+		<div id="skipnav"><a href="#mainContent">Skip navigation</a></div>
+		<Header />
+		<slot />
+		<!-- <script>
       import('../scripts/webfontloader.ts');
     </script> -->
-  </body>
+	</body>
 </html>
