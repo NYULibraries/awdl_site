@@ -19,7 +19,7 @@ const CollectionItem: React.FC<CollectionItemProps> = ({ label }) => {
 	return (
 		<div className="item">
 			<div className="card">
-				<a href={`${baseURL}search/?q=${encodedLabel}`}>{label}</a>
+				<a href={`${baseURL}search/?q=${encodedLabel}&page=1`}>{label}</a>
 			</div>
 		</div>
 	);

@@ -20,19 +20,27 @@ function SearchPagination({ rows = 12 }: SearchPaginationProps) {
 
 	const contentData = useStore(contentStore);
 	const currentPage = useStore(pageStore);
+	const searchQuery = useStore(searchFieldStore);
 
 	const onChange = async (page: number) => {
 		const start = (page - 1) * rows;
 		const newData = await fetchSolrData({
 			start,
 			rows,
-			searchField: searchFieldStore.get(),
+			searchField: searchQuery,
 			sortField: 'ss_longlabel',
 			sortDir: 'asc',
 			collectionCode: '(awdl%20OR%20egypt)'
 		});
 		contentStore.set(newData);
 		pageStore.set(page);
+
+		// Update URL if we're on the search page
+		if (window.location.pathname.includes('/search')) {
+			const url = new URL(window.location.href);
+			url.searchParams.set('page', page.toString());
+			window.history.pushState({}, '', url.toString());
+		}
 	};
 
 	if (!contentData?.response?.numFound || !rows || contentData.response.numFound < 1) {

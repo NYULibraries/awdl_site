@@ -4,6 +4,8 @@ import { contentStore, searchFieldStore, pageStore } from '../../../stores/conte
 import { fetchSolrData } from '../../../Util/fetch';
 
 function SearchForm() {
+	const baseURL: string = import.meta.env.BASE_URL;
+
 	const inputRef = useRef<HTMLInputElement>(null);
 	const searchField = useStore(searchFieldStore);
 
@@ -14,20 +16,9 @@ function SearchForm() {
 			inputRef.current.blur();
 		}
 
-		searchFieldStore.set(searchQuery);
-		// Reset page to 1 for pagination
-		pageStore.set(1);
-
-		const newData = await fetchSolrData({
-			start: 0, // Reset to start of results in api
-			rows: 12,
-			searchField: searchQuery,
-			sortField: 'ss_longlabel',
-			sortDir: 'asc',
-			collectionCode: '(awdl%20OR%20egypt)'
-		});
-
-		contentStore.set(newData);
+		// Navigate to search page with query
+		const searchUrl = `${baseURL}search/?q=${encodeURIComponent(searchQuery)}&page=1`;
+		window.location.href = searchUrl;
 	};
 
 	return (

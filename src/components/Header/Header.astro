@@ -1,5 +1,7 @@
 ---
 import Navigation from './Navigation/Navigation.astro';
+
+const baseURL: string = import.meta.env.BASE_URL;
 ---
 
 <Fragment>
@@ -9,7 +11,7 @@ import Navigation from './Navigation/Navigation.astro';
 				<a href="http://isaw.nyu.edu/" class="isawlogo" target="_blank">NYU | ISAW</a>
 			</div>
 			<h1 class="sitename">
-				<a href="/ancientworld/">Ancient World Digital Library</a>
+				<a href={`${baseURL}`}>Ancient World Digital Library</a>
 			</h1>
 		</header>
 	</div>

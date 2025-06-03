@@ -27,11 +27,13 @@ const SeriesItem: React.FC<SeriesItemProps> = ({ document }) => {
 	const { ss_series_label, ss_series_identifier, is_ispartofseries, bs_status } = document;
 	/* eslint-enable camelcase */
 
+	const baseURL: string = import.meta.env.BASE_URL;
+
 	// eslint-disable-next-line camelcase
 	return bs_status ? (
 		<article className="item">
 			<div className="card">
-				<a href="/ancientworld/series/through-the-eye-series">
+				<a href={`${baseURL}series/through-the-eye-series`}>
 					{/* eslint-disable-next-line camelcase */}
 					{ss_series_label}
 				</a>
