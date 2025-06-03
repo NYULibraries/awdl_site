@@ -13,6 +13,8 @@ interface BookItemProps {
 		zm_subject: string[];
 		zm_provider: string[];
 		bs_status: boolean;
+		sm_provider_nid: string;
+		im_field_subject: number[];
 	};
 }
 
@@ -28,7 +30,9 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 		ss_publication_date_text,
 		zm_subject,
 		zm_provider,
-		bs_status
+		bs_status,
+		sm_provider_nid,
+		im_field_subject
 	} = document;
 	/* eslint-enable camelcase */
 
@@ -52,6 +56,8 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 	const publicationDate = ss_publication_date_text;
 	const subjects = zm_subject;
 	const provider = zm_provider[0];
+	const providerCode = sm_provider_nid;
+	const subjectCodes = im_field_subject;
 	/* eslint-enable camelcase */
 
 	// eslint-disable-next-line camelcase

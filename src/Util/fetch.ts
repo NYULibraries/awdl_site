@@ -35,6 +35,8 @@ export async function fetchSolrData(
 		'zm_provider',
 		'ss_series_label',
 		'iass_timestamp',
+		'sm_provider_nid',
+		'im_field_subject',
 		'bs_status'
 	];
 
