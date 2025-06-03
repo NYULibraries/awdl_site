@@ -3,12 +3,14 @@ import awsAmplify from 'astro-aws-amplify';
 import react from '@astrojs/react';
 import rehypeExternalLinks from 'rehype-external-links';
 
+import sitemap from '@astrojs/sitemap';
+
 export default defineConfig({
-	output: 'hybrid',
-	adapter: awsAmplify(),
-	integrations: [react()],
-	base: '/ancientworld/',
-	markdown: {
-		rehypePlugins: [[rehypeExternalLinks, { target: '_blank', rel: ['noopener'] }]]
-	}
+    output: 'hybrid',
+    adapter: awsAmplify(),
+    integrations: [react(), sitemap()],
+    base: '/ancientworld/',
+    markdown: {
+        rehypePlugins: [[rehypeExternalLinks, { target: '_blank', rel: ['noopener'] }]]
+    }
 });

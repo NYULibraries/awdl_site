@@ -1,103 +1,83 @@
 ---
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
 import Content from '../../components/Content';
+import SearchSubheader from '../../components/Search/Labels/SearchSubheader';
+import SearchPagination from '../../components/Search/Tools/SearchPagination';
+import { fetchSolrData } from '../../Util/fetch.ts';
+import { contentStore } from '../../stores/contentStore';
+import SearchHeader from '../../components/Search/Labels/SearchHeader';
+import StoreInitializer from '../../components/Util/StoreInitializer';
 
-const baseURL: string = import.meta.env.BASE_URL;
+const data = await fetchSolrData({
+	start: 0,
+	rows: 12,
+	searchField: '*:*',
+	sortField: 'ss_longlabel',
+	sortDir: 'asc',
+	collectionCode: '(awdl%20OR%20egypt)'
+});
+
+// Initialize the content store after fetching data
+contentStore.set(data);
 ---
 
 <DefaultLayout bodyID="browse">
 	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
-		<h1 class="page-title">Browse titles</h1>
-		<div class="items-widget">
-			<div class="top">
-				<div class="resultsnum" id="yui_3_18_1_2_1728355287814_82">
-					Showing <span class="start">1</span> - <span class="docslength">12</span> of <span class="numfound">280</span>
-					results<span data-label-active="for" class="s-query"></span>
+		<StoreInitializer initialData={data} client:only="react">
+			<SearchHeader client:only="react" />
+			<div class="items-widget">
+				<div class="top">
+					<div class="filters">
+						<select id="browse-select" aria-label="Sort Books">
+							<option
+								data-label-active="Sorting by Title"
+								data-label-inactive="Sort by Title"
+								data-sort-dir="asc"
+								value="iass_longlabel"
+								selected=""
+							>
+								Sorting by Title
+							</option>
+							<option
+								data-label-active="Sorting by Author"
+								data-label-inactive="Sort by Author"
+								data-sort-dir="asc"
+								value="ss_sauthor"
+							>
+								Sort by Author
+							</option>
+						</select>
+					</div>
+					<SearchSubheader
+						initialData={{
+							response: {
+								numFound: data?.response.numFound,
+								start: data?.response.start
+							}
+						}}
+						client:only="react"
+					/>
 				</div>
-				<div class="filters">
-					<select id="browse-select" aria-label="Sort Books">
-						<option
-							data-label-active="Sorting by Title"
-							data-label-inactive="Sort by Title"
-							data-sort-dir="asc"
-							value="iass_longlabel"
-							selected=""
-						>
-							Sorting by Title
-						</option>
-						<option
-							data-label-active="Sorting by Author"
-							data-label-inactive="Sort by Author"
-							data-sort-dir="asc"
-							value="ss_sauthor"
-						>
-							Sort by Author
-						</option>
-					</select>
+				<div
+					id="items"
+					class="widget items"
+					data-name="items"
+					data-rows="12"
+					data-source="https://discovery1.dlib.nyu.edu/solr/viewer/select"
+					data-fl="*"
+					data-fq-bundle="dlts_book"
+					data-fq-sm_collection_code="awdl"
+					data-numfound="280"
+					data-start="0"
+					data-docslength="12"
+					data-requesterror="0"
+				>
+					<Content client:only="react" />
+				</div>
+				<div class="bottom text-center">
+					<SearchPagination rows={12} client:only="react" />
 				</div>
 			</div>
-			<div
-				id="items"
-				class="widget items"
-				data-name="items"
-				data-rows="12"
-				data-source="https://discovery1.dlib.nyu.edu/solr/viewer/select"
-				data-fl="*"
-				data-fq-bundle="dlts_book"
-				data-fq-sm_collection_code="awdl"
-				data-numfound="280"
-				data-start="0"
-				data-docslength="12"
-				data-requesterror="0"
-			>
-				<Content client:load />
-			</div>
-			<div class="bottom text-center">
-				<!-- <div id="paginator" class="pagination">
-          <div
-            id="yui_3_18_1_2_1728355287814_56"
-            class="yui3-widget yui3-paginator"
-          >
-            <div
-              id="yui_3_18_1_2_1728355287814_91"
-              class="yui3-paginator-content yui3-paginator"
-              style=""
-            >
-              <span
-                id="yui-pg-yui_3_18_1_2_1728355287814_56-first-span"
-                class="yui3-paginator-first">&lt;&lt; first</span
-              >
-              <span
-                id="yui-pg-yui_3_18_1_2_1728355287814_56-pages"
-                class="yui3-paginator-pages"
-                ><span class="yui3-paginator-current-page yui3-paginator-page"
-                  >1</span
-                ><a href="#" class="yui3-paginator-page" page="2">2</a><a
-                  href="#"
-                  class="yui3-paginator-page"
-                  page="3">3</a
-                ><a href="#" class="yui3-paginator-page" page="4">4</a><a
-                  href="#"
-                  class="yui3-paginator-page"
-                  page="5">5</a
-                ><a href="#" class="yui3-paginator-page" page="6">6</a><a
-                  href="#"
-                  class="yui3-paginator-page"
-                  page="7">7</a
-                ><a href="#" class="yui3-paginator-page" page="8">8</a><a
-                  href="#"
-                  class="yui3-paginator-page"
-                  page="9">9</a
-                >…<a href="#" class="yui3-paginator-page" page="24">24</a></span
-              >
-              <a
-                href="#"
-                id="yui-pg-yui_3_18_1_2_1728355287814_56-next-link"
-                class="yui3-paginator-next">next &gt;</a>
-            </div>
-          </div>
-        </div> -->
-			</div>
-		</div>
+		</StoreInitializer>
 	</main>
 </DefaultLayout>

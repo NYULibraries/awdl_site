@@ -32,6 +32,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 	} = document;
 	/* eslint-enable camelcase */
 
+	// Log the specific arrays we're trying to access
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
 	const imageLoad = (): void => {
@@ -46,7 +47,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 	// Series are all named different - still needs to be done
 	const series = sm_series;
 	// Assume can be more than one sm
-	const publisher = sm_publisher[0];
+	const publisher = sm_publisher?.[0] || 'N.A.';
 	const publicationPlace = sm_field_publication_location[0];
 	const publicationDate = ss_publication_date_text;
 	const subjects = zm_subject;
@@ -63,7 +64,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 					<div className={isLoaded ? 'clipper' : 'clipperNoshadow imagePlaceholder'}>
 						<a href={`/ancientworld/books/${identifier}/1`}>
 							<img
-								src={`https://sites.dlib.nyu.edu/viewer/api/image/books/${identifier}/1/full/150,/0/default.jpg`}
+								src={`https://sites.dlib.nyu.edu/viewer/api/image/books/${identifier}/1/full/150,200/0/default.jpg`}
 								alt=""
 								title={title}
 								onLoad={imageLoad}
@@ -122,7 +123,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 							);
 						} catch (error) {
 							console.error('Error parsing subject:', subject, error);
-							return null; // Or return a fallback UI
+							return null;
 						}
 					})}
 				</div>
@@ -139,7 +140,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 							);
 						} catch (error) {
 							console.error('Error parsing provider:', provider, error);
-							return null; // Or return a fallback UI
+							return null;
 						}
 					})()}
 				</div>

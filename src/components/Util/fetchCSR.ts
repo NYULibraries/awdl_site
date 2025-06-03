@@ -40,7 +40,7 @@ const defaultResponse: SolrResponse = {
 	}
 };
 
-export async function fetchSSR(url: string = condensedUrl): Promise<SolrResponse> {
+export async function fetchCSR(url: string = condensedUrl): Promise<SolrResponse> {
 	try {
 		const response = await fetch(url, {
 			headers: {
