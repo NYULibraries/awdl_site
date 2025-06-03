@@ -3,6 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
+        - git checkout ancientworld-astro
         - npm ci
     build:
       commands:
