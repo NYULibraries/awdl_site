@@ -27,27 +27,6 @@ contentStore.set(data);
 			<SearchHeader client:only="react" />
 			<div class="items-widget">
 				<div class="top">
-					<div class="filters">
-						<select id="browse-select" aria-label="Sort Books">
-							<option
-								data-label-active="Sorting by Title"
-								data-label-inactive="Sort by Title"
-								data-sort-dir="asc"
-								value="iass_longlabel"
-								selected=""
-							>
-								Sorting by Title
-							</option>
-							<option
-								data-label-active="Sorting by Author"
-								data-label-inactive="Sort by Author"
-								data-sort-dir="asc"
-								value="ss_sauthor"
-							>
-								Sort by Author
-							</option>
-						</select>
-					</div>
 					<SearchSubheader
 						initialData={{
 							response: {
