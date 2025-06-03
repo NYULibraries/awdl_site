@@ -31,12 +31,12 @@ export async function fetchSolrData(
 		'sm_publisher',
 		'sm_field_publication_location',
 		'ss_publication_date_text',
-		'zm_subject',
-		'zm_provider',
 		'ss_series_label',
 		'iass_timestamp',
 		'sm_provider_nid',
+		'sm_provider_label',
 		'im_field_subject',
+		'sm_subject_label',
 		'bs_status'
 	];
 
@@ -63,3 +63,29 @@ export async function fetchSolrData(
 
 	return data;
 }
+
+export const fetchSolrDataByPID = async ({
+	start = 0,
+	rows = 12,
+	pid,
+	type
+}: {
+	start?: number;
+	rows?: number;
+	pid: string;
+	type: 'subject' | 'provider';
+}) => {
+	const data = await fetchSolrData({
+		start,
+		rows,
+		searchField:
+			type === 'subject'
+				? `im_field_subject:${pid}` // Use im_field_subject for subject queries
+				: `sm_provider_nid:${pid}`, // Use sm_provider_nid for provider queries
+		sortField: 'ss_longlabel',
+		sortDir: 'asc',
+		collectionCode: '(awdl%20OR%20egypt)'
+	});
+
+	return data;
+};

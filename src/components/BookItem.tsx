@@ -13,8 +13,10 @@ interface BookItemProps {
 		zm_subject: string[];
 		zm_provider: string[];
 		bs_status: boolean;
-		sm_provider_nid: string;
+		sm_provider_nid: string[];
 		im_field_subject: number[];
+		sm_provider_label: string[];
+		sm_subject_label: string[];
 	};
 }
 
@@ -28,11 +30,11 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 		sm_publisher,
 		sm_field_publication_location,
 		ss_publication_date_text,
-		zm_subject,
-		zm_provider,
 		bs_status,
 		sm_provider_nid,
-		im_field_subject
+		im_field_subject,
+		sm_provider_label,
+		sm_subject_label
 	} = document;
 	/* eslint-enable camelcase */
 
@@ -46,18 +48,18 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 	/* eslint-disable camelcase */
 	// Use ss_identifier instead of field identifier - done
 	const identifier = ss_book_identifier;
-	const title = ss_title_long;
+	const title = ss_title_long || 'N.A.';
 	const authors = sm_author || [];
 	// Series are all named different - still needs to be done
 	const series = sm_series;
-	// Assume can be more than one sm
+	// Assume can be more than one publisher, provider, and subject
 	const publisher = sm_publisher?.[0] || 'N.A.';
-	const publicationPlace = sm_field_publication_location[0];
-	const publicationDate = ss_publication_date_text;
-	const subjects = zm_subject;
-	const provider = zm_provider[0];
-	const providerCode = sm_provider_nid;
-	const subjectCodes = im_field_subject;
+	const publicationPlace = sm_field_publication_location[0] || 'N.A.';
+	const publicationDate = ss_publication_date_text || 'N.A.';
+	const providerCodes = sm_provider_nid || [];
+	const providers = sm_provider_label || [];
+	const subjectCodes = im_field_subject || [];
+	const subjects = sm_subject_label || [];
 	/* eslint-enable camelcase */
 
 	// eslint-disable-next-line camelcase
@@ -100,7 +102,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 				{/* Series - not fixed */}
 				<div className="md_series">
 					<span className="md_label">Series:</span>
-					<a className="md_series_each" href="/series/bulletin-of-the-american-society-of-papyrologists">
+					<a className="md_series_each" href="/ancientworld/series/bulletin-of-the-american-society-of-papyrologists">
 						Bulletin of the American Society of Papyrologists v. 3
 					</a>
 				</div>
@@ -119,36 +121,20 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 				{/* Subjects */}
 				<div className="md_subjects">
 					<span className="md_label">Subject:</span>
-					{subjects.map((subject, index) => {
-						try {
-							const subjectObj = JSON.parse(subject);
-							return (
-								<a key={index} className="md_subject" href={`/subjects/${subjectObj.tid}`}>
-									{subjectObj.name}
-								</a>
-							);
-						} catch (error) {
-							console.error('Error parsing subject:', subject, error);
-							return null;
-						}
-					})}
+					{subjects.map((subject: string, index: number) => (
+						<a key={index} className="md_subject" href={`/ancientworld/subjects/${subjectCodes[index]}`}>
+							{subject}
+						</a>
+					))}
 				</div>
 				{/* Partners */}
 				<div className="md_partner">
 					<span className="md_label">Provider:</span>
-					{(() => {
-						try {
-							const providerObj = JSON.parse(provider);
-							return (
-								<a className="md_provider" href={`/providers/${providerObj.nid}`}>
-									{providerObj.name}
-								</a>
-							);
-						} catch (error) {
-							console.error('Error parsing provider:', provider, error);
-							return null;
-						}
-					})()}
+					{providers.map((provider: string, index: number) => (
+						<a key={index} className="md_provider" href={`/ancientworld/providers/${providerCodes[index]}`}>
+							{provider}
+						</a>
+					))}
 				</div>
 			</div>
 		</article>

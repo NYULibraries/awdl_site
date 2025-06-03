@@ -1,0 +1,12 @@
+---
+import DefaultLayout from '../../layouts/DefaultLayout.astro';
+
+const { seriesPID } = Astro.params;
+if (!seriesPID) throw new Error('Series PID unfound');
+
+export const prerender = false;
+---
+
+<DefaultLayout>
+	<h1>Series {seriesPID}</h1>
+</DefaultLayout>

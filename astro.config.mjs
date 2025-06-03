@@ -6,9 +6,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
 	output: 'hybrid',
-	adapter: awsAmplify({
-		imageService: true
-	}),
+	adapter: awsAmplify(),
 	integrations: [react(), sitemap()],
 	base: '/ancientworld/',
 	markdown: {

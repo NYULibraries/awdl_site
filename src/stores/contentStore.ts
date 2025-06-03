@@ -1,13 +1,16 @@
 import { atom } from 'nanostores';
+import { type DocumentSchema } from '../components/Util/fetchCSR';
+import { z } from 'zod';
 
 interface SolrResponse {
 	responseHeader: Record<string, unknown>;
 	response: {
 		numFound: number;
 		start: number;
-		docs: any[];
+		docs: z.infer<typeof DocumentSchema>[];
 	};
 }
+
 interface FilterState {
 	field: string;
 	direction: 'asc' | 'desc';
