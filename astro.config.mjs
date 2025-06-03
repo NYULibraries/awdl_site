@@ -5,7 +5,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-	output: 'hybrid',
+	output: 'server',
 	adapter: awsAmplify({
 		imageService: true
 	}),
