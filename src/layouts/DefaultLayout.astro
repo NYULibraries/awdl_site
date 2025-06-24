@@ -3,21 +3,28 @@ import '../assets/sass/style.scss';
 import Header from '../components/Header/Header.astro';
 import Footer from '../components/Footer/Footer.astro';
 import Meta from '../components/Header/Meta.astro';
-// Import { metatags } from "../utils/Constants/metatags";
+import { metatags } from '../components/Header/metatags';
 
 interface Props {
+	title: string;
+	description?: string;
+	author?: string;
 	bodyID?: string;
 	bodyClass?: string;
 }
 
-const title = 'title';
-const description = 'desc';
-const { bodyID = '', bodyClass = '' }: Props = Astro.props;
+const {
+	title,
+	description = metatags.poweredDesc,
+	author = metatags.defaultAuthor,
+	bodyID = '',
+	bodyClass = ''
+}: Props = Astro.props;
 ---
 
 <html lang="en">
 	<head>
-		<Meta title={title} description={description} />
+		<Meta title={title} description={description} author={author} />
 	</head>
 	<body id={bodyID} class={bodyClass}>
 		<div id="skipnav"><a href="#mainContent">Skip navigation</a></div>
@@ -29,7 +36,7 @@ const { bodyID = '', bodyClass = '' }: Props = Astro.props;
 
 			WebFont.load({
 				google: {
-					families: ['Open Sans:400,600']
+					families: ['Open Sans:300,400,600']
 				},
 				active: function () {
 					document.documentElement.classList.add('wf-active');

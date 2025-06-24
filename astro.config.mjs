@@ -8,7 +8,7 @@ export default defineConfig({
 	output: 'hybrid',
 	adapter: awsAmplify(),
 	integrations: [react(), sitemap()],
-	base: '/ancientworld/',
+	base: '/ancientworld',
 	markdown: {
 		rehypePlugins: [[rehypeExternalLinks, { target: '_blank', rel: ['noopener'] }]]
 	}

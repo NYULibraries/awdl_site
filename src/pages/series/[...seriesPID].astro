@@ -1,12 +1,81 @@
 ---
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
+import Content from '../../components/Content';
+import SearchSubheader from '../../components/Search/Labels/SearchSubheader';
+import SearchPagination from '../../components/Search/Tools/SearchPagination';
+import { fetchSolrData, fetchSeriesData } from '../../Util/fetch.ts';
+import { contentStore } from '../../stores/contentStore';
+import SearchHeader from '../../components/Search/Labels/SearchHeader';
+import StoreInitializer from '../../components/Util/StoreInitializer';
 
 const { seriesPID } = Astro.params;
-if (!seriesPID) throw new Error('Series PID unfound');
+if (!seriesPID) throw new Error('Series PID not found');
 
 export const prerender = false;
+
+// First, fetch the series to get its collection identifier
+const seriesData = await fetchSeriesData();
+const seriesDoc = seriesData?.response?.docs?.find(
+	(doc: any) => doc.path_alias === seriesPID || doc.ss_series_label === seriesPID
+);
+
+// Get the collection identifier from the series
+const seriesCollectionId = seriesDoc?.sm_series_collection_identifier?.[0];
+
+// Then fetch books with the same collection identifier
+const data = await fetchSolrData({
+	start: 0,
+	rows: 12,
+	searchField: `sm_collection_identifier:${seriesCollectionId}`,
+	sortField: 'ss_longlabel',
+	sortDir: 'asc',
+	collectionCode: '(awdl%20OR%20egypt)'
+});
+
+// Initialize the content store after fetching data
+contentStore.set(data);
+
+// Use the series label from the found series document
+const seriesLabel = seriesDoc?.ss_series_label || seriesPID;
 ---
 
-<DefaultLayout>
-	<h1>Series {seriesPID}</h1>
+<DefaultLayout title={seriesLabel || 'Series'} bodyID="series">
+	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
+		<StoreInitializer initialData={data} initialSearchField={seriesLabel} client:only="react">
+			<SearchHeader client:only="react" />
+			<div class="items-widget">
+				<div class="top">
+					<SearchSubheader
+						initialData={{
+							response: {
+								numFound: data?.response.numFound,
+								start: data?.response.start,
+								docs: data?.response.docs
+							}
+						}}
+						client:only="react"
+					/>
+				</div>
+				<div
+					id="items"
+					class="widget items"
+					data-name="items"
+					data-rows="12"
+					data-source="https://discovery1.dlib.nyu.edu/solr/viewer/select"
+					data-fl="*"
+					data-fq-bundle="dlts_book"
+					data-fq-sm_collection_code="awdl"
+					data-numfound={data?.response.numFound}
+					data-start="0"
+					data-docslength={data?.response.docs.length}
+					data-requesterror="0"
+				>
+					<Content client:only="react" />
+				</div>
+				<div class="bottom text-center">
+					<SearchPagination rows={12} client:only="react" />
+				</div>
+			</div>
+		</StoreInitializer>
+	</main>
 </DefaultLayout>

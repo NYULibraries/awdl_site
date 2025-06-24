@@ -71,7 +71,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 				<div className="thumbs">
 					{!isLoaded && <BookItemPlaceholder />}
 					<div className={isLoaded ? 'clipper' : 'clipperNoshadow imagePlaceholder'}>
-						<a href={`${baseURL}books/${identifier}/1`}>
+						<a href={`${baseURL}/books/${identifier}/1`}>
 							<img
 								src={`https://sites.dlib.nyu.edu/viewer/api/image/books/${identifier}/1/full/150,200/0/default.jpg`}
 								alt=""
@@ -83,7 +83,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 				</div>
 				{/* Title */}
 				<h1 className="md_title">
-					<a href={`${baseURL}books/${identifier}/1`}>{title && title}</a>
+					<a href={`${baseURL}/books/${identifier}/1`}>{title && title}</a>
 				</h1>
 				{/* Authors */}
 				<div className="md_authors">
@@ -103,7 +103,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 				{/* Series - not fixed */}
 				<div className="md_series">
 					<span className="md_label">Series:</span>
-					<a className="md_series_each" href={`${baseURL}series/bulletin-of-the-american-society-of-papyrologists`}>
+					<a className="md_series_each" href={`${baseURL}/series/bulletin-of-the-american-society-of-papyrologists`}>
 						Bulletin of the American Society of Papyrologists v. 3
 					</a>
 				</div>
@@ -123,7 +123,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 				<div className="md_subjects">
 					<span className="md_label">Subject:</span>
 					{subjects.map((subject: string, index: number) => (
-						<a key={index} className="md_subject" href={`${baseURL}subjects/${subjectCodes[index]}`}>
+						<a key={index} className="md_subject" href={`${baseURL}/subjects/${subjectCodes[index]}`}>
 							{subject}
 						</a>
 					))}
@@ -132,7 +132,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 				<div className="md_partner">
 					<span className="md_label">Provider:</span>
 					{providers.map((provider: string, index: number) => (
-						<a key={index} className="md_provider" href={`${baseURL}providers/${providerCodes[index]}`}>
+						<a key={index} className="md_provider" href={`${baseURL}/providers/${providerCodes[index]}`}>
 							{provider}
 						</a>
 					))}

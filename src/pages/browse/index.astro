@@ -21,7 +21,7 @@ const data = await fetchSolrData({
 contentStore.set(data);
 ---
 
-<DefaultLayout bodyID="browse">
+<DefaultLayout title="Browse" bodyID="browse">
 	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
 		<StoreInitializer initialData={data} client:only="react">
 			<SearchHeader client:only="react" />

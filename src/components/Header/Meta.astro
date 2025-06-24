@@ -1,26 +1,32 @@
 ---
-const { title, description } = Astro.props;
+import { metatags } from './metatags';
+const { title, author, description } = Astro.props;
 
-/* eslint-disable capitalized-comments */
-// const siteName = metatags.siteName;
-// const url = env.PUBLIC_APPURL;
-// const type = metatags.type;
-// const author = metatags.defaultAuthor;
-/* eslint-enable capitalized-comments */
 const baseURL: string = import.meta.env.BASE_URL;
 ---
 
 <head>
-	<title>Partners: Ancient World Digital Library</title>
+	<title>{`${title}: Ancient World Digital Library`}</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
-	<meta property="og:site_name" content="Ancient World Digital Library" />
-	<meta property="og:title" content="Ancient World Digital Library" />
-	<meta property="og:description" content="Powered by NYU Digital Library Technology Services" />
-	<meta property="og:type" content="website" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="title" content={metatags.siteName} />
+	<meta name="description" content={description} />
+	<meta name="author" content={author} />
+	<meta property="og:site_name" content={metatags.siteName} />
+	<meta property="og:title" content={metatags.siteName} />
+	<meta property="og:description" content={metatags.poweredDesc} />
+	<meta property="og:type" content={metatags.type} />
 	<meta property="og:url" content={`${baseURL}`} />
 	<link rel="icon" type="image/x-icon" href=`${baseURL}/favicon.ico` />
 	<link rel="sitemap" href="/sitemap-index.xml" />
 </head>
 
 <!-- Google tag manager script -->
+<!-- <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-CCQL276SXW"></script> -->
+<!-- <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CCQL276SXW');
+</script> -->

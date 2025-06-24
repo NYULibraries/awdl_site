@@ -27,12 +27,10 @@ contentStore.set(data);
 const doc = data?.response?.docs?.[0] as { sm_provider_nid?: string[]; sm_provider_label?: string[] } | undefined;
 const providerIndex = doc?.sm_provider_nid?.findIndex((id) => id === providerPID);
 const providerLabel =
-	providerIndex !== undefined && providerIndex !== -1
-		? doc?.sm_provider_label?.[providerIndex]
-		: `Provider ID: ${providerPID}`;
+	providerIndex !== undefined && providerIndex !== -1 ? doc?.sm_provider_label?.[providerIndex] : '';
 ---
 
-<DefaultLayout bodyID="providers">
+<DefaultLayout title={providerLabel || 'Provider'} bodyID="providers">
 	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
 		<StoreInitializer initialData={data} initialSearchField={providerLabel} client:only="react">
 			<SearchHeader client:only="react" />

@@ -26,13 +26,10 @@ contentStore.set(data);
 // Match subject label to its id
 const doc = data?.response?.docs?.[0] as { im_field_subject?: number[]; sm_subject_label?: string[] } | undefined;
 const subjectIndex = doc?.im_field_subject?.findIndex((id) => id.toString() === subjectPID);
-const subjectLabel =
-	subjectIndex !== undefined && subjectIndex !== -1
-		? doc?.sm_subject_label?.[subjectIndex]
-		: `Subject ID: ${subjectPID}`;
+const subjectLabel = subjectIndex !== undefined && subjectIndex !== -1 ? doc?.sm_subject_label?.[subjectIndex] : '';
 ---
 
-<DefaultLayout bodyID="subjects">
+<DefaultLayout title={subjectLabel || 'Subject'} bodyID="subjects">
 	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
 		<StoreInitializer initialData={data} initialSearchField={subjectLabel} client:only="react">
 			<SearchHeader client:only="react" />

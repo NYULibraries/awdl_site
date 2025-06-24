@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { useStore } from '@nanostores/react';
-import { contentStore, searchFieldStore, pageStore } from '../../../stores/contentStore';
-import { fetchSolrData } from '../../../Util/fetch';
+import { searchFieldStore } from '../../../stores/contentStore';
 
 function SearchForm() {
 	const baseURL: string = import.meta.env.BASE_URL;
@@ -16,8 +15,8 @@ function SearchForm() {
 			inputRef.current.blur();
 		}
 
-		// Navigate to search page with query
-		const searchUrl = `${baseURL}search/?q=${encodeURIComponent(searchQuery)}&page=1`;
+		// Search url
+		const searchUrl = `${baseURL}/search/?q=${encodeURIComponent(searchQuery)}&page=1`;
 		window.location.href = searchUrl;
 	};
 

@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { useStore } from '@nanostores/react';
-import { filterStore, pageStore, contentStore } from '../../../stores/contentStore';
+import { filterStore, pageStore, contentStore, searchFieldStore } from '../../../stores/contentStore';
 import { fetchSolrData } from '../../../Util/fetch';
 
 const FilterDropdown = () => {
 	const filter = useStore(filterStore);
+	const searchquery = useStore(searchFieldStore);
 	const selectRef = useRef<HTMLSelectElement>(null);
 
 	const handleSortChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -19,7 +20,7 @@ const FilterDropdown = () => {
 		const newData = await fetchSolrData({
 			start: 0,
 			rows: 12,
-			searchField: '*:*',
+			searchField: searchquery,
 			sortField: field,
 			sortDir: direction,
 			collectionCode: '(awdl%20OR%20egypt)'
@@ -30,19 +31,21 @@ const FilterDropdown = () => {
 
 	useEffect(() => {
 		if (selectRef.current) {
-			selectRef.current.value = filter.field;
+			// Find the option that matches both field and direction
+			const options = selectRef.current.options;
+			for (let i = 0; i < options.length; i++) {
+				const option = options[i];
+				if (option.value === filter.field && option.getAttribute('data-sort-dir') === filter.direction) {
+					selectRef.current.selectedIndex = i;
+					break;
+				}
+			}
 		}
-	}, [filter.field]);
+	}, [filter.field, filter.direction]);
 
 	return (
 		<div className="filters">
-			<select
-				id="browse-select"
-				aria-label="Search Books"
-				value={filter.field}
-				onChange={handleSortChange}
-				ref={selectRef}
-			>
+			<select id="browse-select" aria-label="Search Books" onChange={handleSortChange} ref={selectRef}>
 				<option data-sort-dir="asc" value="ss_longlabel">
 					Sort by Title
 				</option>

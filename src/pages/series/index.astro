@@ -1,15 +1,16 @@
 ---
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
-import SeriesContentWrapped from '../../components/Series/SeriesContent';
+import SeriesContent from '../../components/Series/SeriesContent';
+import { fetchSeriesData } from '../../Util/fetch';
 
-const baseURL: string = import.meta.env.BASE_URL;
+const data = await fetchSeriesData();
 ---
 
-<DefaultLayout bodyID="series" bodyClass="page">
+<DefaultLayout title="Series" bodyID="series" bodyClass="page">
 	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
 		<header>
 			<h1 class="page-title">Series</h1>
 		</header>
-		<SeriesContentWrapped client:load />
+		<SeriesContent data={data} client:only="react" />
 	</main>
 </DefaultLayout>
