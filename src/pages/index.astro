@@ -22,7 +22,7 @@ const data = await fetchSolrData({
 contentStore.set(data);
 ---
 
-<DefaultLayout title="Home" bodyID="home" bodyClass="home">
+<DefaultLayout title="" bodyID="home" bodyClass="home">
 	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
 		<StoreInitializer initialData={data} client:only="react">
 			<div class="topHold flex-container">

@@ -110,7 +110,7 @@ export const fetchSeriesData = async (
 		collectionCode = '(awdl%20OR%20egypt)'
 	} = params;
 
-	const fields = ['ss_series_label', 'path_alias', 'sm_series_collection_identifier', 'bs_status'];
+	const fields = ['ss_series_label', 'path_alias', 'ss_series_identifier', 'bs_status'];
 
 	const fieldString = fields.join(',');
 

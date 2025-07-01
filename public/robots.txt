@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /
+Allow: /*.css$
+Allow: /*.js$
+Crawl-delay: 5
+Sitemap: https://awdl.dlib.nyu.edu/sitemap-index.xml
