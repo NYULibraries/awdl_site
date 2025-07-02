@@ -1,9 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { useStore } from '@nanostores/react';
 import { filterStore, pageStore, contentStore, searchFieldStore } from '../../../stores/contentStore';
-import { fetchSolrData } from '../../../Util/fetch';
+import { fetchSolrData, fetchSolrDataBySeriesIdentifier } from '../../../Util/fetch';
 
-const FilterDropdown = () => {
+interface FilterDropdownProps {
+	seriesIdentifier?: string;
+}
+
+const FilterDropdown = ({ seriesIdentifier }: FilterDropdownProps) => {
 	const filter = useStore(filterStore);
 	const searchquery = useStore(searchFieldStore);
 	const selectRef = useRef<HTMLSelectElement>(null);
@@ -17,14 +21,22 @@ const FilterDropdown = () => {
 		// Reset pagination
 		pageStore.set(1);
 
-		const newData = await fetchSolrData({
-			start: 0,
-			rows: 12,
-			searchField: searchquery,
-			sortField: field,
-			sortDir: direction,
-			collectionCode: '(awdl%20OR%20egypt)'
-		});
+		const newData = seriesIdentifier
+			? await fetchSolrDataBySeriesIdentifier({
+					start: 0,
+					rows: 12,
+					seriesIdentifier,
+					sortField: field,
+					sortDir: direction
+				})
+			: await fetchSolrData({
+					start: 0,
+					rows: 12,
+					searchField: searchquery,
+					sortField: field,
+					sortDir: direction,
+					collectionCode: '(awdl%20OR%20egypt)'
+				});
 
 		contentStore.set(newData);
 	};

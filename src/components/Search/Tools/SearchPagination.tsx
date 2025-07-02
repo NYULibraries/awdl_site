@@ -1,14 +1,15 @@
 import React from 'react';
 import { ConfigProvider, Pagination, type ThemeConfig } from 'antd';
-import { fetchSolrData } from '../../../Util/fetch';
-import { contentStore, pageStore, searchFieldStore } from '../../../stores/contentStore';
+import { fetchSolrData, fetchSolrDataBySeriesIdentifier } from '../../../Util/fetch';
+import { contentStore, pageStore, searchFieldStore, filterStore } from '../../../stores/contentStore';
 import { useStore } from '@nanostores/react';
 
 interface SearchPaginationProps {
 	rows: number;
+	seriesIdentifier?: string;
 }
 
-function SearchPagination({ rows = 12 }: SearchPaginationProps) {
+function SearchPagination({ rows = 12, seriesIdentifier }: SearchPaginationProps) {
 	const theme: ThemeConfig = {
 		components: {
 			Pagination: {
@@ -21,17 +22,28 @@ function SearchPagination({ rows = 12 }: SearchPaginationProps) {
 	const contentData = useStore(contentStore);
 	const currentPage = useStore(pageStore);
 	const searchQuery = useStore(searchFieldStore);
+	const filter = useStore(filterStore);
 
 	const onChange = async (page: number) => {
 		const start = (page - 1) * rows;
-		const newData = await fetchSolrData({
-			start,
-			rows,
-			searchField: searchQuery,
-			sortField: 'ss_longlabel',
-			sortDir: 'asc',
-			collectionCode: '(awdl%20OR%20egypt)'
-		});
+
+		const newData = seriesIdentifier
+			? await fetchSolrDataBySeriesIdentifier({
+					start,
+					rows,
+					seriesIdentifier,
+					sortField: filter.field,
+					sortDir: filter.direction
+				})
+			: await fetchSolrData({
+					start,
+					rows,
+					searchField: searchQuery,
+					sortField: filter.field,
+					sortDir: filter.direction,
+					collectionCode: '(awdl%20OR%20egypt)'
+				});
+
 		contentStore.set(newData);
 		pageStore.set(page);
 

@@ -30,6 +30,7 @@ export async function fetchSolrData(
 		'sm_author',
 		'sm_series',
 		'sm_series_label',
+		'sm_series_identifier',
 		'sm_publisher',
 		'sm_field_publication_location',
 		'ss_publication_date_text',
@@ -142,24 +143,60 @@ export const fetchSeriesData = async (
 	return data;
 };
 
-// Fetch books by series PID
-export const fetchSolrDataBySeriesPID = async ({
+// Fetch books by series identifier on seriesPID page
+export const fetchSolrDataBySeriesIdentifier = async ({
 	start = 0,
 	rows = 12,
-	seriesPID
+	seriesIdentifier,
+	sortField = 'ss_longlabel',
+	sortDir = 'asc'
 }: {
 	start?: number;
 	rows?: number;
-	seriesPID: string;
+	seriesIdentifier: string;
+	sortField?: string;
+	sortDir?: 'asc' | 'desc';
 }) => {
-	const data = await fetchSolrData({
-		start,
-		rows,
-		searchField: `sm_series:${seriesPID}`,
-		sortField: 'ss_longlabel',
-		sortDir: 'asc',
-		collectionCode: '(awdl%20OR%20egypt)'
+	const fields = [
+		'ss_book_identifier',
+		'ss_uri',
+		'ss_title_long',
+		'sm_author',
+		'sm_series',
+		'sm_series_label',
+		'sm_series_identifier',
+		'sm_publisher',
+		'sm_field_publication_location',
+		'ss_publication_date_text',
+		'iass_timestamp',
+		'sm_provider_nid',
+		'sm_provider_label',
+		'im_field_subject',
+		'sm_subject_label',
+		'sm_collection_identifier',
+		'bs_status'
+	];
+
+	const fieldString = fields.join(',');
+
+	const baseUrl = 'https://discovery1.dlib.nyu.edu/solr/viewer/select';
+	const url = `${baseUrl}?wt=json&q=*:*&fl=${fieldString}&fq=sm_collection_code:(awdl%20OR%20egypt)&fq=sm_series_identifier:${seriesIdentifier}&rows=${rows}&start=${start}&sort=${sortField}%20${sortDir}`;
+
+	const response = await fetch(url, {
+		headers: {
+			Accept: 'application/json'
+		}
 	});
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! status: ${response.status}`);
+	}
+
+	const data = await response.json();
+
+	if (!data.response || !data.response.docs) {
+		throw new Error('Invalid response structure from Solr');
+	}
 
 	return data;
 };

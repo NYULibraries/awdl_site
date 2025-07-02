@@ -26,7 +26,6 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 		ss_title_long,
 		sm_author,
 		sm_series,
-		ss_series_label,
 		sm_publisher,
 		sm_field_publication_location,
 		ss_publication_date_text,
@@ -44,6 +43,17 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 
 	const imageLoad = (): void => {
 		setIsLoaded(true);
+	};
+
+	// Eecode HTML entities
+	const decodeHtmlEntities = (text: string): string => {
+		return text
+			.replace(/&amp;/g, '&')
+			.replace(/&lt;/g, '<')
+			.replace(/&gt;/g, '>')
+			.replace(/&quot;/g, '"')
+			.replace(/&#39;/g, "'")
+			.replace(/&apos;/g, "'");
 	};
 
 	/* eslint-disable camelcase */
@@ -109,7 +119,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 				</div>
 				{/* Publisher */}
 				<div>
-					<span className="md_label">Publisher:</span> <span>{publisher}</span>
+					<span className="md_label">Publisher:</span> <span>{decodeHtmlEntities(publisher)}</span>
 				</div>
 				{/* Place of Publication */}
 				<div>

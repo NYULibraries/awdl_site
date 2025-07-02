@@ -3,7 +3,7 @@ import DefaultLayout from '../../layouts/DefaultLayout.astro';
 import Content from '../../components/Content';
 import SearchSubheader from '../../components/Search/Labels/SearchSubheader';
 import SearchPagination from '../../components/Search/Tools/SearchPagination';
-import { fetchSolrData, fetchSeriesData } from '../../Util/fetch.ts';
+import { fetchSeriesData, fetchSolrDataBySeriesIdentifier } from '../../Util/fetch.ts';
 import { contentStore } from '../../stores/contentStore';
 import SearchHeader from '../../components/Search/Labels/SearchHeader';
 import StoreInitializer from '../../components/Util/StoreInitializer';
@@ -13,36 +13,39 @@ if (!seriesPID) throw new Error('Series PID not found');
 
 export const prerender = false;
 
-// First, fetch the series to get its collection identifier
+// Fetch series and match seriesPID to path_alias
 const seriesData = await fetchSeriesData();
-const seriesDoc = seriesData?.response?.docs?.find(
-	(doc: any) => doc.path_alias === seriesPID || doc.ss_series_label === seriesPID
-);
+const seriesDoc = seriesData?.response?.docs?.find((doc: any) => doc.path_alias === seriesPID);
 
-// Get the collection identifier from the series
-const seriesCollectionId = seriesDoc?.sm_series_collection_identifier?.[0];
+if (!seriesDoc) {
+	throw new Error(`Series not found: ${seriesPID}`);
+}
 
-// Then fetch books with the same collection identifier
-const data = await fetchSolrData({
+// Get ss_series_identifier from the matching series
+const seriesIdentifier = seriesDoc.ss_series_identifier;
+
+if (!seriesIdentifier) {
+	throw new Error(`Series identifier not found for: ${seriesPID}`);
+}
+
+// Fetch all books containing the series identifier
+const data = await fetchSolrDataBySeriesIdentifier({
 	start: 0,
 	rows: 12,
-	searchField: `sm_collection_identifier:${seriesCollectionId}`,
-	sortField: 'ss_longlabel',
-	sortDir: 'asc',
-	collectionCode: '(awdl%20OR%20egypt)'
+	seriesIdentifier: seriesIdentifier
 });
 
 // Initialize the content store after fetching data
 contentStore.set(data);
 
 // Use the series label from the found series document
-const seriesLabel = seriesDoc?.ss_series_label || seriesPID;
+const seriesLabel = seriesDoc.ss_series_label || seriesPID;
 ---
 
 <DefaultLayout title={seriesLabel || 'Series'} bodyID="series">
 	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
 		<StoreInitializer initialData={data} initialSearchField={seriesLabel} client:only="react">
-			<SearchHeader client:only="react" />
+			<SearchHeader seriesLabel={seriesLabel} client:only="react" />
 			<div class="items-widget">
 				<div class="top">
 					<SearchSubheader
@@ -53,6 +56,7 @@ const seriesLabel = seriesDoc?.ss_series_label || seriesPID;
 								docs: data?.response.docs
 							}
 						}}
+						seriesIdentifier={seriesIdentifier}
 						client:only="react"
 					/>
 				</div>
@@ -73,7 +77,7 @@ const seriesLabel = seriesDoc?.ss_series_label || seriesPID;
 					<Content client:only="react" />
 				</div>
 				<div class="bottom text-center">
-					<SearchPagination rows={12} client:only="react" />
+					<SearchPagination rows={12} seriesIdentifier={seriesIdentifier} client:only="react" />
 				</div>
 			</div>
 		</StoreInitializer>

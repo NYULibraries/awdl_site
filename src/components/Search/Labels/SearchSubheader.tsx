@@ -13,9 +13,10 @@ interface SearchSubheaderProps {
 			docs: z.infer<typeof DocumentSchema>[];
 		};
 	};
+	seriesIdentifier?: string;
 }
 
-const SearchSubheader: React.FC<SearchSubheaderProps> = ({ initialData }) => {
+const SearchSubheader: React.FC<SearchSubheaderProps> = ({ initialData, seriesIdentifier }) => {
 	const data = useStore(contentStore) || initialData;
 
 	if (!data?.response) return null;
@@ -36,7 +37,7 @@ const SearchSubheader: React.FC<SearchSubheaderProps> = ({ initialData }) => {
 				Showing items <span className="start">{displayStart}</span> -{' '}
 				<span className="docslength">{displayLength}</span> of <span className="numfound">{numFound}</span>
 			</div>
-			<FilterDropdown />
+			<FilterDropdown seriesIdentifier={seriesIdentifier} />
 		</>
 	);
 };
