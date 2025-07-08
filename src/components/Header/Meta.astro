@@ -5,8 +5,14 @@ const { title, author, description } = Astro.props;
 const baseURL: string = import.meta.env.BASE_URL;
 ---
 
-<head>
-	<title>{title ? `${title} - Ancient World Digital Library Collection - NYU Libraries` : 'Ancient World Digital Library Collection - NYU Libraries'}</title>
+<Fragment>
+	<title>
+		{
+			title
+				? `${title} - Ancient World Digital Library Collection - NYU Libraries`
+				: 'Ancient World Digital Library Collection - NYU Libraries'
+		}
+	</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -20,7 +26,7 @@ const baseURL: string = import.meta.env.BASE_URL;
 	<meta property="og:url" content={`${baseURL}`} />
 	<link rel="icon" type="image/x-icon" href={`${baseURL}/favicon.ico`} />
 	<link rel="sitemap" href="/sitemap-index.xml" />
-</head>
+</Fragment>
 
 <!-- Google tag manager script -->
 <!-- <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-CCQL276SXW"></script> -->
