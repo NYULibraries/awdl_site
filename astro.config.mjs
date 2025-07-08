@@ -9,6 +9,7 @@ export default defineConfig({
 	adapter: awsAmplify(),
 	integrations: [react(), sitemap()],
 	base: '/ancientworld',
+	site: 'https://awdl.dlib.nyu.edu',
 	markdown: {
 		rehypePlugins: [[rehypeExternalLinks, { target: '_blank', rel: ['noopener'] }]]
 	}
