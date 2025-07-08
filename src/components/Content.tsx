@@ -9,6 +9,7 @@ const Content: React.FC = () => {
 	if (!data?.response) return null;
 
 	const docs = data.response.docs;
+	console.log(docs);
 
 	return (
 		<>

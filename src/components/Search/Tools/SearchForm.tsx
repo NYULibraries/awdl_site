@@ -8,6 +8,8 @@ function SearchForm() {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const searchField = useStore(searchFieldStore);
 
+	const isOnSeriesPage = typeof window !== 'undefined' && window.location.pathname.includes('/series/');
+
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const searchQuery = inputRef.current?.value || '*:*';
@@ -27,7 +29,7 @@ function SearchForm() {
 				name="q"
 				type="text"
 				className="searchfield"
-				defaultValue={searchField === '*:*' ? '' : searchField}
+				defaultValue={isOnSeriesPage ? '' : searchField === '*:*' ? '' : searchField}
 				placeholder="Search titles, subjects, authors..."
 				title="Enter the terms you wish to search for."
 				aria-label="Search"

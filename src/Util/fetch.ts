@@ -10,20 +10,8 @@ interface SolrParams {
 	collectionCode?: string;
 }
 
-// Fetch Books
-export async function fetchSolrData(
-	params: SolrParams = {
-		start: 0,
-		rows: 12,
-		searchField: '*:*',
-		sortField: 'ss_longlabel',
-		sortDir: 'asc',
-		collectionCode: '(awdl%20OR%20egypt)'
-	}
-): Promise<SolrResponse> {
-	const { start, rows, searchField, sortField, sortDir, collectionCode } = params;
-
-	const fields = [
+const getBookFields = (additionalFields: string[] = []): string[] => {
+	const baseFields = [
 		'ss_book_identifier',
 		'ss_uri',
 		'ss_title_long',
@@ -40,8 +28,28 @@ export async function fetchSolrData(
 		'im_field_subject',
 		'sm_subject_label',
 		'sm_collection_identifier',
+		'zm_series_data_x',
 		'bs_status'
 	];
+
+	return [...baseFields, ...additionalFields];
+};
+
+// Fetch Books
+export async function fetchSolrData(
+	params: SolrParams = {
+		start: 0,
+		rows: 12,
+		searchField: '*:*',
+		sortField: 'ss_longlabel',
+		sortDir: 'asc',
+		collectionCode: '(awdl%20OR%20egypt)'
+	},
+	additionalFields: string[] = [] // Allow additional fields
+): Promise<SolrResponse> {
+	const { start, rows, searchField, sortField, sortDir, collectionCode } = params;
+
+	const fields = getBookFields(additionalFields);
 
 	const fieldString = fields.join(',');
 
@@ -64,9 +72,23 @@ export async function fetchSolrData(
 		throw new Error('Invalid response structure from Solr');
 	}
 
+	// Parse zm_series_data_x 
+	data.response.docs = data.response.docs.map((doc: any) => {
+		if (doc.zm_series_data_x && Array.isArray(doc.zm_series_data_x) && doc.zm_series_data_x.length > 0) {
+			try {
+				doc.zm_series_data_parsed = JSON.parse(doc.zm_series_data_x[0]);
+			} catch (error) {
+				console.warn('Failed to parse zm_series_data_x for document:', doc.ss_book_identifier);
+				doc.zm_series_data_parsed = null;
+			}
+		}
+		return doc;
+	});
+
 	return data;
 }
 
+// Fetch books by subject or provider PID on subject or provider pages
 export const fetchSolrDataByPID = async ({
 	start = 0,
 	rows = 12,
@@ -149,33 +171,17 @@ export const fetchSolrDataBySeriesIdentifier = async ({
 	rows = 12,
 	seriesIdentifier,
 	sortField = 'ss_longlabel',
-	sortDir = 'asc'
+	sortDir = 'asc',
+	additionalFields = [] // Allow additional fields
 }: {
 	start?: number;
 	rows?: number;
 	seriesIdentifier: string;
 	sortField?: string;
 	sortDir?: 'asc' | 'desc';
+	additionalFields?: string[];
 }) => {
-	const fields = [
-		'ss_book_identifier',
-		'ss_uri',
-		'ss_title_long',
-		'sm_author',
-		'sm_series',
-		'sm_series_label',
-		'sm_series_identifier',
-		'sm_publisher',
-		'sm_field_publication_location',
-		'ss_publication_date_text',
-		'iass_timestamp',
-		'sm_provider_nid',
-		'sm_provider_label',
-		'im_field_subject',
-		'sm_subject_label',
-		'sm_collection_identifier',
-		'bs_status'
-	];
+	const fields = getBookFields(additionalFields);
 
 	const fieldString = fields.join(',');
 
