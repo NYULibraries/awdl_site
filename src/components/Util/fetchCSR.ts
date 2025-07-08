@@ -8,13 +8,16 @@ const DocumentSchema = z
 		ss_uri: z.string().optional(),
 		ss_title_long: z.string(),
 		sm_author: z.array(z.string()).optional(),
-		sm_series: z.array(z.string()).optional(),
+		zm_series_data_x: z.array(z.string()).optional(),
+		sm_series_label: z.array(z.string()).optional(),
+		sm_series_identifier: z.array(z.string()).optional(),
 		sm_publisher: z.array(z.string()).optional(),
 		sm_field_publication_location: z.array(z.string()).optional(),
 		ss_publication_date_text: z.string().optional(),
-		zm_subject: z.array(z.string()).optional(),
-		zm_provider: z.array(z.string()).optional(),
-		ss_series_label: z.string().optional(),
+		im_field_subject: z.array(z.number()).optional(),
+		sm_provider_nid: z.array(z.string()).optional(),
+		sm_provider_label: z.array(z.string()).optional(),
+		sm_subject_label: z.array(z.string()).optional(),
 		bs_status: z.boolean().optional()
 	})
 	.passthrough();

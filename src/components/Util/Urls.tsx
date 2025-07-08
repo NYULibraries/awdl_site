@@ -1,25 +1,7 @@
-const fields = [
-	'ss_book_identifier',
-	'ss_uri',
-	'ss_title_long',
-	'sm_author',
-	'sm_series',
-	'sm_publisher',
-	'sm_field_publication_location',
-	'ss_publication_date_text',
-	'zm_subject',
-	'zm_provider',
-	'ss_series_label',
-	'iass_timestamp',
-	'bs_status'
-];
-
-const createFieldString = (fieldsArray: string[]): string => {
-	return fieldsArray.join(',');
-};
+import { getBookFields } from '../../Util/fetch';
 
 const collectionCode = '(awdl%20OR%20egypt)';
-const fieldString = createFieldString(fields);
+const fieldString = getBookFields().join(',');
 export const solrUrl = `https://discovery1.dlib.nyu.edu/solr/viewer/select?wt=json&q=*:*&fl=*&fq=sm_collection_code:awdl&rows=12&start=0&sort=ss_longlabel%20asc`;
 export const condensedUrl = `https://discovery1.dlib.nyu.edu/solr/viewer/select?wt=json&q=*:*&fl=${fieldString}&fq=sm_collection_code:${collectionCode}&rows=12&start=0&sort=ss_longlabel%20asc`;
 // Solr url for series

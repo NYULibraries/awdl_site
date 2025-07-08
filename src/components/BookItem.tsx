@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import BookItemPlaceholder from './BookItemPlaceholder';
 
+interface SeriesData {
+	series_book_collections: any[];
+	series_book_identifier: string;
+	series_book_label: string;
+	series_book_nid: string;
+	series_book_volume_number: string;
+	series_book_volume_number_str: string;
+	series_identifier: string;
+	series_label: string;
+	series_nid: string;
+}
+
 interface BookItemProps {
 	document: {
 		ss_book_identifier: string;
 		ss_title_long: string;
 		sm_author: string[];
-		sm_series: string[];
+		zm_series_data_x: SeriesData[] | null;
 		ss_series_label: string[];
 		sm_publisher: string[];
 		sm_field_publication_location: string[];
@@ -25,7 +37,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 		ss_book_identifier,
 		ss_title_long,
 		sm_author,
-		sm_series,
+		zm_series_data_x,
 		sm_publisher,
 		sm_field_publication_location,
 		ss_publication_date_text,
@@ -62,7 +74,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 	const title = ss_title_long || 'N.A.';
 	const authors = sm_author || [];
 	// Series are all named different - still needs to be done
-	const series = sm_series;
+	const series = zm_series_data_x;
 	// Assume can be more than one publisher, provider, and subject
 	const publisher = sm_publisher?.[0] || 'N.A.';
 	const publicationPlace = sm_field_publication_location?.[0] || 'N.A.';
@@ -99,7 +111,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 				<div className="md_authors">
 					<span className="md_label">Author:</span>{' '}
 					{authors.length > 0 ? (
-						authors.map((author, index) => {
+						authors.map((author: string, index: number) => {
 							return (
 								<span key={index} className="md_author">
 									{author}
@@ -113,9 +125,12 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 				{/* Series - not fixed */}
 				<div className="md_series">
 					<span className="md_label">Series:</span>
-					<a className="md_series_each" href={`${baseURL}/series/bulletin-of-the-american-society-of-papyrologists`}>
-						Bulletin of the American Society of Papyrologists v. 3
-					</a>
+					{series && series.length > 0 &&
+						series.map((series: SeriesData, index: number) => (
+							<a key={index} className="md_series_each" href={`${baseURL}/series/${series.series_identifier}`}>
+								{series.series_label}
+							</a>
+						))}
 				</div>
 				{/* Publisher */}
 				<div>
