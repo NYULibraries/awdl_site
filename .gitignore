@@ -30,3 +30,11 @@ src/components/Test.tsx
 src/pages/atest.astro
 src/pages/api
 src/pages/api/viewer.json.tsx
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/tests-examples/
+/tests/card.spec.ts

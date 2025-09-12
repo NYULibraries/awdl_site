@@ -12,5 +12,10 @@ export default defineConfig({
 	site: 'https://awdl.dlib.nyu.edu',
 	markdown: {
 		rehypePlugins: [[rehypeExternalLinks, { target: '_blank', rel: ['noopener'] }]]
+	},
+	redirects: {
+		'/favicon.ico': '/ancientworld/favicon.ico',
+		'/robots.txt': '/ancientworld/robots.txt',
+		'/sitemap-index.xml': '/ancientworld/sitemap-index.xml'
 	}
 });

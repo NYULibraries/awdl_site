@@ -29,7 +29,7 @@ const data = await fetchSolrData({
 contentStore.set(data);
 ---
 
-<DefaultLayout title="Search" bodyID="search">
+<DefaultLayout title="Search Results" bodyID="search">
 	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
 		<StoreInitializer initialData={data} initialSearchField={searchQuery} client:only="react">
 			<SearchHeader client:only="react" />

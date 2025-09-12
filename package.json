@@ -15,7 +15,13 @@
     "lint": "npx eslint .",
     "fixlint": "npx eslint . --fix",
     "format": "prettier --check 'src/**/**.{js,jsx,css,astro}'",
-    "fixformat": "prettier --write 'src/**/**.{js,jsx,css,astro}'"
+    "fixformat": "prettier --write 'src/**/**.{js,jsx,css,astro}'",
+    "e2etest": "npx playwright test",
+    "e2etest:ui": "npx playwright test --ui",
+    "e2etest:rerun": "npx playwright test --last-failed",
+    "e2etest:debug": "npx playwright test --debug",
+    "e2etest:report": "npx playwright show-report"
+
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -38,8 +44,10 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "@stylistic/eslint-plugin": "^1.6.2",
     "@stylistic/eslint-plugin-js": "^1.6.2",
+    "@types/node": "^24.3.1",
     "@types/react": "^18.3.11",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
