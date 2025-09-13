@@ -168,5 +168,6 @@ test.describe('Searchbar Tests', () => {
 
 		// Check spaces are properly encoded
 		expect(currentUrl).toContain('test%20query%20with%20spaces');
+        // TODO: check for other search params
 	});
 });
