@@ -62,6 +62,7 @@ function SearchPagination({ rows = 12, seriesIdentifier }: SearchPaginationProps
 	return (
 		<ConfigProvider theme={theme}>
 			<Pagination
+				data-testid="search-pagination"
 				current={currentPage}
 				showSizeChanger={false}
 				pageSize={rows}

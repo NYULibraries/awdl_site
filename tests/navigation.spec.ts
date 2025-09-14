@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import { checkHome } from './helpers/nav';
 
 interface NavigationItem {
 	path: string;
@@ -55,10 +56,7 @@ const navigationItems: NavigationItem[] = [
 
 test.describe('Navigation Menu Tests', () => {
 	test.beforeEach(async ({ page }: { page: Page }) => {
-		await page.goto('http://localhost:4321/ancientworld/');
-		console.log('Current URL after goto:', page.url());
-		await expect(page.locator('h1.sitename')).toHaveText('Ancient World Digital Library');
-		await expect(page.locator(`${navigationItems[0].hElement}:has-text("${navigationItems[0].hText}")`)).toBeVisible();
+		await checkHome(page);
 		const nav = page.locator('nav.navbar');
 		await expect(nav).toBeVisible();
 		for (const item of navigationItems) {

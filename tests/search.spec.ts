@@ -1,4 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
+import { checkHome } from './helpers/nav';
+import { checkPaginationVisibility } from './helpers/pagination';
+import { checkSearchInputIsCleared, checkSearchInputIsFilled, submitSearch, checkSearchResultsHeader } from './helpers/search';
 
 test.describe('Searchbar Tests', () => {
 	test.beforeEach(async ({ page }: { page: Page }) => {
@@ -7,39 +10,28 @@ test.describe('Searchbar Tests', () => {
 	});
 	test('search bar is cleared when returning to home page', async ({ page }: { page: Page }) => {
 		// Search item
-		const searchInput = page.locator('input[name="q"]');
-		await searchInput.fill('a cow of sin');
-		await page.locator('form.dl-search').press('Enter');
+		await submitSearch(page, 'a cow of sin');
 
 		// Wait for search results page
 		await page.waitForURL('**/search/**');
 
 		// Navigate back to home page by clicking the Home link
 		await page.click('nav a:has-text("Home")');
-		await expect(page.locator('h1.sitename')).toHaveText('Ancient World Digital Library');
+        await checkHome(page);
 
 		// Check searchbar is cleared
-		const homeSearchInput = page.locator('input[name="q"]');
-		await expect(homeSearchInput).toBeVisible();
-		const searchValue = await homeSearchInput.inputValue();
-		expect(searchValue).toBe('');
+		await checkSearchInputIsCleared(page);
 	});
 
 	test('Search for a single item with no pagination, using "a cow of sin"', async ({ page }: { page: Page }) => {
-		const searchInput = page.locator('input[name="q"]');
-		await expect(searchInput).toBeVisible();
-
-		// Search for single item
-		await searchInput.fill('a cow of sin');
-		await page.locator('form.dl-search').press('Enter');
+        // Submit search
+		await submitSearch(page, 'a cow of sin');
 
 		// Wait for search results and check contents load
 		await page.waitForURL('**/search/**');
-		await expect(page.locator('h1.sitename')).toHaveText('Ancient World Digital Library');
 
 		// Search result header
-		await expect(page.locator('h1.page-title')).toHaveText('Search Results for: a cow of sin');
-		await expect(page.locator('div.resultsnum')).toHaveText('Showing items 1 - 1 of 1');
+		await checkSearchResultsHeader(page, 'a cow of sin', true, false, 1);
 
 		// Check for card
 		await page.waitForSelector('div.card', { timeout: 10000 });
@@ -49,14 +41,12 @@ test.describe('Searchbar Tests', () => {
 		// one result for cow of sin
 		expect(cardCount).toBe(1);
 
-        //TODO: check for pagination
+        // Pagination
+		await checkPaginationVisibility(page, false);
 	});
 
 	test('search for item that does not exist, using "a cow of sinsss"', async ({ page }: { page: Page }) => {
-		const searchInput = page.locator('input[name="q"]');
-		await expect(searchInput).toBeVisible();
-		await searchInput.fill('a cow of sinsss');
-		await page.locator('form.dl-search').press('Enter');
+		await submitSearch(page, 'a cow of sinsss');
 
 		// Wait for search results and check contents load
 		await page.waitForURL('**/search/**');
@@ -76,7 +66,8 @@ test.describe('Searchbar Tests', () => {
 		const cardCount = await cards.count();
 		expect(cardCount).toBe(0);
 
-		//TODO: check for pagination
+		// Check pagination is not visible (no results)
+		await checkPaginationVisibility(page, false);
 	});
 
 	test('try search with common terms with many results', async ({ page }: { page: Page }) => {
@@ -94,7 +85,9 @@ test.describe('Searchbar Tests', () => {
 			// Check results are > 0
 			const hasResults = (await page.locator('.item').count()) > 0;
 			expect(hasResults).toBe(true);
-			//TODO: check for pagination
+
+			// Check pagination visibility (should be visible for multiple results)
+			await checkPaginationVisibility(page, true);
 		}
 	});
 	test('search form accessibility and keyboard navigation', async ({ page }: { page: Page }) => {
@@ -135,9 +128,7 @@ test.describe('Searchbar Tests', () => {
 		}
 	});
 	test('search maintains state when navigating using window stack', async ({ page }: { page: Page }) => {
-		const searchInput = page.locator('input[name="q"]');
-		await searchInput.fill('a cow of sin');
-		await page.locator('form.dl-search').press('Enter');
+		await submitSearch(page, 'a cow of sin');
 
 		// Wait for search results and check contents load
 		await page.waitForURL('**/search/**');
@@ -154,9 +145,7 @@ test.describe('Searchbar Tests', () => {
 		await expect(page.locator('h1.page-title')).toHaveText('Search Results for: a cow of sin');
 	});
 	test('check URL parameters are formatted correctly after search', async ({ page }: { page: Page }) => {
-		const searchInput = page.locator('input[name="q"]');
-		await searchInput.fill('test query with spaces');
-		await page.locator('form.dl-search').press('Enter');
+		await submitSearch(page, 'test query with spaces');
 
 		await page.waitForURL('**/search/**');
 
@@ -168,6 +157,6 @@ test.describe('Searchbar Tests', () => {
 
 		// Check spaces are properly encoded
 		expect(currentUrl).toContain('test%20query%20with%20spaces');
-        // TODO: check for other search params
+		// TODO: check for other search terms
 	});
 });
