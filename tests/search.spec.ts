@@ -1,93 +1,87 @@
 import { test, expect, type Page } from '@playwright/test';
-import { checkHome } from './helpers/nav';
-import { checkPaginationVisibility } from './helpers/pagination';
-import { checkSearchInputIsCleared, checkSearchInputIsFilled, submitSearch, checkSearchResultsHeader } from './helpers/search';
+import { resetToHome } from './helpers/nav';
+import {
+	checkSearchInputIsCleared,
+	checkSearchInputIsFilled,
+	submitSearch,
+	checkSingleSearchResult,
+	checkNoSearchResults,
+	checkMultipleSearchResults,
+} from './helpers/search';
+
+test.describe('Collection Overview Search Tests', () => {
+	test.beforeEach(async ({ page }: { page: Page }) => {
+		await resetToHome(page);
+	});
+	test('Check results after clicking on a collection in Collections Overview Page', async ({
+		page
+	}: {
+		page: Page;
+	}) => {
+		await page.click('nav a:has-text("Collections Overview")');
+		await page.waitForURL('**/collectionsoverview');
+	});
+});
+
+test.describe('Series Search Tests', () => {
+	test.beforeEach(async ({ page }: { page: Page }) => {
+		await resetToHome(page);
+	});
+	test('Check results after clicking on a series in Series Page', async ({ page }: { page: Page }) => {
+		await page.click('nav a:has-text("Series")');
+		await page.waitForURL('**/series');
+	});
+});
 
 test.describe('Searchbar Tests', () => {
 	test.beforeEach(async ({ page }: { page: Page }) => {
-		await page.goto('http://localhost:4321/ancientworld/');
-		await expect(page.locator('h1.sitename')).toHaveText('Ancient World Digital Library');
+		// reset to home page
+		await resetToHome(page);
 	});
 	test('search bar is cleared when returning to home page', async ({ page }: { page: Page }) => {
 		// Search item
 		await submitSearch(page, 'a cow of sin');
 
-		// Wait for search results page
-		await page.waitForURL('**/search/**');
-
 		// Navigate back to home page by clicking the Home link
 		await page.click('nav a:has-text("Home")');
-        await checkHome(page);
+		await page.waitForURL('**/ancientworld/');
+		await expect(page.locator(`h3:has-text("Recently Added Titles")`)).toBeVisible();
 
 		// Check searchbar is cleared
 		await checkSearchInputIsCleared(page);
 	});
 
 	test('Search for a single item with no pagination, using "a cow of sin"', async ({ page }: { page: Page }) => {
-        // Submit search
+		// Submit search
 		await submitSearch(page, 'a cow of sin');
 
-		// Wait for search results and check contents load
-		await page.waitForURL('**/search/**');
-
-		// Search result header
-		await checkSearchResultsHeader(page, 'a cow of sin', true, false, 1);
-
-		// Check for card
-		await page.waitForSelector('div.card', { timeout: 10000 });
-		const cards = page.locator('div.card');
-		const cardCount = await cards.count();
-
-		// one result for cow of sin
-		expect(cardCount).toBe(1);
-
-        // Pagination
-		await checkPaginationVisibility(page, false);
+		// Check single search result
+		await checkSingleSearchResult(page, 'a cow of sin');
 	});
 
 	test('search for item that does not exist, using "a cow of sinsss"', async ({ page }: { page: Page }) => {
+		// Submit search
 		await submitSearch(page, 'a cow of sinsss');
 
-		// Wait for search results and check contents load
-		await page.waitForURL('**/search/**');
-		await expect(page.locator('h1.sitename')).toHaveText('Ancient World Digital Library');
-
-		// Search result header
-		await expect(page.locator('h1.page-title')).toHaveText('Search Results for: a cow of sinsss');
-		await expect(page.locator('div.resultsnum')).not.toBeVisible();
-
-		// Check no results messages
-		const noResultsDiv = page.locator('div.col');
-		await expect(noResultsDiv).toBeVisible();
-		await expect(noResultsDiv.locator('p').first()).toHaveText('Sorry, no results found.');
-		await expect(noResultsDiv.locator('p').nth(1)).toHaveText('Try a different term.');
-
-		const cards = page.locator('div.card');
-		const cardCount = await cards.count();
-		expect(cardCount).toBe(0);
-
-		// Check pagination is not visible (no results)
-		await checkPaginationVisibility(page, false);
+		// Check no search results
+		await checkNoSearchResults(page);
 	});
 
 	test('try search with common terms with many results', async ({ page }: { page: Page }) => {
-		const searchTerms = ['ancient', 'egypt', 'greek'];
-		for (const term of searchTerms) {
-			await page.goto('http://localhost:4321/ancientworld/');
-			await expect(page.locator('h1.sitename')).toHaveText('Ancient World Digital Library');
-			const searchInput = page.locator('input[name="q"]');
-			// Search
-			await searchInput.fill(term);
-			await page.locator('form.dl-search').press('Enter');
-			// Wait for search results and check contents load
-			await page.waitForURL('**/search/**');
-			await expect(page.locator('h1.page-title')).toHaveText(`Search Results for: ${term}`);
-			// Check results are > 0
-			const hasResults = (await page.locator('.item').count()) > 0;
-			expect(hasResults).toBe(true);
+		const searchTerms = [
+			{ term: 'ancient', totalResults: 88 },
+			{ term: 'egypt', totalResults: 292 },
+			{ term: 'greek', totalResults: 79 }
+		];
+		for (const { term, totalResults } of searchTerms) {
+			// reset to home page
+			await resetToHome(page);
 
-			// Check pagination visibility (should be visible for multiple results)
-			await checkPaginationVisibility(page, true);
+			// Submit search
+			await submitSearch(page, term);
+
+			// Check that multiple search results are displayed
+			await checkMultipleSearchResults(page, term, totalResults);
 		}
 	});
 	test('search form accessibility and keyboard navigation', async ({ page }: { page: Page }) => {
@@ -105,49 +99,42 @@ test.describe('Searchbar Tests', () => {
 		await expect(searchInput).toBeFocused();
 	});
 	test.skip('search results pagination works', async ({ page }: { page: Page }) => {
-		const searchInput = page.locator('input[name="q"]');
-		await searchInput.fill('ancient');
-		await page.locator('form.dl-search').press('Enter');
+		// Submit search
+		await submitSearch(page, 'egypt');
 
-		// Wait for search results
-		await page.waitForURL('**/search/**');
+		// Check that multiple search results are displayed
+		await checkMultipleSearchResults(page, 'egypt', 292);
 
-		// Check if pagination is present (only if there are enough results)
-		const pagination = page.locator('.ant-pagination');
-		const hasPagination = await pagination.isVisible();
-
-		if (hasPagination) {
-			// Check that pagination controls are present
-			await expect(pagination).toBeVisible();
-			// Try clicking on page 2 if it exists
-			const page2Button = page.locator('.ant-pagination-item-2');
-			if (await page2Button.isVisible()) {
-				await page2Button.click();
-				await page.waitForURL('**/search/**page=2**');
-			}
+		// Click last page
+		const lastPageButton = page.locator('li[title="25"]');
+		if (await lastPageButton.isVisible()) {
+			await lastPageButton.click();
+			await page.waitForURL('**/search/q=egypt&page=25');
 		}
 	});
 	test('search maintains state when navigating using window stack', async ({ page }: { page: Page }) => {
 		await submitSearch(page, 'a cow of sin');
 
-		// Wait for search results and check contents load
-		await page.waitForURL('**/search/**');
-		await expect(page.locator('h1.page-title')).toHaveText('Search Results for: a cow of sin');
+		// Check single search result
+		await checkSingleSearchResult(page, 'a cow of sin');
 
 		// Change pages
 		await page.goto('http://localhost:4321/ancientworld/browse');
-		await expect(page.locator('h1.sitename')).toHaveText('Ancient World Digital Library');
+		await expect(page.locator('h1.page-title')).toHaveText('Browse titles');
+
+		// Check search is empty
+		await checkSearchInputIsCleared(page);
 
 		// Use browser back button
 		await page.goBack();
 		await page.waitForURL('**/search/**');
 
-		await expect(page.locator('h1.page-title')).toHaveText('Search Results for: a cow of sin');
+		// Check search header again and check if search is repopulated
+		await checkSearchInputIsFilled(page, 'a cow of sin');
+		await checkSingleSearchResult(page, 'a cow of sin');
 	});
-	test('check URL parameters are formatted correctly after search', async ({ page }: { page: Page }) => {
+	test('check URL parameters are formatted correctly after search with spaces', async ({ page }: { page: Page }) => {
 		await submitSearch(page, 'test query with spaces');
-
-		await page.waitForURL('**/search/**');
 
 		// Check that URL contains properly encoded search parameters
 		const currentUrl = page.url();
@@ -158,5 +145,17 @@ test.describe('Searchbar Tests', () => {
 		// Check spaces are properly encoded
 		expect(currentUrl).toContain('test%20query%20with%20spaces');
 		// TODO: check for other search terms
+	});
+	test('check URL parameters are formatted correctly after search with special characters', async ({
+		page
+	}: {
+		page: Page;
+	}) => {
+		await submitSearch(page, '!!!');
+
+		const currentUrl = page.url();
+		expect(currentUrl).toContain('/search/');
+		expect(currentUrl).toContain('q=!!!');
+		expect(currentUrl).toContain('page=1');
 	});
 });

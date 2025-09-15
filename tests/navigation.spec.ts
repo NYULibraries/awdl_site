@@ -1,5 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
-import { checkHome } from './helpers/nav';
+import { resetToHome } from './helpers/nav';
 
 interface NavigationItem {
 	path: string;
@@ -54,9 +54,9 @@ const navigationItems: NavigationItem[] = [
 	}
 ];
 
-test.describe('Navigation Menu Tests', () => {
+test.describe('Navbar Menu Tests', () => {
 	test.beforeEach(async ({ page }: { page: Page }) => {
-		await checkHome(page);
+		await resetToHome(page);
 		const nav = page.locator('nav.navbar');
 		await expect(nav).toBeVisible();
 		for (const item of navigationItems) {
