@@ -1,5 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
-import { resetToHome } from './helpers/nav';
+import { navigateToHome, navigateToCollectionOverview, navigateToSeries } from './helpers/nav';
 import {
 	checkSearchInputIsCleared,
 	checkSearchInputIsFilled,
@@ -7,36 +7,41 @@ import {
 	checkSingleSearchResult,
 	checkNoSearchResults,
 	checkMultipleSearchResults,
+	checkPaginatedMultipleSearchResults
 } from './helpers/search';
+
+// Testing for pagination alongside the search results rendering
 
 test.describe('Collection Overview Search Tests', () => {
 	test.beforeEach(async ({ page }: { page: Page }) => {
-		await resetToHome(page);
+		await navigateToCollectionOverview(page);
 	});
 	test('Check results after clicking on a collection in Collections Overview Page', async ({
 		page
 	}: {
 		page: Page;
 	}) => {
-		await page.click('nav a:has-text("Collections Overview")');
-		await page.waitForURL('**/collectionsoverview');
+		await page.click('div.card a:has-text("Ancient Judaism")');
+		await page.waitForURL('**/collectionsoverview/"ancient%20judaism"&page=1');
+		await checkMultipleSearchResults(page, 'ancient judaism', 1);
 	});
 });
 
+// TODO: series needs page number
 test.describe('Series Search Tests', () => {
 	test.beforeEach(async ({ page }: { page: Page }) => {
-		await resetToHome(page);
+		await navigateToSeries(page);
 	});
 	test('Check results after clicking on a series in Series Page', async ({ page }: { page: Page }) => {
-		await page.click('nav a:has-text("Series")');
-		await page.waitForURL('**/series');
+		await page.click('div.card a:has-text("Through the eye" series)');
+		await page.waitForURL('**/series/"through-the-eye-series"&page=1');
 	});
 });
 
 test.describe('Searchbar Tests', () => {
 	test.beforeEach(async ({ page }: { page: Page }) => {
 		// reset to home page
-		await resetToHome(page);
+		await navigateToHome(page);
 	});
 	test('search bar is cleared when returning to home page', async ({ page }: { page: Page }) => {
 		// Search item
@@ -75,7 +80,7 @@ test.describe('Searchbar Tests', () => {
 		];
 		for (const { term, totalResults } of searchTerms) {
 			// reset to home page
-			await resetToHome(page);
+			await navigateToHome(page);
 
 			// Submit search
 			await submitSearch(page, term);
@@ -84,7 +89,7 @@ test.describe('Searchbar Tests', () => {
 			await checkMultipleSearchResults(page, term, totalResults);
 		}
 	});
-	test('search form accessibility and keyboard navigation', async ({ page }: { page: Page }) => {
+	test('search form accessibility labels and keyboard navigation (tabbable)', async ({ page }: { page: Page }) => {
 		// Check that search form has role
 		const searchForm = page.locator('form[role="search"]');
 		await expect(searchForm).toBeVisible();
@@ -98,19 +103,28 @@ test.describe('Searchbar Tests', () => {
 		await searchInput.focus();
 		await expect(searchInput).toBeFocused();
 	});
-	test.skip('search results pagination works', async ({ page }: { page: Page }) => {
+	// TODO: Fix this test
+	// TODO: the pagination number is not being selected after refresh
+	test.skip('search results display after clicking on a pagination number', async ({ page }: { page: Page }) => {
 		// Submit search
 		await submitSearch(page, 'egypt');
 
 		// Check that multiple search results are displayed
 		await checkMultipleSearchResults(page, 'egypt', 292);
 
+		// Click page 2
+		const page2Button = page.locator('li[title="2"]');
+		await expect(page2Button).toBeVisible();
+		await page2Button.click();
+		await page.waitForURL('**/search/q=egypt&page=2');
+		await checkPaginatedMultipleSearchResults(page, 'egypt', 2, 292);
+
 		// Click last page
 		const lastPageButton = page.locator('li[title="25"]');
-		if (await lastPageButton.isVisible()) {
-			await lastPageButton.click();
-			await page.waitForURL('**/search/q=egypt&page=25');
-		}
+		await expect(lastPageButton).toBeVisible();
+		await lastPageButton.click();
+		await page.waitForURL('**/search/q=egypt&page=25');
+		await checkPaginatedMultipleSearchResults(page, 'egypt', 25, 292);
 	});
 	test('search maintains state when navigating using window stack', async ({ page }: { page: Page }) => {
 		await submitSearch(page, 'a cow of sin');

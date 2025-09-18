@@ -71,13 +71,24 @@ export const checkMultipleSearchResults = async (
 	await checkPaginationVisibility(page, true);
 };
 
-// export const checkMultipleSearchResults = async (page: Page, searchTerm: string, totalResults: number): Promise<void> => {
-// 	await expect(page.locator('h1.page-title')).toHaveText(`Search Results for: ${searchTerm}`);
-// 	await expect(page.locator('div.resultsnum')).toHaveText(`Showing items 1 - ${totalResults} of ${totalResults}`);
+export const checkPaginatedMultipleSearchResults = async (
+	page: Page,
+	searchTerm: string,
+	pageNumber: number,
+	totalResults: number
+): Promise<void> => {
+	const startItems = (pageNumber - 1) * 12 + 1;
+	const endItems = Math.min(pageNumber * 12, totalResults);
+	const expectedCount = endItems - startItems + 1;
 
-// 	const cards = page.locator('div.card');
-// 	const cardCount = await cards.count();
-// 	expect(cardCount).toBe(12);
+	await expect(page.locator('h1.page-title')).toHaveText(`Search Results for: ${searchTerm}`);
+	await expect(page.locator('div.resultsnum')).toHaveText(
+		`Showing items ${startItems} - ${endItems} of ${totalResults}`
+	);
 
-// 	await checkPaginationVisibility(page, true);
-// };
+	const cards = page.locator('div.card');
+	const cardCount = await cards.count();
+	expect(cardCount).toBe(expectedCount);
+
+	await checkPaginationVisibility(page, true);
+};
