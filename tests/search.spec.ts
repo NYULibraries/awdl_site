@@ -22,7 +22,7 @@ test.describe('Collection Overview Search Tests', () => {
 		page: Page;
 	}) => {
 		await page.click('div.card a:has-text("Ancient Judaism")');
-		await page.waitForURL('**/collectionsoverview/"ancient%20judaism"&page=1');
+		await page.waitForURL('**/search/?q="ancient%20judaism"&page=1');
 		await checkMultipleSearchResults(page, 'ancient judaism', 1);
 	});
 });

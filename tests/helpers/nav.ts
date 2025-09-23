@@ -67,21 +67,21 @@ export const navigateToHome = async (page: Page): Promise<void> => {
 };
 
 export const navigateToCollectionOverview = async (page: Page): Promise<void> => {
-	await page.goto(`${baseURL}/collectionsoverview`);
+	await page.goto(`${baseURL}collectionsoverview`);
 	await page.waitForURL('**/collectionsoverview');
 	await expect(page.locator('h1.sitename')).toHaveText('Ancient World Digital Library');
 	await expect(page.locator(`${navigationItems.collectionsOverview.hElement}:has-text("${navigationItems.collectionsOverview.hText}")`)).toBeVisible();
 };
 
 export const navigateToSeries = async (page: Page): Promise<void> => {
-	await page.goto(`${baseURL}/series`);
+	await page.goto(`${baseURL}series`);
 	await page.waitForURL('**/series');
 	await expect(page.locator('h1.sitename')).toHaveText('Ancient World Digital Library');
 	await expect(page.locator(`${navigationItems.series.hElement}:has-text("${navigationItems.series.hText}")`)).toBeVisible();
 };
 
 export const navigateToBrowse = async (page: Page): Promise<void> => {
-	await page.goto(`${baseURL}/browse`);
+	await page.goto(`${baseURL}browse`);
 	await page.waitForURL('**/browse');
 	await expect(page.locator('h1.sitename')).toHaveText('Ancient World Digital Library');
 	await expect(page.locator(`${navigationItems.browse.hElement}:has-text("${navigationItems.browse.hText}")`)).toBeVisible();
