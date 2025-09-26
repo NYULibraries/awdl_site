@@ -125,12 +125,15 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 				{/* Series - not fixed */}
 				<div className="md_series">
 					<span className="md_label">Series:</span>
-					{series && series.length > 0 &&
+					{series && series.length > 0 ? (
 						series.map((series: SeriesData, index: number) => (
 							<a key={index} className="md_series_each" href={`${baseURL}/series/${series.series_identifier}`}>
 								{series.series_label}
 							</a>
-						))}
+						))
+					) : (
+						<span className="md_series"> N.A.</span>
+					)}
 				</div>
 				{/* Publisher */}
 				<div>
