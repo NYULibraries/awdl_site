@@ -13,9 +13,14 @@ if (!subjectPID) throw new Error('Subject PID not found');
 
 export const prerender = false;
 
+// Get init url parameters on load
+const page = parseInt(Astro.url.searchParams.get('page') || '1');
+const rows = 12;
+const start = (page - 1) * rows;
+
 const data = await fetchSolrDataByPID({
-	start: 0,
-	rows: 12,
+	start,
+	rows,
 	pid: subjectPID,
 	type: 'subject'
 });
@@ -31,7 +36,7 @@ const subjectLabel = subjectIndex !== undefined && subjectIndex !== -1 ? doc?.sm
 
 <DefaultLayout title={subjectLabel || 'Subject'} bodyID="subjects">
 	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
-		<StoreInitializer initialData={data} initialSearchField={subjectLabel} client:only="react">
+		<StoreInitializer initialData={data} initialSearchField={subjectLabel} initialPage={page} client:only="react">
 			<SearchHeader client:only="react" />
 			<div class="items-widget">
 				<div class="top">
@@ -50,20 +55,20 @@ const subjectLabel = subjectIndex !== undefined && subjectIndex !== -1 ? doc?.sm
 					id="items"
 					class="widget items"
 					data-name="items"
-					data-rows="12"
+					data-rows={rows}
 					data-source="https://discovery1.dlib.nyu.edu/solr/viewer/select"
 					data-fl="*"
 					data-fq-bundle="dlts_book"
 					data-fq-sm_collection_code="awdl"
 					data-numfound={data?.response.numFound}
-					data-start="0"
+					data-start={start}
 					data-docslength={data?.response.docs.length}
 					data-requesterror="0"
 				>
 					<Content client:only="react" />
 				</div>
 				<div class="bottom text-center">
-					<SearchPagination rows={12} client:only="react" />
+					<SearchPagination rows={rows} client:only="react" />
 				</div>
 			</div>
 		</StoreInitializer>

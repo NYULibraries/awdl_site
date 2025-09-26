@@ -49,9 +49,6 @@ function SearchPagination({ rows = 12, seriesIdentifier }: SearchPaginationProps
 
 		// Update URL with page number if we're on a page with pagination
 		const url = new URL(window.location.href);
-		if (window.location.pathname.includes('browse')) {
-			url.searchParams.set('q', '');
-		}
 		if (window.location.pathname.includes('search')) {
 			url.searchParams.set('q', searchQuery);
 		}

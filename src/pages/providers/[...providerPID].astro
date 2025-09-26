@@ -13,9 +13,14 @@ if (!providerPID) throw new Error('Provider PID not found');
 
 export const prerender = false;
 
+// Get init url parameters on load
+const page = parseInt(Astro.url.searchParams.get('page') || '1');
+const rows = 12;
+const start = (page - 1) * rows;
+
 const data = await fetchSolrDataByPID({
-	start: 0,
-	rows: 12,
+	start,
+	rows,
 	pid: providerPID,
 	type: 'provider'
 });
@@ -32,7 +37,7 @@ const providerLabel =
 
 <DefaultLayout title={providerLabel || 'Provider'} bodyID="providers">
 	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
-		<StoreInitializer initialData={data} initialSearchField={providerLabel} client:only="react">
+		<StoreInitializer initialData={data} initialSearchField={providerLabel} initialPage={page} client:only="react">
 			<SearchHeader client:only="react" />
 			<div class="items-widget">
 				<div class="top">
@@ -51,13 +56,13 @@ const providerLabel =
 					id="items"
 					class="widget items"
 					data-name="items"
-					data-rows="12"
+					data-rows={rows}
 					data-source="https://discovery1.dlib.nyu.edu/solr/viewer/select"
 					data-fl="*"
 					data-fq-bundle="dlts_book"
 					data-fq-sm_collection_code="awdl"
 					data-numfound={data?.response.numFound}
-					data-start="0"
+					data-start={start}
 					data-docslength={data?.response.docs.length}
 					data-requesterror="0"
 				>
