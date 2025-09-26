@@ -47,12 +47,16 @@ function SearchPagination({ rows = 12, seriesIdentifier }: SearchPaginationProps
 		contentStore.set(newData);
 		pageStore.set(page);
 
-		// Update URL if we're on the search page
-		if (window.location.pathname.includes('/search')) {
-			const url = new URL(window.location.href);
-			url.searchParams.set('page', page.toString());
-			window.history.pushState({}, '', url.toString());
+		// Update URL with page number if we're on a page with pagination
+		const url = new URL(window.location.href);
+		if (window.location.pathname.includes('browse')) {
+			url.searchParams.set('q', '');
 		}
+		if (window.location.pathname.includes('search')) {
+			url.searchParams.set('q', searchQuery);
+		}
+		url.searchParams.set('page', page.toString());
+		window.history.pushState({}, '', url.toString());
 	};
 
 	if (!contentData?.response?.numFound || !rows || contentData.response.numFound < 1) {

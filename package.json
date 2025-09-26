@@ -21,7 +21,6 @@
     "e2etest:rerun": "npx playwright test --last-failed",
     "e2etest:debug": "npx playwright test --debug",
     "e2etest:report": "npx playwright show-report"
-
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -40,6 +39,7 @@
     "react-dom": "^18.2.0",
     "rehype-external-links": "^3.0.0",
     "sass": "^1.49.9",
+    "speakingurl": "^14.0.1",
     "webfontloader": "^1.6.28",
     "zod": "^3.23.8"
   },

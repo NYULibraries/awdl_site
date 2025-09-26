@@ -31,7 +31,7 @@ contentStore.set(data);
 
 <DefaultLayout title="Search Results" bodyID="search">
 	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
-		<StoreInitializer initialData={data} initialSearchField={searchQuery} client:only="react">
+		<StoreInitializer initialData={data} initialSearchField={searchQuery} initialPage={page} client:only="react">
 			<SearchHeader client:only="react" />
 			<div class="items-widget">
 				<div class="top">
@@ -69,4 +69,3 @@ contentStore.set(data);
 		</StoreInitializer>
 	</main>
 </DefaultLayout>
-
