@@ -14,6 +14,7 @@ function SearchForm() {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const searchQuery = inputRef.current?.value || '*:*';
+		// TODO: speakingurl should be sanitizing server not searchform, look to remove
 		const slugifiedQuery = createSlugWithCustoms(searchQuery);
 		if (inputRef.current) {
 			inputRef.current.blur();
