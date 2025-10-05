@@ -59,6 +59,7 @@ export const navigationItems: NavigationMap = {
 	}
 };
 
+
 export const navigateToHome = async (page: Page): Promise<void> => {
 	await page.goto(baseURL);
 	await page.waitForURL('**/ancientworld/');

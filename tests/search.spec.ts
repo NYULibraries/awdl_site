@@ -9,6 +9,7 @@ import {
 	checkMultipleSearchResults,
 	checkPaginatedMultipleSearchResults
 } from './helpers/search';
+import { checkPaginationVisibility, checkPaginationActiveNumber } from './helpers/pagination';
 
 // Testing for pagination alongside the search results rendering
 
@@ -24,6 +25,8 @@ test.describe('Collection Overview Search Tests', () => {
 		await page.click('div.card a:has-text("Ancient Judaism")');
 		await page.waitForURL('**/search/?q="ancient%20judaism"&page=1');
 		await checkMultipleSearchResults(page, 'ancient judaism', 1);
+		await checkPaginationVisibility(page, true);
+		await checkPaginationActiveNumber(page, 1);
 	});
 });
 
@@ -62,6 +65,9 @@ test.describe('Searchbar Tests', () => {
 
 		// Check single search result
 		await checkSingleSearchResult(page, 'a cow of sin');
+
+		// Check pagination is not visible
+		await checkPaginationVisibility(page, false);
 	});
 
 	test('search for item that does not exist, using "a cow of sinsss"', async ({ page }: { page: Page }) => {
@@ -70,6 +76,9 @@ test.describe('Searchbar Tests', () => {
 
 		// Check no search results
 		await checkNoSearchResults(page);
+
+		// Check pagination is not visible
+		await checkPaginationVisibility(page, false);
 	});
 
 	test('try search with common terms with many results', async ({ page }: { page: Page }) => {
@@ -87,6 +96,9 @@ test.describe('Searchbar Tests', () => {
 
 			// Check that multiple search results are displayed
 			await checkMultipleSearchResults(page, term, totalResults);
+
+			// Check pagination is visible
+			await checkPaginationVisibility(page, true);
 		}
 	});
 	test('search form accessibility labels and keyboard navigation (tabbable)', async ({ page }: { page: Page }) => {
@@ -103,14 +115,13 @@ test.describe('Searchbar Tests', () => {
 		await searchInput.focus();
 		await expect(searchInput).toBeFocused();
 	});
-	// TODO: Fix this test
-	// TODO: the pagination number is not being selected after refresh
-	test.skip('search results display after clicking on a pagination number', async ({ page }: { page: Page }) => {
+	test('search results display after clicking on a pagination number', async ({ page }: { page: Page }) => {
 		// Submit search
 		await submitSearch(page, 'egypt');
 
 		// Check that multiple search results are displayed
 		await checkMultipleSearchResults(page, 'egypt', 292);
+		await checkPaginationActiveNumber(page, 1);
 
 		// Click page 2
 		const page2Button = page.locator('li[title="2"]');
@@ -118,6 +129,8 @@ test.describe('Searchbar Tests', () => {
 		await page2Button.click();
 		await page.waitForURL('**/search/q=egypt&page=2');
 		await checkPaginatedMultipleSearchResults(page, 'egypt', 2, 292);
+		await checkPaginationVisibility(page, true);
+		await checkPaginationActiveNumber(page, 2);
 
 		// Click last page
 		const lastPageButton = page.locator('li[title="25"]');
@@ -125,6 +138,8 @@ test.describe('Searchbar Tests', () => {
 		await lastPageButton.click();
 		await page.waitForURL('**/search/q=egypt&page=25');
 		await checkPaginatedMultipleSearchResults(page, 'egypt', 25, 292);
+		await checkPaginationVisibility(page, true);
+		await checkPaginationActiveNumber(page, 25);
 	});
 	test('search maintains state when navigating using window stack', async ({ page }: { page: Page }) => {
 		await submitSearch(page, 'a cow of sin');
@@ -138,6 +153,9 @@ test.describe('Searchbar Tests', () => {
 
 		// Check search is empty
 		await checkSearchInputIsCleared(page);
+
+		// Check pagination is visible
+		await checkPaginationVisibility(page, false);
 
 		// Use browser back button
 		await page.goBack();
@@ -158,8 +176,8 @@ test.describe('Searchbar Tests', () => {
 
 		// Check spaces are properly encoded
 		expect(currentUrl).toContain('test%20query%20with%20spaces');
-		// TODO: check for other search terms
 	});
+	// TODO: check for other search terms, special character edge cases such as !!!, %, &, etc.
 	test('check URL parameters are formatted correctly after search with special characters', async ({
 		page
 	}: {

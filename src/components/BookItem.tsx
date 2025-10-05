@@ -122,19 +122,19 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 						<span className="md_author">No author available</span>
 					)}
 				</div>
-				{/* Series - not fixed */}
-				<div className="md_series">
-					<span className="md_label">Series:</span>
-					{series && series.length > 0 ? (
-						series.map((series: SeriesData, index: number) => (
+				{/* TODO: Series - not fixed */}
+				{series && series.length > 0 ? (
+					<div className="md_series">
+						<span className="md_label">Series:</span>
+						{series.map((series: SeriesData, index: number) => (
 							<a key={index} className="md_series_each" href={`${baseURL}/series/${series.series_identifier}`}>
-								{series.series_label}
+								{" " + series.series_label}
 							</a>
-						))
-					) : (
-						<span className="md_series"> N.A.</span>
-					)}
-				</div>
+						))}
+					</div>
+				) : (
+					<></>
+				)}
 				{/* Publisher */}
 				<div>
 					<span className="md_label">Publisher:</span> <span>{decodeHtmlEntities(publisher)}</span>
@@ -152,7 +152,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 					<span className="md_label">Subject:</span>
 					{subjects.map((subject: string, index: number) => (
 						<a key={index} className="md_subject" href={`${baseURL}/subjects/${subjectCodes[index]}`}>
-							{subject}
+							{" " + subject}
 						</a>
 					))}
 				</div>
@@ -161,7 +161,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 					<span className="md_label">Provider:</span>
 					{providers.map((provider: string, index: number) => (
 						<a key={index} className="md_provider" href={`${baseURL}/providers/${providerCodes[index]}`}>
-							{provider}
+							{" " + provider}
 						</a>
 					))}
 				</div>

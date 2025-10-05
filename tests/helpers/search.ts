@@ -1,5 +1,4 @@
 import { expect, type Page } from '@playwright/test';
-import { checkPaginationVisibility } from './pagination';
 
 export const checkSearchInputIsCleared = async (page: Page): Promise<void> => {
 	const searchInput = page.locator('input[name="q"]');
@@ -8,6 +7,10 @@ export const checkSearchInputIsCleared = async (page: Page): Promise<void> => {
 	expect(searchValue).toBe('');
 };
 
+/**
+ * After a query is made, checks that the search input is filled with the query
+ * @param searchValue - query
+ */
 export const checkSearchInputIsFilled = async (page: Page, searchValue: string): Promise<void> => {
 	const searchInput = page.locator('input[name="q"]');
 	await expect(searchInput).toBeVisible();
@@ -31,14 +34,11 @@ export const checkSingleSearchResult = async (page: Page, searchTerm: string): P
 	const cards = page.locator('div.card');
 	const cardCount = await cards.count();
 	expect(cardCount).toBe(1);
-
-	// Pagination menu shouldn't show
-	await checkPaginationVisibility(page, false);
 };
 
 // Expect no search results and pagination is not visible
 export const checkNoSearchResults = async (page: Page): Promise<void> => {
-	await expect(page.locator('h1.page-title')).toHaveText(`Search Results`);
+	await expect(page.locator('h1.page-title')).toHaveText(`Search Results for:`);
 	await expect(page.locator('div.resultsnum')).not.toBeVisible();
 
 	// Check for the no results messages
@@ -50,11 +50,13 @@ export const checkNoSearchResults = async (page: Page): Promise<void> => {
 	// Check no cards exist
 	const cards = page.locator('div.card');
 	await expect(cards).not.toBeVisible();
-
-	// Pagination menu shouldn't show
-	await checkPaginationVisibility(page, false);
 };
 
+/**
+ * After a query is made, checks that the number of items returned is correct by checking resultsnum
+ * @param searchTerm - query
+ * @param totalResults - total results expected
+ */
 // Expect max page of 12 search results and pagination menu is visible
 export const checkMultipleSearchResults = async (
 	page: Page,
@@ -67,8 +69,6 @@ export const checkMultipleSearchResults = async (
 	const cards = page.locator('div.card');
 	const cardCount = await cards.count();
 	expect(cardCount).toBe(12);
-
-	await checkPaginationVisibility(page, true);
 };
 
 export const checkPaginatedMultipleSearchResults = async (
@@ -89,6 +89,4 @@ export const checkPaginatedMultipleSearchResults = async (
 	const cards = page.locator('div.card');
 	const cardCount = await cards.count();
 	expect(cardCount).toBe(expectedCount);
-
-	await checkPaginationVisibility(page, true);
 };
