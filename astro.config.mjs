@@ -6,7 +6,9 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
 	output: 'hybrid',
-	adapter: awsAmplify(),
+	adapter: awsAmplify({
+		runtime: 'nodejs20.x'
+	}),
 	integrations: [react(), sitemap()],
 	base: '/ancientworld',
 	site: 'https://awdl.dlib.nyu.edu',
