@@ -244,5 +244,18 @@ export const fetchSolrDataBySeriesIdentifier = async ({
 		throw new Error('Invalid response structure from Solr');
 	}
 
+	// Parse zm_series_data_x
+	data.response.docs = data.response.docs.map((doc: any) => {
+		if (doc.zm_series_data_x && Array.isArray(doc.zm_series_data_x) && doc.zm_series_data_x.length > 0) {
+			try {
+				doc.zm_series_data_x = JSON.parse(doc.zm_series_data_x[0]) as SeriesData;
+			} catch (error) {
+				console.warn('Failed to parse zm_series_data_x for document:', doc.ss_book_identifier);
+				doc.zm_series_data_x = null;
+			}
+		}
+		return doc;
+	});
+
 	return data;
 };

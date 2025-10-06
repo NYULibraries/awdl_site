@@ -16,7 +16,7 @@ export const prerender = false;
 // Fetch series and match seriesPID to path_alias
 const seriesData = await fetchSeriesData();
 const seriesDoc = seriesData?.response?.docs?.find(
-	(doc: any) => doc.path_alias === seriesPID || doc.ss_series_identifier === seriesPID
+	(doc: any) => doc.path_alias === seriesPID
 );
 
 if (!seriesDoc) {
