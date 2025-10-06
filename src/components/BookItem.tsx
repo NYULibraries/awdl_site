@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import BookItemPlaceholder from './BookItemPlaceholder';
-import { seriesIdToPathAliasMapping } from '../Util/seriesMapping';
+import { seriesIdToPathAliasMapping } from '../Util/pagemaps/seriesMapping';
 
 interface SeriesData {
 	series_book_collections: any[];

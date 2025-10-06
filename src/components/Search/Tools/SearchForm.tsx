@@ -16,9 +16,11 @@ function SearchForm() {
 		if (inputRef.current) {
 			inputRef.current.blur();
 		}
-
+		const escapeSolrQuery = (str: string): string => {
+			return str.replace(/([+\-\!\(\)\{\}\[\]\^"~\*\?:\\/])/g, '\\$1');
+		}
 		// Search url
-		const searchUrl = `${baseURL}/search/?q=${encodeURIComponent(searchQuery)}&page=1`;
+		const searchUrl = `${baseURL}/search/?q=${encodeURIComponent(escapeSolrQuery(searchQuery))}&page=1`;
 		window.location.href = searchUrl;
 	};
 

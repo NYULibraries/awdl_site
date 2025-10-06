@@ -10,8 +10,18 @@ import StoreInitializer from '../../components/Util/StoreInitializer';
 
 export const prerender = false;
 
+/**
+ * Unescape Solr query characters for searchfield display and url
+ * @param str - The string to unescape
+ * @returns The unescaped string
+ */
+const unescapeSolrQuery = (str: string): string => {
+	return str.replace(/\\([+\-!(){}[\]^"~*?:\\/])/g, '$1');
+};
+
 // Get search query parameters
-const searchQuery = Astro.url.searchParams.get('q') || '*:*';
+const escapedSearchQuery = Astro.url.searchParams.get('q') || '*:*';
+const readableSearchQuery = unescapeSolrQuery(escapedSearchQuery);
 const page = parseInt(Astro.url.searchParams.get('page') || '1');
 const rows = 12;
 const start = (page - 1) * rows;
@@ -19,19 +29,26 @@ const start = (page - 1) * rows;
 const data = await fetchSolrData({
 	start,
 	rows,
-	searchField: searchQuery,
+	searchField: escapedSearchQuery, // Use raw escaped query for Solr
 	sortField: 'ss_longlabel',
 	sortDir: 'asc',
 	collectionCode: '(awdl%20OR%20egypt)'
 });
 
+(data as any).responseHeader.params.q = readableSearchQuery;
+console.log(data);
 // Initialize the content store after fetching data
 contentStore.set(data);
 ---
 
 <DefaultLayout title="Search Results" bodyID="search">
 	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
-		<StoreInitializer initialData={data} initialSearchField={searchQuery} initialPage={page} client:only="react">
+		<StoreInitializer
+			initialData={data}
+			initialSearchField={readableSearchQuery}
+			initialPage={page}
+			client:only="react"
+		>
 			<SearchHeader client:only="react" />
 			<div class="items-widget">
 				<div class="top">
