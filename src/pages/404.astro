@@ -2,6 +2,8 @@
 import DefaultLayout from '../layouts/DefaultLayout.astro';
 
 const baseURL = import.meta.env.BASE_URL;
+
+export const prerender = false;
 ---
 
 <DefaultLayout title="Page Not Found - Ancient World Digital Library">
@@ -12,10 +14,4 @@ const baseURL = import.meta.env.BASE_URL;
 			<p><a href={baseURL}>Return to Homepage</a></p>
 		</div>
 	</main>
-
-	<script define:vars={{ baseURL }}>
-		setTimeout(() => {
-			window.location.href = baseURL;
-		}, 3000);
-	</script>
 </DefaultLayout>
