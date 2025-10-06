@@ -4,7 +4,8 @@ frontend:
     preBuild:
       commands:
         - git checkout ancientworld-astro
-        - nvm use 18
+        - node --version
+        - npm --version
         - npm ci
     build:
       commands:
