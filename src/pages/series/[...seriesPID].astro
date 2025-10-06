@@ -30,10 +30,15 @@ if (!seriesIdentifier) {
 	throw new Error(`Series identifier not found for: ${seriesPID}`);
 }
 
+// Get init url parameters on load
+const page = parseInt(Astro.url.searchParams.get('page') || '1');
+const rows = 12;
+const start = (page - 1) * rows;
+
 // Fetch all books containing the series identifier
 const data = await fetchSolrDataBySeriesIdentifier({
-	start: 0,
-	rows: 12,
+	start: start,
+	rows: rows,
 	seriesIdentifier: seriesIdentifier
 });
 
@@ -46,7 +51,7 @@ const seriesLabel = seriesDoc.ss_series_label || seriesPID;
 
 <DefaultLayout title={seriesLabel || 'Series'} bodyID="series">
 	<main class="main container-fluid" role="main" id="mainContent" tabindex="-1">
-		<StoreInitializer initialData={data} initialSearchField={seriesLabel} client:only="react">
+		<StoreInitializer initialData={data} initialSearchField={seriesLabel} initialPage={page} client:only="react">
 			<SearchHeader seriesLabel={seriesLabel} client:only="react" />
 			<div class="items-widget">
 				<div class="top">
