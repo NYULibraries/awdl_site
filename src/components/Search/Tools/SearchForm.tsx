@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { useStore } from '@nanostores/react';
 import { searchFieldStore } from '../../../stores/contentStore';
-import { createSlugWithCustoms } from '../../../Util/speakingurlCharMap';
 
 function SearchForm() {
 	const baseURL: string = import.meta.env.BASE_URL;
@@ -14,14 +13,12 @@ function SearchForm() {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const searchQuery = inputRef.current?.value || '*:*';
-		// TODO: speakingurl should be sanitizing server not searchform, look to remove
-		const slugifiedQuery = createSlugWithCustoms(searchQuery);
 		if (inputRef.current) {
 			inputRef.current.blur();
 		}
 
 		// Search url
-		const searchUrl = `${baseURL}/search/?q=${encodeURIComponent(slugifiedQuery)}&page=1`;
+		const searchUrl = `${baseURL}/search/?q=${encodeURIComponent(searchQuery)}&page=1`;
 		window.location.href = searchUrl;
 	};
 

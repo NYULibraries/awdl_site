@@ -1,6 +1,36 @@
 // src/Util/fetch.ts
 import type { SolrResponse } from '../components/Util/fetchCSR';
 
+/**
+ * Solr parameters
+ * @param start - Start index
+ * @param rows - Number of rows
+ * @param searchField - Search field
+ * @param sortField - Sort field
+ * @param sortDir - Sort direction
+ * @param collectionCode - Collection code
+ */
+interface SolrParams {
+	start?: number;
+	rows?: number;
+	searchField?: string;
+	sortField?: string;
+	sortDir?: 'asc' | 'desc';
+	collectionCode?: string;
+}
+
+/**
+ * Series data
+ * @param series_book_collections - Series book collections
+ * @param series_book_identifier - Series book identifier
+ * @param series_book_label - Series book label
+ * @param series_book_nid - Series book nid
+ * @param series_book_volume_number - Series book volume number
+ * @param series_book_volume_number_str - Series book volume number str
+ * @param series_identifier - Series identifier
+ * @param series_label - Series label
+ * @param series_nid - Series nid
+ */
 interface SeriesData {
 	series_book_collections: any[];
 	series_book_identifier: string;
@@ -13,15 +43,11 @@ interface SeriesData {
 	series_nid: string;
 }
 
-interface SolrParams {
-	start?: number;
-	rows?: number;
-	searchField?: string;
-	sortField?: string;
-	sortDir?: 'asc' | 'desc';
-	collectionCode?: string;
-}
-
+/**
+ * Get book fields for each book
+ * @param additionalFields - takes additional fields if needed
+ * @returns properties to fetch for from each book
+ */
 export const getBookFields = (additionalFields: string[] = []): string[] => {
 	const baseFields = [
 		'ss_book_identifier',
@@ -46,7 +72,12 @@ export const getBookFields = (additionalFields: string[] = []): string[] => {
 	return [...baseFields, ...additionalFields];
 };
 
-// Fetch Books
+/**
+ * Fetch book data from Solr
+ * @param params - default Solr parameters to use
+ * @param additionalFields - Additional fields to fetch
+ * @returns book data
+ */
 export async function fetchSolrData(
 	params: SolrParams = {
 		start: 0,
