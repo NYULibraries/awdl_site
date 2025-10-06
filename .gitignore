@@ -1,5 +1,6 @@
 # build output
 dist/
+.amplify-hosting/
 
 # generated types
 .astro/
@@ -38,3 +39,4 @@ src/pages/api/viewer.json.tsx
 /playwright/.cache/
 /tests-examples/
 /tests/card.spec.ts
+
