@@ -55,8 +55,6 @@ export const getBookFields = (additionalFields: string[] = []): string[] => {
 		'ss_title_long',
 		'sm_author',
 		'zm_series_data_x',
-		'sm_series_label',
-		'sm_series_identifier',
 		'sm_publisher',
 		'sm_field_publication_location',
 		'ss_publication_date_text',

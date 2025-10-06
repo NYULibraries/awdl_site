@@ -57,27 +57,29 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 		setIsLoaded(true);
 	};
 
-	// Eecode HTML entities
+	/**
+	 * Decodes HTML entities that api-returns as encoded: &, <, >, ", ', non-breaking spaces, copyright symbol, registered trademark symbol, euro symbol, etc.
+	 * @param text - text to decode
+	 * @returns decoded text
+	 */
+
 	const decodeHtmlEntities = (text: string): string => {
-		return text
-			.replace(/&amp;/g, '&')
-			.replace(/&lt;/g, '<')
-			.replace(/&gt;/g, '>')
-			.replace(/&quot;/g, '"')
-			.replace(/&#39;/g, "'")
-			.replace(/&apos;/g, "'");
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(text, 'text/html');
+		return doc.documentElement.textContent || text;
 	};
 
 	/* eslint-disable camelcase */
-	// Use ss_identifier instead of field identifier - done
 	const identifier = ss_book_identifier;
 	const title = ss_title_long || 'N.A.';
 	const authors = sm_author || [];
 	// Series are all named different - still needs to be done
 	const series = zm_series_data_x;
 	// Assume can be more than one publisher, provider, and subject
-	const publisher = sm_publisher?.[0] || 'N.A.';
+	// Some publishers have encoded & symbols
+	const publisher = decodeHtmlEntities(sm_publisher?.[0] || 'N.A.');
 	const publicationPlace = sm_field_publication_location?.[0] || 'N.A.';
+	// Some publication dates have c symbols but they are not encoded they are just c's
 	const publicationDate = ss_publication_date_text || 'N.A.';
 	const providerCodes = sm_provider_nid || [];
 	const providers = sm_provider_label || [];
@@ -128,7 +130,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 						<span className="md_label">Series:</span>
 						{series.map((series: SeriesData, index: number) => (
 							<a key={index} className="md_series_each" href={`${baseURL}/series/${series.series_identifier}`}>
-								{" " + series.series_label}
+								{' ' + series.series_label}
 							</a>
 						))}
 					</div>
@@ -137,7 +139,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 				)}
 				{/* Publisher */}
 				<div>
-					<span className="md_label">Publisher:</span> <span>{decodeHtmlEntities(publisher)}</span>
+					<span className="md_label">Publisher:</span> <span>{publisher}</span>
 				</div>
 				{/* Place of Publication */}
 				<div>
@@ -152,7 +154,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 					<span className="md_label">Subject:</span>
 					{subjects.map((subject: string, index: number) => (
 						<a key={index} className="md_subject" href={`${baseURL}/subjects/${subjectCodes[index]}`}>
-							{" " + subject}
+							{' ' + subject}
 						</a>
 					))}
 				</div>
@@ -161,7 +163,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 					<span className="md_label">Provider:</span>
 					{providers.map((provider: string, index: number) => (
 						<a key={index} className="md_provider" href={`${baseURL}/providers/${providerCodes[index]}`}>
-							{" " + provider}
+							{' ' + provider}
 						</a>
 					))}
 				</div>

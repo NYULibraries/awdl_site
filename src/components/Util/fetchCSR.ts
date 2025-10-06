@@ -9,8 +9,6 @@ const DocumentSchema = z
 		ss_title_long: z.string(),
 		sm_author: z.array(z.string()).optional(),
 		zm_series_data_x: z.array(z.string()).optional(),
-		sm_series_label: z.array(z.string()).optional(),
-		sm_series_identifier: z.array(z.string()).optional(),
 		sm_publisher: z.array(z.string()).optional(),
 		sm_field_publication_location: z.array(z.string()).optional(),
 		ss_publication_date_text: z.string().optional(),
