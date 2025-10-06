@@ -8,6 +8,8 @@ import { contentStore } from '../../stores/contentStore';
 import SearchHeader from '../../components/Search/Labels/SearchHeader';
 import StoreInitializer from '../../components/Util/StoreInitializer';
 
+export const prerender = false;
+
 // Get init url parameters on load
 const page = parseInt(Astro.url.searchParams.get('page') || '1');
 const rows = 12;

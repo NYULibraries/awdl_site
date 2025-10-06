@@ -128,7 +128,13 @@ export async function fetchSolrData(
 	return data;
 }
 
-// Fetch books by subject or provider PID on subject or provider pages
+/**
+ * Fetch books by subject or provider PID on subject or provider pages using fetchSolrData
+ * @param params - default Solr parameters to use
+ * @param pid - subject or provider PID
+ * @param type - subject or provider
+ * @returns book data
+ */
 export const fetchSolrDataByPID = async ({
 	start = 0,
 	rows = 12,
@@ -155,7 +161,11 @@ export const fetchSolrDataByPID = async ({
 	return data;
 };
 
-// Fetch series
+/**
+ * Fetch series data from Solr
+ * @param params - default Solr parameters to use
+ * @returns series data
+ */
 export const fetchSeriesData = async (
 	params: {
 		start?: number;
@@ -205,7 +215,12 @@ export const fetchSeriesData = async (
 	return data;
 };
 
-// Fetch books by series identifier on seriesPID page
+/**
+ * Fetch books by series identifier on seriesPID page using book data api not series api
+ * @param params - default Solr parameters to use
+ * @param seriesIdentifier - series identifier
+ * @returns book data
+ */
 export const fetchSolrDataBySeriesIdentifier = async ({
 	start = 0,
 	rows = 12,
