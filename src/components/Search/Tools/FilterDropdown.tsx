@@ -64,12 +64,13 @@ const FilterDropdown = ({ seriesIdentifier }: FilterDropdownProps) => {
 				<option data-sort-dir="asc" value="ss_sauthor">
 					Sort by Author
 				</option>
-				<option data-sort-dir="asc" value="iass_timestamp">
+				{/* TODO: Not sure if we're keeping these options */}
+				{/* <option data-sort-dir="asc" value="iass_timestamp">
 					Sort by Year Asc.
 				</option>
 				<option data-sort-dir="desc" value="iass_timestamp">
 					Sort by Year Desc.
-				</option>
+				</option> */}
 			</select>
 		</div>
 	);
