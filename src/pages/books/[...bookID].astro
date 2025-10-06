@@ -10,6 +10,6 @@ export const prerender = false;
 const viewer = 'https://sites.dlib.nyu.edu/viewer';
 ---
 
-<BookLayout>
+<BookLayout title={bookID}>
 	<Book client:only="react" pid={bookID} viewer={viewer} />
 </BookLayout>
