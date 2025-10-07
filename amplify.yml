@@ -13,6 +13,8 @@ frontend:
         - npm run build
         - mv .env ./.amplify-hosting/compute/default/.env
         - npm prune --production
+        - echo "After pruning:"
+        - du -sh node_modules
         - mv node_modules ./.amplify-hosting/compute/default
   artifacts:
     baseDirectory: .amplify-hosting
