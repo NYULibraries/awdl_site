@@ -13,6 +13,14 @@ frontend:
         - npm run build
         - mv .env ./.amplify-hosting/compute/default/.env
         - npm prune --production
+        - echo "Removing large dev dependencies:"
+        - rm -rf node_modules/playwright*
+        - rm -rf node_modules/@playwright
+        - rm -rf node_modules/eslint*
+        - rm -rf node_modules/@typescript-eslint
+        - rm -rf node_modules/prettier*
+        - rm -rf node_modules/@stylistic
+        - rm -rf node_modules/typescript
         - echo "Before node_modules:"
         - du -sh .amplify-hosting/* | sort -hr
         - mv node_modules ./.amplify-hosting/compute/default
