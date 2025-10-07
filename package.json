@@ -11,7 +11,7 @@
 		"build": "astro check && astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"check-version": "npm run preinstall && npm run check-versions && npm install",
+		"check-version": "nvm use && npm install",
 		"lint": "npx eslint .",
 		"fixlint": "npx eslint . --fix",
 		"format": "prettier --check 'src/**/**.{js,jsx,css,astro}'",
