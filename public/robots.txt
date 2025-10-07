@@ -1,6 +1,4 @@
 User-agent: *
-Disallow: /
-Allow: /*.css$
-Allow: /*.js$
+Allow: /
 Crawl-delay: 5
-Sitemap: https://awdl.dlib.nyu.edu/sitemap-index.xml
+Sitemap: https://awdl.dlib.nyu.edu/ancientworld/sitemap-index.xml

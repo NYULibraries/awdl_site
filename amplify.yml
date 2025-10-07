@@ -12,6 +12,8 @@ frontend:
         - env >> .env
         - npm run build
         - mv .env ./.amplify-hosting/compute/default/.env
+        - npm ci --production
+        - mv node_modules ./.amplify-hosting/compute/default
   artifacts:
     baseDirectory: .amplify-hosting
     files:
