@@ -6,7 +6,6 @@ frontend:
   phases:
     preBuild:
       commands:
-        - rm -rf node_modules
         - npm ci
     build:
       commands:
@@ -14,8 +13,10 @@ frontend:
         - npm run build
         - mv .env ./.amplify-hosting/compute/default/.env
         - npm prune --production
-        - echo "After pruning:"
-        - du -sh node_modules
+        - echo "Breakdown by directory:"
+        - du -sh .amplify-hosting/* | sort -hr
+        - echo "breakdown by compute directory:"
+        - du -sh .amplify-hosting/compute/* | sort -hr
         - mv node_modules ./.amplify-hosting/compute/default
   artifacts:
     baseDirectory: .amplify-hosting
@@ -23,4 +24,4 @@ frontend:
       - '**/*'
   cache:
     paths:
-      # - node_modules/**/*
+      - node_modules/**/*
