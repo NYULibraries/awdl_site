@@ -8,14 +8,10 @@ export default defineConfig({
 	output: 'hybrid',
 	adapter: netlify(),
 	integrations: [react(), sitemap()],
-	base: '/ancientworld',
-	site: 'https://awdl.dlib.nyu.edu',
+	// base: '/ancientworld', // Removed for Netlify root deployment
+	site: 'https://ancwo.netlify.app',
 	markdown: {
 		rehypePlugins: [[rehypeExternalLinks, { target: '_blank', rel: ['noopener'] }]]
-	},
-	redirects: {
-		'/favicon.ico': '/ancientworld/favicon.ico',
-		'/robots.txt': '/ancientworld/robots.txt',
-		'/sitemap-index.xml': '/ancientworld/sitemap-index.xml'
 	}
+	// Redirects removed for Netlify root deployment
 });
