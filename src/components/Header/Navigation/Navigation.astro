@@ -2,35 +2,35 @@
 import SearchForm from '../../Search/Tools/SearchForm';
 import NavigationMobile from './NavigationMobile.astro';
 
-const baseURL: string = import.meta.env.BASE_URL;
+const baseURL: string = '';
 const NavigationItems = [
 	{
-		href: `/`,
+		href: `${baseURL}/`,
 		class: 'home',
 		label: 'Home'
 	},
 	{
-		href: `/collectionsoverview`,
+		href: `${baseURL}/collectionsoverview`,
 		class: 'collectionsoverview',
 		label: 'Collections Overview'
 	},
 	{
-		href: `/series`,
+		href: `${baseURL}/series`,
 		class: 'series',
 		label: 'Series'
 	},
 	{
-		href: `/about`,
+		href: `${baseURL}/about`,
 		class: 'about',
 		label: 'About'
 	},
 	{
-		href: `/partners`,
+		href: `${baseURL}/partners`,
 		class: 'partners',
 		label: 'Partners'
 	},
 	{
-		href: `/browse`,
+		href: `${baseURL}/browse`,
 		class: 'browse',
 		label: 'Browse'
 	}

@@ -3,7 +3,7 @@ import { useStore } from '@nanostores/react';
 import { searchFieldStore } from '../../../stores/contentStore';
 
 function SearchForm() {
-	const baseURL: string = import.meta.env.BASE_URL;
+	const baseURL: string = '';
 
 	const inputRef = useRef<HTMLInputElement>(null);
 	const searchField = useStore(searchFieldStore);

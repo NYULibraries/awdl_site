@@ -50,7 +50,7 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
 	} = document;
 	/* eslint-enable camelcase */
 
-	const baseURL: string = import.meta.env.BASE_URL;
+	const baseURL: string = '';
 
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
