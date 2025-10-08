@@ -1,12 +1,12 @@
 import { defineConfig } from 'astro/config';
-import awsAmplify from 'astro-aws-amplify';
+import netlify from '@astrojs/netlify';
 import react from '@astrojs/react';
 import rehypeExternalLinks from 'rehype-external-links';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
 	output: 'hybrid',
-	adapter: awsAmplify(),
+	adapter: netlify(),
 	integrations: [react(), sitemap()],
 	base: '/ancientworld',
 	site: 'https://awdl.dlib.nyu.edu',

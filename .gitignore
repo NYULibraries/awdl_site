@@ -1,6 +1,7 @@
 # build output
 dist/
 .amplify-hosting/
+.netlify/
 
 # generated types
 .astro/
