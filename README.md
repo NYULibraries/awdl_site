@@ -7,3 +7,4 @@ $ cd ancientworld
 $ npm i or npm run check-version to ensure the correct version of Node is installed
 
 $ npm run dev
+# aw-net
