@@ -2,7 +2,7 @@
 import '../assets/sass/style.scss';
 import Header from '../components/Header/Header.astro';
 import Meta from '../components/Header/Meta.astro';
-import { metatags } from "../components/Header/metatags";
+import { metatags } from '../components/Header/metatags';
 
 interface Props {
 	title: string;
@@ -10,11 +10,7 @@ interface Props {
 	author?: string;
 }
 
-const {
-	title,
-	description = metatags.poweredDesc,
-	author = metatags.defaultAuthor,
-}: Props = Astro.props;
+const { title, description = metatags.poweredDesc, author = metatags.defaultAuthor }: Props = Astro.props;
 ---
 
 <html lang="en">
@@ -25,8 +21,17 @@ const {
 		<div id="skipnav"><a href="#mainContent">Skip navigation</a></div>
 		<Header />
 		<slot />
-		<!-- <script>
-      import('../scripts/webfontloader.ts');
-    </script> -->
+		<script>
+			import WebFont from 'webfontloader';
+
+			WebFont.load({
+				google: {
+					families: ['Open Sans:300,400,600']
+				},
+				active: function () {
+					document.documentElement.classList.add('wf-active');
+				}
+			});
+		</script>
 	</body>
 </html>
