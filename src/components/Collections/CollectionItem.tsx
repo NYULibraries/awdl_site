@@ -5,7 +5,7 @@ interface CollectionItemProps {
 }
 
 const CollectionItem: React.FC<CollectionItemProps> = ({ label }) => {
-	const baseURL: string = import.meta.env.BASE_URL;
+	const baseURL: string = '';
 
 	//   Single words have no encoding for double quotations
 	const encodeLabel = (label: string): string => {

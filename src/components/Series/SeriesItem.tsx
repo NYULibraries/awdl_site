@@ -19,7 +19,7 @@ const SeriesItem: React.FC<SeriesItemProps> = ({ document }) => {
 	const { ss_series_label, path_alias, bs_status } = document;
 	/* eslint-enable camelcase */
 
-	const baseURL: string = import.meta.env.BASE_URL;
+	const baseURL: string = '';
 
 	// eslint-disable-next-line camelcase
 	return bs_status ? (
