@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Crawl-delay: 5
-Sitemap: https://awdl.dlib.nyu.edu/ancientworld/sitemap-index.xml
