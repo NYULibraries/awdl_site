@@ -33,15 +33,6 @@
 
     </head>
     <body>
-      <div id="skipnav">
-        <a href="#mainContent">Skip navigation</a>
-      </div>
-      <div class="header-wrapper">
-        <header class="header-main container-fluid" role="banner">
-          <div class="toplogo"><a href="http://isaw.nyu.edu/" class="isawlogo" target="_blank">NYU | ISAW</a></div>
-          <h1 class="sitename"><a href="/ancientworld/">Ancient World Digital Library</a></h1>
-        </header>
-      </div>
       @inertia
     </body>
 </html>

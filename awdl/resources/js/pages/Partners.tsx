@@ -1,15 +1,26 @@
+import React from 'react';
 import DefaultLayout from '@/layouts/DefaultLayout';
-import { Content as PartnerContent } from '@/components/Partners/partners.md';
+import ReactMarkdown from 'react-markdown';
+import { usePage } from '@inertiajs/react';
 
-<DefaultLayout title="Partners" bodyID="partners" bodyClass="page">
-	<div class="container-fluid">
-		<div class="flex-container">
-			<main class="main" role="main" id="mainContent" tabIndex="-1">
-				<h2 class="page-title">Partners</h2>
-				<div class="maintext">
-					<PartnerContent />
-				</div>
-			</main>
-		</div>
-	</div>
-</DefaultLayout>
+export default function About() {
+
+  const { id, title, markdownBodyContent } = usePage().props;
+
+  return (
+    <DefaultLayout title={title} id={id} bodyclassName="page">
+	    <div className="container-fluid">
+		    <div className="flex-container">
+			    <main className="main" role="main" id="mainContent" tabIndex="-1">
+				    <h2 className="page-title">Partners</h2>
+    				<div className="maintext">
+              <div className="maintext prose">
+                <ReactMarkdown children={markdownBodyContent} />
+              </div>
+		    		</div>
+			   </main>
+  		  </div>
+	    </div>
+    </DefaultLayout>
+  );
+}

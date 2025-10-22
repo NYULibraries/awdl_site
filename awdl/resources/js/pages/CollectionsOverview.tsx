@@ -14,17 +14,17 @@ export default function CollectionsOverview() {
   return (
     <>
       <DefaultLayout id={id} pageTitle={pageTitle}>
-        <div class="container-fluid">
-		  <div class="flex-container">
+        <div className="container-fluid">
+		  <div className="flex-container">
 		    <main className="main hasSidebar" role="main" id="mainContent" tabIndex="-1">
-			  <h2 class="page-title">{pageTitle}</h2>
-			    <div class="maintext">
+			  <h2 className="page-title">{pageTitle}</h2>
+			    <div className="maintext">
 				  <p>
 					AWDL's purpose is to present the broadest possible range of scholarly materials relevant to the study of the
 					ancient world.
 				  </p>
 				  <p>Particular strengths of the AWDL collection include:</p>
-                  <div class="flex-container">
+                  <div className="flex-container">
 					{
 						collectionItems.map((item, key) => {
 						  return <CollectionItem key={key} label={item.label} />;
@@ -34,9 +34,9 @@ export default function CollectionsOverview() {
                   </div>
                 </main>
                 <aside role="complementary">
-                  <h3 class="sidebar-title">AWDL Atlas</h3>
-                  <div class="content">
-                    <div class="imgHold">
+                  <h3 className="sidebar-title">AWDL Atlas</h3>
+                  <div className="content">
+                    <div className="imgHold">
                       <img src="/images/ISAWLibrary420.jpg" alt="Book Stacks at the Institute for the Study of the Ancient World" />
                     </div>
                   </div>
