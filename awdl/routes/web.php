@@ -1,68 +1,55 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia; // We are going to use this class to render React components
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CollectionsOverviewController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\BrowseController;
+use App\Http\Controllers\PartnersController;
+use App\Http\Controllers\ProvidersController;
+use App\Http\Controllers\SubjectsController;
+use App\Http\Controllers\SeriesController;
 
-Route::get('/test', function () {
-    return Inertia::render('test'); // This will get component Test.jsx from the resources/js/Pages/Test.jsx
-});
+Route::get('/', [ HomeController::class, 'index'])
+    ->name('home');
 
-Route::get('/', function () {
-    return Inertia::render('HomePage');
-});
+Route::get('collectionsoverview', [ CollectionsOverviewController::class, 'index'])
+    ->name('collectionsoverview');
 
-Route::get('/about', function () {
-    return Inertia::render('AboutPage');
-});
+Route::get('search', [ SearchController::class, 'index'])
+    ->name('search');
 
-Route::get('/books', function () {
-    return Inertia::render('BookPage');
-});
+Route::get('about', [ AboutController::class, 'index'])
+    ->name('about');
 
-Route::get('/books/{bookPID}', function ($bookPID) {
-    return Inertia::render('BookPage', ['bookPID' => $bookPID]);
-});
+Route::get('books/{id}', [ BookController::class, 'show'])
+    ->name('books.show');
 
-Route::get('/browse', function () {
-    return Inertia::render('BrowsePage');
-});
+Route::get('books/{id}/{sequence}', [ BookController::class, 'show'])
+    ->name('books.sequence');
 
-Route::get('/collectionsoverview', function () {
-    return Inertia::render('CollectionsPage');
-});
+Route::get('browse', [ BrowseController::class, 'index'])
+    ->name('browse');
 
-Route::get('/partners', function () {
-    return Inertia::render('PartnersPage');
-});
+Route::get('partners', [ PartnersController::class, 'index'])
+    ->name('partners');
 
-Route::get('/providers', function () {
-    return Inertia::render('ProvidersPage');
-});
+Route::get('providers', [ ProvidersController::class, 'index'])
+    ->name('providers');
 
-Route::get('/providers/{providerPID}', function ($providerPID) {
-    return Inertia::render('ProvidersPage', ['providerPID' => $providerPID]);
-});
+Route::get('providers/{id}', [ ProvidersController::class, 'show'])
+    ->name('providers.show');
 
-Route::get('/providers/{providerPID}', function ($providerPID) {
-    return Inertia::render('ProvidersPage', ['providerPID' => $providerPID]);
-});
+Route::get('subjects', [ SubjectsController::class, 'index'])
+    ->name('subjects');
 
-Route::get('/subjects', function () {
-    return Inertia::render('SubjectsPage');
-});
+Route::get('subjects/{id}', [ SubjectsController::class, 'show'])
+    ->name('subjects.show');
 
-Route::get('/subjects/{subjectPID}', function ($subjectPID) {
-    return Inertia::render('SubjectsPage', ['subjectPID' => $subjectPID]);
-});
+Route::get('series', [ SeriesController::class, 'index'])
+    ->name('series');
 
-Route::get('/series', function () {
-    return Inertia::render('SeriesPage');
-});
-
-Route::get('/series/{seriesPID}', function ($seriesPID) {
-    return Inertia::render('SeriesPage', ['seriesPID' => $seriesPID]);
-});
-
-Route::get('/search', function () {
-    return Inertia::render('SearchPage');
-});
+Route::get('series/{id}', [ SeriesController::class, 'show'])
+    ->name('series.show');
