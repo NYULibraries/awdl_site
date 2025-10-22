@@ -37,7 +37,7 @@ export default function CollectionsOverview() {
                   <h3 className="sidebar-title">AWDL Atlas</h3>
                   <div className="content">
                     <div className="imgHold">
-                      <img src="/images/ISAWLibrary420.jpg" alt="Book Stacks at the Institute for the Study of the Ancient World" />
+                      <img src={ISAWLibrary} alt="Book Stacks at the Institute for the Study of the Ancient World" />
                     </div>
                   </div>
                 </aside>
