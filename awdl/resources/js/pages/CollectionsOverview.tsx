@@ -1,6 +1,6 @@
 import { usePage } from '@inertiajs/react';
 import DefaultLayout from '@/layouts/DefaultLayout';
-import ISAWLibrary from '@/images/ISAWLibrary420.jpg';
+import ISAWLibrary from '/resources/images/ISAWLibrary420.jpg';
 import CollectionItem from '@/components/Collections/CollectionItem';
 
 export default function CollectionsOverview() {
