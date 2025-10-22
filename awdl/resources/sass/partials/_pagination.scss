@@ -1,4 +1,4 @@
-@use "sass:color";
+@use 'sass:color';
 
 .pagination {
   display: inline-block;
@@ -8,7 +8,9 @@
   .yui3-paginator-pages {
     display: inline-block;
   }
-  .yui3-paginator-first, .yui3-paginator-next, .yui3-paginator-page {
+  .yui3-paginator-first,
+  .yui3-paginator-next,
+  .yui3-paginator-page {
     display: inline-block;
     padding: 5px;
     padding: 6px 12px;

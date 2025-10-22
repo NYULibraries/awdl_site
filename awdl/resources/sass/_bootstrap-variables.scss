@@ -13,7 +13,7 @@
 //
 //## Gray and brand colors for use across Bootstrap.
 
-@use "sass:color";
+@use 'sass:color';
 
 // $gray-darker:              lighten(#000, 13.5%) // #222
 $gray-darker: color.scale(#000, $lightness: 13.5%);
@@ -25,7 +25,7 @@ $gray-darker: color.scale(#000, $lightness: 13.5%);
 // $gray-lighter:           lighten(#000, 93.5%) // #eee
 
 // Blood red
-$brand-primary: #8A0707;
+$brand-primary: #8a0707;
 $brand-primary2: color.scale($brand-primary, $lightness: -10%);
 $brand-primary-l2: color.scale($brand-primary, $lightness: 10%);
 
@@ -34,9 +34,9 @@ $brand-primary-l2: color.scale($brand-primary, $lightness: 10%);
 $brand-secondary: #f9f1e7;
 $brand-secondary2: color.scale($brand-secondary, $lightness: -5%);
 $brand-secondary3: color.scale($brand-secondary, $lightness: -8%);
-$brand-secondary-bright: #FF9C00;
+$brand-secondary-bright: #ff9c00;
 
-$footer-color: #474C50;
+$footer-color: #474c50;
 
 ///
 // $brand-success:         #5cb85c
@@ -66,7 +66,7 @@ $header-underline-color: color.scale($body-bg, $lightness: -10%);
 //## Font, line-height, and color for body text, headings, and more.
 
 $font-family-sans-serif: Verdana, Helvetica, Arial, sans-serif;
-$font-family-serif: Georgia, "Times New Roman", Times, serif;
+$font-family-serif: Georgia, 'Times New Roman', Times, serif;
 
 //* Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 // $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace
@@ -220,7 +220,7 @@ $headings-font-family: inherit;
 //* `<input>` border radius
 // $input-border-radius:            $border-radius-base
 //* Border color for inputs on focus
-$input-border-focus: #FF9C00;
+$input-border-focus: #ff9c00;
 
 //* Placeholder text color
 // $input-color-placeholder:        $gray-light
@@ -375,7 +375,7 @@ $navbar-padding-horizontal: 0;
 // $navbar-collapse-max-height:       340px
 
 // $navbar-default-color:             #777
-$navbar-default-bg: #FCF7F0;
+$navbar-default-bg: #fcf7f0;
 
 // $navbar-default-border:            darken($navbar-default-bg, 6.5%)
 
@@ -385,8 +385,8 @@ $navbar-default-link-color: #555;
 // $navbar-default-link-hover-color:          #333
 $navbar-default-link-hover-bg: color.scale($navbar-default-bg, $lightness: -6.5%);
 
-$navbar-link-hover-underline-color: #FF9C00;
-$navbar-link-hover-text-color: #FF9C00;
+$navbar-link-hover-underline-color: #ff9c00;
+$navbar-link-hover-text-color: #ff9c00;
 
 ///////
 // Text color for hover nav link
@@ -406,8 +406,8 @@ $navbar-default-link-active-bg: $navbar-default-bg;
 $nav-link-padding: 15px 15px;
 $nav-link-span-padding: 0px;
 $nav-link-margin: 0px 15px !default;
-$active-navlink-underline-color: #DECCBF;
-$active-navlink-underline-color-hover: #DECCBF;
+$active-navlink-underline-color: #deccbf;
+$active-navlink-underline-color-hover: #deccbf;
 
 // $nav-disabled-link-color:                   $gray-light
 // $nav-disabled-link-hover-color:             $gray-light
@@ -436,7 +436,7 @@ $active-navlink-underline-color-hover: #DECCBF;
 //##
 
 // $pagination-color:                     $link-color
-$pagination-bg: #FCF7F0;
+$pagination-bg: #fcf7f0;
 
 // $pagination-border:                    #ddd
 
@@ -449,7 +449,7 @@ $pagination-bg: #FCF7F0;
 // $pagination-active-border:             $brand-primary
 
 // $pagination-disabled-color:            $gray-light
-$pagination-disabled-bg: #FCF7F0;
+$pagination-disabled-bg: #fcf7f0;
 
 // $pagination-disabled-border:           #ddd
 
@@ -834,7 +834,6 @@ $pagination-disabled-bg: #FCF7F0;
 //* Horizontal line color.
 // $hr-border:                   $gray-lighter
 
-
 /// https://css-tricks.com/snippets/sass/simple-asset-helper-functions/
 
 /// Base path for assets (fonts, images...),
@@ -864,4 +863,3 @@ $asset-base-path: '/ancientworld/images' !default;
 @function font($file) {
   @return asset('fonts', $file);
 }
-

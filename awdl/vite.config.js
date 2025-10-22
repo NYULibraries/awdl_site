@@ -4,12 +4,13 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            input: ['resources/sass/style.scss', 'resources/js/app.js'],
-            refresh: true,
-        }),
-        tailwindcss(),
-        react(),
-    ],
+  plugins: [
+    laravel({
+      input: ['resources/sass/style.scss', 'resources/js/app.js'],
+      refresh: true,
+    }),
+    tailwindcss(),
+    react(),
+  ],
+  assetsInclude: ['**/*.md'],
 });

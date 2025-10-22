@@ -19,7 +19,7 @@
     float: right;
     a {
       text-indent: -1000em;
-      background: url("/src/assets/images/nyu-isaw.svg") no-repeat right center;
+      background: url('/src/assets/images/nyu-isaw.svg') no-repeat right center;
       background-size: contain;
       max-width: 175px;
       width: 17vw;
@@ -66,8 +66,14 @@
     }
     a:hover {
       text-decoration: none;
-      text-shadow: 1px 0px 0px #FF9C00, -1px 0px 0px #FF9C00, 0px 1px 0px #FF9C00, 0px -1px 0px #FF9C00;
-      text-shadow: 0px 0px 1px #fff, 1px 0px 0px #FF9C00;
+      text-shadow:
+        1px 0px 0px #ff9c00,
+        -1px 0px 0px #ff9c00,
+        0px 1px 0px #ff9c00,
+        0px -1px 0px #ff9c00;
+      text-shadow:
+        0px 0px 1px #fff,
+        1px 0px 0px #ff9c00;
     }
   }
   .toplogo a,

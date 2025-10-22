@@ -8,61 +8,57 @@ Route::get('/test', function () {
 });
 
 Route::get('/', function () {
-    return Inertia::render('HomePage');
+    return Inertia::render('index');
 });
 
 Route::get('/about', function () {
-    return Inertia::render('AboutPage');
+    return Inertia::render('about/index');
 });
 
 Route::get('/books', function () {
-    return Inertia::render('BookPage');
+    return Inertia::render('books/index');
 });
 
 Route::get('/books/{bookPID}', function ($bookPID) {
-    return Inertia::render('BookPage', ['bookPID' => $bookPID]);
+    return Inertia::render('books/index', ['bookPID' => $bookPID]);
 });
 
 Route::get('/browse', function () {
-    return Inertia::render('BrowsePage');
+    return Inertia::render('browse/index');
 });
 
 Route::get('/collectionsoverview', function () {
-    return Inertia::render('CollectionsPage');
+    return Inertia::render('collectionsoverview/index');
 });
 
 Route::get('/partners', function () {
-    return Inertia::render('PartnersPage');
+    return Inertia::render('partners/index');
 });
 
 Route::get('/providers', function () {
-    return Inertia::render('ProvidersPage');
+    return Inertia::render('providers/index');
 });
 
 Route::get('/providers/{providerPID}', function ($providerPID) {
-    return Inertia::render('ProvidersPage', ['providerPID' => $providerPID]);
-});
-
-Route::get('/providers/{providerPID}', function ($providerPID) {
-    return Inertia::render('ProvidersPage', ['providerPID' => $providerPID]);
+    return Inertia::render('providers/index', ['providerPID' => $providerPID]);
 });
 
 Route::get('/subjects', function () {
-    return Inertia::render('SubjectsPage');
+    return Inertia::render('subjects/index');
 });
 
 Route::get('/subjects/{subjectPID}', function ($subjectPID) {
-    return Inertia::render('SubjectsPage', ['subjectPID' => $subjectPID]);
+    return Inertia::render('subjects/index', ['subjectPID' => $subjectPID]);
 });
 
 Route::get('/series', function () {
-    return Inertia::render('SeriesPage');
+    return Inertia::render('series/index');
 });
 
 Route::get('/series/{seriesPID}', function ($seriesPID) {
-    return Inertia::render('SeriesPage', ['seriesPID' => $seriesPID]);
+    return Inertia::render('series/index', ['seriesPID' => $seriesPID]);
 });
 
 Route::get('/search', function () {
-    return Inertia::render('SearchPage');
+    return Inertia::render('search/index');
 });

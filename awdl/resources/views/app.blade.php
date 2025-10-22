@@ -8,7 +8,5 @@
         @vite(['resources/sass/style.scss', 'resources/js/app.js'])
         @inertiaHead
     </head>
-    <body>
-        @inertia
-    </body>
+    @inertia
 </html>

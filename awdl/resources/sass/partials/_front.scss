@@ -2,13 +2,13 @@
   main {
     min-height: 1000px;
   }
-  [role=complementary] {
+  [role='complementary'] {
     .content {
       margin-top: 10px;
       overflow: auto;
     }
   }
-  [role="tablist"] {
+  [role='tablist'] {
     @include box-shadow(inset 0px -1px 0px 0px rgba(110, 102, 93, 0.3));
     margin-bottom: 10px;
     .yui3-tab {
@@ -21,8 +21,8 @@
           padding: 10px 0px 4px;
           font-weight: 400;
           color: #555;
-          font-size: .8em;
-          letter-spacing: .3px;
+          font-size: 0.8em;
+          letter-spacing: 0.3px;
           text-transform: uppercase;
           &:hover {
             text-decoration: none;
@@ -42,7 +42,8 @@
           text-decoration: none;
           box-shadow: inset 0px -4px 0px 0px orange;
         }
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
           text-decoration: none;
           background-color: #f9f1e7;
         }
@@ -65,14 +66,15 @@
       padding-right: 50px;
       font-weight: 300;
     }
-    a:link, a:visited {
+    a:link,
+    a:visited {
       font-weight: 400;
     }
     b {
       font-weight: 400;
     }
     p {
-       max-width: 36em;
+      max-width: 36em;
     }
   }
   .featured h3 {
@@ -92,7 +94,8 @@
     }
   }
   @media (min-width: $grid-float-breakpoint) {
-    .yui3-tab-panel {}
+    .yui3-tab-panel {
+    }
     .yui3-tab-panel h3 {
       display: none;
     }
@@ -118,6 +121,6 @@
   }
 }
 .readmore {
-  font-size: .8em;
+  font-size: 0.8em;
   display: inline-block;
 }

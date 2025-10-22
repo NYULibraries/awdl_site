@@ -2,29 +2,29 @@ import React, { useEffect } from 'react';
 import { contentStore, searchFieldStore, pageStore } from '../../stores/contentStore';
 
 interface StoreInitializerProps {
-	initialData: any;
-	initialSearchField?: string;
-	initialPage?: number;
-	children: React.ReactNode;
+  initialData: any;
+  initialSearchField?: string;
+  initialPage?: number;
+  children: React.ReactNode;
 }
 
 const StoreInitializer: React.FC<StoreInitializerProps> = ({
-	initialData,
-	initialSearchField,
-	initialPage,
-	children
+  initialData,
+  initialSearchField,
+  initialPage,
+  children,
 }) => {
-	useEffect(() => {
-		contentStore.set(initialData);
-		if (initialSearchField) {
-			searchFieldStore.set(initialSearchField);
-		}
-		if (initialPage) {
-			pageStore.set(initialPage);
-		}
-	}, [initialData, initialSearchField, initialPage]);
+  useEffect(() => {
+    contentStore.set(initialData);
+    if (initialSearchField) {
+      searchFieldStore.set(initialSearchField);
+    }
+    if (initialPage) {
+      pageStore.set(initialPage);
+    }
+  }, [initialData, initialSearchField, initialPage]);
 
-	return <>{children}</>;
+  return <>{children}</>;
 };
 
 export default StoreInitializer;
