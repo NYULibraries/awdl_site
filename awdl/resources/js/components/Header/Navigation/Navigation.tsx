@@ -1,68 +1,70 @@
-import React from 'react';
-import SearchForm from '../../Search/Tools/SearchForm';
-import NavigationMobile from './NavigationMobile.tsx';
+// import SearchForm from '../../Search/Tools/SearchForm';
+import NavigationMobile from './NavigationMobile';
+import { Link } from '@inertiajs/react';
 
-const baseURL: string = '';
+function SearchForm() {
+  return (<></>);
+}
+
 const NavigationItems = [
 	{
-		href: `${baseURL}/`,
+		route: 'home',
 		class: 'home',
 		label: 'Home',
 	},
 	{
-		href: `${baseURL}/collectionsoverview`,
+		route: 'collectionsoverview',
 		class: 'collectionsoverview',
 		label: 'Collections Overview',
 	},
 	{
-		href: `${baseURL}/series`,
+		route: 'series',
 		class: 'series',
 		label: 'Series',
 	},
 	{
-		href: `${baseURL}/about`,
+		route: 'about',
 		class: 'about',
 		label: 'About',
 	},
 	{
-		href: `${baseURL}/partners`,
+		route: 'partners',
 		class: 'partners',
 		label: 'Partners',
 	},
 	{
-		href: `${baseURL}/browse`,
+		route: 'browse',
 		class: 'browse',
 		label: 'Browse',
-	},
+	}
 ];
 
-function Navigation() {
-	return (
-		<nav className="navbar navbar-default" role="navigation">
-			<div className="container-fluid">
-				<div className="navbar-header">
-					<NavigationMobile />
-				</div>
-
-				<div className="navbar-collapse">
-					<ul className="nav navbar-nav">
-						{NavigationItems.map((item, index) => {
-							return (
-								<li key={index}>
-									<a href={item.href} className={item.class}>
-										{item.label}
-									</a>
-								</li>
-							);
-						})}
-					</ul>
-					<div className="search_holder widget navbar-form navbar-right">
-						<SearchForm />
-					</div>
-				</div>
-			</div>
-		</nav>
-	);
+export default function Navigation() {
+  return (
+    <nav className="navbar navbar-default" role="navigation">
+	    <div className="container-fluid">
+		    <div className="navbar-header">
+			    <NavigationMobile />
+		    </div>
+		    <div className="navbar-collapse">
+			    <ul className="nav navbar-nav">
+				    {
+					    NavigationItems.map((item) => {
+						    return (
+							    <li>
+								    <Link prefetch href={route(item.route)} className={item.class}>
+									    {item.label}
+								    </Link>
+							    </li>
+						    );
+					    })
+				    }
+			    </ul>
+			    <div className="search_holder widget navbar-form navbar-right">
+				    <SearchForm />
+			    </div>
+		    </div>
+	    </div>
+    </nav>
+  );
 }
-
-export default Navigation;

@@ -19,7 +19,7 @@
     float: right;
     a {
       text-indent: -1000em;
-      background: url('/src/assets/images/nyu-isaw.svg') no-repeat right center;
+      background: url("../../images/nyu-isaw.svg") no-repeat right center;
       background-size: contain;
       max-width: 175px;
       width: 17vw;
@@ -50,7 +50,7 @@
       color: #fff;
       line-height: 1;
       display: block;
-      background: url('/src/assets/images/logo.png') no-repeat left center;
+      background: url('../../images/logo.png') no-repeat left center;
       background-size: contain;
       @media (max-width: $grid-float-breakpoint) {
         width: 75vw;
@@ -58,7 +58,7 @@
         background-position: left bottom;
       }
       @media (max-width: 479px) {
-        background: url('/src/assets/images/logoVert.png') no-repeat left top;
+        background: url('../../images/logoVert.png') no-repeat left top;
         background-size: auto 100%;
         padding-top: 0;
         height: 40px;

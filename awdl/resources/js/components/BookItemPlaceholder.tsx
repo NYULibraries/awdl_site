@@ -7,20 +7,20 @@ const BookItemPlaceholder: React.FC = () => {
       Spin: {
         colorPrimary: '#8A0707',
         motionEaseInOutCirc: 'cubic-bezier(0.78, 0.14, 0.15, 0.86)',
-        motionDurationSlow: '.1s',
-      },
-    },
+        motionDurationSlow: '.1s'
+      }
+    }
   };
 
   return (
     <ConfigProvider theme={theme}>
-      <div className='bookItemPlaceholder'>
+      <div className="bookItemPlaceholder">
         <Spin
-          size='large'
+          size="large"
           style={{
             position: 'relative',
             marginTop: '0%',
-            marginLeft: '10%',
+            marginLeft: '10%'
           }}
         />
       </div>

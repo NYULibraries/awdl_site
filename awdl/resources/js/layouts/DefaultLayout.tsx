@@ -1,60 +1,30 @@
-import React, { ReactNode, useEffect } from 'react';
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
-import Meta from '../components/Header/Meta';
-import { metatags } from '../components/Header/metatags';
+import { AppContent } from '@/layouts/app/app-content';
+import AppHeader from '@/layouts/app/app-header';
+import { AppShell } from '@/layouts/app/app-shell';
+import Footer from '@/components/Footer/Footer';
+import { type PropsWithChildren } from 'react';
+import { type BreadcrumbItem } from '@/types';
+import { type ReactNode } from 'react';
 
-interface DefaultLayoutProps {
-  title: string;
-  description?: string;
-  author?: string;
-  bodyID?: string;
-  bodyClass?: string;
+interface AppLayoutProps {
   children: ReactNode;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
-export default function DefaultLayout({
-  title,
-  description = metatags.poweredDesc,
-  author = metatags.defaultAuthor,
-  bodyID = '',
-  bodyClass = '',
-  children,
-}: DefaultLayoutProps) {
-  useEffect(() => {
-    // Load WebFont
-    const loadWebFont = async () => {
-      try {
-        const WebFont = (await import('webfontloader')).default;
-        WebFont.load({
-          google: {
-            families: ['Open Sans:300,400,600'],
-          },
-          active: function () {
-            document.documentElement.classList.add('wf-active');
-          },
-        });
-      } catch (error) {
-        console.warn('WebFont loader not available:', error);
-      }
-    };
-
-    loadWebFont();
-  }, []);
-
+function AppLayout({ children, breadcrumbs = [] }: PropsWithChildren<{ breadcrumbs?: BreadcrumbItem[] }>) {
   return (
-    <>
-      <Meta title={title} description={description} author={author} />
-      <body id={bodyID} className={bodyClass}>
-        <div id='skipnav'>
-          <a href='#mainContent'>Skip navigation</a>
-        </div>
-        <Header />
-        <main id={bodyID} className={bodyClass}>
-          {children}
-        </main>
-        <Footer />
-      </body>
-    </>
+    <AppShell>
+      <AppHeader breadcrumbs={breadcrumbs} />
+      <AppContent>
+        {children}
+      </AppContent>
+      <Footer />
+    </AppShell>
   );
 }
+
+export default ({ children, breadcrumbs, ...props }: AppLayoutProps) => (
+  <AppLayout breadcrumbs={breadcrumbs} {...props}>
+    {children}
+  </AppLayout>
+);
