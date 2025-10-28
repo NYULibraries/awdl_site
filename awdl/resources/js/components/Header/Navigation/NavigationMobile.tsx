@@ -32,14 +32,14 @@ export default function NavigationMobile() {
 	    <svg
 		    version="1.1"
 		    xmlns="http://www.w3.org/2000/svg"
-		    xmlns:xlink="http://www.w3.org/1999/xlink"
+		    xmlnsXlink="http://www.w3.org/1999/xlink"
 		    x="0px"
 		    y="0px"
 		    width="40px"
 		    height="30px"
 		    viewBox="0 0 40 30"
 		    overflow="visible"
-		    xml:space="preserve"
+		    xmlSpace="preserve"
 	    >
 		    <defs></defs>
 		    <rect y="0" fill="#FFFFFF" width="40" height="3"></rect>

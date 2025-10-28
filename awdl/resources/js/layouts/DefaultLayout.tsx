@@ -15,9 +15,7 @@ function AppLayout({ children, breadcrumbs = [] }: PropsWithChildren<{ breadcrum
   return (
     <AppShell>
       <AppHeader breadcrumbs={breadcrumbs} />
-      <AppContent>
-        {children}
-      </AppContent>
+      <AppContent>{children}</AppContent>
       <Footer />
     </AppShell>
   );

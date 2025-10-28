@@ -5,12 +5,10 @@ export default function Welcome() {
 
   const pageTitle = 'Welcome to the Ancient World Digital Library';
 
-  const id = 'home';
-
   return (
     <>
-      <DefaultLayout id={id} pageTitle={pageTitle}>
-        <Head title="Welcome"></Head>
+      <DefaultLayout>
+        <Head title={pageTitle}></Head>
         <div>HOLA</div>
       </DefaultLayout>
     </>

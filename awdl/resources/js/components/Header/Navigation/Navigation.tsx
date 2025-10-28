@@ -6,7 +6,13 @@ function SearchForm() {
   return (<></>);
 }
 
-const NavigationItems = [
+interface NavigationItem {
+	route: string;
+	class: string;
+	label: string;
+}
+
+const NavigationItems: NavigationItem[] = [
 	{
 		route: 'home',
 		class: 'home',
@@ -49,9 +55,9 @@ export default function Navigation() {
 		    <div className="navbar-collapse">
 			    <ul className="nav navbar-nav">
 				    {
-					    NavigationItems.map((item) => {
+					    NavigationItems.map((item: NavigationItem, index: number) => {
 						    return (
-							    <li>
+							    <li key={index}>
 								    <Link prefetch href={route(item.route)} className={item.class}>
 									    {item.label}
 								    </Link>
