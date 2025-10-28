@@ -28,7 +28,7 @@ class SeriesController extends Controller
 
       $documents = [];
 
-      $seriesMap = json_decode(file_get_contents(storage_path('app/private/series.json')));
+      $seriesMap = json_decode(file_get_contents(resource_path('datasource/series.json')));
 
       if (isset($seriesMap->$id)) {
 
