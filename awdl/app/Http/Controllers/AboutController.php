@@ -11,15 +11,14 @@ class AboutController extends Controller
     public function index(): Response
     {
 
-      $markdownBodyContent = File::get(resource_path('markdown/about.md'));
+        $markdownBodyContent = File::get(resource_path('markdown/about.md'));
 
-      $markdownAsideContent = File::get(resource_path('markdown/aboutSidebar.md'));
+        $markdownAsideContent = File::get(resource_path('markdown/aboutSidebar.md'));
 
-      return Inertia::render('About', [
-        'markdownBodyContent' => $markdownBodyContent,
-        'markdownAsideContent' => $markdownAsideContent,
-      ]);
+        return Inertia::render('About', [
+            'markdownBodyContent' => $markdownBodyContent,
+            'markdownAsideContent' => $markdownAsideContent,
+        ]);
 
     }
-
 }

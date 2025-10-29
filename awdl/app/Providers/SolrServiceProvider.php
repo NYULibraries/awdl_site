@@ -16,8 +16,8 @@ class SolrServiceProvider extends ServiceProvider
             $config = config('solr');
 
             return new Client(
-                new Curl(),
-                new EventDispatcher(),
+                new Curl,
+                new EventDispatcher,
                 [
                     'endpoint' => [
                         'default' => [

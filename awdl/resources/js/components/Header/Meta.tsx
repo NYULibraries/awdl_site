@@ -1,4 +1,3 @@
-import React from 'react';
 import { Head } from '@inertiajs/react';
 import { metatags } from './metatags';
 
@@ -13,7 +12,7 @@ export default function Meta({
   description = metatags.poweredDesc,
   author = metatags.defaultAuthor,
 }: MetaProps) {
-  const pageTitle = title? `${title} - Ancient World Digital Library Collection - NYU Libraries`: 'Ancient World Digital Library Collection - NYU Libraries';
+  const pageTitle = title? `${title} - ${import.meta.env.VITE_APP_NAME}`: `${import.meta.env.VITE_APP_NAME}`;
 
   return (
     <Head>

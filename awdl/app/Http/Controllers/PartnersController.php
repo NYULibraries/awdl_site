@@ -11,18 +11,17 @@ class PartnersController extends Controller
     public function index(): Response
     {
 
-      $id = 'partners';
+        $id = 'partners';
 
-      $title = 'Partners';
+        $title = 'Partners';
 
-      $markdownBodyContent = File::get(resource_path('markdown/partners.md'));
+        $markdownBodyContent = File::get(resource_path('markdown/partners.md'));
 
-      return Inertia::render('Partners', [
-        'id' => $id,
-        'title' => $title,
-        'markdownBodyContent' => $markdownBodyContent,
-      ]);
+        return Inertia::render('Partners', [
+            'id' => $id,
+            'title' => $title,
+            'markdownBodyContent' => $markdownBodyContent,
+        ]);
 
     }
-
 }

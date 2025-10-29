@@ -10,8 +10,7 @@ class SubjectsController extends Controller
     public function index(): Response
     {
 
-      return Inertia::render('Subjects', [ ]);
+        return Inertia::render('Subjects', []);
 
     }
-
 }

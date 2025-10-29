@@ -10,8 +10,7 @@ class BrowseController extends Controller
     public function index(): Response
     {
 
-      return Inertia::render('Browse', [ ]);
+        return Inertia::render('Browse', []);
 
     }
-
 }
