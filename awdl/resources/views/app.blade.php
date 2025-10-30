@@ -32,7 +32,7 @@
         @inertiaHead
 
     </head>
-    <body>
+    <body id="{{ $page['props']['bodyId'] ?? '' }}" @if(!empty($page['props']['bodyClass'])) class="{{ $page['props']['bodyClass'] }}" @endif>
       @inertia
     </body>
 </html>

@@ -2,6 +2,8 @@ import DefaultLayout from '@/layouts/DefaultLayout';
 import Meta from '@/components/Header/Meta';
 import { Link, usePage } from '@inertiajs/react';
 import BlogThumb from '/resources/images/blog_thumb.jpg';
+import Content from '@/components/Content';
+import { type BookItemProps } from '@/types';
 
 export default function Home() {
   const pageTitle = 'Home';
@@ -68,7 +70,7 @@ export default function Home() {
                   </li>
                 </ul>
                 <div id='recently-added-titles' role='tabpanel'>
-                  {/* <Content client:only='react' /> */}
+                  <Content documents={docs as BookItemProps[]} />
                 </div>
               </div>
             </div>

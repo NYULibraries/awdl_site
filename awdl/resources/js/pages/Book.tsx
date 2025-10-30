@@ -1,6 +1,6 @@
-import React from 'react';
 import { usePage } from '@inertiajs/react';
 import BookLayout from '@/layouts/BookLayout';
+import Meta from '@/components/Header/Meta';
 import { useState, useEffect, useRef } from 'react';
 import calculateAvailableHeight from '@/components/Util/getAvailableHeight';
 import { ConfigProvider, Spin, type ThemeConfig } from 'antd';
@@ -135,7 +135,8 @@ export default function Book() {
   const { title, identifier, url  } = usePage().props;
 
   return (
-    <BookLayout title={title}>
+    <BookLayout>
+		<Meta title={title as string} />
 	    <EmbededViewer title={title} identifier={identifier} url={url} />
     </BookLayout>
   );

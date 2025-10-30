@@ -1,12 +1,12 @@
 ---
 import DefaultLayout from '../../layouts/DefaultLayout';
-import Content from '../components/Content.tsx';
-import SearchSubheader from '../components/Search/Labels/SearchSubheader.tsx';
-import SearchPagination from '../components/Search/Tools/SearchPagination.tsx';
-import { fetchSolrDataByPID } from '../../Util/fetch.ts';
+import Content from '../components/Content';
+import SearchSubheader from '../components/Search/Labels/SearchSubheader';
+import SearchPagination from '../components/Search/Tools/SearchPagination';
+import { fetchSolrDataByPID } from '../../Util/fetch';
 import { contentStore } from '../../stores/contentStore';
-import SearchHeader from '../components/Search/Labels/SearchHeader.tsx';
-import StoreInitializer from '../components/Util/StoreInitializer.tsx';
+import SearchHeader from '../components/Search/Labels/SearchHeader';
+import StoreInitializer from '../components/Util/StoreInitializer';
 
 const { subjectPID } = Astro.params;
 if (!subjectPID) throw new Error('Subject PID not found');

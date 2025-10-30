@@ -1,6 +1,6 @@
 import { usePage } from '@inertiajs/react';
 import DefaultLayout from '@/layouts/DefaultLayout';
-import { Link } from '@inertiajs/react';
+import Meta from '@/components/Header/Meta';
 
 // Define the structure of a single document
 interface SeriesDocument {
@@ -31,7 +31,7 @@ const SeriesItem: React.FC<SeriesItemProps> = ({ document }) => {
   return (
     <article className="item">
       <div className="card">
-        <Link prefetch href={route('series.show', d)}>{label}</Link>
+        <a href={route('series.show', d)}>{label}</a>
       </div>
     </article>
   );
@@ -60,16 +60,15 @@ const SeriesContent: React.FC<SeriesContentProps> = ({ docs }) => {
 
 export default function CollectionsOverview() {
 
-  const { docs } = usePage().props as { docs: SeriesDocument[] };
-
-  const id = 'series';
+  const { docs } = usePage().props as unknown as { docs: SeriesDocument[] };
 
   const pageTitle = 'Series';
 
   return (
     <>
-      <DefaultLayout id={id} pageTitle={pageTitle}>
-        <main className="main container-fluid" role="main" id="mainContent" tabIndex="-1">
+      <DefaultLayout>
+        <Meta title={pageTitle} />
+        <main className='main container-fluid' role='main' id='mainContent' tabIndex={-1}>
           <header>
             <h1 className="page-title">{pageTitle}</h1>
           </header>

@@ -1,7 +1,5 @@
 import { Fragment} from 'react';
 import Navigation from '@/components/Header/Navigation/Navigation';
-import { Link } from '@inertiajs/react';
-
 
 export default function AppHeader() {
   return (
@@ -14,7 +12,7 @@ export default function AppHeader() {
             </a>
           </div>
           <h1 className='sitename'>
-            <Link href={route('home')}>Ancient World Digital Library</Link>
+            <a href={route('home')}>Ancient World Digital Library</a>
           </h1>
         </header>
       </div>

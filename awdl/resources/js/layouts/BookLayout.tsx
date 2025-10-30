@@ -1,31 +1,21 @@
-import React, { ReactNode } from 'react';
-import Header from '../components/Header/Header';
-import Meta from '../components/Header/Meta';
-import { metatags } from '../components/Header/metatags';
+import { AppContent } from '@/layouts/app/app-content';
+import AppHeader from '@/layouts/app/app-header';
+import { AppShell } from '@/layouts/app/app-shell';
+import Footer from '@/components/Footer/Footer';
+import { type PropsWithChildren } from 'react';
+import { type ReactNode } from 'react';
 
-interface BookLayoutProps {
-  title: string;
-  description?: string;
-  author?: string;
+interface AppLayoutProps {
   children: ReactNode;
 }
 
-export default function BookLayout({
-  title,
-  description = metatags.poweredDesc,
-  author = metatags.defaultAuthor,
-  children,
-}: BookLayoutProps) {
-	return (
-		<>
-			<Meta title={title} description={description} author={author} />
-			<div id="skipnav">
-				<a href="#mainContent">Skip navigation</a>
-			</div>
-			<Header />
-			<main id="book">
-				{children}
-			</main>
-		</>
-	);
+function AppLayout({ children }: PropsWithChildren<{ children: ReactNode }>) {
+  return (
+    <AppShell>
+      <AppHeader />
+      <AppContent>{children}</AppContent>
+    </AppShell>
+  );
 }
+
+export default ({ children, ...props }: AppLayoutProps) => <AppLayout {...props}>{children}</AppLayout>;

@@ -1,6 +1,5 @@
 // import SearchForm from '../../Search/Tools/SearchForm';
 import NavigationMobile from './NavigationMobile';
-import { Link } from '@inertiajs/react';
 
 function SearchForm() {
   return (<></>);
@@ -58,9 +57,9 @@ export default function Navigation() {
 					    NavigationItems.map((item: NavigationItem, index: number) => {
 						    return (
 							    <li key={index}>
-								    <Link prefetch href={route(item.route)} className={item.class}>
+								    <a href={route(item.route)} className={item.class}>
 									    {item.label}
-								    </Link>
+								    </a>
 							    </li>
 						    );
 					    })

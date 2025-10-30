@@ -1,28 +1,25 @@
 import React, { useState } from 'react';
 import BookItemPlaceholder from './BookItemPlaceholder';
-// import { seriesIdToPathAliasMapping } from '../Util/pagemaps/seriesMapping';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { type BookItemProps, type SeriesData } from '@/types';
 
-import { type BookItemProps } from '@/types';
 
-const BookItem: React.FC<BookItemProps> = ({ document }) => {
-
-  console.log('BookItem document:', document);
-	/* eslint-disable camelcase */
-	const {
-		identifier,
-		title,
-		authors,
-		zm_series_data_x,
-		sm_publisher,
-		sm_field_publication_location,
-		ss_publication_date_text,
-		sm_provider_nid,
-		im_field_subject,
-		sm_provider_label,
-		sm_subject_label
-	} = document;
-	/* eslint-enable camelcase */
+const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
+  /* eslint-disable camelcase */
+  const {
+    ss_book_identifier,
+    ss_title_long,
+    sm_author,
+    zm_series_data_x,
+    sm_publisher,
+    sm_field_publication_location,
+    ss_publication_date_text,
+    bs_status,
+    sm_provider_nid,
+    im_field_subject,
+    sm_provider_label,
+    sm_subject_label,
+  } = document;
+  /* eslint-enable camelcase */
 
   const baseURL = '';
 
@@ -44,111 +41,111 @@ const BookItem: React.FC<BookItemProps> = ({ document }) => {
     return doc.documentElement.textContent || text;
   };
 
-	// Series are all named different - still needs to be done
-	const series = zm_series_data_x;
+  /* eslint-disable camelcase */
+  const identifier = ss_book_identifier;
+  const title = ss_title_long || 'N.A.';
+  const authors = sm_author || [];
+  // Series are all named different - still needs to be done
+  const series = zm_series_data_x;
+  // Assume can be more than one publisher, provider, and subject
+  // Some publishers have encoded & symbols
+  const publisher = decodeHtmlEntities(sm_publisher?.[0] || 'N.A.');
+  const publicationPlace = sm_field_publication_location?.[0] || 'N.A.';
+  // Some publication dates have c symbols but they are not encoded they are just c's
+  const publicationDate = ss_publication_date_text || 'N.A.';
+  const providerCodes = sm_provider_nid || [];
+  const providers = sm_provider_label || [];
+  const subjectCodes = im_field_subject || [];
+  const subjects = sm_subject_label || [];
 
-	// Assume can be more than one publisher, provider, and subject
-	// Some publishers have encoded & symbols
-
-	const publisher = decodeHtmlEntities(sm_publisher?.[0] || 'N.A.');
-
-	const publicationPlace = sm_field_publication_location?.[0] || 'N.A.';
-
-	// Some publication dates have c symbols but they are not encoded they are just c's
-	const publicationDate = ss_publication_date_text || 'N.A.';
-
-	const providerCodes = sm_provider_nid || [];
-
-	const providers = sm_provider_label || [];
-
-	const subjectCodes = im_field_subject || [];
-
-	const subjects = sm_subject_label || [];
-
-	return (
-		<article className="item">
-			<div className="card">
-				{/* Thumbnail */}
-				<div className="thumbs">
-					{!isLoaded && <BookItemPlaceholder />}
-					<div className={isLoaded ? 'clipper' : 'clipperNoshadow imagePlaceholder'}>
-						<a href={`${baseURL}/books/${identifier}/1`}>
-							<img
-								src={`https://sites.dlib.nyu.edu/viewer/api/image/books/${identifier}/1/full/150,200/0/default.jpg`}
-								alt=""
-								title={title}
-								onLoad={imageLoad}
-							/>
-						</a>
-					</div>
-				</div>
-				{/* Title */}
-				<h1 className="md_title">
-					<a href={`${baseURL}/books/${identifier}/1`}>{title && title}</a>
-				</h1>
-				{/* Authors */}
-				<div className="md_authors">
-					<span className="md_label">Author:</span>{' '}
-					{authors.length > 0 ? (
-						authors.map((author: string, index: number) => {
-							return (
-								<span key={index} className="md_author">
-									{author}
-								</span>
-							);
-						})
-					) : (
-						<span className="md_author">No author available</span>
-					)}
-				</div>
-				{series && series.length > 0 ? (
-					<div className="md_series">
-						<span className="md_label">Series:</span>
-						{series.map((series: SeriesData, index: number) => {
-							const pathAlias = series.series_identifier;
-							return (
-								<a key={index} className="md_series_each" href={`${baseURL}/series/${pathAlias}`}>
-									{' ' + series.series_label}
-								</a>
-							);
-						})}
-					</div>
-				) : (
-					<></>
-				)}
-				{/* Publisher */}
-				<div>
-					<span className="md_label">Publisher:</span> <span>{publisher}</span>
-				</div>
-				{/* Place of Publication */}
-				<div>
-					<span className="md_label">Place of Publication:</span> {publicationPlace}
-				</div>
-				{/* Date of Publication */}
-				<div>
-					<span className="md_label">Date of Publication:</span> {publicationDate}
-				</div>
-				{/* Subjects */}
-				<div className="md_subjects">
-					<span className="md_label">Subject:</span>
-					{subjects.map((subject: string, index: number) => (
-						<a key={index} className="md_subject" href={`${baseURL}/subjects/${subjectCodes[index]}`}>
-							{' ' + subject}
-						</a>
-					))}
-				</div>
-				{/* Partners */}
-				<div className="md_partner">
-					<span className="md_label">Provider:</span>
-					{providers.map((provider: string, index: number) => (
-						<a key={index} className="md_provider" href={`${baseURL}/providers/${providerCodes[index]}`}>
-							{' ' + provider}
-						</a>
-					))}
-				</div>
-			</div>
-		</article>
-	);
+  return (
+	bs_status ? (
+    <article className='item'>
+      <div className='card'>
+        {/* Thumbnail */}
+        <div className='thumbs'>
+          {!isLoaded && <BookItemPlaceholder />}
+          <div className={isLoaded ? 'clipper' : 'clipperNoshadow imagePlaceholder'}>
+            <a href={`${baseURL}/books/${identifier}/1`}>
+              <img
+                src={`https://sites.dlib.nyu.edu/viewer/api/image/books/${identifier}/1/full/150,200/0/default.jpg`}
+                alt=''
+                title={title}
+                onLoad={imageLoad}
+              />
+            </a>
+          </div>
+        </div>
+        {/* Title */}
+        <h1 className='md_title'>
+          <a href={`${baseURL}/books/${identifier}/1`}>{title && title}</a>
+        </h1>
+        {/* Authors */}
+        <div className='md_authors'>
+          <span className='md_label'>Author:</span>{' '}
+          {authors.length > 0 ? (
+            authors.map((author: string, index: number) => {
+              return (
+                <span key={index} className='md_author'>
+                  {author}
+                </span>
+              );
+            })
+          ) : (
+            <span className='md_author'>No author available</span>
+          )}
+        </div>
+        {series && series.length > 0 ? (
+          <div className='md_series'>
+            <span className='md_label'>Series:</span>
+            {series.map((series: SeriesData, index: number) => {
+              const pathAlias = series.series_identifier;
+              return (
+                <a key={index} className='md_series_each' href={`${baseURL}/series/${pathAlias}`}>
+                  {' ' + series.series_label}
+                </a>
+              );
+            })}
+          </div>
+        ) : (
+          <></>
+        )}
+        {/* Publisher */}
+        <div>
+          <span className='md_label'>Publisher:</span> <span>{publisher}</span>
+        </div>
+        {/* Place of Publication */}
+        <div>
+          <span className='md_label'>Place of Publication:</span> {publicationPlace}
+        </div>
+        {/* Date of Publication */}
+        <div>
+          <span className='md_label'>Date of Publication:</span> {publicationDate}
+        </div>
+        {/* Subjects */}
+        <div className='md_subjects'>
+          <span className='md_label'>Subject:</span>
+          {subjects.map((subject: string, index: number) => (
+            <a key={index} className='md_subject' href={`${baseURL}/subjects/${subjectCodes[index]}`}>
+              {' ' + subject}
+            </a>
+          ))}
+        </div>
+        {/* Partners */}
+        <div className='md_partner'>
+          <span className='md_label'>Provider:</span>
+          {providers.map((provider: string, index: number) => (
+            <a key={index} className='md_provider' href={`${baseURL}/providers/${providerCodes[index]}`}>
+              {' ' + provider}
+            </a>
+          ))}
+        </div>
+      </div>
+    </article>
+  ) : (
+    <></>
+    )
+  );
 };
 
 export default BookItem;

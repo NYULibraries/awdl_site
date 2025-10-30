@@ -12,9 +12,11 @@ class SeriesController extends Controller
     public function index(Request $request, Client $solrClient): Response
     {
 
+        $bodyId = 'series';
+
         $docs = $this->fetchSeriesData($request, $solrClient);
 
-        return Inertia::render('Series', ['docs' => $docs]);
+        return Inertia::render('Series', ['bodyId' => $bodyId, 'docs' => $docs]);
 
     }
 
@@ -109,6 +111,7 @@ class SeriesController extends Controller
                     'date' => $doc->ss_publication_date_text,
                     'providers' => $doc->sm_provider_nid, // zm_provider
                     'path' => $pathAlias,
+                    'bs_status' => $doc->bs_status,
                 ];
 
             }

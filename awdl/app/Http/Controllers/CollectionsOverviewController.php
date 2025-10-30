@@ -10,6 +10,8 @@ class CollectionsOverviewController extends Controller
     public function index(): Response
     {
 
+        $bodyId = 'collections-overview';
+
         $collectionItems = [
             ['label' => 'Ancient Judaism'],
             ['label' => 'Ancient Science'],
@@ -23,7 +25,7 @@ class CollectionsOverviewController extends Controller
             ['label' => 'Papyrology'],
         ];
 
-        return Inertia::render('CollectionsOverview', ['collectionItems' => $collectionItems]);
+        return Inertia::render('CollectionsOverview', ['bodyId' => $bodyId, 'collectionItems' => $collectionItems]);
 
     }
 }

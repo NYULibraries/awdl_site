@@ -11,9 +11,14 @@ class HomeController extends Controller
 {
     public function index(Request $request, Client $solrClient): Response
     {
+
+        $bodyId = 'home';
+
+        $bodyClass = 'home';
+
         $docs = $this->fetchSolrData($request, $solrClient);
 
-        return Inertia::render('Home', ['docs' => $docs]);
+        return Inertia::render('Home', ['bodyId' => $bodyId, 'bodyClass' => $bodyClass, 'docs' => $docs]);
 
     }
 
@@ -53,12 +58,12 @@ class HomeController extends Controller
 
         $query->addFilterQuery([
             'key' => 'bundle_filter',
-            'query' => 'bundle:dlts_series',
+            'query' => 'bundle:dlts_book',
         ]);
 
         $query->addFilterQuery([
             'key' => 'collection_code_filter',
-            'query' => 'sm_series_code:('.$collectionCode.')',
+            'query' => 'sm_collection_code:('.$collectionCode.')',
         ]);
 
         $query->addFilterQuery([
@@ -79,21 +84,19 @@ class HomeController extends Controller
         $docs = [];
 
         foreach ($resultset as $doc) {
-            // $pathAlias = (string) $doc->path_alias;
-            // $pathAlias = str_replace('content/', 'series/', $pathAlias).'?page=1';
             $docs[] = [
-                'id' => $doc->ss_series_identifier,
-                'title' => $doc->ss_title_long,
-                'authors' => $doc->sm_author,
-                'series' => $doc->zm_series_data_x,
-                'publisher' => $doc->sm_publisher,
-                'publication_location' => $doc->sm_field_publication_location,
-                'publication_date' => $doc->ss_publication_date_text,
-                'provider_codes' => $doc->sm_provider_nid,
-                'provider_labels' => $doc->sm_provider_label,
-                'subject_codes' => $doc->im_field_subject,
-                'subject_labels' => $doc->sm_subject_label,
-                // 'path' => $pathAlias,
+                'ss_book_identifier' => $doc->ss_book_identifier,
+                'ss_title_long' => $doc->ss_title_long,
+                'sm_author' => $doc->sm_author,
+                'zm_series_data_x' => $doc->zm_series_data_x,
+                'sm_publisher' => $doc->sm_publisher,
+                'sm_field_publication_location' => $doc->sm_field_publication_location,
+                'ss_publication_date_text' => $doc->ss_publication_date_text,
+                'sm_provider_nid' => $doc->sm_provider_nid,
+                'sm_provider_label' => $doc->sm_provider_label,
+                'im_field_subject' => $doc->im_field_subject,
+                'sm_subject_label' => $doc->sm_subject_label,
+                'bs_status' => $doc->bs_status,
             ];
         }
 

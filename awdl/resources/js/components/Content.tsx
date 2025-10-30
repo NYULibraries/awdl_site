@@ -1,7 +1,8 @@
 import React from 'react';
 import BookItem from './BookItem';
+import { type BookItemProps } from '@/types';
 
-const Content: React.FC = ( { documents }) => {
+const Content: React.FC<{ documents: BookItemProps[] }> = ({ documents }) => {
 
   return (
     <>

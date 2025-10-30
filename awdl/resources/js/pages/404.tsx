@@ -1,26 +1,24 @@
 import DefaultLayout from '@/layouts/DefaultLayout';
+import Meta from '@/components/Header/Meta';
 
-const baseURL = '';
+export default function PageNotFound() {
 
-export default function CollectionsOverview() {
-
-  const { collectionItems } = usePage().props;
-
-  const id = 'collections-overview';
-
-  const pageTitle = 'Collections Overview';
+  const pageTitle = 'Page Not Found';
 
   return (
     <>
-      <DefaultLayout title="Page Not Found - Ancient World Digital Library">
-	    <main>
-		  <div class="container-fluid">
-			<h1>Page Not Found</h1>
-			<p>The page you're looking for doesn't exist.</p>
-			<p><a href={baseURL}>Return to Homepage</a></p>
-		  </div>
-	    </main>
-	  </DefaultLayout>
+      <DefaultLayout>
+        <Meta title='Page Not Found - Ancient World Digital Library' />
+        <main>
+          <div className='container-fluid'>
+            <h1>Page Not Found</h1>
+            <p>The page you're looking for doesn't exist.</p>
+            <p>
+              <a href={route('home')}>Return to Homepage</a>
+            </p>
+          </div>
+        </main>
+      </DefaultLayout>
     </>
-  )
+  );
 }
