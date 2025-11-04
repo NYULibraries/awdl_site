@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import { usePage } from '@inertiajs/react';
 import Meta from '@/components/Header/Meta';
 
-export default function About() {
+export default function Partners() {
   const { id, title, markdownBodyContent } = usePage().props;
 
   return (

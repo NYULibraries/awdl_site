@@ -1,28 +1,50 @@
 import React, { useRef } from 'react';
-import { useStore } from '@nanostores/react';
-import { searchFieldStore } from '../../../stores/contentStore';
+import { usePage } from '@inertiajs/react';
 
-function SearchForm() {
-  const baseURL = '';
+export default function SearchForm() {
+  const { data, idAlias } = usePage().props as unknown as {
+    data?: { queryText?: string};
+    idAlias?: string;
+  };
+  console.log(data);
+  const { queryText } = data || { queryText: '*:*' as string };
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const searchField = useStore(searchFieldStore);
-
-  const isOnSeriesPage = typeof window !== 'undefined' && window.location.pathname.includes('/series/');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const searchQuery = inputRef.current?.value || '*:*';
+    const searchQuery = inputRef.current?.value?.trim() || '';
     if (inputRef.current) {
       inputRef.current.blur();
     }
-    const escapeSolrQuery = (str: string): string => {
-      return str.replace(/([+\-\!\(\)\{\}\[\]\^"~\*\?:\\/])/g, '\\$1');
-    };
-    // Search url
-    const searchUrl = `${baseURL}/search/?q=${encodeURIComponent(escapeSolrQuery(searchQuery))}&page=1`;
+
+    // only include 'q' if it's not empty and not the default
+    const params = new URLSearchParams();
+    if (searchQuery && searchQuery !== '*:*') {
+      params.set('q', searchQuery);
+    }
+    params.set('page', '1');
+
+    const searchUrl = `/search/?${params.toString()}`;
     window.location.href = searchUrl;
   };
+
+  let defaultSearchValue;
+  const pathname = window.location.pathname;
+  switch (true) {
+    case pathname.includes('/providers/') && pathname !== '/providers':
+      defaultSearchValue = '';
+      break;
+    case pathname.includes('/subjects/') && pathname !== '/subjects':
+      defaultSearchValue = '';
+      break;
+    case pathname.includes('/series/') && pathname !== '/series':
+      defaultSearchValue = 'Search series';
+      break;
+    default:
+      defaultSearchValue = queryText === '*:*' ? '' : queryText;
+      break;
+  }
 
   return (
     <form onSubmit={handleSubmit} role='search' className='dl-search'>
@@ -31,7 +53,7 @@ function SearchForm() {
         name='q'
         type='text'
         className='searchfield'
-        defaultValue={isOnSeriesPage ? '' : searchField === '*:*' ? '' : searchField}
+        defaultValue={defaultSearchValue}
         placeholder='Search titles, subjects, authors...'
         title='Enter the terms you wish to search for.'
         aria-label='Search'
@@ -45,5 +67,3 @@ function SearchForm() {
     </form>
   );
 }
-
-export default SearchForm;

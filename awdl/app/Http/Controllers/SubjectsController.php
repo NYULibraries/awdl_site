@@ -16,7 +16,7 @@ class SubjectsController extends Controller
 
         $subjectsMap = json_decode(file_get_contents(resource_path('datasource/subjectsMap.json')));
 
-        return Inertia::render('Subjects', ['bodyId' => $bodyId, 'subjectsMap' => $subjectsMap]);
+        return Inertia::render('SubjectIndex', ['subjectsMap' => $subjectsMap]);
 
     }
 
@@ -27,9 +27,16 @@ class SubjectsController extends Controller
         $data = $this->fetchSolrDataByPID($request, $solrClient, $id);
 
         $subjectsMap = json_decode(file_get_contents(resource_path('datasource/subjectsMap.json')));
-        $idAlias = $subjectsMap->$id;
+        
+        $idAlias = null;
 
-        return Inertia::render('SubjectItems', ['bodyId' => $bodyId, 'data' => $data, 'idAlias' => $idAlias]);
+        if (isset($subjectsMap->$id)) {
+            $idAlias = $subjectsMap->$id;
+        } else {
+            $idAlias = $id;
+        }
+
+        return Inertia::render('SubjectPID', ['bodyId' => $bodyId, 'data' => $data, 'idAlias' => $idAlias]);
 
     }
 
@@ -39,6 +46,7 @@ class SubjectsController extends Controller
         $rows = 12;
         $start = ($page - 1) * $rows;
 
+        $subjectPID = (int) $subjectPID;
         $queryText = "im_field_subject:$subjectPID";
 
         $sortField = 'ss_longlabel';
@@ -119,7 +127,6 @@ class SubjectsController extends Controller
             'docs' => $docs,
             'numFound' => $numFound,
             'queryText' => $queryText,
-            'page' => $page, 
         ];
     }
 }

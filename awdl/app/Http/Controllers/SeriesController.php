@@ -16,7 +16,7 @@ class SeriesController extends Controller
 
         $docs = $this->fetchSeriesData($request, $solrClient);
 
-        return Inertia::render('Series', ['bodyId' => $bodyId, 'docs' => $docs]);
+        return Inertia::render('SeriesIndex', ['docs' => $docs]);
 
     }
 
@@ -122,7 +122,7 @@ class SeriesController extends Controller
             $pageTitle = $documents[0]['series'][$seriesIdentifier]['label'];
         }
 
-        return Inertia::render('SeriesItems', [
+        return Inertia::render('SeriesPID', [
             'pageTitle' => $pageTitle,
             'pageId' => 'series',
             'documents' => $documents,

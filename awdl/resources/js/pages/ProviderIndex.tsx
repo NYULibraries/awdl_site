@@ -1,13 +1,10 @@
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Meta from '@/components/Header/Meta';
+import { usePage } from '@inertiajs/react';
 
-const Providers: React.FC = () => {
-  const pageTitle = 'Provider';
-  const providerNidToLabelMapping = {
-    '1': 'Provider 1',
-    '2': 'Provider 2',
-    '3': 'Provider 3',
-  };
+export default function ProviderIndex() {
+  const pageTitle = 'Providers: Ancient World Digital Library Collection - NYU Libraries';
+  const { providersMap } = usePage().props as unknown as { providersMap: Record<string, string> };
 
   return (
     <DefaultLayout>
@@ -18,8 +15,8 @@ const Providers: React.FC = () => {
         </header>
         <div>
           <ul>
-            {Object.entries(providerNidToLabelMapping).map(([nid, label]) => (
-              <li>
+            {Object.entries(providersMap).map(([nid, label]: [string, string]) => (
+              <li key={nid}>
                 <a href={route('providers.show', nid)}>{label}</a>
               </li>
             ))}
@@ -28,6 +25,4 @@ const Providers: React.FC = () => {
       </main>
     </DefaultLayout>
   );
-};
-
-export default Providers;
+}

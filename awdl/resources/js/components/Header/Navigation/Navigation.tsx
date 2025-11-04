@@ -1,9 +1,5 @@
-// import SearchForm from '../../Search/Tools/SearchForm';
+import SearchForm from '../../Search/Tools/SearchForm';
 import NavigationMobile from './NavigationMobile';
-
-function SearchForm() {
-  return (<></>);
-}
 
 interface NavigationItem {
 	route: string;
@@ -66,7 +62,7 @@ export default function Navigation() {
 				    }
 			    </ul>
 			    <div className="search_holder widget navbar-form navbar-right">
-				    <SearchForm />
+				    <SearchForm queryText={'*:*' as unknown as string} />
 			    </div>
 		    </div>
 	    </div>

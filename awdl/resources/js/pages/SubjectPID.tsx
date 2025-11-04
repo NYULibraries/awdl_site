@@ -1,23 +1,28 @@
 import DefaultLayout from '@/layouts/DefaultLayout';
-import Meta from '@/components/Header/Meta';
 import { usePage } from '@inertiajs/react';
-import { type BookItemProps } from '@/types';
-import SearchHeader from '@/components/Search/Labels/SearchHeader';
-import SearchSubheader from '@/components/Search/Labels/SearchSubheader';
+import Meta from '@/components/Header/Meta';
 import Content from '@/components/Content';
+import SearchSubheader from '@/components/Search/Labels/SearchSubheader';
 import SearchPagination from '@/components/Search/Tools/SearchPagination';
+import SearchHeader from '@/components/Search/Labels/SearchHeader';
+import { BookItemProps } from '@/types';
 
-const Browse: React.FC = () => {
-  const pageTitle = 'Browse';
-  const { data } = usePage().props as unknown as {
-    data: { start: number; rows: number; docs: BookItemProps[]; numFound: number; queryText: string };
+export default function SubjectPID() {
+  const { data, idAlias } = usePage().props as unknown as {
+    data: {
+      docs: BookItemProps[];
+      start: number;
+      rows: number;
+      numFound: number;
+    };
+    idAlias: string;
   };
-  const { start, rows, docs, numFound, queryText } = data;
+  const { docs, start, rows, numFound } = data;
   return (
     <DefaultLayout>
-      <Meta title={pageTitle} />
+      <Meta title={idAlias || 'Subject'} />
       <main className='main container-fluid' role='main' id='mainContent' tabIndex={-1}>
-        <SearchHeader query={queryText} />
+        <SearchHeader query={idAlias} />
         <div className='items-widget'>
           <div className='top'>
             <SearchSubheader numFound={numFound} start={start} length={docs.length} />
@@ -45,6 +50,4 @@ const Browse: React.FC = () => {
       </main>
     </DefaultLayout>
   );
-};
-
-export default Browse;
+}

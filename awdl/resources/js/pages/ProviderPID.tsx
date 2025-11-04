@@ -1,31 +1,28 @@
 import DefaultLayout from '@/layouts/DefaultLayout';
-import { usePage } from '@inertiajs/react';
 import Meta from '@/components/Header/Meta';
-import Content from '@/components/Content';
-import SearchSubheader from '@/components/Search/Labels/SearchSubheader';
+import SearchSubheader from '../components/Search/Labels/SearchSubheader';
 import SearchPagination from '@/components/Search/Tools/SearchPagination';
 import SearchHeader from '@/components/Search/Labels/SearchHeader';
-import StoreInitializer from '@/components/Util/StoreInitializer';
-import { BookItemProps } from '@/types';
+import Content from '@/components/Content';
+import { usePage } from '@inertiajs/react';
+import { type BookItemProps } from '@/types';
 
-export default function SubjectItem() {
-  const { subjectLabel } = usePage().props as unknown as { subjectLabel: string };
-  const { data } = usePage().props as unknown as {
+const ProviderPID = () => {
+  const { data, idAlias } = usePage().props as unknown as {
     data: {
       docs: BookItemProps[];
       start: number;
       rows: number;
       numFound: number;
-      queryText: string;
-      page: number;
     };
+    idAlias: string;
   };
-  const { docs, start, rows, numFound, page } = data;
+  const { docs, start, rows, numFound } = data;
   return (
     <DefaultLayout>
-      <Meta title={subjectLabel || 'Subject'} />
+      <Meta title={idAlias || 'Provider'} />
       <main className='main container-fluid' role='main' id='mainContent' tabIndex={-1}>
-        <SearchHeader query={queryText} />
+        <SearchHeader query={idAlias} />
         <div className='items-widget'>
           <div className='top'>
             <SearchSubheader numFound={numFound} start={start} length={docs.length} />
@@ -44,7 +41,7 @@ export default function SubjectItem() {
             data-docslength={docs.length}
             data-requesterror='0'
           >
-            <Content documents={docs as BookItemProps[]} />
+            <Content documents={docs} />
           </div>
           <div className='bottom text-center'>
             <SearchPagination rows={rows} />
@@ -53,4 +50,6 @@ export default function SubjectItem() {
       </main>
     </DefaultLayout>
   );
-}
+};
+
+export default ProviderPID;

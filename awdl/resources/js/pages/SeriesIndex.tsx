@@ -26,8 +26,6 @@ const SeriesItem: React.FC<SeriesItemProps> = ({ document }) => {
 
   const d = path.replace('series/', '')
 
-  // console.log(d);
-
   return (
     <article className="item">
       <div className="card">
@@ -58,7 +56,7 @@ const SeriesContent: React.FC<SeriesContentProps> = ({ docs }) => {
   );
 };
 
-export default function CollectionsOverview() {
+export default function SeriesIndex() {
 
   const { docs } = usePage().props as unknown as { docs: SeriesDocument[] };
 

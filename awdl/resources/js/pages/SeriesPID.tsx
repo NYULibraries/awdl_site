@@ -4,7 +4,7 @@ import Content from '@/components/Content';
 import Meta from '@/components/Header/Meta';
 import { type BookItemProps } from '@/types';
 
-export default function SeriesItems() {
+export default function SeriesPID() {
   const { pageTitle, documents } = usePage().props;
 
   console.log('SeriesItems documents:', documents);
