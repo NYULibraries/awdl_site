@@ -10,7 +10,13 @@ import SearchPagination from '@/components/Search/Tools/SearchPagination';
 const Browse: React.FC = () => {
   const pageTitle = 'Browse';
   const { data } = usePage().props as unknown as {
-    data: { start: number; rows: number; docs: BookItemProps[]; numFound: number; queryText: string };
+    data: {
+      start: number;
+      rows: number;
+      docs: BookItemProps[];
+      numFound: number;
+      queryText: string;
+    };
   };
   const { start, rows, docs, numFound, queryText } = data;
   return (
@@ -20,7 +26,7 @@ const Browse: React.FC = () => {
         <SearchHeader query={queryText} />
         <div className='items-widget'>
           <div className='top'>
-            <SearchSubheader numFound={numFound} start={start} length={docs.length} />
+            <SearchSubheader />
           </div>
           <div
             id='items'

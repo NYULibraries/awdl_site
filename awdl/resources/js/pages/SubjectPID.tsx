@@ -25,7 +25,7 @@ export default function SubjectPID() {
         <SearchHeader query={idAlias} />
         <div className='items-widget'>
           <div className='top'>
-            <SearchSubheader numFound={numFound} start={start} length={docs.length} />
+            <SearchSubheader />
           </div>
           <div
             id='items'

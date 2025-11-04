@@ -48,7 +48,7 @@ class ProvidersController extends Controller
         $providerPID = (int) $providerPID;
         $queryText = "sm_provider_nid:($providerPID)";
 
-        $sortField = 'ss_longlabel';
+        $sortField = $request->input('sortfield', 'ss_longlabel');
 
         $collectionCode = 'awdl OR egypt';
 
@@ -126,6 +126,7 @@ class ProvidersController extends Controller
             'docs' => $docs,
             'numFound' => $numFound,
             'queryText' => $queryText,
+            'sortField' => $sortField,
         ];
     }
 }

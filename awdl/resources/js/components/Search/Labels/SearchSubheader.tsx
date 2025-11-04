@@ -1,20 +1,13 @@
 import React from 'react';
 import FilterDropdown from '../Tools/FilterDropdown';
-// import { useStore } from '@nanostores/react';
-// import { contentStore } from '../../../stores/contentStore';
-import { type DocumentSchema } from '../../Util/fetchCSR';
-import { z } from 'zod';
+import { usePage } from '@inertiajs/react';
+import { type BookItemProps } from '@/types';
 
-interface SearchSubheaderProps {
-  numFound: number;
-  start: number;
-  length: number;
-  seriesIdentifier?: string;
-}
-
-const SearchSubheader: React.FC<SearchSubheaderProps> = ({ numFound, start, length, seriesIdentifier }) => {
+const SearchSubheader: React.FC = () => {
+  const { data } = usePage().props as unknown as { data: { numFound: number; start: number; docs: BookItemProps[] } };
+  const { numFound, start, docs } = data || { numFound: 0, start: 0, docs: [] as BookItemProps[] };
   const displayStart = start < 1 ? 1 : start + 1;
-  const displayLength = start + length;
+  const displayLength = start + docs.length;
 
   return numFound < 1 ? (
     <div className='col'>
@@ -27,7 +20,7 @@ const SearchSubheader: React.FC<SearchSubheaderProps> = ({ numFound, start, leng
         Showing items <span className='start'>{displayStart}</span> -{' '}
         <span className='docslength'>{displayLength}</span> of <span className='numfound'>{numFound}</span>
       </div>
-      {/* <FilterDropdown seriesIdentifier={seriesIdentifier} /> */}
+      <FilterDropdown />
     </>
   );
 };

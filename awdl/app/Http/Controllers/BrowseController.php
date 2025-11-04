@@ -29,7 +29,7 @@ class BrowseController extends Controller
 
         $queryText = '*:*';
 
-        $sortField = 'ss_longlabel';
+        $sortField = $request->input('sortfield', 'ss_longlabel');
 
         $collectionCode = 'awdl OR egypt';
 
@@ -77,7 +77,7 @@ class BrowseController extends Controller
         $query->setRows($rows);
 
         $query->addSort($sortField, $query::SORT_ASC);
-
+        
         $resultset = $solrClient->select($query);
 
         $docs = [];
@@ -108,6 +108,7 @@ class BrowseController extends Controller
             'numFound' => $numFound,
             'queryText' => $queryText,
             'page' => $page, 
+            'sortField' => $sortField,
         ];
     }
 }

@@ -29,7 +29,7 @@ class SearchController extends Controller
 
         $queryText = $request->input('q', '*:*');
 
-        $sortField = 'ss_longlabel';
+        $sortField = $request->input('sortfield', 'ss_longlabel');
 
         $collectionCode = 'awdl OR egypt';
 
@@ -107,7 +107,8 @@ class SearchController extends Controller
             'docs' => $docs,
             'numFound' => $numFound,
             'queryText' => $queryText,
-            'page' => $page, 
+            'page' => $page,
+            'sortField' => $sortField,
         ];
     }
 }

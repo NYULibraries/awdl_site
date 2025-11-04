@@ -49,7 +49,7 @@ class SubjectsController extends Controller
         $subjectPID = (int) $subjectPID;
         $queryText = "im_field_subject:$subjectPID";
 
-        $sortField = 'ss_longlabel';
+        $sortField = $request->input('sortfield', 'ss_longlabel');
 
         $collectionCode = 'awdl OR egypt';
 
@@ -127,6 +127,7 @@ class SubjectsController extends Controller
             'docs' => $docs,
             'numFound' => $numFound,
             'queryText' => $queryText,
+            'sortField' => $sortField,
         ];
     }
 }

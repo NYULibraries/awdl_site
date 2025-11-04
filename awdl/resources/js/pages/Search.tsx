@@ -9,9 +9,15 @@ import { type BookItemProps } from '@/types';
 
 export default function Search() {
   const { data } = usePage().props as unknown as {
-    data: { start: number; rows: number; docs: BookItemProps[]; numFound: number; queryText: string };
+    data: {
+      start: number;
+      rows: number;
+      docs: BookItemProps[];
+      numFound: number;
+      queryText: string;
+    };
   };
-  const { start, rows, docs, numFound, queryText } = data;
+  const { start, rows, docs, numFound, queryText} = data;
   const pageTitle = queryText || 'Search Results';
 
   return (
@@ -22,7 +28,7 @@ export default function Search() {
           <SearchHeader query={queryText} />
           <div className='items-widget'>
             <div className='top'>
-              <SearchSubheader numFound={numFound} start={start} length={docs.length} />
+              <SearchSubheader />
             </div>
             <div
               id='items'
