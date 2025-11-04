@@ -2,27 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Solarium\Client;
 
 class BrowseController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request, Client $solrClient): Response
     {
 
         $bodyId = 'browse';
 
-        $docs = $this->fetchSolrData($request, $solrClient);
+        $data = $this->fetchSolrData($request, $solrClient);
 
-        return Inertia::render('Browse', ['bodyId' => $bodyId, 'docs' => $docs]);
+        return Inertia::render('Browse', ['bodyId' => $bodyId, 'data' => $data]);
 
     }
 
     public function fetchSolrData(Request $request, Client $solrClient)
     {
-        $start = 0;
-
+        $page = (int) $request->input('page', 1);
         $rows = 12;
+        
+        $start = ($page - 1) * $rows;
 
         $queryText = '*:*';
 
@@ -96,7 +99,15 @@ class BrowseController extends Controller
             ];
         }
 
-        return $docs;
+        $numFound = $resultset->getNumFound();
 
+        return [
+            'start' => $start,
+            'rows' => $rows,
+            'docs' => $docs,
+            'numFound' => $numFound,
+            'queryText' => $queryText,
+            'page' => $page, 
+        ];
     }
 }

@@ -9,6 +9,11 @@ class ProvidersController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Providers', []);
+
+        // body has no id or class on index page
+
+        $providersMap = json_decode(file_get_contents(resource_path('datasource/providersMap.json')));
+
+        return Inertia::render('Providers', ['providersMap' => $providersMap]);
     }
 }

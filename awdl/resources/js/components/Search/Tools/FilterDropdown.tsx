@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useStore } from '@nanostores/react';
+// import { useStore } from '@nanostores/react';
 import { filterStore, pageStore, contentStore, searchFieldStore } from '../../../stores/contentStore';
 import { fetchSolrData, fetchSolrDataBySeriesIdentifier } from '../../../Util/fetch';
 

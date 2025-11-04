@@ -1,8 +1,7 @@
 import React from 'react';
 import { ConfigProvider, Pagination, type ThemeConfig } from 'antd';
-import { fetchSolrData, fetchSolrDataBySeriesIdentifier } from '../../../Util/fetch';
-import { contentStore, pageStore, searchFieldStore, filterStore } from '../../../stores/contentStore';
-import { useStore } from '@nanostores/react';
+import { router } from '@inertiajs/react';
+import { usePage } from '@inertiajs/react';
 
 interface SearchPaginationProps {
   rows: number;
@@ -19,44 +18,21 @@ function SearchPagination({ rows = 12, seriesIdentifier }: SearchPaginationProps
     },
   };
 
-  const contentData = useStore(contentStore);
-  const currentPage = useStore(pageStore);
-  const searchQuery = useStore(searchFieldStore);
-  const filter = useStore(filterStore);
+  const { data } = usePage().props as unknown as { data: { numFound: number; page?: number } };
+  const currentPage = data?.page || 1;
+  const numFound = data?.numFound || 0;
 
-  const onChange = async (page: number) => {
-    const start = (page - 1) * rows;
-
-    const newData = seriesIdentifier
-      ? await fetchSolrDataBySeriesIdentifier({
-          start,
-          rows,
-          seriesIdentifier,
-          sortField: filter.field,
-          sortDir: filter.direction,
-        })
-      : await fetchSolrData({
-          start,
-          rows,
-          searchField: searchQuery,
-          sortField: filter.field,
-          sortDir: filter.direction,
-          collectionCode: '(awdl%20OR%20egypt)',
-        });
-
-    contentStore.set(newData);
-    pageStore.set(page);
-
-    // Update URL with page number if we're on a page with pagination
-    const url = new URL(window.location.href);
-    if (window.location.pathname.includes('search')) {
-      url.searchParams.set('q', searchQuery);
-    }
-    url.searchParams.set('page', page.toString());
-    window.history.pushState({}, '', url.toString());
+  const onChange = (page: number) => {
+    router.get(
+      '/browse',
+      { page },
+      {
+        only: ['data'], 
+      }
+    );
   };
 
-  if (!contentData?.response?.numFound || !rows || contentData.response.numFound < 1) {
+  if (!numFound || !rows || numFound < 1) {
     return null;
   }
 
@@ -68,7 +44,7 @@ function SearchPagination({ rows = 12, seriesIdentifier }: SearchPaginationProps
         showSizeChanger={false}
         pageSize={rows}
         hideOnSinglePage={true}
-        total={contentData.response.numFound}
+        total={numFound}
         onChange={onChange}
         style={{
           display: 'flex',

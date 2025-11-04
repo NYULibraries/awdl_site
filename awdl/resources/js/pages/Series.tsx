@@ -26,7 +26,7 @@ const SeriesItem: React.FC<SeriesItemProps> = ({ document }) => {
 
   const d = path.replace('series/', '')
 
-  console.log(d);
+  // console.log(d);
 
   return (
     <article className="item">

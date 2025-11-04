@@ -1,14 +1,9 @@
 import DefaultLayout from '@/layouts/DefaultLayout';
-// import { subjectNidToLabelMapping } from '../../Util/pagemaps/subjectMapping.ts';
 import Meta from '@/components/Header/Meta';
-
+import { usePage } from '@inertiajs/react';
 const Subjects: React.FC = () => {
   const pageTitle = 'Subjects: Ancient World Digital Library';
-  const subjectNidToLabelMapping = {
-    '1': 'Subject 1',
-    '2': 'Subject 2',
-    '3': 'Subject 3',
-  };
+  const { subjectsMap } = usePage().props as unknown as { subjectsMap: Record<string, string> };
   return (
     <DefaultLayout>
       <Meta title={pageTitle} />
@@ -18,7 +13,7 @@ const Subjects: React.FC = () => {
         </header>
         <div>
           <ul>
-            {Object.entries(subjectNidToLabelMapping).map(([nid, label]) => (
+            {Object.entries(subjectsMap).map(([nid, label]) => (
               <li>
                 <a href={route('subjects.show', nid)}>{label}</a>
               </li>

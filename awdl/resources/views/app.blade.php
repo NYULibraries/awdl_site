@@ -33,6 +33,7 @@
 
     </head>
     <body id="{{ $page['props']['bodyId'] ?? '' }}" @if(!empty($page['props']['bodyClass'])) class="{{ $page['props']['bodyClass'] }}" @endif>
+      <div id="skipnav"><a href="#mainContent">Skip navigation</a></div>
       @inertia
     </body>
 </html>

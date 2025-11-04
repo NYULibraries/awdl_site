@@ -1,21 +1,29 @@
 import DefaultLayout from '@/layouts/DefaultLayout';
-import Meta from '@/components/Header/Meta';
 import { usePage } from '@inertiajs/react';
-import { type BookItemProps } from '@/types';
-import SearchHeader from '@/components/Search/Labels/SearchHeader';
-import SearchSubheader from '@/components/Search/Labels/SearchSubheader';
+import Meta from '@/components/Header/Meta';
 import Content from '@/components/Content';
+import SearchSubheader from '@/components/Search/Labels/SearchSubheader';
 import SearchPagination from '@/components/Search/Tools/SearchPagination';
+import SearchHeader from '@/components/Search/Labels/SearchHeader';
+import StoreInitializer from '@/components/Util/StoreInitializer';
+import { BookItemProps } from '@/types';
 
-const Browse: React.FC = () => {
-  const pageTitle = 'Browse';
+export default function SubjectItem() {
+  const { subjectLabel } = usePage().props as unknown as { subjectLabel: string };
   const { data } = usePage().props as unknown as {
-    data: { start: number; rows: number; docs: BookItemProps[]; numFound: number; queryText: string };
+    data: {
+      docs: BookItemProps[];
+      start: number;
+      rows: number;
+      numFound: number;
+      queryText: string;
+      page: number;
+    };
   };
-  const { start, rows, docs, numFound, queryText } = data;
+  const { docs, start, rows, numFound, page } = data;
   return (
     <DefaultLayout>
-      <Meta title={pageTitle} />
+      <Meta title={subjectLabel || 'Subject'} />
       <main className='main container-fluid' role='main' id='mainContent' tabIndex={-1}>
         <SearchHeader query={queryText} />
         <div className='items-widget'>
@@ -42,10 +50,7 @@ const Browse: React.FC = () => {
             <SearchPagination rows={rows} />
           </div>
         </div>
-        {/* </StoreInitializer> */}
       </main>
     </DefaultLayout>
   );
-};
-
-export default Browse;
+}
