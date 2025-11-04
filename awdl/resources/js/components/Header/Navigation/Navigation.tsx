@@ -62,7 +62,7 @@ export default function Navigation() {
 				    }
 			    </ul>
 			    <div className="search_holder widget navbar-form navbar-right">
-				    <SearchForm queryText={'*:*' as unknown as string} />
+				    <SearchForm />
 			    </div>
 		    </div>
 	    </div>
