@@ -4,8 +4,7 @@ import { usePage } from '@inertiajs/react';
 
 export default function ProviderIndex() {
   const pageTitle = 'Providers: Ancient World Digital Library Collection - NYU Libraries';
-  const { providersMap } = usePage().props as unknown as { providersMap: Record<string, string> };
-
+  const { providersMap } = usePage().props as unknown as { providersMap: { nid: string; label: string }[] };
   return (
     <DefaultLayout>
       <Meta title={pageTitle} />
@@ -15,7 +14,7 @@ export default function ProviderIndex() {
         </header>
         <div>
           <ul>
-            {Object.entries(providersMap).map(([nid, label]: [string, string]) => (
+            {providersMap.map(({ nid, label }) => (
               <li key={nid}>
                 <a href={route('providers.show', nid)}>{label}</a>
               </li>

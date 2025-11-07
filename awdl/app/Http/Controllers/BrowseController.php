@@ -24,7 +24,7 @@ class BrowseController extends Controller
     {
         $page = (int) $request->input('page', 1);
         $rows = 12;
-        
+
         $start = ($page - 1) * $rows;
 
         $queryText = '*:*';
@@ -77,7 +77,7 @@ class BrowseController extends Controller
         $query->setRows($rows);
 
         $query->addSort($sortField, $query::SORT_ASC);
-        
+
         $resultset = $solrClient->select($query);
 
         $docs = [];
@@ -107,7 +107,7 @@ class BrowseController extends Controller
             'docs' => $docs,
             'numFound' => $numFound,
             'queryText' => $queryText,
-            'page' => $page, 
+            'page' => $page,
             'sortField' => $sortField,
         ];
     }

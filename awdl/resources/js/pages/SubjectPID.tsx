@@ -18,6 +18,7 @@ export default function SubjectPID() {
     idAlias: string;
   };
   const { docs, start, rows, numFound } = data;
+  
   return (
     <DefaultLayout>
       <Meta title={idAlias || 'Subject'} />

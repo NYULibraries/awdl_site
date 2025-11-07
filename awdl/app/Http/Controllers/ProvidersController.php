@@ -2,44 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
-use Illuminate\Http\Request;
 use Solarium\Client;
 
 class ProvidersController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request, Client $solrClient): Response
     {
-
         // body has no id or class on index page
 
-        $providersMap = json_decode(file_get_contents(resource_path('datasource/providersMap.json')));
+        $providersMap = $this->fetchProviderNidsMapping($request, $solrClient);
 
         return Inertia::render('ProviderIndex', ['providersMap' => $providersMap]);
     }
+
     public function show($id, Request $request, Client $solrClient): Response
     {
         $bodyId = 'providers-'.$id;
 
         $data = $this->fetchSolrDataByPID($request, $solrClient, $id);
 
-        $providersMap = json_decode(file_get_contents(resource_path('datasource/providersMap.json')));
-        
+        // just check first book, we only need the alias once
         $idAlias = null;
-
-        if (isset($providersMap->$id)) {
-            $idAlias = $providersMap->$id;
+        $firstBookProvider = $data['docs'][0];
+        if (isset($firstBookProvider['sm_provider_nid']) && $firstBookProvider['sm_provider_nid'][0] === $id) {
+            $idAlias = $firstBookProvider['sm_provider_label'][0];
         } else {
             $idAlias = $id;
         }
 
-
         return Inertia::render('ProviderPID', ['bodyId' => $bodyId, 'data' => $data, 'idAlias' => $idAlias]);
-
     }
 
-    public function fetchSolrDataByPID(Request $request, Client $solrClient, $providerPID)
+    private function fetchSolrDataByPID(Request $request, Client $solrClient, $providerPID)
     {
         $page = (int) $request->input('page', 1);
         $rows = 12;
@@ -128,5 +125,113 @@ class ProvidersController extends Controller
             'queryText' => $queryText,
             'sortField' => $sortField,
         ];
+    }
+
+    // facet for unique provider nids for index page
+    private function fetchProviderNidsMapping(Request $request, Client $solrClient): array
+    {
+        $query = $solrClient->createSelect();
+        $query->setQuery('*:*');
+        $query->setRows(0);
+
+        $collectionCode = 'awdl OR egypt';
+
+        $query->addFilterQuery([
+            'key' => 'bundle_filter',
+            'query' => 'bundle:dlts_book',
+        ]);
+
+        $query->addFilterQuery([
+            'key' => 'collection_code_filter',
+            'query' => 'sm_collection_code:('.$collectionCode.')',
+        ]);
+
+        $query->addFilterQuery([
+            'key' => 'status',
+            'query' => 'bs_status:1',
+        ]);
+
+        // get unique provider nids
+        $facetSet = $query->getFacetSet();
+        $facetSet->createFacetField('provider_nids')
+            ->setField('sm_provider_nid')
+            // removes limit of unique fields found
+            ->setLimit(-1)
+            ->setMinCount(1);
+
+        $resultset = $solrClient->select($query);
+        $facet = $resultset->getFacetSet()->getFacet('provider_nids');
+
+        $uniqueNids = [];
+        foreach ($facet as $value => $count) {
+            $uniqueNids[] = $value;
+        }
+
+        // map all unique nids to labels
+        $labelQuery = $solrClient->createSelect();
+        $labelQuery->setQuery('*:*');
+        // select all items to check for all unique values
+        $labelQuery->setRows(470);
+        $labelQuery->setFields(['sm_provider_nid', 'sm_provider_label']);
+
+        $labelQuery->addFilterQuery([
+            'key' => 'bundle_filter',
+            'query' => 'bundle:dlts_book',
+        ]);
+
+        $labelQuery->addFilterQuery([
+            'key' => 'collection_code_filter',
+            'query' => 'sm_collection_code:('.$collectionCode.')',
+        ]);
+
+        $labelQuery->addFilterQuery([
+            'key' => 'status',
+            'query' => 'bs_status:1',
+        ]);
+
+        $labelResultset = $solrClient->select($labelQuery);
+
+        $nidToLabelMap = [];
+        foreach ($labelResultset as $doc) {
+            if (isset($doc->sm_provider_nid) && is_array($doc->sm_provider_nid)
+                && isset($doc->sm_provider_label) && is_array($doc->sm_provider_label)) {
+
+                // match id to label
+                foreach ($doc->sm_provider_nid as $index => $providerNid) {
+                    // store if we don't already have a label for this id
+                    if (! isset($nidToLabelMap[$providerNid])
+                        && isset($doc->sm_provider_label[$index])) {
+                        $nidToLabelMap[$providerNid] = $doc->sm_provider_label[$index];
+                    }
+                }
+            }
+        }
+
+        $providersWithLabels = [];
+        foreach ($uniqueNids as $nid) {
+            $providersWithLabels[] = [
+                'nid' => $nid,
+                'label' => $nidToLabelMap[$nid] ?? 'Unknown',
+            ];
+        }
+
+        usort($providersWithLabels, function ($a, $b) {
+            return (int) $a['nid'] <=> (int) $b['nid'];
+        });
+
+        return $providersWithLabels;
+    }
+
+    private function decodeJsonArray(?array $values): array
+    {
+        if (! $values) {
+            return [];
+        }
+
+        return array_map(function ($value) {
+            $decoded = json_decode($value, true);
+
+            return json_last_error() === JSON_ERROR_NONE ? $decoded : $value;
+        }, $values);
     }
 }

@@ -4,7 +4,7 @@ import { usePage } from '@inertiajs/react';
 
 const SubjectIndex: React.FC = () => {
   const pageTitle = 'Subjects: Ancient World Digital Library';
-  const { subjectsMap } = usePage().props as unknown as { subjectsMap: Record<string, string> };
+  const { subjectsMap } = usePage().props as unknown as { subjectsMap: { nid: string; label: string }[] };
   return (
     <DefaultLayout>
       <Meta title={pageTitle} />
@@ -14,7 +14,7 @@ const SubjectIndex: React.FC = () => {
         </header>
         <div>
           <ul>
-            {Object.entries(subjectsMap).map(([nid, label]: [string, string]) => (
+            {subjectsMap.map(({ nid, label }) => (
               <li key={nid}>
                 <a href={route('subjects.show', nid)}>{label}</a>
               </li>

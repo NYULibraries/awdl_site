@@ -24,7 +24,7 @@ class SearchController extends Controller
     {
         $page = (int) $request->input('page', 1);
         $rows = 12;
-        
+
         $start = ($page - 1) * $rows;
 
         $queryText = $request->input('q', '*:*');
