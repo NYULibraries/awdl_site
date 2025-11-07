@@ -2,24 +2,20 @@ import { usePage } from '@inertiajs/react';
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Meta from '@/components/Header/Meta';
 
-// Define the structure of a single document
 interface SeriesDocument {
   'id': string;
   'label': string;
   'path': string;
 }
 
-// Define props for the SeriesContent component
 interface SeriesContentProps {
     docs: SeriesDocument[];
 }
 
-// Define props for the SeriesItem component
 interface SeriesItemProps {
     document: SeriesDocument;
 }
 
-// Corrected SeriesItem component
 const SeriesItem: React.FC<SeriesItemProps> = ({ document }) => {
 
   const { label, path } = document;
@@ -36,7 +32,6 @@ const SeriesItem: React.FC<SeriesItemProps> = ({ document }) => {
 
 };
 
-// Corrected SeriesContent component
 const SeriesContent: React.FC<SeriesContentProps> = ({ docs }) => {
 
   if (!docs || docs.length === 0) {

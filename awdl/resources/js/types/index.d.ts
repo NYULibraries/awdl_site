@@ -23,7 +23,7 @@ export interface BookItemProps {
   ss_book_identifier: string;
   ss_title_long: string;
   sm_author: string[];
-  zm_series_data_x: SeriesData[] | null;
+  zm_series_data_x: SeriesData[][] | null;
   ss_series_label: string[];
   sm_publisher: string[];
   sm_field_publication_location: string[];
@@ -39,7 +39,7 @@ interface BookItemDocument {
   ss_book_identifier: string;
   ss_title_long?: string;
   sm_author?: string[];
-  zm_series_data_x?: SeriesData[];
+  zm_series_data_x?: SeriesData[][];
   sm_publisher?: string[];
   sm_field_publication_location?: string[];
   ss_publication_date_text?: string;

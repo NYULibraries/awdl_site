@@ -9,7 +9,6 @@ const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
     ss_book_identifier,
     ss_title_long,
     sm_author,
-    zm_series_data_x,
     sm_publisher,
     sm_field_publication_location,
     ss_publication_date_text,
@@ -18,6 +17,7 @@ const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
     im_field_subject,
     sm_provider_label,
     sm_subject_label,
+    zm_series_data_x,
   } = document;
   /* eslint-enable camelcase */
 
@@ -46,7 +46,7 @@ const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
   const title = ss_title_long || 'N.A.';
   const authors = sm_author || [];
   // Series are all named different - still needs to be done
-  const series = zm_series_data_x;
+  const series = zm_series_data_x?.[0];
   // Assume can be more than one publisher, provider, and subject
   // Some publishers have encoded & symbols
   const publisher = decodeHtmlEntities(sm_publisher?.[0] || 'N.A.');
@@ -102,7 +102,7 @@ const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
               const pathAlias = series.series_identifier;
               return (
                 <a key={index} className='md_series_each' href={`${baseURL}/series/${pathAlias}`}>
-                  {' ' + series.series_label}
+                  {' ' + series.series_book_label}
                 </a>
               );
             })}

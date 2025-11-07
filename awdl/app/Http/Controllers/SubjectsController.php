@@ -62,7 +62,6 @@ class SubjectsController extends Controller
             'ss_uri',
             'ss_title_long',
             'sm_author',
-            'zm_series_data_x',
             'sm_publisher',
             'sm_field_publication_location',
             'ss_publication_date_text',
@@ -73,6 +72,7 @@ class SubjectsController extends Controller
             'sm_subject_label',
             'sm_collection_identifier',
             'bs_status',
+            'zm_series_data_x',
             'zm_subject',
         ];
 
@@ -169,6 +169,7 @@ class SubjectsController extends Controller
             ->setMinCount(1);
 
         $resultset = $solrClient->select($query);
+        $numFound = $resultset->getNumFound();
         $facet = $resultset->getFacetSet()->getFacet('subject_ids');
 
         $uniqueIds = [];
@@ -180,7 +181,7 @@ class SubjectsController extends Controller
         $labelQuery = $solrClient->createSelect();
         $labelQuery->setQuery('*:*');
         // select all items to check for all unique values
-        $labelQuery->setRows(470);
+        $labelQuery->setRows($numFound);
         $labelQuery->setFields(['im_field_subject', 'sm_subject_label']);
 
         $labelQuery->addFilterQuery([
@@ -230,6 +231,7 @@ class SubjectsController extends Controller
         });
 
         return $subjectsWithLabels;
+
     }
 
     private function decodeJsonArray(?array $values): array
@@ -241,7 +243,26 @@ class SubjectsController extends Controller
         return array_map(function ($value) {
             $decoded = json_decode($value, true);
 
-            return json_last_error() === JSON_ERROR_NONE ? $decoded : $value;
+            if (json_last_error() === JSON_ERROR_NONE) {
+                return $this->decodeHtmlEntitiesRecursive($decoded);
+            }
+
+            return is_string($value) ? html_entity_decode($value, ENT_QUOTES | ENT_HTML5) : $value;
         }, $values);
+    }
+
+    private function decodeHtmlEntitiesRecursive($data)
+    {
+        if (is_string($data)) {
+            return html_entity_decode($data, ENT_QUOTES | ENT_HTML5);
+        }
+
+        if (is_array($data)) {
+            foreach ($data as $key => $item) {
+                $data[$key] = $this->decodeHtmlEntitiesRecursive($item);
+            }
+        }
+
+        return $data;
     }
 }

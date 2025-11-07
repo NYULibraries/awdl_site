@@ -30,13 +30,13 @@ export default function Home() {
               </p>
               <p className='line2'>
                 <span className='nobreak'>AWDL will identify,</span> collect, curate, and provide access to the broadest
-                possible range of scholarly materials relevant to the study of the ancient world.
+                possible range of scholarly materials relevant to the study of the ancient world. {' '}
                 <Link
                   href={route('about')}
                   className='readmore'
                   aria-label='Read more about The Ancient World Digital Library'
                 >
-                  READ MORE…
+                READ MORE…
                 </Link>
               </p>
             </div>
