@@ -39,7 +39,7 @@ export default function SearchForm() {
       defaultSearchValue = '';
       break;
     case pathname.includes('/series/') && pathname !== '/series':
-      defaultSearchValue = 'Search series';
+      defaultSearchValue = '';
       break;
     default:
       defaultSearchValue = queryText === '*:*' ? '' : queryText;

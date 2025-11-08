@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { usePage } from '@inertiajs/react';
 import BookItemPlaceholder from './BookItemPlaceholder';
 import { type BookItemProps, type SeriesData } from '@/types';
 
-
 const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
+  const { seriesMap } = usePage().props as unknown as { seriesMap: Record<string, string> };
   /* eslint-disable camelcase */
   const {
     ss_book_identifier,
@@ -58,8 +59,7 @@ const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
   const subjectCodes = im_field_subject || [];
   const subjects = sm_subject_label || [];
 
-  return (
-	bs_status ? (
+  return bs_status ? (
     <article className='item'>
       <div className='card'>
         {/* Thumbnail */}
@@ -99,7 +99,7 @@ const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
           <div className='md_series'>
             <span className='md_label'>Series:</span>
             {series.map((series: SeriesData, index: number) => {
-              const pathAlias = series.series_identifier;
+              const pathAlias = seriesMap?.[series.series_identifier] || series.series_identifier;
               return (
                 <a key={index} className='md_series_each' href={`${baseURL}/series/${pathAlias}`}>
                   {' ' + series.series_book_label}
@@ -144,7 +144,6 @@ const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
     </article>
   ) : (
     <></>
-    )
   );
 };
 

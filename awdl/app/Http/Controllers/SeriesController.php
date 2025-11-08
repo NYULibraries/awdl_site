@@ -29,11 +29,17 @@ class SeriesController extends Controller
 
         $documents = [];
 
-        $seriesMap = json_decode(file_get_contents(resource_path('datasource/series.json')));
+        $seriesMap = json_decode(file_get_contents(resource_path('datasource/series.json')), true);
 
-        if (isset($seriesMap->$id)) {
+        $seriesIdentifier = array_search($id, $seriesMap, true);
 
-            $seriesIdentifier = $seriesMap->$id;
+        if (!$seriesIdentifier) {
+            abort(404, 'Series not found');
+        }
+
+        if (isset($seriesMap[$seriesIdentifier])) {
+
+            $seriesAlias = $seriesMap[$seriesIdentifier];
             $page = (int) $request->input('page', 1);
             $rows = 12;
             $start = ($page - 1) * $rows;
