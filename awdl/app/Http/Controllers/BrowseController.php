@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use Solarium\Client;
+use App\Helpers\JsonHelper;
 
 class BrowseController extends Controller
 {
@@ -87,7 +88,7 @@ class BrowseController extends Controller
                 'ss_book_identifier' => $doc->ss_book_identifier,
                 'ss_title_long' => $doc->ss_title_long,
                 'sm_author' => $doc->sm_author,
-                'zm_series_data_x' => $this->decodeJsonArray($doc->zm_series_data_x),
+                'zm_series_data_x' => JsonHelper::decodeJsonArray($doc->zm_series_data_x),
                 'sm_publisher' => $doc->sm_publisher,
                 'sm_field_publication_location' => $doc->sm_field_publication_location,
                 'ss_publication_date_text' => $doc->ss_publication_date_text,
@@ -110,37 +111,5 @@ class BrowseController extends Controller
             'page' => $page,
             'sortField' => $sortField,
         ];
-    }
-
-    private function decodeJsonArray(?array $values): array
-    {
-        if (! $values) {
-            return [];
-        }
-
-        return array_map(function ($value) {
-            $decoded = json_decode($value, true);
-
-            if (json_last_error() === JSON_ERROR_NONE) {
-                return $this->decodeHtmlEntitiesRecursive($decoded);
-            }
-
-            return is_string($value) ? html_entity_decode($value, ENT_QUOTES | ENT_HTML5) : $value;
-        }, $values);
-    }
-
-    private function decodeHtmlEntitiesRecursive($data)
-    {
-        if (is_string($data)) {
-            return html_entity_decode($data, ENT_QUOTES | ENT_HTML5);
-        }
-
-        if (is_array($data)) {
-            foreach ($data as $key => $item) {
-                $data[$key] = $this->decodeHtmlEntitiesRecursive($item);
-            }
-        }
-
-        return $data;
     }
 }
