@@ -133,11 +133,11 @@ main {
   }
 }
 
-body.page .maintext {
+body.page .maintext, #app > div:first-child.page .maintext {
   max-width: 53rem;
 }
 
-body#book {
+body#book, #app > div:first-child#book {
   overflow-y: hidden;
   .navbar {
     margin-bottom: 0;

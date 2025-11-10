@@ -56,7 +56,7 @@ export default function SeriesIndex() {
 
   return (
     <>
-      <DefaultLayout>
+      <DefaultLayout bodyId='series'>
         <Meta title={pageTitle} />
         <main className='main container-fluid' role='main' id='mainContent' tabIndex={-1}>
           <header>

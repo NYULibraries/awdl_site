@@ -11,7 +11,7 @@ interface AppLayoutProps {
 
 function AppLayout({ children }: PropsWithChildren<{ children: ReactNode }>) {
   return (
-    <AppShell>
+    <AppShell bodyId='book'>
       <AppHeader />
       <AppContent>{children}</AppContent>
     </AppShell>

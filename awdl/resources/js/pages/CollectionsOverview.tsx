@@ -11,7 +11,7 @@ export default function CollectionsOverview() {
 
   return (
     <>
-      <DefaultLayout>
+      <DefaultLayout bodyId='collections-overview'>
         <Meta title={pageTitle} />
         <div className='container-fluid'>
           <div className='flex-container'>

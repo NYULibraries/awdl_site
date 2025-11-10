@@ -20,7 +20,7 @@ const Browse: React.FC = () => {
   };
   const { start, rows, docs, numFound, queryText } = data;
   return (
-    <DefaultLayout>
+    <DefaultLayout bodyId='browse'>
       <Meta title={pageTitle} />
       <main className='main container-fluid' role='main' id='mainContent' tabIndex={-1}>
         <SearchHeader query={queryText} />

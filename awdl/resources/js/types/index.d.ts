@@ -33,6 +33,7 @@ export interface BookItemProps {
   sm_provider_label: string[];
   sm_subject_label: string[];
   bs_status: boolean;
+  series: Record<string, { identifier: string; label: string }>;
 }
 
 interface BookItemDocument {

@@ -18,9 +18,11 @@ export default function SubjectPID() {
     idAlias: string;
   };
   const { docs, start, rows, numFound } = data;
+
+  const subjectPidId = docs[0]?.sm_provider_nid[0];
   
   return (
-    <DefaultLayout>
+    <DefaultLayout bodyId={`subject-pages-${subjectPidId}`}>
       <Meta title={idAlias || 'Subject'} />
       <main className='main container-fluid' role='main' id='mainContent' tabIndex={-1}>
         <SearchHeader query={idAlias} />

@@ -6,12 +6,14 @@ import { type PropsWithChildren } from 'react';
 import { type ReactNode } from 'react';
 
 interface AppLayoutProps {
+  bodyId?: string;
+  bodyClass?: string;
   children: ReactNode;
 }
 
-function AppLayout({ children }: PropsWithChildren<{ children: ReactNode }>) {
+function AppLayout({ bodyId, bodyClass, children }: { bodyId?:string, bodyClass?:string, children: ReactNode }) {
   return (
-    <AppShell>
+    <AppShell bodyId={bodyId} bodyClass={bodyClass}>
       <AppHeader />
       <AppContent>{children}</AppContent>
       <Footer />

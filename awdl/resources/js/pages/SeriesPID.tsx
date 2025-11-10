@@ -20,10 +20,10 @@ export default function SeriesPID() {
   };
   const { pageTitle, docs, start, rows, numFound, seriesLabel } = data;
 
-  console.log('SeriesItems docs:', docs);
+  const seriesId = Object.keys(docs[0]?.series || {})[0];
 
   return (
-    <DefaultLayout>
+    <DefaultLayout bodyId={`series-page-${seriesId}`}>
       <Meta title={pageTitle as string} />
       <main className='main container-fluid' role='main' id='mainContent' tabIndex={-1}>
         <SearchHeader query='*' seriesLabel={seriesLabel as string} />

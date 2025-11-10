@@ -1,7 +1,19 @@
 interface AppShellProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
-export function AppShell({ children }: AppShellProps) {
-  return <div>{children}</div>;
+export function AppShell({
+  bodyId,
+  bodyClass,
+  children,
+}: {
+  bodyId?: string;
+  bodyClass?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div id={bodyId} className={bodyClass}>
+      {children}
+    </div>
+  );
 }

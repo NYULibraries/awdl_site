@@ -40,7 +40,7 @@ const EmbededViewerPlaceholder = ({ height }: EmbededViewerPlaceholder) => {
 	);
 };
 
-const EmbededViewer = (props) => {
+const EmbededViewer = (props: { title: string; url: string }) => {
 
   const { title, url } = props
 
@@ -132,12 +132,12 @@ const EmbededViewer = (props) => {
 
 export default function Book() {
 
-  const { title, identifier, url  } = usePage().props;
+  const { title, url } = usePage().props as unknown as { title: string; url: string };
 
   return (
     <BookLayout>
 		<Meta title={title as string} />
-	    <EmbededViewer title={title} identifier={identifier} url={url} />
+	    <EmbededViewer title={title} url={url} />
     </BookLayout>
   );
 }

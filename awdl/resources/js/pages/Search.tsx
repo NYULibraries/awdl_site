@@ -22,7 +22,7 @@ export default function Search() {
 
   return (
     <>
-      <DefaultLayout>
+      <DefaultLayout bodyId='search'>
         <Meta title={pageTitle} />
         <main className='main container-fluid' role='main' id='mainContent' tabIndex={-1}>
           <SearchHeader query={queryText} />

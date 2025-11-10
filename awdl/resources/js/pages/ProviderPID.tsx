@@ -18,8 +18,11 @@ const ProviderPID = () => {
     idAlias: string;
   };
   const { docs, start, rows, numFound } = data;
+
+  const providerPidId = docs[0]?.im_field_subject[0];
+
   return (
-    <DefaultLayout>
+    <DefaultLayout bodyId={`providers-${providerPidId}`}>
       <Meta title={idAlias || 'Provider'} />
       <main className='main container-fluid' role='main' id='mainContent' tabIndex={-1}>
         <SearchHeader query={idAlias} />

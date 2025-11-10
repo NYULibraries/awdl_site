@@ -7,7 +7,7 @@ export default function About() {
   const { markdownBodyContent, markdownAsideContent } = usePage().props;
 
   return (
-    <DefaultLayout>
+    <DefaultLayout bodyId='about'>
       <Meta title='About' />
       <div className='container-fluid'>
         <div className='flex-container'>

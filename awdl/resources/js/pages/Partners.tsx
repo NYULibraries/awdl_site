@@ -7,7 +7,7 @@ export default function Partners() {
   const { id, title, markdownBodyContent } = usePage().props;
 
   return (
-    <DefaultLayout>
+    <DefaultLayout bodyId='partners' bodyClass='page'>
       <Meta title={title as string} />
       <div className='container-fluid'>
         <div className='flex-container'>

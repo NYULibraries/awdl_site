@@ -70,7 +70,7 @@ main {
   body {
     margin-bottom: 100px;
   }
-  body.book {
+  body.book, #app > div:first-child.book {
     margin-bottom: 0px;
   }
   .footer-wrapper {

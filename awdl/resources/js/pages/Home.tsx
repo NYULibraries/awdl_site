@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <>
-      <DefaultLayout>
+      <DefaultLayout bodyId='home' bodyClass='home'>
         <Meta title={pageTitle} />
         <main className='main container-fluid' role='main' id='mainContent' tabIndex={-1}>
           <div className='topHold flex-container'>

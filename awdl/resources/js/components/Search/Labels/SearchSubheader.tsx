@@ -17,8 +17,8 @@ const SearchSubheader: React.FC = () => {
   ) : (
     <>
       <div className='resultsnum'>
-        Showing items <span className='start'>{displayStart}</span> -{' '}
-        <span className='docslength'>{displayLength}</span> of <span className='numfound'>{numFound}</span>
+        Showing <span className='start'>{displayStart}</span> - <span className='docslength'>{displayLength}</span> of{' '}
+        <span className='numfound'>{numFound}</span> results
       </div>
       <FilterDropdown />
     </>
