@@ -1,6 +1,6 @@
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Meta from '@/components/Header/Meta';
-import { usePage } from '@inertiajs/react';
+import { usePage, Link } from '@inertiajs/react';
 
 const SubjectIndex: React.FC = () => {
   const pageTitle = 'Subjects: Ancient World Digital Library';
@@ -16,7 +16,7 @@ const SubjectIndex: React.FC = () => {
           <ul>
             {subjectsMap.map(({ nid, label }) => (
               <li key={nid}>
-                <a href={route('subjects.show', nid)}>{label}</a>
+                <Link href={route('subjects.show', nid)}>{label}</Link>
               </li>
             ))}
           </ul>

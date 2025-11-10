@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { usePage } from '@inertiajs/react';
+import { usePage, Link } from '@inertiajs/react';
 import BookItemPlaceholder from './BookItemPlaceholder';
 import { type BookItemProps, type SeriesData } from '@/types';
 
@@ -66,19 +66,19 @@ const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
         <div className='thumbs'>
           {!isLoaded && <BookItemPlaceholder />}
           <div className={isLoaded ? 'clipper' : 'clipperNoshadow imagePlaceholder'}>
-            <a href={`${baseURL}/books/${identifier}/1`}>
+            <Link href={`${baseURL}/books/${identifier}/1`}>
               <img
                 src={`https://sites.dlib.nyu.edu/viewer/api/image/books/${identifier}/1/full/150,200/0/default.jpg`}
                 alt=''
                 title={title}
                 onLoad={imageLoad}
               />
-            </a>
+            </Link>
           </div>
         </div>
         {/* Title */}
         <h1 className='md_title'>
-          <a href={`${baseURL}/books/${identifier}/1`}>{title && title}</a>
+          <Link href={`${baseURL}/books/${identifier}/1`}>{title && title}</Link>
         </h1>
         {/* Authors */}
         <div className='md_authors'>

@@ -1,6 +1,6 @@
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Meta from '@/components/Header/Meta';
-import { usePage } from '@inertiajs/react';
+import { usePage, Link } from '@inertiajs/react';
 
 export default function ProviderIndex() {
   const pageTitle = 'Providers: Ancient World Digital Library Collection - NYU Libraries';
@@ -16,7 +16,7 @@ export default function ProviderIndex() {
           <ul>
             {providersMap.map(({ nid, label }) => (
               <li key={nid}>
-                <a href={route('providers.show', nid)}>{label}</a>
+                <Link href={route('providers.show', nid)}>{label}</Link>
               </li>
             ))}
           </ul>

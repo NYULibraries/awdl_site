@@ -1,5 +1,6 @@
 import SearchForm from '../../Search/Tools/SearchForm';
 import NavigationMobile from './NavigationMobile';
+import { Link } from '@inertiajs/react';
 
 interface NavigationItem {
 	route: string;
@@ -53,9 +54,9 @@ export default function Navigation() {
 					    NavigationItems.map((item: NavigationItem, index: number) => {
 						    return (
 							    <li key={index}>
-								    <a href={route(item.route)} className={item.class}>
+								    <Link href={route(item.route)} className={item.class}>
 									    {item.label}
-								    </a>
+								    </Link>
 							    </li>
 						    );
 					    })

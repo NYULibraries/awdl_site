@@ -1,4 +1,4 @@
-import { usePage } from '@inertiajs/react';
+import { usePage, Link } from '@inertiajs/react';
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Meta from '@/components/Header/Meta';
 
@@ -24,7 +24,7 @@ const SeriesItem: React.FC<SeriesItemProps> = ({ document }) => {
   return (
     <article className='item'>
       <div className='card'>
-        <a href={route('series.show', pathAlias)}>{label}</a>
+        <Link href={route('series.show', pathAlias)}>{label}</Link>
       </div>
     </article>
   );
