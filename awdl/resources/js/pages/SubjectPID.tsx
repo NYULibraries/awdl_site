@@ -19,7 +19,7 @@ export default function SubjectPID() {
   };
   const { docs, start, rows, numFound } = data;
 
-  const subjectPidId = docs[0]?.sm_provider_nid[0];
+  const subjectPidId = docs[0]?.subjectIds?.[0];
   
   return (
     <DefaultLayout bodyId={`subject-pages-${subjectPidId}`}>

@@ -34,7 +34,6 @@ const SeriesContent: React.FC<SeriesContentProps> = ({ docs }) => {
   if (!docs || docs.length === 0) {
     return <div>No data available</div>;
   }
-  console.log('SeriesContent docs:', docs);
 
   return (
     <>

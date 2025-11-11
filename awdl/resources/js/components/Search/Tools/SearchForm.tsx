@@ -2,11 +2,9 @@ import React, { useRef } from 'react';
 import { usePage } from '@inertiajs/react';
 
 export default function SearchForm() {
-  const { data, idAlias } = usePage().props as unknown as {
-    data?: { queryText?: string};
-    idAlias?: string;
+  const { data } = usePage().props as unknown as {
+    data?: { queryText?: string };
   };
-  console.log(data);
   const { queryText } = data || { queryText: '*:*' as string };
 
   const inputRef = useRef<HTMLInputElement>(null);

@@ -20,19 +20,19 @@ export interface SeriesData {
 }
 
 export interface BookItemProps {
-  ss_book_identifier: string;
-  ss_title_long: string;
-  sm_author: string[];
-  zm_series_data_x: SeriesData[][] | null;
-  ss_series_label: string[];
-  sm_publisher: string[];
-  sm_field_publication_location: string[];
-  ss_publication_date_text: string;
-  sm_provider_nid: string[];
-  im_field_subject: number[];
-  sm_provider_label: string[];
-  sm_subject_label: string[];
+  identifier: string;
+  title: string;
+  authors: string[];
+  seriesData: SeriesData[][] | null;
+  publisher: string[];
+  publicationPlace: string[];
+  publicationDate: string;
+  providerIds: string[];
+  subjectIds: number[];
+  providerLabels: string[];
+  subjectLabels: string[];
   bs_status: boolean;
+  ss_series_label: string[];
   series: Record<string, { identifier: string; label: string }>;
 }
 

@@ -19,7 +19,7 @@ const ProviderPID = () => {
   };
   const { docs, start, rows, numFound } = data;
 
-  const providerPidId = docs[0]?.im_field_subject[0];
+  const providerPidId = docs[0]?.providerIds?.[0];
 
   return (
     <DefaultLayout bodyId={`providers-${providerPidId}`}>

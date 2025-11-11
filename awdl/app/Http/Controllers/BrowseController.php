@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\JsonHelper;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use Solarium\Client;
-use App\Helpers\JsonHelper;
 
 class BrowseController extends Controller
 {
@@ -82,17 +82,17 @@ class BrowseController extends Controller
 
         foreach ($resultset as $doc) {
             $docs[] = [
-                'ss_book_identifier' => $doc->ss_book_identifier,
-                'ss_title_long' => $doc->ss_title_long,
-                'sm_author' => $doc->sm_author,
-                'zm_series_data_x' => JsonHelper::decodeJsonArray($doc->zm_series_data_x),
-                'sm_publisher' => $doc->sm_publisher,
-                'sm_field_publication_location' => $doc->sm_field_publication_location,
-                'ss_publication_date_text' => $doc->ss_publication_date_text,
-                'sm_provider_nid' => $doc->sm_provider_nid,
-                'sm_provider_label' => $doc->sm_provider_label,
-                'im_field_subject' => $doc->im_field_subject,
-                'sm_subject_label' => $doc->sm_subject_label,
+                'identifier' => $doc->ss_book_identifier,
+                'title' => $doc->ss_title_long ?: 'N.A.',
+                'authors' => $doc->sm_author ?: [],
+                'seriesData' => JsonHelper::decodeJsonArray($doc->zm_series_data_x),
+                'publisher' => JsonHelper::decodeHtmlEntitiesRecursive($doc->sm_publisher[0] ?: 'N.A.'),
+                'publicationPlace' => $doc->sm_field_publication_location,
+                'publicationDate' => $doc->ss_publication_date_text ?: 'N.A.',
+                'providerIds' => $doc->sm_provider_nid ?: [],
+                'providerLabels' => $doc->sm_provider_label ?: [],
+                'subjectIds' => $doc->im_field_subject ?: [],
+                'subjectLabels' => $doc->sm_subject_label ?: [],
                 'bs_status' => $doc->bs_status,
             ];
         }

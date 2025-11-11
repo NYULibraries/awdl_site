@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\JsonHelper;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use Solarium\Client;
-use App\Helpers\JsonHelper;
 
 class SeriesController extends Controller
 {
@@ -31,7 +31,7 @@ class SeriesController extends Controller
 
         $seriesIdentifier = array_search($id, $seriesMap, true);
 
-        if (!$seriesIdentifier) {
+        if (! $seriesIdentifier) {
             abort(404, 'Series not found');
         }
 
@@ -45,7 +45,7 @@ class SeriesController extends Controller
 
             $queryText = '*:*';
             $fields = [
-                '*'
+                '*',
             ];
 
             $query = $solrClient->createSelect();
@@ -101,30 +101,22 @@ class SeriesController extends Controller
                 }
 
                 $documents[] = [
-                    'id' => $doc->ss_series_identifier,
-                    // 'identifier' => $doc->ss_book_identifier,
-                    // 'title' => $doc->ss_title_long,
-                    // 'authors' => $doc->sm_author,
-                    // 'label' => $doc->ss_series_label,
-                    'series' => $series,
-                    // 'publisher' => $doc->sm_publisher,
-                    // 'publocation' => $doc->sm_field_publication_location,
-                    // 'date' => $doc->ss_publication_date_text,
-                    // 'providers' => $doc->sm_provider_nid, // zm_provider
-                    // 'path' => $pathAlias,
-                    // 'bs_status' => $doc->bs_status,
-                    'ss_book_identifier' => $doc->ss_book_identifier,
-                    'ss_title_long' => $doc->ss_title_long,
-                    'sm_author' => $doc->sm_author,
-                    'sm_publisher' => $doc->sm_publisher,
-                    'sm_field_publication_location' => $doc->sm_field_publication_location,
-                    'ss_publication_date_text' => $doc->ss_publication_date_text,
-                    'sm_provider_nid' => $doc->sm_provider_nid,
-                    'sm_provider_label' => $doc->sm_provider_label,
-                    'im_field_subject' => $doc->im_field_subject,
-                    'sm_subject_label' => $doc->sm_subject_label,
+                    'identifier' => $doc->ss_book_identifier,
+                    'title' => $doc->ss_title_long ?: 'N.A.',
+                    'authors' => $doc->sm_author ?: [],
+                    'seriesData' => JsonHelper::decodeJsonArray($doc->zm_series_data_x),
+                    'publisher' => JsonHelper::decodeHtmlEntitiesRecursive($doc->sm_publisher[0] ?: 'N.A.'),
+                    'publicationPlace' => $doc->sm_field_publication_location,
+                    'publicationDate' => $doc->ss_publication_date_text ?: 'N.A.',
+                    'providerIds' => $doc->sm_provider_nid ?: [],
+                    'providerLabels' => $doc->sm_provider_label ?: [],
+                    'subjectIds' => $doc->im_field_subject ?: [],
+                    'subjectLabels' => $doc->sm_subject_label ?: [],
                     'bs_status' => $doc->bs_status,
-                    'zm_series_data_x' => JsonHelper::decodeJsonArray($doc->zm_series_data_x),
+                    'id' => $doc->ss_series_identifier,
+                    'label' => $doc->ss_series_label,
+                    'series' => $series,
+                    'path' => $pathAlias,
                 ];
 
             }
@@ -140,16 +132,16 @@ class SeriesController extends Controller
 
         return Inertia::render('SeriesPID', [
             'data' => [
-            'pageTitle' => $pageTitle,
-            'pageId' => 'series',
-            'docs' => $documents,
-            'start' => $start,
-            'rows' => $rows,
-            'numFound' => $numFound,
-            'seriesLabel' => $seriesLabel,
-            'sortField' => $sortField,
-            'page' => $page,
-            ]
+                'pageTitle' => $pageTitle,
+                'pageId' => 'series',
+                'docs' => $documents,
+                'start' => $start,
+                'rows' => $rows,
+                'numFound' => $numFound,
+                'seriesLabel' => $seriesLabel,
+                'sortField' => $sortField,
+                'page' => $page,
+            ],
         ]);
 
     }
