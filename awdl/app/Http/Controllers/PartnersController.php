@@ -13,15 +13,9 @@ class PartnersController extends Controller
 
         $title = 'Partners';
 
-        $bodyId = 'partners';
-
-        $bodyClass = 'page';
-
         $markdownBodyContent = File::get(resource_path('markdown/partners.md'));
 
         return Inertia::render('Partners', [
-            'bodyId' => $bodyId,
-            'bodyClass' => $bodyClass,
             'title' => $title,
             'markdownBodyContent' => $markdownBodyContent,
         ]);

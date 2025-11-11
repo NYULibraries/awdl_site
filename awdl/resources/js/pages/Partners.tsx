@@ -4,7 +4,7 @@ import { usePage } from '@inertiajs/react';
 import Meta from '@/components/Header/Meta';
 
 export default function Partners() {
-  const { id, title, markdownBodyContent } = usePage().props;
+  const { title, markdownBodyContent } = usePage().props;
 
   return (
     <DefaultLayout bodyId='partners' bodyClass='page'>

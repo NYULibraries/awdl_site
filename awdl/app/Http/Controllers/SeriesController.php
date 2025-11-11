@@ -12,9 +12,6 @@ class SeriesController extends Controller
 {
     public function index(Request $request, Client $solrClient): Response
     {
-
-        $bodyId = 'series';
-
         $docs = $this->fetchSeriesData($request, $solrClient);
 
         return Inertia::render('SeriesIndex', ['docs' => $docs]);

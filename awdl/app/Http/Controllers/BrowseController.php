@@ -12,12 +12,9 @@ class BrowseController extends Controller
 {
     public function index(Request $request, Client $solrClient): Response
     {
-
-        $bodyId = 'browse';
-
         $data = $this->fetchSolrData($request, $solrClient);
 
-        return Inertia::render('Browse', ['bodyId' => $bodyId, 'data' => $data]);
+        return Inertia::render('Browse', ['data' => $data]);
 
     }
 

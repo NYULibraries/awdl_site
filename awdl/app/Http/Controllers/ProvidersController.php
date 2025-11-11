@@ -21,8 +21,6 @@ class ProvidersController extends Controller
 
     public function show($id, Request $request, Client $solrClient): Response
     {
-        $bodyId = 'providers-'.$id;
-
         $data = $this->fetchSolrDataByPID($request, $solrClient, $id);
 
         // just check first book, we only need the alias once
@@ -34,7 +32,7 @@ class ProvidersController extends Controller
             $idAlias = $id;
         }
 
-        return Inertia::render('ProviderPID', ['bodyId' => $bodyId, 'data' => $data, 'idAlias' => $idAlias]);
+        return Inertia::render('ProviderPID', ['data' => $data, 'idAlias' => $idAlias]);
     }
 
     private function fetchSolrDataByPID(Request $request, Client $solrClient, $providerPID)

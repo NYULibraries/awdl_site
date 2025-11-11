@@ -12,13 +12,9 @@ class HomeController extends Controller
     public function index(Request $request, Client $solrClient): Response
     {
 
-        $bodyId = 'home';
-
-        $bodyClass = 'home';
-
         $docs = $this->fetchSolrData($request, $solrClient);
 
-        return Inertia::render('Home', ['bodyId' => $bodyId, 'bodyClass' => $bodyClass, 'docs' => $docs]);
+        return Inertia::render('Home', ['docs' => $docs]);
 
     }
 

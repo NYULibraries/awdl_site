@@ -12,12 +12,9 @@ class SearchController extends Controller
 {
     public function index(Request $request, Client $solrClient): Response
     {
-
-        $bodyId = 'search';
-
         $data = $this->fetchSolrData($request, $solrClient);
 
-        return Inertia::render('Search', ['bodyId' => $bodyId, 'data' => $data]);
+        return Inertia::render('Search', ['data' => $data]);
 
     }
 
