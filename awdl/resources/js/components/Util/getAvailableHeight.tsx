@@ -7,10 +7,13 @@ function calculateAvailableHeight(): number {
   let height: number = document.documentElement.clientHeight;
 
   for (const child of children) {
-    height -= (child as HTMLElement).offsetHeight;
+    if (iframe && child.contains(iframe)) {
+      continue;
+    }
     if (height <= 0) {
       break;
     }
+    height -= (child as HTMLElement).offsetHeight;
   }
 
   if (iframe) {
