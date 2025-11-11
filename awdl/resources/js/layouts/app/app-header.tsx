@@ -1,10 +1,13 @@
-import { Fragment} from 'react';
+import { Fragment } from 'react';
 import Navigation from '@/components/Header/Navigation/Navigation';
 import { Link } from '@inertiajs/react';
 
 export default function AppHeader() {
   return (
     <Fragment>
+      <div id='skipnav'>
+        <a href='#mainContent'>Skip navigation</a>
+      </div>
       <div className='header-wrapper'>
         <header className='header-main container-fluid' role='banner'>
           <div className='toplogo'>

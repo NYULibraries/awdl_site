@@ -33,7 +33,6 @@
 
     </head>
     <body>
-      <div id="skipnav"><a href="#mainContent">Skip navigation</a></div>
       @inertia
     </body>
 </html>

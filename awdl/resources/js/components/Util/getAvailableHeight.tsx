@@ -1,8 +1,8 @@
 function calculateAvailableHeight(): number {
-  const body: HTMLBodyElement | null = document.querySelector('body');
-  if (!body) return 0;
+  const iframeParent: HTMLDivElement | null = document.querySelector('div#book');
+  if (!iframeParent) return 0;
 
-  const children: Element[] = Array.from(body.children);
+  const children: Element[] = Array.from(iframeParent.children);
   const iframe: HTMLIFrameElement | null = document.querySelector('iframe');
   let height: number = document.documentElement.clientHeight;
 
