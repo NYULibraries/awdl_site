@@ -11,6 +11,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\SubjectsController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])
     ->name('home');
@@ -53,3 +54,7 @@ Route::get('series', [SeriesController::class, 'index'])
 
 Route::get('series/{id}', [SeriesController::class, 'show'])
     ->name('series.show');
+
+ Route::fallback(function () {
+    return Inertia::render('404');
+});

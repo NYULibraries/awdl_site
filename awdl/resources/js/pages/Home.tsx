@@ -6,7 +6,7 @@ import Content from '@/components/Content';
 import { type BookItemProps } from '@/types';
 
 export default function Home() {
-  const pageTitle = 'Home';
+  const pageTitle = '';
 
   const { docs } = usePage().props;
 
