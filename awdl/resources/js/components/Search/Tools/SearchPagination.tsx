@@ -7,7 +7,7 @@ interface SearchPaginationProps {
   seriesIdentifier?: string;
 }
 
-function SearchPagination({ rows = 12, seriesIdentifier }: SearchPaginationProps) {
+function SearchPagination({ rows = 12 }: SearchPaginationProps) {
   const theme: ThemeConfig = {
     components: {
       Pagination: {
@@ -17,10 +17,13 @@ function SearchPagination({ rows = 12, seriesIdentifier }: SearchPaginationProps
     },
   };
 
-  const { data } = usePage().props as unknown as { data: { numFound: number; page?: number; queryText?: string } };
+  const { data } = usePage().props as unknown as {
+    data: { numFound: number; page?: number; queryText?: string; sortField?: string };
+  };
   const currentPage = data?.page || 1;
   const numFound = data?.numFound || 0;
   const queryText = data?.queryText;
+  const sortField = data?.sortField;
 
   const onChange = (page: number) => {
     const pathname = window.location.pathname;
@@ -31,6 +34,10 @@ function SearchPagination({ rows = 12, seriesIdentifier }: SearchPaginationProps
       params.q = queryText;
     }
     params.page = page.toString();
+
+    if (sortField) {
+      params.sortfield = sortField;
+    }
 
     router.get(pathname, params, {
       only: ['data'],

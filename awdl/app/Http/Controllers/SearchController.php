@@ -84,16 +84,16 @@ class SearchController extends Controller
         foreach ($resultset as $doc) {
             $docs[] = [
                 'identifier' => $doc->ss_book_identifier,
-                'title' => $doc->ss_title_long ?: 'N.A.',
-                'authors' => $doc->sm_author ?: [],
+                'title' => $doc->ss_title_long ?? 'N.A.',
+                'authors' => $doc->sm_author ?? [],
                 'seriesData' => JsonHelper::decodeJsonArray($doc->zm_series_data_x),
-                'publisher' => JsonHelper::decodeHtmlEntitiesRecursive($doc->sm_publisher[0] ?: 'N.A.'),
-                'publicationPlace' => $doc->sm_field_publication_location,
-                'publicationDate' => $doc->ss_publication_date_text ?: 'N.A.',
-                'providerIds' => $doc->sm_provider_nid,
-                'providerLabels' => $doc->sm_provider_label,
-                'subjectIds' => $doc->im_field_subject,
-                'subjectLabels' => $doc->sm_subject_label,
+                'publisher' => JsonHelper::decodeHtmlEntitiesRecursive($doc->sm_publisher[0] ?? 'N.A.'),
+                'publicationPlace' => $doc->sm_field_publication_location ?? [],
+                'publicationDate' => $doc->ss_publication_date_text ?? 'N.A.',
+                'providerIds' => $doc->sm_provider_nid ?? [],
+                'providerLabels' => $doc->sm_provider_label ?? [],
+                'subjectIds' => $doc->im_field_subject ?? [],
+                'subjectLabels' => $doc->sm_subject_label ?? [],
                 'bs_status' => $doc->bs_status,
             ];
         }
