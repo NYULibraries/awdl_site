@@ -24,3 +24,15 @@ Homestead.yaml
 Thumbs.db
 
 Test.tsx
+# php tests
+BrowseControllerTest.php
+ProvidersControllerTest.php
+SearchControllerTest.php
+SeriesControllerTest.php
+SubjectsControllerTest.php
+card.spec.ts
+# E2E Tests
+playwright-report
+tests-e2e
+playwright.config.ts
+test-results

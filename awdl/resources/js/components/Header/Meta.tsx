@@ -12,7 +12,7 @@ export default function Meta({
   description = metatags.poweredDesc,
   author = metatags.defaultAuthor,
 }: MetaProps) {
-  const pageTitle = title? `${title} - ${import.meta.env.VITE_APP_NAME}`: `${import.meta.env.VITE_APP_NAME}`;
+  const pageTitle = title ? `${title} - ${import.meta.env.VITE_APP_NAME}` : `${import.meta.env.VITE_APP_NAME}`;
 
   return (
     <Head>

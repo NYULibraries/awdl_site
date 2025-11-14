@@ -7,7 +7,7 @@ const appName = import.meta.env.VITE_APP_NAME || 'Ancient World Digital Library 
 
 createInertiaApp({
   title: (title) => {
-    return `${title} - ${appName}`;
+    return `${title}`;
   },
   resolve: (name) => {
     return resolvePageComponent(`./pages/${name}.tsx`, import.meta.glob('./pages/**/*.tsx'));

@@ -9,7 +9,12 @@
     "format": "prettier --write resources/",
     "format:check": "prettier --check resources/",
     "lint": "eslint . --fix",
-    "types": "tsc --noEmit"
+    "types": "tsc --noEmit",
+    "e2etest": "npx playwright test",
+    "e2etest:ui": "npx playwright test --ui",
+    "e2etest:rerun": "npx playwright test --last-failed",
+    "e2etest:debug": "npx playwright test --debug",
+    "e2etest:report": "npx playwright show-report"
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",
