@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import { usePage } from '@inertiajs/react';
+import { usePage, router } from '@inertiajs/react';
+import { route } from 'ziggy-js';
 
 export default function SearchForm() {
   const { data } = usePage().props as unknown as {
@@ -16,15 +17,15 @@ export default function SearchForm() {
       inputRef.current.blur();
     }
 
-    // only include 'q' if it's not empty and not the default
-    const params = new URLSearchParams();
-    if (searchQuery && searchQuery !== '*:*') {
-      params.set('q', searchQuery);
+    // include 'q' if it's not empty and not the default
+    const params: { q?: string; page: number } = { page: 1 };
+    if (searchQuery && searchQuery !== '*:*' && searchQuery !== '') {
+      params.q = searchQuery;
     }
-    params.set('page', '1');
 
-    const searchUrl = `/search/?${params.toString()}`;
-    window.location.href = searchUrl;
+    router.get(route('search'), params, {
+      only: ['data'],
+    });
   };
 
   let defaultSearchValue;
