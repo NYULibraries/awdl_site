@@ -22,5 +22,4 @@ yarn-error.log
 /.vscode
 /.zed
 .DS_Store
-.ddev
 pnpm-workspace.yaml
