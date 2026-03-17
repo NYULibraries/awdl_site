@@ -1,3 +1,13 @@
+dist/
+node_modules/
+vendor/
+storage/
+bootstrap/cache/
+public/build/
+*.min.js
+*.min.css
+.env
+.env.*
 *.log
 .DS_Store
 .env
