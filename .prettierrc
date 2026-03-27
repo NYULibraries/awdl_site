@@ -1,22 +1,22 @@
 {
-	"tabWidth": 2,
-	"useTabs": true,
-	"semi": true,
-	"singleQuote": true,
-	"jsxSingleQuote": false,
-	"trailingComma": "none",
-	"bracketSpacing": true,
-	"bracketSameLine": false,
-	"arrowParens": "always",
-	"printWidth": 120,
-	"plugins": ["prettier-plugin-astro"],
-	"overrides": [
-		{
-			"files": "*.astro",
-			"options": {
-				"parser": "astro"
-			}
-		}
-	],
-	"htmlWhitespaceSensitivity": "ignore"
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "arrowParens": "always",
+  "printWidth": 120,
+  "endOfLine": "lf",
+  "overrides": [
+    {
+      "files": ["*.tsx", "*.jsx"],
+      "options": {
+        "parser": "typescript"
+      }
+    }
+  ],
+  "htmlWhitespaceSensitivity": "ignore"
 }
