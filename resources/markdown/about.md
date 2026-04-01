@@ -1,6 +1,6 @@
 ### What is the Ancient World Digital Library?
 
-The Ancient World Digital Library (AWDL) is an initiative of the [Institute for the Study of the Ancient World](http://isaw.nyu.edu/) (ISAW) at [New York University](http://www.nyu.edu/). AWDL is a publicly available digital library of public domain content on the ancient world. AWDL currently provides digital access to over 400 volumes across subjects such as [Egyptology](https://dlib.nyu.edu/ancientworld/search/?q=egyptology&page=1), [Assyriology](https://dlib.nyu.edu/ancientworld/search/?q=assyriology&page=1), [Papyrology](https://dlib.nyu.edu/ancientworld/search/?q=papyrology&page=1), and [Classical Antiquity](https://dlib.nyu.edu/ancientworld/search/?q=%22Classical%20Antiquity%22&page=1). Visit the [Collections Overview](https://dlib.nyu.edu/ancientworld/collectionsoverview/) page for a list of subjects.
+The Ancient World Digital Library (AWDL) is an initiative of the [Institute for the Study of the Ancient World](http://isaw.nyu.edu/) (ISAW) at [New York University](http://www.nyu.edu/). AWDL is a publicly available digital library of public domain content on the ancient world. AWDL currently provides digital access to over 400 volumes across subjects such as [Egyptology]({{BASE_URL}}/search/?q=egyptology&page=1), [Assyriology]({{BASE_URL}}/search/?q=assyriology&page=1), [Papyrology]({{BASE_URL}}/search/?q=papyrology&page=1), and [Classical Antiquity]({{BASE_URL}}/search/?q=%22Classical%20Antiquity%22&page=1). Visit the [Collections Overview]({{BASE_URL}}/collectionsoverview/) page for a list of subjects.
 
 ### What is the purpose of the project?
 
@@ -37,7 +37,7 @@ AWDL's digitization efforts are focused on materials that fit the following crit
 
 ### What are AWDL's copyright guidelines?
 
-NYU has researched copyright requirements and restrictions for each of the countries of publication and believes the materials displayed on this site have been cleared by the rightsholder, are specified in the rights statement attached to each work, or are in the public domain. However, if you believe that you are the copyright owner of any material displayed here, please see our [takedown policy](http://dlib.nyu.edu/ancientworld/takedown/).
+NYU has researched copyright requirements and restrictions for each of the countries of publication and believes the materials displayed on this site have been cleared by the rightsholder, are specified in the rights statement attached to each work, or are in the public domain. However, if you believe that you are the copyright owner of any material displayed here, please see our [takedown policy]({{BASE_URL}}/takedown/).
 
 ### Is AWDL metadata available?
 
