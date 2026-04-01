@@ -10,6 +10,7 @@ use App\Http\Controllers\ProvidersController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\SubjectsController;
+use App\Http\Controllers\TakedownController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,6 +25,9 @@ Route::get('search', [SearchController::class, 'index'])
 
 Route::get('about', [AboutController::class, 'index'])
     ->name('about');
+
+Route::get('takedown', [TakedownController::class, 'index'])
+    ->name('takedown');
 
 Route::get('books/{id}', [BookController::class, 'show'])
     ->name('books.show');
