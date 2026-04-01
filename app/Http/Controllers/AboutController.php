@@ -11,7 +11,9 @@ class AboutController extends Controller
     public function index(): Response
     {
 
-        $markdownBodyContent = File::get(resource_path('markdown/about.md'));
+        $baseUrl = config('app.url');
+
+        $markdownBodyContent = str_replace('{{BASE_URL}}', $baseUrl, File::get(resource_path('markdown/about.md')));
 
         $markdownAsideContent = File::get(resource_path('markdown/aboutSidebar.md'));
 
