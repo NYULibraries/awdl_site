@@ -1,6 +1,6 @@
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Meta from '@/components/Header/Meta';
-import ReactMarkdown from 'react-markdown';
+import MarkdownBody from '@/components/MarkdownBody';
 import { usePage } from '@inertiajs/react';
 
 export default function About() {
@@ -14,13 +14,13 @@ export default function About() {
           <main className='main hasSidebar' role='main' id='mainContent' tabIndex={-1}>
             <h2 className='page-title'>About</h2>
             <div className='maintext'>
-              <ReactMarkdown children={markdownBodyContent as string} />
+              <MarkdownBody content={markdownBodyContent as string} />
             </div>
           </main>
           <aside role='complementary'>
             <h3 className='sidebar-title'>About the ISAW library</h3>
             <div className='content'>
-              <ReactMarkdown children={markdownAsideContent as string} />
+              <MarkdownBody content={markdownAsideContent as string} />
             </div>
           </aside>
         </div>
