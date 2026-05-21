@@ -13,6 +13,7 @@ export default function Meta({
   author = metatags.defaultAuthor,
 }: MetaProps) {
   const pageTitle = title ? `${title} - ${import.meta.env.VITE_APP_NAME}` : `${import.meta.env.VITE_APP_NAME}`;
+  const pageUrl = typeof window !== 'undefined' ? window.location.href : 'https://awdl.dlib.nyu.edu/';
 
   return (
     <Head>
@@ -27,7 +28,7 @@ export default function Meta({
       <meta property='og:title' content={metatags.siteName} />
       <meta property='og:description' content={metatags.poweredDesc} />
       <meta property='og:type' content={metatags.type} />
-      <meta property='og:url' content='' />
+      <meta property='og:url' content={pageUrl} />
       <link rel='icon' type='image/x-icon' href='/favicon.ico' />
       <link rel='sitemap' href='/sitemap-index.xml' />
     </Head>
