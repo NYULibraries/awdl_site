@@ -26,6 +26,14 @@
           });
         </script>
 
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-CCQL276SXW"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-CCQL276SXW');
+        </script>
+
         @routes
         @viteReactRefresh
         @vite(['resources/sass/style.scss', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
