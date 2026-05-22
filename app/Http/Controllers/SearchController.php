@@ -25,7 +25,8 @@ class SearchController extends Controller
 
         $start = ($page - 1) * $rows;
 
-        $queryText = $request->input('q', '*:*');
+        $rawQuery = $request->input('q', '');
+        $queryText = $rawQuery !== '' ? $solrClient->createSelect()->getHelper()->escapeTerm($rawQuery) : '*:*';
 
         $sortField = $request->input('sortfield', 'ss_longlabel');
 
@@ -105,7 +106,7 @@ class SearchController extends Controller
             'rows' => $rows,
             'docs' => $docs,
             'numFound' => $numFound,
-            'queryText' => $queryText,
+            'queryText' => $rawQuery,
             'page' => $page,
             'sortField' => $sortField,
         ];
