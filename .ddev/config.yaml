@@ -5,7 +5,7 @@
 name: awdl-site
 type: laravel
 docroot: public
-php_version: "8.2"
+php_version: "8.5"
 
 # Use Apache instead of the default Nginx
 webserver_type: apache-fpm
