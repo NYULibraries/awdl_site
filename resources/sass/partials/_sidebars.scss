@@ -13,6 +13,7 @@
     margin-bottom: 2em;
     margin-top: 2.83em;
     width: 100%;
+    align-self: flex-start;
     @media (min-width: $screen-md-min) {
       -ms-flex: 0 1 32%;
       -webkit-flex: 0 1 32%;

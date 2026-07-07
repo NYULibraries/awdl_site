@@ -30,14 +30,6 @@ export default function CollectionsOverview() {
                 </div>
               </div>
             </main>
-            <aside role='complementary'>
-              <h3 className='sidebar-title'>AWDL Atlas</h3>
-              <div className='content'>
-                <div className='imgHold'>
-                  <img src={ISAWLibrary} alt='Book Stacks at the Institute for the Study of the Ancient World' />
-                </div>
-              </div>
-            </aside>
           </div>
         </div>
       </DefaultLayout>

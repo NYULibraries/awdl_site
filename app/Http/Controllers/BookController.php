@@ -21,14 +21,18 @@ class BookController extends Controller
         if ($response->successful()) {
             $data = $response->json();
 
+            if ($data === null) {
+                return Inertia::render('404', []);
+            }
+
             return Inertia::render('Book', [
-                'title' => $data['displayTitle'],
-                'identifier' => $data['identifier'],
-                'noid' => $data['noid'],
+                'title' => $data['displayTitle'] ?? null,
+                'identifier' => $data['identifier'] ?? $identifier,
+                'noid' => $data['noid'] ?? null,
                 'url' => "{$config['endpoint']}/{$type_alias}/{$identifier}/{$sequence}",
             ]);
         } else {
-            return Inertia::render('BookError', []);
+            return Inertia::render('404', []);
         }
 
     }
