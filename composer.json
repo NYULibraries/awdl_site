@@ -7,7 +7,7 @@
     "license": "MIT",
     "require": {
         "php": "8.5.*",
-        "guzzlehttp/guzzle": "7.10.*",
+        "guzzlehttp/guzzle": "7.15.*",
         "inertiajs/inertia-laravel": "3.*",
         "laravel/framework": "12.*",
         "laravel/tinker": "2.10.*",
