@@ -4,210 +4,102 @@ namespace App\Http\Controllers;
 
 use App\Helpers\JsonHelper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 use Inertia\Response;
-use Solarium\Client;
 
 class SerialsController extends Controller
 {
-    public function index(Request $request, Client $solrClient): Response
+    public function index(): Response
     {
-        $docs = $this->fetchSeriesData($request, $solrClient);
+        $resultset = $this->fetchSerials(
+            'fq=bundle:dlts_serial&fq=sm_collection_code:bsa&fq=bs_status:1&fl=sm_collection_code,sm_collection_label&rows=1000'
+        );
+
+        $docs = collect($resultset['docs'])
+            ->groupBy(fn ($doc) => $doc['sm_collection_code'][0])
+            ->map(fn ($volumes, $code) => [
+                'id' => $code,
+                'label' => $volumes->first()['sm_collection_label'][0] ?? $code,
+                'path' => "serials/{$code}?page=1",
+                'count' => $volumes->count(),
+            ])
+            ->sortBy('label')
+            ->values()
+            ->all();
 
         return Inertia::render('SerialsIndex', ['docs' => $docs]);
-
     }
 
-    public function show($id, Request $request, Client $solrClient): Response
+    public function show(string $id, Request $request): Response
     {
+        $page = max(1, (int) $request->input('page', 1));
+        $rows = 12;
+        $start = ($page - 1) * $rows;
+        $sortField = $this->sortField($request);
 
-        //   sort=iass_longlabel asc
+        $resultset = $this->fetchSerials(
+            "fq=bundle:dlts_serial&fq=sm_collection_code:{$id}&fq=bs_status:1&start={$start}&rows={$rows}&sort={$sortField}+asc"
+        );
 
-        $pageTitle = '';
-
-        $documents = [];
-
-        $serialsMap = json_decode(file_get_contents(resource_path('datasource/serials.json')), true);
-
-        $serialIdentifier = array_search($id, $serialsMap, true);
-
-        if (! $serialIdentifier) {
+        if (empty($resultset['docs'])) {
             abort(404, 'Serial not found');
         }
 
-        if (isset($serialsMap[$serialIdentifier])) {
+        $documents = [];
 
-            $serialAlias = $serialsMap[$serialIdentifier];
-            $page = (int) $request->input('page', 1);
-            $rows = 12;
-            $start = ($page - 1) * $rows;
-            $sortField = $request->input('sortfield', 'ss_longlabel');
-
-            $queryText = '*:*';
-            $fields = [
-                '*',
+        foreach ($resultset['docs'] as $doc) {
+            $documents[] = [
+                'identifier' => $doc['ss_identifier'],
+                'title' => $doc['ss_title_long'] ?? 'N.A.',
+                'authors' => $doc['sm_author'] ?? [],
+                'seriesData' => [],
+                'publisher' => JsonHelper::decodeHtmlEntitiesRecursive($doc['sm_publisher'][0] ?? 'N.A.'),
+                'publicationPlace' => $doc['sm_field_publication_location'] ?? [],
+                'publicationDate' => $doc['ss_publication_date_text'] ?? 'N.A.',
+                'providerIds' => $doc['sm_provider_nid'] ?? [],
+                'providerLabels' => $doc['sm_provider_label'] ?? [],
+                'subjectIds' => $doc['im_field_subject'] ?? [],
+                'subjectLabels' => $doc['sm_subject_label'] ?? [],
+                'bs_status' => $doc['bs_status'],
+                'id' => $doc['sm_collection_code'][0] ?? $id,
+                'label' => $doc['sm_collection_label'][0] ?? '',
+                'series' => [],
+                'path' => "books/{$doc['ss_identifier']}?page=1",
+                'volume' => $doc['ss_volume'] ?? null,
             ];
-
-            $query = $solrClient->createSelect();
-
-            $query->setQuery($queryText);
-
-            $query->addFilterQuery([
-                'key' => 'bundle_filter',
-                'query' => 'bundle:dlts_book',
-            ]);
-
-            $query->addFilterQuery([
-                'key' => 'series_identifier',
-                'query' => "sm_series_identifier:{$seriesIdentifier}",
-            ]);
-
-            // $query->addFilterQuery([
-            //     'key' => 'ispartofserie',
-            //     'query' => 'is_ispartofseries:1',
-            // ]);
-
-            $query->addFilterQuery([
-                'key' => 'status',
-                'query' => 'bs_status:1',
-            ]);
-
-            $query->setFields($fields);
-
-            $query->setStart($start);
-
-            $query->setRows($rows);
-
-            $query->addSort($sortField, $query::SORT_ASC);
-
-            $resultset = $solrClient->select($query);
-
-            foreach ($resultset as $doc) {
-
-                $pathAlias = (string) $doc->path_alias;
-
-                $pathAlias = str_replace('content/', 'series/', $pathAlias).'?page=1';
-
-                $series = [];
-
-                foreach ($doc->zm_series_data_x as $data) {
-                    $datax = json_decode($data);
-                    foreach ($datax as $xx) {
-                        $series[$xx->series_identifier] = [
-                            'label' => $xx->series_label,
-                            'identifier' => $xx->series_identifier,
-                        ];
-                    }
-                }
-
-                $documents[] = [
-                    'identifier' => $doc->ss_book_identifier,
-                    'title' => $doc->ss_title_long ?? 'N.A.',
-                    'authors' => $doc->sm_author ?? [],
-                    'seriesData' => JsonHelper::decodeJsonArray($doc->zm_series_data_x),
-                    'publisher' => JsonHelper::decodeHtmlEntitiesRecursive($doc->sm_publisher[0] ?? 'N.A.'),
-                    'publicationPlace' => $doc->sm_field_publication_location ?? [],
-                    'publicationDate' => $doc->ss_publication_date_text ?? 'N.A.',
-                    'providerIds' => $doc->sm_provider_nid ?? [],
-                    'providerLabels' => $doc->sm_provider_label ?? [],
-                    'subjectIds' => $doc->im_field_subject ?? [],
-                    'subjectLabels' => $doc->sm_subject_label ?? [],
-                    'bs_status' => $doc->bs_status,
-                    'id' => $doc->ss_series_identifier,
-                    'label' => $doc->ss_series_label,
-                    'series' => $series,
-                    'path' => $pathAlias,
-                ];
-
-            }
-
         }
 
-        if (! empty($documents[0])) {
-            $pageTitle = $documents[0]['series'][$seriesIdentifier]['label'];
-        }
+        $serialLabel = $documents[0]['label'];
 
-        $numFound = $resultset->getNumFound();
-        $seriesLabel = $documents[0]['series'][$seriesIdentifier]['label'];
-
-        return Inertia::render('SeriesPID', [
+        return Inertia::render('SerialsPID', [
             'data' => [
-                'pageTitle' => $pageTitle,
-                'pageId' => 'series',
+                'pageTitle' => $serialLabel,
+                'pageId' => 'serials',
                 'docs' => $documents,
                 'start' => $start,
                 'rows' => $rows,
-                'numFound' => $numFound,
-                'seriesLabel' => $seriesLabel,
+                'numFound' => $resultset['numFound'],
+                'serialLabel' => $serialLabel,
                 'sortField' => $sortField,
                 'page' => $page,
             ],
         ]);
-
     }
 
-    private function fetchSerialsData(Request $request, Client $solrClient)
+    private function fetchSerials(string $query): array
     {
+        $config = config('viewer');
 
-        $queryText = '*:*';
+        $response = Http::get(rtrim($config['endpoint'], '/')."/api/v1/search?{$query}");
 
-        $start = 0;
-
-        $rows = 150;
-
-        $sortField = 'ss_series_label';
-
-        $collectionCode = 'awdl OR egypt';
-
-        $fields = [
-            'ss_series_label',
-            'path_alias',
-            'ss_series_identifier',
-            'bs_status',
-        ];
-
-        $query = $solrClient->createSelect();
-
-        $query->setQuery($queryText);
-
-        $query->addFilterQuery([
-            'key' => 'bundle_filter',
-            'query' => 'bundle:dlts_series',
-        ]);
-
-        $query->addFilterQuery([
-            'key' => 'collection_code_filter',
-            'query' => 'sm_series_code:('.$collectionCode.')',
-        ]);
-
-        $query->addFilterQuery([
-            'key' => 'status',
-            'query' => 'bs_status:1',
-        ]);
-
-        $query->setFields($fields);
-
-        $query->setStart($start);
-
-        $query->setRows($rows);
-
-        $query->addSort($sortField, $query::SORT_ASC);
-
-        $resultset = $solrClient->select($query);
-
-        $docs = [];
-
-        foreach ($resultset as $doc) {
-            $pathAlias = (string) $doc->path_alias;
-            $pathAlias = str_replace('content/', 'series/', $pathAlias).'?page=1';
-            $docs[] = [
-                'id' => $doc->ss_series_identifier,
-                'label' => $doc->ss_series_label,
-                'path' => $pathAlias,
-            ];
+        if (! $response->successful() || ! is_array($response->json())) {
+            abort(502, 'Viewer search unavailable');
         }
 
-        return $docs;
-
+        return [
+            'docs' => $response->json('docs') ?? [],
+            'numFound' => $response->json('numFound') ?? 0,
+        ];
     }
 }
