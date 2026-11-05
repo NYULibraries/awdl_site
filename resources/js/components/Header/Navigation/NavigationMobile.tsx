@@ -1,33 +1,16 @@
-interface NavElements {
-	button: HTMLButtonElement | null;
-	navbar: HTMLElement | null;
+interface NavigationMobileProps {
+  open: boolean;
+  onToggle: () => void;
 }
 
-export default function NavigationMobile() {
-
-  window.addEventListener('DOMContentLoaded', (): void => {
-	  const elements: NavElements = {
-		  button: document.querySelector<HTMLButtonElement>('button'),
-	  	navbar: document.querySelector<HTMLElement>('.navbar-collapse')
-  	};
-
-	  let collapsed: boolean = true;
-
-	  if (elements.button && elements.navbar) {
-	  	elements.button.addEventListener('click', (event: MouseEvent): void => {
-  			event.preventDefault();
-			  elements.navbar!.style.height = collapsed ? '238px' : '0px';
-		  	collapsed = !collapsed;
-	  	});
-  	}
-  });
-
+export default function NavigationMobile({ open, onToggle }: NavigationMobileProps) {
   return (
     <button
 	    type="button"
-	    className="navbar-toggle collapsed widget"
-	    data-toggle="collapse"
-	    data-name="navButton"
+	    className={`navbar-toggle widget${open ? '' : ' collapsed'}`}
+	    aria-expanded={open}
+	    aria-controls="main-nav"
+	    onClick={onToggle}
 	  >
 	    <svg
 		    version="1.1"
@@ -40,6 +23,7 @@ export default function NavigationMobile() {
 		    viewBox="0 0 40 30"
 		    overflow="visible"
 		    xmlSpace="preserve"
+		    aria-hidden="true"
 	    >
 		    <defs></defs>
 		    <rect y="0" fill="#FFFFFF" width="40" height="3"></rect>
@@ -50,4 +34,3 @@ export default function NavigationMobile() {
     </button>
   )
 }
-

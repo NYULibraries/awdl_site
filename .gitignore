@@ -24,3 +24,8 @@ yarn-error.log
 .DS_Store
 pnpm-workspace.yaml
 isaw/
+.ddev/php/suppress-deprecations.ini
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
