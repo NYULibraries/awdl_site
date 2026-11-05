@@ -10,6 +10,7 @@
     "format:check": "prettier --check resources/",
     "lint": "eslint . --fix",
     "types": "tsc --noEmit",
+    "test": "php artisan test && playwright test --reporter=line",
     "e2etest": "npx playwright test",
     "e2etest:ui": "npx playwright test --ui",
     "e2etest:rerun": "npx playwright test --last-failed",
