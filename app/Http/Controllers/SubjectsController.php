@@ -54,7 +54,7 @@ class SubjectsController extends Controller
         $subjectPID = (int) $subjectPID;
         $queryText = "im_field_subject:$subjectPID";
 
-        $sortField = $request->input('sortfield', 'ss_longlabel');
+        $sortField = $this->sortField($request);
 
         $collectionCode = 'awdl OR egypt';
 

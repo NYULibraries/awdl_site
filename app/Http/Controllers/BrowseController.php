@@ -27,7 +27,7 @@ class BrowseController extends Controller
 
         $queryText = '*:*';
 
-        $sortField = $request->input('sortfield', 'ss_longlabel');
+        $sortField = $this->sortField($request);
 
         $collectionCode = 'awdl OR egypt';
 

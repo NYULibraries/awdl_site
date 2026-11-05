@@ -13,7 +13,6 @@ use App\Http\Controllers\SerialsController;
 use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\TakedownController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])
     ->name('home');
@@ -64,8 +63,7 @@ Route::get('serials', [SerialsController::class, 'index'])
     ->name('serials');
 
 Route::get('serials/{id}', [SerialsController::class, 'show'])
+    ->where('id', '[A-Za-z0-9_]+')
     ->name('serials.show');
 
- Route::fallback(function () {
-    return Inertia::render('404');
-});
+Route::fallback(fn () => abort(404));

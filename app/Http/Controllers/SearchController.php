@@ -28,7 +28,7 @@ class SearchController extends Controller
         $rawQuery = $request->input('q', '');
         $queryText = $rawQuery !== '' ? $solrClient->createSelect()->getHelper()->escapeTerm($rawQuery) : '*:*';
 
-        $sortField = $request->input('sortfield', 'ss_longlabel');
+        $sortField = $this->sortField($request);
 
         $collectionCode = 'awdl OR egypt';
 
