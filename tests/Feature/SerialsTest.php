@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Http\Client\Request;
-use Illuminate\Support\Facades\Http;
 use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
@@ -36,16 +34,10 @@ class SerialsTest extends TestCase
         ];
     }
 
-    private function fakeViewer(array $docs): void
-    {
-        Http::fake([
-            '*/api/v1/search*' => Http::response(['numFound' => count($docs), 'docs' => $docs]),
-        ]);
-    }
-
+    // The serials index groups volumes into one entry per serial, with a volume count, and filters Solr to bsa serials.
     public function test_index_lists_each_serial_once(): void
     {
-        $this->fakeViewer([$this->volume(1), $this->volume(2)]);
+        $this->mockSolr([$this->volume(1), $this->volume(2)]);
 
         $this->get('/serials')
             ->assertOk()
@@ -56,13 +48,14 @@ class SerialsTest extends TestCase
                 ->where('docs.0.label', 'Bulletin on Sumerian Agriculture')
                 ->where('docs.0.count', 2));
 
-        Http::assertSent(fn (Request $request) => str_contains($request->url(), 'fq=bundle:dlts_serial')
-            && str_contains($request->url(), 'fq=sm_collection_code:bsa'));
+        $this->assertStringContainsString('fq=bundle:dlts_serial', $this->sentSolrQueries[0]);
+        $this->assertStringContainsString('fq=sm_collection_code:bsa', $this->sentSolrQueries[0]);
     }
 
+    // A serial page maps each Solr volume to a book item that links to the embed viewer.
     public function test_show_maps_volumes_to_book_items(): void
     {
-        $this->fakeViewer([$this->volume(1)]);
+        $this->mockSolr([$this->volume(1)]);
 
         $this->get('/serials/bsa')
             ->assertOk()
@@ -72,50 +65,55 @@ class SerialsTest extends TestCase
                 ->where('data.numFound', 1)
                 ->where('data.docs.0.identifier', 'isaw_bsa000001')
                 ->where('data.docs.0.seriesData', [])
-                ->where('data.docs.0.path', 'books/isaw_bsa000001?page=1'));
+                ->where('data.docs.0.path', 'viewer/isaw_bsa000001?page=1'));
     }
 
-    public function test_show_passes_valid_sortfield_to_viewer(): void
+    // An allowed sortfield is passed to Solr as an ascending sort.
+    public function test_show_passes_valid_sortfield_to_solr(): void
     {
-        $this->fakeViewer([$this->volume(1)]);
+        $this->mockSolr([$this->volume(1)]);
 
         $this->get('/serials/bsa?sortfield=ss_sauthor')
             ->assertInertia(fn (Assert $page) => $page->where('data.sortField', 'ss_sauthor'));
 
-        Http::assertSent(fn (Request $request) => str_contains($request->url(), 'sort=ss_sauthor+asc'));
+        $this->assertStringContainsString('sort=ss_sauthor asc', $this->sentSolrQueries[0]);
     }
 
+    // An unknown or injected sortfield falls back to title and never reaches Solr.
     public function test_show_falls_back_to_title_for_invalid_sortfield(): void
     {
-        $this->fakeViewer([$this->volume(1)]);
+        $this->mockSolr([$this->volume(1)]);
 
         $this->get('/serials/bsa?sortfield='.urlencode('ss_longlabel&rows=100000'))
             ->assertInertia(fn (Assert $page) => $page->where('data.sortField', 'ss_longlabel'));
 
-        Http::assertNotSent(fn (Request $request) => str_contains($request->url(), 'rows=100000'));
+        $this->assertStringNotContainsString('rows=100000', $this->sentSolrQueries[0]);
     }
 
+    // A serial with no volumes shows the 404 page.
     public function test_unknown_serial_renders_404_page(): void
     {
-        $this->fakeViewer([]);
+        $this->mockSolr([]);
 
         $this->get('/serials/nope')
             ->assertNotFound()
             ->assertInertia(fn (Assert $page) => $page->component('404'));
     }
 
-    public function test_serial_id_with_solr_syntax_never_reaches_viewer(): void
+    // A serial id containing Solr syntax is rejected by the route before any Solr query runs.
+    public function test_serial_id_with_solr_syntax_never_reaches_solr(): void
     {
-        Http::fake();
+        $this->mockSolr([]);
 
         $this->get('/serials/'.rawurlencode('bsa OR x'))->assertNotFound();
 
-        Http::assertNotSent(fn (Request $request) => str_contains($request->url(), '/api/v1/search'));
+        $this->assertEmpty($this->sentSolrQueries);
     }
 
-    public function test_viewer_failure_returns_502(): void
+    // A Solr error returns 502 instead of a 500 crash.
+    public function test_solr_failure_returns_502(): void
     {
-        Http::fake(['*' => Http::response('down', 500)]);
+        $this->mockSolr([], [], 500);
 
         $this->get('/serials')->assertStatus(502);
     }

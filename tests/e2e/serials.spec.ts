@@ -17,7 +17,7 @@ test.describe('Serials', () => {
 
   test('volume card links to the book viewer', async ({ page }) => {
     await page.goto('/serials/bsa', { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('.md_title a').first()).toHaveAttribute('href', /\/books\/isaw_bsa\d{6}\/1$/);
+    await expect(page.locator('.md_title a').first()).toHaveAttribute('href', /\/viewer\/isaw_bsa\d{6}\/1$/);
   });
 
   test('sorting by author updates the URL and the dropdown', async ({ page }) => {

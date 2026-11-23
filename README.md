@@ -37,7 +37,7 @@ ddev pnpm build
 
 There are two kinds of tests:
 
-- **PHPUnit** (`tests/Feature`, `tests/Unit`): backend tests for controllers and helpers. The viewer API is faked, so no DDEV or VPN is needed.
+- **PHPUnit** (`tests/Feature`, `tests/Unit`): backend tests for controllers and helpers. They use mock Solr data (`mockSolr()` in `tests/TestCase.php`) and a mocked viewer API, so no DDEV, VPN or live Solr is needed.
 - **Playwright** (`tests/e2e`): browser tests against https://awdl-site.ddev.site. DDEV must be running, the frontend built (or `ddev pnpm dev` running) and the VPN connected. Set `BASE_URL` to test a different host.
 
 Run every test (PHPUnit, then Playwright) from your machine's terminal:
