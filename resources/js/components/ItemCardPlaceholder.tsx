@@ -1,7 +1,7 @@
 import React from 'react';
 import { ConfigProvider, Spin, type ThemeConfig } from 'antd';
 
-const BookItemPlaceholder: React.FC = () => {
+const ItemCardPlaceholder: React.FC = () => {
   const theme: ThemeConfig = {
     components: {
       Spin: {
@@ -28,4 +28,4 @@ const BookItemPlaceholder: React.FC = () => {
   );
 };
 
-export default BookItemPlaceholder;
+export default ItemCardPlaceholder;

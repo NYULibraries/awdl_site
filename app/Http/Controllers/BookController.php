@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class BookController extends Controller
 {
-    public function show($identifier, $sequence = 1): Response
+    public function show($identifier, $sequence = 1): Response|RedirectResponse
     {
 
         $config = config('viewer');
+
+        if ($config['books_use_embed']) {
+            return redirect()->route('viewer.sequence', ['id' => $identifier, 'sequence' => $sequence], 301);
+        }
 
         $type_alias = 'books';
 
@@ -23,7 +28,7 @@ class BookController extends Controller
             abort(404);
         }
 
-        return Inertia::render('Book', [
+        return Inertia::render('ItemPage', [
             'title' => $data['displayTitle'] ?? null,
             'identifier' => $data['identifier'] ?? $identifier,
             'noid' => $data['noid'] ?? null,

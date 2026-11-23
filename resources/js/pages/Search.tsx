@@ -5,14 +5,14 @@ import SearchHeader from '@/components/Search/Labels/SearchHeader';
 import SearchSubheader from '@/components/Search/Labels/SearchSubheader';
 import SearchPagination from '@/components/Search/Tools/SearchPagination';
 import Content from '@/components/Content';
-import { type BookItemProps } from '@/types';
+import { type ItemCardProps } from '@/types';
 
 export default function Search() {
   const { data } = usePage().props as unknown as {
     data: {
       start: number;
       rows: number;
-      docs: BookItemProps[];
+      docs: ItemCardProps[];
       numFound: number;
       queryText: string;
     };

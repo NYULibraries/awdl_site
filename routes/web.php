@@ -12,6 +12,7 @@ use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\SerialsController;
 use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\TakedownController;
+use App\Http\Controllers\ViewerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])
@@ -28,6 +29,12 @@ Route::get('about', [AboutController::class, 'index'])
 
 Route::get('takedown', [TakedownController::class, 'index'])
     ->name('takedown');
+
+Route::get('viewer/{id}', [ViewerController::class, 'show'])
+    ->name('viewer.show');
+
+Route::get('viewer/{id}/{sequence}', [ViewerController::class, 'show'])
+    ->name('viewer.sequence');
 
 Route::get('books/{id}', [BookController::class, 'show'])
     ->name('books.show');

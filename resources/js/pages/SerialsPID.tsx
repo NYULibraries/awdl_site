@@ -5,13 +5,13 @@ import Meta from '@/components/Header/Meta';
 import SearchHeader from '@/components/Search/Labels/SearchHeader';
 import SearchSubheader from '@/components/Search/Labels/SearchSubheader';
 import SearchPagination from '@/components/Search/Tools/SearchPagination';
-import { type BookItemProps } from '@/types';
+import { type ItemCardProps } from '@/types';
 
 export default function SerialsPID() {
   const { data } = usePage().props as unknown as {
     data: {
       pageTitle: string;
-      docs: BookItemProps[];
+      docs: ItemCardProps[];
       start: number;
       rows: number;
       numFound: number;

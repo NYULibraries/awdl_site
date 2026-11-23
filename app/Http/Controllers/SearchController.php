@@ -30,10 +30,11 @@ class SearchController extends Controller
 
         $sortField = $this->sortField($request);
 
-        $collectionCode = 'awdl OR egypt';
+        $collectionCode = 'awdl OR egypt OR bsa';
 
         $fields = [
-            'ss_book_identifier',
+            'ss_identifier',
+            'bundle',
             'ss_uri',
             'ss_title_long',
             'sm_author',
@@ -57,7 +58,7 @@ class SearchController extends Controller
 
         $query->addFilterQuery([
             'key' => 'bundle_filter',
-            'query' => 'bundle:dlts_book',
+            'query' => 'bundle:(dlts_book OR dlts_serial)',
         ]);
 
         $query->addFilterQuery([
@@ -84,7 +85,8 @@ class SearchController extends Controller
 
         foreach ($resultset as $doc) {
             $docs[] = [
-                'identifier' => $doc->ss_book_identifier,
+                'identifier' => $doc->ss_identifier,
+                'bundle' => $doc->bundle,
                 'title' => $doc->ss_title_long ?? 'N.A.',
                 'authors' => $doc->sm_author ?? [],
                 'seriesData' => JsonHelper::decodeJsonArray($doc->zm_series_data_x),

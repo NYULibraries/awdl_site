@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { usePage, Link } from '@inertiajs/react';
-import BookItemPlaceholder from './BookItemPlaceholder';
-import { type BookItemProps, type SeriesData } from '@/types';
+import ItemCardPlaceholder from './ItemCardPlaceholder';
+import { type ItemCardProps, type SeriesData } from '@/types';
 
-const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
+const ItemCard: React.FC<{ document: ItemCardProps }> = ({ document }) => {
   const { seriesMap } = usePage().props as unknown as { seriesMap: Record<string, string> };
   const {
     identifier,
+    bundle,
     title,
     authors,
     publisher,
@@ -27,6 +28,8 @@ const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
   };
 
   const baseURL = '';
+  const viewerPath = bundle === 'dlts_serial' ? 'viewer' : 'books';
+  const imageType = bundle === 'dlts_serial' ? 'serials' : 'books';
   const series = seriesData?.[0];
 
   return bs_status ? (
@@ -34,11 +37,11 @@ const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
       <div className='card'>
         {/* Thumbnail */}
         <div className='thumbs'>
-          {!isLoaded && <BookItemPlaceholder />}
+          {!isLoaded && <ItemCardPlaceholder />}
           <div className={isLoaded ? 'clipper' : 'clipperNoshadow imagePlaceholder'}>
-            <Link href={`${baseURL}/books/${identifier}/1`}>
+            <Link href={`${baseURL}/${viewerPath}/${identifier}/1`}>
               <img
-                src={`https://sites.dlib.nyu.edu/viewer/api/image/books/${identifier}/1/full/150,200/0/default.jpg`}
+                src={`https://sites.dlib.nyu.edu/viewer/api/image/${imageType}/${identifier}/1/full/150,200/0/default.jpg`}
                 alt=''
                 title={title}
                 onLoad={imageLoad}
@@ -48,7 +51,7 @@ const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
         </div>
         {/* Title */}
         <h1 className='md_title'>
-          <Link href={`${baseURL}/books/${identifier}/1`}>{title && title}</Link>
+          <Link href={`${baseURL}/${viewerPath}/${identifier}/1`}>{title && title}</Link>
         </h1>
         {/* Authors */}
         <div className='md_authors'>
@@ -117,4 +120,4 @@ const BookItem: React.FC<{ document: BookItemProps }> = ({ document }) => {
   );
 };
 
-export default BookItem;
+export default ItemCard;
