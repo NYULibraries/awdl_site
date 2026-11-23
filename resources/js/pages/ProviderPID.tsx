@@ -5,12 +5,12 @@ import SearchPagination from '@/components/Search/Tools/SearchPagination';
 import SearchHeader from '@/components/Search/Labels/SearchHeader';
 import Content from '@/components/Content';
 import { usePage } from '@inertiajs/react';
-import { type BookItemProps } from '@/types';
+import { type ItemCardProps } from '@/types';
 
 const ProviderPID = () => {
   const { data, idAlias } = usePage().props as unknown as {
     data: {
-      docs: BookItemProps[];
+      docs: ItemCardProps[];
       start: number;
       rows: number;
       numFound: number;

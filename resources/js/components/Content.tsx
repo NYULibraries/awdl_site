@@ -1,13 +1,13 @@
 import React from 'react';
-import BookItem from './BookItem';
-import { type BookItemProps } from '@/types';
+import ItemCard from './ItemCard';
+import { type ItemCardProps } from '@/types';
 
-const Content: React.FC<{ documents: BookItemProps[] }> = ({ documents }) => {
+const Content: React.FC<{ documents: ItemCardProps[] }> = ({ documents }) => {
   return (
     <>
       <div className='item-list flex-container'>
         {documents.map((document: any, index: number) => {
-          return <BookItem key={index} document={document} />;
+          return <ItemCard key={index} document={document} />;
         })}
         <article className='item'></article>
         <article className='item'></article>

@@ -2,38 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class BookController extends Controller
 {
-    public function show($identifier, $sequence = 1): Response
+    public function show($identifier, $sequence = 1): Response|RedirectResponse
     {
 
         $config = config('viewer');
+
+        if ($config['books_use_embed']) {
+            return redirect()->route('viewer.sequence', ['id' => $identifier, 'sequence' => $sequence], 301);
+        }
 
         $type_alias = 'books';
 
         $response = Http::get("{$config['endpoint']}/api/v1/{$type_alias}/{$identifier}");
 
-        // Check for success and retrieve JSON data
-        if ($response->successful()) {
-            $data = $response->json();
+        $data = $response->successful() ? $response->json() : null;
 
-            if ($data === null) {
-                return Inertia::render('404', []);
-            }
-
-            return Inertia::render('Book', [
-                'title' => $data['displayTitle'] ?? null,
-                'identifier' => $data['identifier'] ?? $identifier,
-                'noid' => $data['noid'] ?? null,
-                'url' => "{$config['endpoint']}/{$type_alias}/{$identifier}/{$sequence}",
-            ]);
-        } else {
-            return Inertia::render('404', []);
+        if ($data === null) {
+            abort(404);
         }
+
+        return Inertia::render('ItemPage', [
+            'title' => $data['displayTitle'] ?? null,
+            'identifier' => $data['identifier'] ?? $identifier,
+            'noid' => $data['noid'] ?? null,
+            'url' => "{$config['endpoint']}/{$type_alias}/{$identifier}/{$sequence}",
+        ]);
 
     }
 }

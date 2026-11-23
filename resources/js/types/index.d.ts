@@ -19,9 +19,10 @@ export interface SeriesData {
   series_nid: string;
 }
 
-export interface BookItemProps {
+export interface ItemCardProps {
   identifier: string;
   title: string;
+  bundle?: string;
   authors: string[];
   seriesData: SeriesData[][] | null;
   publisher: string[];
@@ -34,20 +35,4 @@ export interface BookItemProps {
   bs_status: boolean;
   ss_series_label: string[];
   series: Record<string, { identifier: string; label: string }>;
-}
-
-interface BookItemDocument {
-  ss_book_identifier: string;
-  ss_title_long?: string;
-  sm_author?: string[];
-  zm_series_data_x?: SeriesData[][];
-  sm_publisher?: string[];
-  sm_field_publication_location?: string[];
-  ss_publication_date_text?: string;
-  bs_status?: string;
-  sm_provider_nid?: string[];
-  im_field_subject?: string[];
-  sm_provider_label?: string[];
-  sm_subject_label?: string[];
-  [key: string]: any;
 }

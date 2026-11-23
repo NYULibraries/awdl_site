@@ -5,6 +5,23 @@ declare module 'ziggy-js' {
     "collectionsoverview": [],
     "search": [],
     "about": [],
+    "takedown": [],
+    "viewer.show": [
+        {
+            "name": "id",
+            "required": true
+        }
+    ],
+    "viewer.sequence": [
+        {
+            "name": "id",
+            "required": true
+        },
+        {
+            "name": "sequence",
+            "required": true
+        }
+    ],
     "books.show": [
         {
             "name": "id",
@@ -44,7 +61,20 @@ declare module 'ziggy-js' {
             "required": true
         }
     ],
+    "serials": [],
+    "serials.show": [
+        {
+            "name": "id",
+            "required": true
+        }
+    ],
     "storage.local": [
+        {
+            "name": "path",
+            "required": true
+        }
+    ],
+    "storage.local.upload": [
         {
             "name": "path",
             "required": true

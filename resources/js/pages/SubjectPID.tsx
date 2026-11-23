@@ -5,12 +5,12 @@ import Content from '@/components/Content';
 import SearchSubheader from '@/components/Search/Labels/SearchSubheader';
 import SearchPagination from '@/components/Search/Tools/SearchPagination';
 import SearchHeader from '@/components/Search/Labels/SearchHeader';
-import { BookItemProps } from '@/types';
+import { ItemCardProps } from '@/types';
 
 export default function SubjectPID() {
   const { data, idAlias } = usePage().props as unknown as {
     data: {
-      docs: BookItemProps[];
+      docs: ItemCardProps[];
       start: number;
       rows: number;
       numFound: number;
@@ -44,7 +44,7 @@ export default function SubjectPID() {
             data-docslength={docs.length}
             data-requesterror='0'
           >
-            <Content documents={docs as BookItemProps[]} />
+            <Content documents={docs as ItemCardProps[]} />
           </div>
           <div className='bottom text-center'>
             <SearchPagination rows={rows} />

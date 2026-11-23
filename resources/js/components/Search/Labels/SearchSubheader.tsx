@@ -1,11 +1,11 @@
 import React from 'react';
 import FilterDropdown from '../Tools/FilterDropdown';
 import { usePage } from '@inertiajs/react';
-import { type BookItemProps } from '@/types';
+import { type ItemCardProps } from '@/types';
 
 const SearchSubheader: React.FC = () => {
-  const { data } = usePage().props as unknown as { data: { numFound: number; start: number; docs: BookItemProps[] } };
-  const { numFound, start, docs } = data || { numFound: 0, start: 0, docs: [] as BookItemProps[] };
+  const { data } = usePage().props as unknown as { data: { numFound: number; start: number; docs: ItemCardProps[] } };
+  const { numFound, start, docs } = data || { numFound: 0, start: 0, docs: [] as ItemCardProps[] };
   const displayStart = start < 1 ? 1 : start + 1;
   const displayLength = start + docs.length;
 

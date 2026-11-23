@@ -9,10 +9,11 @@ use App\Http\Controllers\PartnersController;
 use App\Http\Controllers\ProvidersController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SeriesController;
+use App\Http\Controllers\SerialsController;
 use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\TakedownController;
+use App\Http\Controllers\ViewerController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])
     ->name('home');
@@ -28,6 +29,12 @@ Route::get('about', [AboutController::class, 'index'])
 
 Route::get('takedown', [TakedownController::class, 'index'])
     ->name('takedown');
+
+Route::get('viewer/{id}', [ViewerController::class, 'show'])
+    ->name('viewer.show');
+
+Route::get('viewer/{id}/{sequence}', [ViewerController::class, 'show'])
+    ->name('viewer.sequence');
 
 Route::get('books/{id}', [BookController::class, 'show'])
     ->name('books.show');
@@ -59,6 +66,11 @@ Route::get('series', [SeriesController::class, 'index'])
 Route::get('series/{id}', [SeriesController::class, 'show'])
     ->name('series.show');
 
- Route::fallback(function () {
-    return Inertia::render('404');
-});
+Route::get('serials', [SerialsController::class, 'index'])
+    ->name('serials');
+
+Route::get('serials/{id}', [SerialsController::class, 'show'])
+    ->where('id', '[A-Za-z0-9_]+')
+    ->name('serials.show');
+
+Route::fallback(fn () => abort(404));

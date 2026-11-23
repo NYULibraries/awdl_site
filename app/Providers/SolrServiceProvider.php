@@ -21,6 +21,7 @@ class SolrServiceProvider extends ServiceProvider
                 [
                     'endpoint' => [
                         'default' => [
+                            'scheme' => $config['scheme'],
                             'host' => $config['host'],
                             'port' => $config['port'],
                             'path' => $config['path'],

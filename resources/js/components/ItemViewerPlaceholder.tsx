@@ -1,10 +1,10 @@
 import { ConfigProvider, Spin, type ThemeConfig } from 'antd';
 
-interface BookviewerPlaceholderProps {
+interface ItemViewerPlaceholderProps {
   height: number;
 }
 
-const BookviewerPlaceholder = ({ height }: BookviewerPlaceholderProps) => {
+const ItemViewerPlaceholder = ({ height }: ItemViewerPlaceholderProps) => {
   const theme: ThemeConfig = {
     components: {
       Spin: {
@@ -35,4 +35,4 @@ const BookviewerPlaceholder = ({ height }: BookviewerPlaceholderProps) => {
   );
 };
 
-export default BookviewerPlaceholder;
+export default ItemViewerPlaceholder;

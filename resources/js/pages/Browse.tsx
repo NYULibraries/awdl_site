@@ -1,7 +1,7 @@
 import DefaultLayout from '@/layouts/DefaultLayout';
 import Meta from '@/components/Header/Meta';
 import { usePage } from '@inertiajs/react';
-import { type BookItemProps } from '@/types';
+import { type ItemCardProps } from '@/types';
 import SearchHeader from '@/components/Search/Labels/SearchHeader';
 import SearchSubheader from '@/components/Search/Labels/SearchSubheader';
 import Content from '@/components/Content';
@@ -13,7 +13,7 @@ const Browse: React.FC = () => {
     data: {
       start: number;
       rows: number;
-      docs: BookItemProps[];
+      docs: ItemCardProps[];
       numFound: number;
       queryText: string;
     };
@@ -42,7 +42,7 @@ const Browse: React.FC = () => {
             data-docslength={docs.length}
             data-requesterror='0'
           >
-            <Content documents={docs as BookItemProps[]} />
+            <Content documents={docs as ItemCardProps[]} />
           </div>
           <div className='bottom text-center'>
             <SearchPagination rows={rows} />

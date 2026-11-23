@@ -22,5 +22,9 @@ yarn-error.log
 /.vscode
 /.zed
 .DS_Store
-pnpm-workspace.yaml
 isaw/
+.ddev/php/suppress-deprecations.ini
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

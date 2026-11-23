@@ -41,7 +41,7 @@ class SeriesController extends Controller
             $page = (int) $request->input('page', 1);
             $rows = 12;
             $start = ($page - 1) * $rows;
-            $sortField = $request->input('sortfield', 'ss_longlabel');
+            $sortField = $this->sortField($request);
 
             $queryText = '*:*';
             $fields = [

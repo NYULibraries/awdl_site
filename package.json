@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/package.json",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@10.34.9",
   "scripts": {
     "build": "vite build",
     "build:ssr": "vite build && vite build --ssr",
@@ -10,6 +11,7 @@
     "format:check": "prettier --check resources/",
     "lint": "eslint . --fix",
     "types": "tsc --noEmit",
+    "test": "php artisan test && playwright test --reporter=line",
     "e2etest": "npx playwright test",
     "e2etest:ui": "npx playwright test --ui",
     "e2etest:rerun": "npx playwright test --last-failed",
@@ -17,19 +19,18 @@
     "e2etest:report": "npx playwright show-report"
   },
   "devDependencies": {
-    "@babel/core": "7.28.4",
+    "@babel/core": "7.29.13",
     "@babel/eslint-parser": "7.28.4",
     "@eslint/js": "9.19.0",
     "@playwright/test": "1.56.1",
-    "@stylistic/eslint-plugin": "1.8.1",
     "@stylistic/eslint-plugin-js": "1.8.1",
     "@types/node": "24.8.1",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.0.2",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
-    "concurrently": "9.0.1",
-    "eslint": "9.17.0",
+    "concurrently": "9.2.5",
+    "eslint": "9.39.5",
     "eslint-config-prettier": "10.0.1",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
@@ -41,9 +42,8 @@
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "4.1.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.23.0",
-    "vite": "7.3.2",
-    "vite-plugin-markdown": "2.2.0"
+    "typescript-eslint": "8.74.0",
+    "vite": "7.3.8"
   },
   "dependencies": {
     "@headlessui/react": "2.2.0",

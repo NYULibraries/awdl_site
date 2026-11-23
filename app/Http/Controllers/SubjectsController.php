@@ -27,6 +27,10 @@ class SubjectsController extends Controller
 
         $data = $this->fetchSolrDataByPID($request, $solrClient, $id);
 
+        if (empty($data['docs'])) {
+            abort(404, 'Subject not found');
+        }
+
         // just check first book, we only need the alias once
         $idAlias = null;
         $firstBook = $data['docs'][0];
@@ -54,12 +58,13 @@ class SubjectsController extends Controller
         $subjectPID = (int) $subjectPID;
         $queryText = "im_field_subject:$subjectPID";
 
-        $sortField = $request->input('sortfield', 'ss_longlabel');
+        $sortField = $this->sortField($request);
 
-        $collectionCode = 'awdl OR egypt';
+        $collectionCode = 'awdl OR egypt OR bsa';
 
         $fields = [
-            'ss_book_identifier',
+            'ss_identifier',
+            'bundle',
             'ss_uri',
             'ss_title_long',
             'sm_author',
@@ -83,7 +88,7 @@ class SubjectsController extends Controller
 
         $query->addFilterQuery([
             'key' => 'bundle_filter',
-            'query' => 'bundle:dlts_book',
+            'query' => 'bundle:(dlts_book OR dlts_serial)',
         ]);
 
         $query->addFilterQuery([
@@ -110,7 +115,8 @@ class SubjectsController extends Controller
 
         foreach ($resultset as $doc) {
             $docs[] = [
-                'identifier' => $doc->ss_book_identifier,
+                'identifier' => $doc->ss_identifier,
+                'bundle' => $doc->bundle,
                 'title' => $doc->ss_title_long ?: 'N.A.',
                 'authors' => $doc->sm_author ?: [],
                 'seriesData' => JsonHelper::decodeJsonArray($doc->zm_series_data_x),
@@ -144,11 +150,11 @@ class SubjectsController extends Controller
         $query->setQuery('*:*');
         $query->setRows(0);
 
-        $collectionCode = 'awdl OR egypt';
+        $collectionCode = 'awdl OR egypt OR bsa';
 
         $query->addFilterQuery([
             'key' => 'bundle_filter',
-            'query' => 'bundle:dlts_book',
+            'query' => 'bundle:(dlts_book OR dlts_serial)',
         ]);
 
         $query->addFilterQuery([
@@ -187,7 +193,7 @@ class SubjectsController extends Controller
 
         $labelQuery->addFilterQuery([
             'key' => 'bundle_filter',
-            'query' => 'bundle:dlts_book',
+            'query' => 'bundle:(dlts_book OR dlts_serial)',
         ]);
 
         $labelQuery->addFilterQuery([

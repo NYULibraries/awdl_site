@@ -5,13 +5,13 @@ import Meta from '@/components/Header/Meta';
 import SearchHeader from '@/components/Search/Labels/SearchHeader';
 import SearchSubheader from '@/components/Search/Labels/SearchSubheader';
 import SearchPagination from '@/components/Search/Tools/SearchPagination';
-import { type BookItemProps } from '@/types';
+import { type ItemCardProps } from '@/types';
 
 export default function SeriesPID() {
   const { data } = usePage().props as unknown as {
     data: {
       pageTitle: string;
-      docs: BookItemProps[];
+      docs: ItemCardProps[];
       start: number;
       rows: number;
       numFound: number;
@@ -45,7 +45,7 @@ export default function SeriesPID() {
             data-docslength={docs.length}
             data-requesterror='0'
           >
-            <Content documents={docs as BookItemProps[]} />
+            <Content documents={docs as ItemCardProps[]} />
           </div>
           <div className='bottom text-center'>
             <SearchPagination rows={rows} />
